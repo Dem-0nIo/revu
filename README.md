@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======<<<<<<< HEAD
+# revu
+Nuevo sistema de Revu para cotizaciones de influencers
+=======
+>>>>>>> bd7ef74 (:see_no_evil: Update .gitignore to exclude .mp4 files)
 ## Influencer managment system revu
 
 ## Setup server production docker
@@ -61,3 +67,7 @@ INSERT INTO user_roles (`roleId`, `userId`, `createdAt`, `updatedAt`) VALUES
 
 `npm install`
 `npm start`
+<<<<<<< HEAD
+=======
+>>>>>>> 205b135 (:tada:Initial commit for production version:tada:)
+>>>>>>> bd7ef74 (:see_no_evil: Update .gitignore to exclude .mp4 files)
