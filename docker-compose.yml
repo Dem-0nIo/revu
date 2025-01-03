@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  mysqldb:
+    container_name: mysqldb
+    platform: linux/amd64
+    image: mysql:5.7
+    # restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    expose:
+      - 8081
+    volumes:
+      - /var/lib/mysql
+      - ./mysql/migrations:/docker-entrypoint-initdb.d
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    restart: unless-stopped
+
+  back_app:
+    container_name: back_app
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    links:
+      - mysqldb
+    build: ./back-node
+    # restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    working_dir: /back-node
+    environment:
+      - DB_HOST=$MYSQL_HOST
+      - DB_USER=$MYSQL_USER
+      - DB_PASSWORD=$MYSQL_PASSWORD
+      - DB_NAME=$MYSQL_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run start"
+
+  front_app:
+    container_name: front_app
+    build: ./front-react
+    ports:
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    working_dir: /front-react
+    depends_on:
+      - back_app
+    env_file: ./.env
+    volumes:
+      - .:/src
+  nginx:
+    build: ./front-react
+    ports:
+      - 80:80
+    depends_on:
+      - front_app
