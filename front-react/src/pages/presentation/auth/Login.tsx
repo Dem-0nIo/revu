@@ -169,16 +169,6 @@ const Login: FC<ILoginProps> = ({ isSignUp }) => {
 
 								<LoginHeader isNewUser={singUpStatus} />
 
-								<Alert isLight icon='Lock' isDismissible>
-									<div className='row'>
-										<div className='col-12'>
-											<strong>Usuario:</strong> admin
-										</div>
-										<div className='col-12'>
-											<strong>Contraseña:</strong> 12345678
-										</div>
-									</div>
-								</Alert>
 								<form className='row g-4'>
 									{singUpStatus ? (
 										<>
