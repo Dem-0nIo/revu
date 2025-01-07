@@ -6,7 +6,7 @@ const DefaultFooter = () => {
 		<Footer>
 			<div className='container-fluid'>
 				<div className='row'>
-					<div className='col'>@JuanPGutidev todos los derechos reservados</div>
+					<div className='col'>Revu todos los derechos reservados ©</div>
 					<div className='col-auto'>Mensaje diario de motivación</div>
 				</div>
 			</div>
