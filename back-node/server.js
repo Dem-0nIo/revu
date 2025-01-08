@@ -52,6 +52,9 @@ require("./app/routes/auth.routes", cors(corsOptions))(app);
 require("./app/routes/user.routes", cors(corsOptions))(app);
 require("./app/routes/influ.routes", cors(corsOptions))(app);
 require("./app/routes/cotizaciones.routes", cors(corsOptions))(app);
+require("./app/routes/gender.routes", cors(corsOptions))(app);
+
+
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 8081;
