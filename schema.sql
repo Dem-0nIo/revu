@@ -45,6 +45,24 @@ CREATE TABLE `cotizaciones` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `generos`
+--
+
+CREATE TABLE IF NOT EXISTS `genders` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `description` VARCHAR(50) NOT NULL UNIQUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- Insertar los valores de géneros/sexos
+INSERT INTO genders (description) VALUES
+('Masculino'),
+('Femenino'),
+('Homosexual'),
+('No binario');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `influencers`
 --
 
@@ -55,7 +73,7 @@ CREATE TABLE `influencers` (
   `cityNac` varchar(255) DEFAULT NULL,
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
-  `gender` varchar(255) DEFAULT NULL,
+  `gender_id` INT DEFAULT NULL,
   `eps` varchar(255) DEFAULT NULL,
   `passport` varchar(255) DEFAULT NULL,
   `displayName` varchar(255) DEFAULT NULL,
@@ -167,7 +185,11 @@ ALTER TABLE `cotizaciones`
 -- Indices de la tabla `influencers`
 --
 ALTER TABLE `influencers`
-  ADD PRIMARY KEY (`idUser`);
+  ADD PRIMARY KEY (`idUser`),
+  ADD CONSTRAINT `fk_gender`
+  FOREIGN KEY (`gender_id`) REFERENCES `genders` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
 
 --
 -- Indices de la tabla `roles`

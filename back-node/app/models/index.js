@@ -17,15 +17,27 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Database connected successfully.");
+  })
+  .catch((error) => {
+    console.error("Database connection error:", error);
+  });
+
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("Database synchronized successfully.");
+});
+
 db.influ = require("../models/influencer.model.js")(sequelize, Sequelize);
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
-db.cotizaciones = require("../models/cotizaciones.model.js")(
-  sequelize,
-  Sequelize
-);
+db.cotizaciones = require("../models/cotizaciones.model.js")(sequelize, Sequelize);
 
 db.roles = require("../models/user_roles.model.js")(sequelize, Sequelize);
+db.gender = require("../models/gender.model.js")(sequelize, Sequelize);
+
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
