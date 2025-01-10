@@ -168,7 +168,6 @@ const Login: FC<ILoginProps> = ({ isSignUp }) => {
 								</div> */}
 
 								<LoginHeader isNewUser={singUpStatus} />
-
 								<form className='row g-4'>
 									{singUpStatus ? (
 										<>

@@ -171,6 +171,195 @@ INSERT INTO `user_roles` (`roleId`, `userId`, `createdAt`, `updatedAt`) VALUES
 (1, 2, '2024-10-08 17:03:32', '2024-10-08 17:03:32'),
 (3, 1, '2024-10-08 17:03:32', '2024-10-08 17:03:32');
 
+
+-- Crear la tabla de departamentos
+CREATE TABLE IF NOT EXISTS departments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    department_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Insertar departamentos
+INSERT INTO departments (department_name) VALUES
+('Amazonas'),
+('Antioquia'),
+('Arauca'),
+('Atlántico'),
+('Bolívar'),
+('Boyacá'),
+('Caldas'),
+('Caquetá'),
+('Casanare'),
+('Cauca'),
+('Cesar'),
+('Chocó'),
+('Córdoba'),
+('Cundinamarca'),
+('Guainía'),
+('Guaviare'),
+('Huila'),
+('La Guajira'),
+('Magdalena'),
+('Meta'),
+('Nariño'),
+('Norte de Santander'),
+('Putumayo'),
+('Quindío'),
+('Risaralda'),
+('San Andrés y Providencia'),
+('Santander'),
+('Sucre'),
+('Tolima'),
+('Valle del Cauca'),
+('Vaupés'),
+('Vichada');
+
+-- Crear la tabla de ciudades
+CREATE TABLE IF NOT EXISTS cities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    city_name VARCHAR(100) NOT NULL,
+    department_id INT NOT NULL,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+-- Insertar ciudades con su respectivo departamento
+INSERT INTO cities (city_name, department_id) VALUES
+-- Amazonas
+('Leticia', (SELECT id FROM departments WHERE department_name = 'Amazonas')),
+('Puerto Nariño', (SELECT id FROM departments WHERE department_name = 'Amazonas')),
+
+-- Antioquia
+('Medellín', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
+('Bello', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
+('Itagüí', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
+('Envigado', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
+('Rionegro', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
+('Turbo', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
+
+-- Arauca
+('Arauca', (SELECT id FROM departments WHERE department_name = 'Arauca')),
+('Arauquita', (SELECT id FROM departments WHERE department_name = 'Arauca')),
+('Saravena', (SELECT id FROM departments WHERE department_name = 'Arauca')),
+
+-- Atlántico
+('Barranquilla', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
+('Soledad', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
+('Malambo', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
+('Sabanalarga', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
+
+-- Bolívar
+('Cartagena', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
+('Magangué', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
+('Turbaco', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
+('Arjona', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
+
+-- Boyacá
+('Tunja', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
+('Duitama', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
+('Sogamoso', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
+('Chiquinquirá', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
+
+-- Caldas
+('Manizales', (SELECT id FROM departments WHERE department_name = 'Caldas')),
+('Chinchiná', (SELECT id FROM departments WHERE department_name = 'Caldas')),
+('Villamaría', (SELECT id FROM departments WHERE department_name = 'Caldas')),
+
+-- Caquetá
+('Florencia', (SELECT id FROM departments WHERE department_name = 'Caquetá')),
+('Morelia', (SELECT id FROM departments WHERE department_name = 'Caquetá')),
+
+-- Casanare
+('Yopal', (SELECT id FROM departments WHERE department_name = 'Casanare')),
+('Aguazul', (SELECT id FROM departments WHERE department_name = 'Casanare')),
+
+-- Cauca
+('Popayán', (SELECT id FROM departments WHERE department_name = 'Cauca')),
+('Santander de Quilichao', (SELECT id FROM departments WHERE department_name = 'Cauca')),
+
+-- Cesar
+('Valledupar', (SELECT id FROM departments WHERE department_name = 'Cesar')),
+('Aguachica', (SELECT id FROM departments WHERE department_name = 'Cesar')),
+
+-- Chocó
+('Quibdó', (SELECT id FROM departments WHERE department_name = 'Chocó')),
+('Istmina', (SELECT id FROM departments WHERE department_name = 'Chocó')),
+
+-- Córdoba
+('Montería', (SELECT id FROM departments WHERE department_name = 'Córdoba')),
+('Lorica', (SELECT id FROM departments WHERE department_name = 'Córdoba')),
+
+-- Cundinamarca
+('Bogotá', (SELECT id FROM departments WHERE department_name = 'Cundinamarca')),
+('Zipaquirá', (SELECT id FROM departments WHERE department_name = 'Cundinamarca')),
+('Girardot', (SELECT id FROM departments WHERE department_name = 'Cundinamarca')),
+
+-- Guainía
+('Inírida', (SELECT id FROM departments WHERE department_name = 'Guainía')),
+
+-- Guaviare
+('San José del Guaviare', (SELECT id FROM departments WHERE department_name = 'Guaviare')),
+
+-- Huila
+('Neiva', (SELECT id FROM departments WHERE department_name = 'Huila')),
+('Pitalito', (SELECT id FROM departments WHERE department_name = 'Huila')),
+
+-- La Guajira
+('Riohacha', (SELECT id FROM departments WHERE department_name = 'La Guajira')),
+('Maicao', (SELECT id FROM departments WHERE department_name = 'La Guajira')),
+
+-- Magdalena
+('Santa Marta', (SELECT id FROM departments WHERE department_name = 'Magdalena')),
+('Ciénaga', (SELECT id FROM departments WHERE department_name = 'Magdalena')),
+
+-- Meta
+('Villavicencio', (SELECT id FROM departments WHERE department_name = 'Meta')),
+('Acacías', (SELECT id FROM departments WHERE department_name = 'Meta')),
+
+-- Nariño
+('Pasto', (SELECT id FROM departments WHERE department_name = 'Nariño')),
+('Tumaco', (SELECT id FROM departments WHERE department_name = 'Nariño')),
+
+-- Norte de Santander
+('Cúcuta', (SELECT id FROM departments WHERE department_name = 'Norte de Santander')),
+('Ocaña', (SELECT id FROM departments WHERE department_name = 'Norte de Santander')),
+
+-- Putumayo
+('Mocoa', (SELECT id FROM departments WHERE department_name = 'Putumayo')),
+
+-- Quindío
+('Armenia', (SELECT id FROM departments WHERE department_name = 'Quindío')),
+('Montenegro', (SELECT id FROM departments WHERE department_name = 'Quindío')),
+
+-- Risaralda
+('Pereira', (SELECT id FROM departments WHERE department_name = 'Risaralda')),
+('Dosquebradas', (SELECT id FROM departments WHERE department_name = 'Risaralda')),
+
+-- San Andrés y Providencia
+('San Andrés', (SELECT id FROM departments WHERE department_name = 'San Andrés y Providencia')),
+
+-- Santander
+('Bucaramanga', (SELECT id FROM departments WHERE department_name = 'Santander')),
+('Floridablanca', (SELECT id FROM departments WHERE department_name = 'Santander')),
+
+-- Sucre
+('Sincelejo', (SELECT id FROM departments WHERE department_name = 'Sucre')),
+('Corozal', (SELECT id FROM departments WHERE department_name = 'Sucre')),
+
+-- Tolima
+('Ibagué', (SELECT id FROM departments WHERE department_name = 'Tolima')),
+('Espinal', (SELECT id FROM departments WHERE department_name = 'Tolima')),
+
+-- Valle del Cauca
+('Cali', (SELECT id FROM departments WHERE department_name = 'Valle del Cauca')),
+('Palmira', (SELECT id FROM departments WHERE department_name = 'Valle del Cauca')),
+('Buenaventura', (SELECT id FROM departments WHERE department_name = 'Valle del Cauca')),
+
+-- Vaupés
+('Mitú', (SELECT id FROM departments WHERE department_name = 'Vaupés')),
+
+-- Vichada
+('Puerto Carreño', (SELECT id FROM departments WHERE department_name = 'Vichada'));
 --
 -- Índices para tablas volcadas
 --
