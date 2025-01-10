@@ -53,6 +53,7 @@ require("./app/routes/user.routes", cors(corsOptions))(app);
 require("./app/routes/influ.routes", cors(corsOptions))(app);
 require("./app/routes/cotizaciones.routes", cors(corsOptions))(app);
 require("./app/routes/gender.routes", cors(corsOptions))(app);
+require("./app/routes/cities.routes", cors(corsOptions))(app);
 
 
 

@@ -61,11 +61,18 @@ interface Gender {
 	description: string;
 }
 
+// Define the Gender type
+interface City {
+	id: number;
+	city_name: string;
+}
+
 const NewInfluencer = () => {
 	const formdata = new FormData();
 	const [successful, setSuccessful] = useState(false);
 	const [message, setMessage] = useState('error por defecto');
 	const [genders, setGenders] = useState<Gender[]>([]);
+	const [cities, setCities] = useState<City[]>([]);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -92,6 +99,19 @@ const NewInfluencer = () => {
 		fetchGenders();
 	}, []);
 
+	// Fetch cities from the API
+	useEffect(() => {
+		async function fetchCities() {
+			try {
+				const response = await InfluService.getCities(); // Make sure to create this service method
+				setCities(response.data);
+			} catch (error) {
+				console.error("Failed to fetch Cities:", error);
+			}
+		}
+		fetchCities();
+	}, []);
+
 	async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
@@ -110,7 +130,7 @@ const NewInfluencer = () => {
 			firstName: 'John',
 			lastName: 'Doe',
 			idUser: '90998909',
-			cityNac: 'Colombia',
+			cityNac: 'Cali',
 			birthdayDate: '10/10/2024',
 			year: '45',
 			gender: '1',
@@ -256,17 +276,17 @@ const NewInfluencer = () => {
 														isFloating>
 														<Select
 															ariaLabel='Ciudad'
-															placeholder='Choose...'
-															list={[
-																{ value: 'col', text: 'COLOMBIA' },
-																{ value: 'usa', text: 'USA' },
-															]}
+															placeholder='Seleccione...'
+															list={cities.map((city) => ({
+																value: city.id, // Use the gender ID as the value
+																text: city.city_name, // Use the gender description as the text
+															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
-															value={formik.values.cityNac}
+															value={formik.values.city}
 															isValid={formik.isValid}
-															isTouched={formik.touched.cityNac}
-															invalidFeedback={formik.errors.cityNac}
+															isTouched={formik.touched.city}
+															invalidFeedback={formik.errors.city}
 														/>
 													</FormGroup>
 												</div>

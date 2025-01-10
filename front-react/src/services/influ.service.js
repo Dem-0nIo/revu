@@ -3,6 +3,7 @@ import authHeader from './auth-header';
 
 const API_URL = 'http://127.0.0.1:8081/api/influencer/';
 const GENDER_API_URL = 'http://127.0.0.1:8081/api/genders'; // Add Gender API endpoint
+const CITIES_API_URL = 'http://127.0.0.1:8081/api/cities'; // Add Gender API endpoint
 
 const getAll = () => {
 	return axios.get(`${API_URL}all`, { headers: authHeader() });
@@ -25,12 +26,18 @@ const getGenders = () => {
 	return axios.get(GENDER_API_URL); // No auth headers needed unless required
 };
 
+// New method to fetch genders
+const getCities = () => {
+	return axios.get(CITIES_API_URL); // No auth headers needed unless required
+};
+
 const UserService = {
 	getAll,
 	addInfluencer,
 	deleteInfluencer,
 	updateInfluencer,
-	getGenders, // Export the new method
+	getGenders,
+	getCities, // Export the new method
 };
 
 export default UserService;
