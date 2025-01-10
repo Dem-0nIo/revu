@@ -1,6 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable no-console */
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 import Card, {
@@ -38,6 +38,8 @@ const SignupSchema = Yup.object({
 	socialInstagramCla: Yup.string().required('Es un campo obligatorio'),
 	socialInstagramSeg: Yup.string().required('Es un campo obligatorio'),
 	costo_1: Yup.string().required('Es un campo obligatorio'),
+	// gender
+	gender: Yup.string().required("Es un campo obligatorio"),
 });
 
 interface IPreviewItemProps {
@@ -53,10 +55,17 @@ const PreviewItem: FC<IPreviewItemProps> = ({ title, value }) => {
 	);
 };
 
+// Define the Gender type
+interface Gender {
+	id: number;
+	description: string;
+}
+
 const NewInfluencer = () => {
 	const formdata = new FormData();
 	const [successful, setSuccessful] = useState(false);
 	const [message, setMessage] = useState('error por defecto');
+	const [genders, setGenders] = useState<Gender[]>([]);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -69,6 +78,19 @@ const NewInfluencer = () => {
 		{ id: 2, name: 'TikTok' },
 		{ id: 3, name: 'Facebook' },
 	];
+
+	// Fetch genders from the API
+	useEffect(() => {
+		async function fetchGenders() {
+			try {
+				const response = await InfluService.getGenders(); // Make sure to create this service method
+				setGenders(response.data);
+			} catch (error) {
+				console.error("Failed to fetch genders:", error);
+			}
+		}
+		fetchGenders();
+	}, []);
 
 	async function addInflu(values: any) {
 		try {
@@ -91,7 +113,7 @@ const NewInfluencer = () => {
 			cityNac: 'Colombia',
 			birthdayDate: '10/10/2024',
 			year: '45',
-			gender: 'M',
+			gender: '1',
 			eps: 'SURA',
 			passport: 'NO',
 			displayName: 'johndoe',
@@ -307,20 +329,20 @@ const NewInfluencer = () => {
 													</FormGroup>
 												</div>
 												<div className='col-6'>
-													<FormGroup
-														id='gender'
-														label='gender'
-														isFloating>
-														<Input
-															placeholder='Genero'
-															autoComplete='gender'
+													<FormGroup id='gender' label='Género' isFloating>
+														<Select
+															ariaLabel='Género'
+															placeholder='Seleccione...'
+															list={genders.map((gender) => ({
+																value: gender.id, // Use the gender ID as the value
+																text: gender.description, // Use the gender description as the text
+															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
 															value={formik.values.gender}
 															isValid={formik.isValid}
 															isTouched={formik.touched.gender}
 															invalidFeedback={formik.errors.gender}
-															validFeedback='Looks good!'
 														/>
 													</FormGroup>
 												</div>
