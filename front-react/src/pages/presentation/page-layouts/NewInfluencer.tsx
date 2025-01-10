@@ -24,8 +24,21 @@ import InfluService from '../../../services/influ.service';
 const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
-	idUser: Yup.string().required('Es un campo obligatorio'),
-	year: Yup.string().required('Es un campo obligatorio'),
+	idUser: Yup.number()
+	.typeError('Debe ser un número')
+	.positive('Debe ser un número positivo')
+	.integer('Debe ser un número entero')
+	.required('Es un campo obligatorio y numérico'),
+	year: Yup.number()
+    .typeError('Debe ser un número')
+    .positive('Debe ser un número positivo')
+    .integer('Debe ser un número entero')
+    .test(
+		'len',
+		'Debe tener exactamente 2 dígitos',
+		(val) => (val ? val.toString().length === 2 : false) // Retorna `false` si `val` es undefined
+	)
+    .required('Es un campo obligatorio y numérico'),
 	displayName: Yup.string().required('Es un campo obligatorio'),
 	// segundo
 	phoneNumber: Yup.string().required('Es un campo obligatorio'),
@@ -257,6 +270,7 @@ const NewInfluencer = () => {
 														label='Cedula'
 														isFloating>
 														<Input
+															type='number'
 															placeholder='Cedula'
 															autoComplete='additional-name'
 															onChange={formik.handleChange}
@@ -314,17 +328,18 @@ const NewInfluencer = () => {
 												</div>
 												<div className='col-md-4'>
 													<FormGroup id='year' label='Edad' isFloating>
-														<Input
-															placeholder='Edad'
-															autoComplete='family-name'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.year}
-															isValid={formik.isValid}
-															isTouched={formik.touched.year}
-															invalidFeedback={formik.errors.year}
-															validFeedback='Looks good!'
-														/>
+													<Input
+														type='number'
+														placeholder='Edad'
+														autoComplete='off'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.year}
+														isValid={formik.isValid}
+														isTouched={formik.touched.year}
+														invalidFeedback={formik.errors.year}
+														validFeedback='Looks good!'
+													/>
 													</FormGroup>
 												</div>
 												<div className='col-6'>
