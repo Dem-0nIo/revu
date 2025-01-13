@@ -38,6 +38,8 @@ db.cotizaciones = require("../models/cotizaciones.model.js")(sequelize, Sequeliz
 db.roles = require("../models/user_roles.model.js")(sequelize, Sequelize);
 db.gender = require("../models/gender.model.js")(sequelize, Sequelize);
 db.cities = require("../models/cities.model.js")(sequelize, Sequelize);
+db.departments = require("../models/departments.model.js")(sequelize, Sequelize);
+db.influencer_classes = require("../models/influencer_classes.model.js")(sequelize, Sequelize);
 
 
 db.role.belongsToMany(db.user, {

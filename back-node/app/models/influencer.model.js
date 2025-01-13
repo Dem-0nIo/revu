@@ -22,8 +22,9 @@ module.exports = (sequelize, Sequelize) => {
     year: {
       type: Sequelize.STRING,
     },
-    gender: {
-      type: Sequelize.STRING,
+    gender_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
     eps: {
       type: Sequelize.STRING,

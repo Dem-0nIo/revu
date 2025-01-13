@@ -360,9 +360,21 @@ INSERT INTO cities (city_name, department_id) VALUES
 
 -- Vichada
 ('Puerto Carreño', (SELECT id FROM departments WHERE department_name = 'Vichada'));
---
--- Índices para tablas volcadas
---
+
+
+CREATE TABLE IF NOT EXISTS influencer_classes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(50) NOT NULL UNIQUE,
+    min_followers INT NOT NULL,
+    max_followers INT DEFAULT NULL
+);
+
+INSERT INTO influencer_classes (class_name, min_followers, max_followers)
+VALUES
+    ('Nano', 1000, 9999),
+    ('Micro', 10000, 99999),
+    ('Macro', 100000, 999999),
+    ('Mega', 1000000, NULL);
 
 --
 -- Indices de la tabla `cotizaciones`

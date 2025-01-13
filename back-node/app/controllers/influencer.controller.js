@@ -15,18 +15,31 @@ const fileUpload = multer({
   storage: diskstorage,
 }).single("image");
 
-exports.registerinfluencer = (req, res) => {
+exports.registerinfluencer = async (req, res) => {
   const vart = req.body;
 
+  const { socialInstagramSeg } = req.body;
+
+  // Validate and find the influencer class based on the number of followers
+  const matchedClass = await db.influencer_classes.findOne({
+    where: {
+        min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
+        max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
+    },
+  });
+
+  // Add logic to handle the matched class (optional)
+  const classification = matchedClass ? matchedClass.class_name : "Unknown";
+
   // Save User to Database
-  Influ.create({
+  const newInfluencer = await Influ.create({
     firstName: vart.firstName,
     lastName: vart.lastName,
     idUser: vart.idUser,
     cityNac: vart.cityNac,
     birthdayDate: vart.birthdayDate,
     year: vart.year,
-    gender: vart.gender,
+    gender_id: vart.gender_id,
     eps: vart.eps,
     passport: vart.passport,
     displayName: vart.displayName,
@@ -41,7 +54,7 @@ exports.registerinfluencer = (req, res) => {
     pushNotification: vart.pushNotification,
     phoneNumberWhp: vart.phoneNumberWhp,
     socialInstagram: vart.socialInstagram,
-    socialInstagramCla: vart.socialInstagramCla,
+    socialInstagramCla: classification,
     socialInstagramSeg: vart.socialInstagramSeg,
     socialTik: vart.socialTik,
     socialTikCla: vart.socialTikCla,
@@ -62,24 +75,41 @@ exports.registerinfluencer = (req, res) => {
     });
 };
 
-exports.registerinflu = (req, res, fileUpload) => {
+exports.registerinflu = async (req, res, fileUpload) => {
   const body = req.body;
   const type = req.file.mimetype;
   const name = req.file.originalname;
   const data = fs.readFileSync(
     path.join(__dirname, "../images/" + req.file.filename)
   );
-  // console.log(body);
+  const { socialInstagramSeg } = req.body;
+
+  // Validate and find the influencer class based on the number of followers
+  const matchedClass = await db.influencer_classes.findOne({
+    where: {
+        min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
+        max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
+    },
+  });
+
+  // Add logic to handle the matched class (optional)
+  const classification = matchedClass ? matchedClass.class_name : "Unknown";
+
+  // Manejo de la imagen subida
+  const filePath = req.file
+    ? "/" + req.file.filename
+    : "/default_image.jpg"; // Imagen por defecto si no se sube ninguna
+
   console.log(__dirname, "../images/" + req.file.filename);
   // Save User to Database
-  Influ.create({
+  const newInfluencer = await Influ.create({
     firstName: req.body.name,
     lastName: req.body.lastName,
     idUser: req.body.idUser,
     cityNac: req.body.cityNac,
     birthdayDate: req.body.birthdayDate,
     year: req.body.year,
-    gender: req.body.gender,
+    gender_id: req.body.gender_id,
     eps: req.body.eps,
     passport: req.body.passport,
     displayName: req.body.displayName,
@@ -94,7 +124,7 @@ exports.registerinflu = (req, res, fileUpload) => {
     pushNotification: req.body.pushNotification,
     phoneNumberWhp: req.body.phoneNumberWhp,
     socialInstagram: req.body.socialInstagram,
-    socialInstagramCla: req.body.socialInstagramCla,
+    socialInstagramCla: classification,
     socialInstagramSeg: req.body.socialInstagramSeg,
     socialTik: req.body.socialTik,
     socialTikCla: req.body.socialTikCla,
@@ -159,31 +189,6 @@ exports.deleteInfluencer = (req, res) => {
     });
 };
 
-// exports.deleteInfluencer = (req, res) => {
-//   const updatedData = req.body;
-//   const idUser = updatedData.idUser;
-
-//   Influ.destroy({
-//     where: { idUser: idUser },
-//   })
-//     .then((num) => {
-//       if (num == 1) {
-//         res.send({
-//           message: "Influencer was deleted successfully!",
-//         });
-//       } else {
-//         res.send({
-//           message: `Cannot delete Influencer with idUser=${idUser}. Maybe Influencer was not found!`,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message: "Could not delete Influencer with idUser=" + idUser,
-//       });
-//       console.error(err);
-//     });
-// };
 
 exports.allAccess = (req, res) => {
   // Find all influencers

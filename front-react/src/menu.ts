@@ -45,7 +45,7 @@ export const dashboardPagesMenu = {
 	},
 	newInfluencer: {
 		id: 'newinfluencer',
-		text: 'Nuevo Influncer',
+		text: 'Nuevo Influencer',
 		path: 'revu/add-influencer',
 		icon: 'AddReaction',
 	},
@@ -89,7 +89,7 @@ export const adminPagesMenu = {
 	},
 	newInfluencer: {
 		id: 'newinfluencer',
-		text: 'Nuevo Influncer',
+		text: 'Nuevo Influencer',
 		path: 'revu/add-influencer',
 		icon: 'AddReaction',
 	},

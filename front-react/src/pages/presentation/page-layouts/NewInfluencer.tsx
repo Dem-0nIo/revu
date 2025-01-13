@@ -41,7 +41,17 @@ const SignupSchema = Yup.object({
     .required('Es un campo obligatorio y numérico'),
 	displayName: Yup.string().required('Es un campo obligatorio'),
 	// segundo
-	phoneNumber: Yup.string().required('Es un campo obligatorio'),
+	phoneNumber: Yup.string()
+	.matches(
+	  /^(\+)?\d+$/,
+	  "El número de teléfono solo puede contener dígitos y un '+' opcional al inicio"
+	)
+	.test(
+		'len',
+		'Debe tener no mas de 11 dígitos',
+		(val) => (val ? val.toString().length <= 12 : false) // Retorna `false` si `val` es undefined
+	)
+	.required("Es un campo obligatorio"),
 	emailAddress: Yup.string()
 		.email('Ingresar un correo valido')
 		.required('Es un campo obligatorio'),
@@ -49,10 +59,29 @@ const SignupSchema = Yup.object({
 	// Tercero
 	socialInstagram: Yup.string().required('Es un campo obligatorio'),
 	socialInstagramCla: Yup.string().required('Es un campo obligatorio'),
-	socialInstagramSeg: Yup.string().required('Es un campo obligatorio'),
+	socialInstagramSeg: Yup.number()
+    .typeError("Debe ser un número")
+    .positive("Debe ser un número positivo")
+    .integer("Debe ser un número entero")
+    .required("Es un campo obligatorio"),
+	socialTikSeg: Yup.number()
+    .typeError("Debe ser un número")
+    .positive("Debe ser un número positivo")
+    .integer("Debe ser un número entero")
+    .required("Es un campo obligatorio"),
+	socialTikCla: Yup.string().required("Es un campo obligatorio"),
 	costo_1: Yup.string().required('Es un campo obligatorio'),
 	// gender
-	gender: Yup.string().required("Es un campo obligatorio"),
+	gender_id: Yup.string().required("Es un campo obligatorio"),
+	zip: Yup.number()
+    .typeError('Debe ser un número')
+    .positive('Debe ser un número positivo')
+    .integer('Debe ser un número entero')
+    .test(
+		'len',
+		'Debe tener exactamente 6 dígitos',
+		(val) => (val ? val.toString().length === 6 : false) // Retorna `false` si `val` es undefined
+	)
 });
 
 interface IPreviewItemProps {
@@ -74,11 +103,24 @@ interface Gender {
 	description: string;
 }
 
-// Define the Gender type
+// Define the City type
 interface City {
 	id: number;
 	city_name: string;
 }
+
+// Define the Department type
+interface Department {
+	id: number;
+	department_name: string;
+}
+
+interface InfluencerClass {
+	min_followers: number;
+	max_followers: number | null; // null si no hay límite superior
+	class_name: string;
+  }
+  
 
 const NewInfluencer = () => {
 	const formdata = new FormData();
@@ -86,6 +128,8 @@ const NewInfluencer = () => {
 	const [message, setMessage] = useState('error por defecto');
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
+	const [departments, setDepartments] = useState<Department[]>([]);
+	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -98,6 +142,30 @@ const NewInfluencer = () => {
 		{ id: 2, name: 'TikTok' },
 		{ id: 3, name: 'Facebook' },
 	];
+
+	// Handle classification update
+	const handleFollowersChange = (followers: number) => {
+		formik.setFieldValue("socialInstagramSeg", followers); // Actualiza el número de seguidores
+		const matchedClass = influencerClasses.find(
+			(cls) =>
+				followers >= cls.min_followers &&
+				(cls.max_followers === null || followers <= cls.max_followers)
+		);
+		console.log("Clase coincidente:", matchedClass); // Verifica si encuentra una clase
+		formik.setFieldValue("socialInstagramCla", matchedClass?.class_name || "");
+	};
+
+	// Handle TikTok classification update
+	const handleTikTokFollowersChange = (followers: number) => {
+		formik.setFieldValue("socialTikSeg", followers); // Actualiza el número de seguidores
+		const matchedClass = influencerClasses.find(
+			(cls) =>
+				followers >= cls.min_followers &&
+				(cls.max_followers === null || followers <= cls.max_followers)
+		);
+		console.log("Clase TikTok coincidente:", matchedClass); // Verifica si encuentra una clase
+		formik.setFieldValue("socialTikCla", matchedClass?.class_name || "");
+	};
 
 	// Fetch genders from the API
 	useEffect(() => {
@@ -125,6 +193,33 @@ const NewInfluencer = () => {
 		fetchCities();
 	}, []);
 
+	// Fetch departments from the API
+	useEffect(() => {
+		async function fetchDepartments() {
+			try {
+				const response = await InfluService.getDepartments(); // Make sure to create this service method
+				setDepartments(response.data);
+			} catch (error) {
+				console.error("Failed to fetch Departments Front", error);
+			}
+		}
+		fetchDepartments();
+	}, []);
+
+	// Fetch influencer classes
+	useEffect(() => {
+		async function fetchInfluencerClasses() {
+			try {
+				const response = await InfluService.getInfluencerClasses(); // Asegúrate de tener este método en tu servicio
+				console.log("Clases cargadas:", response.data); // Verifica el contenido
+				setInfluencerClasses(response.data);
+			} catch (error) {
+				console.error("Failed to fetch influencer classes:", error);
+			}
+		}
+		fetchInfluencerClasses();
+	}, []);
+
 	async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
@@ -146,7 +241,7 @@ const NewInfluencer = () => {
 			cityNac: 'Cali',
 			birthdayDate: '10/10/2024',
 			year: '45',
-			gender: '1',
+			gender_id: '1',
 			eps: 'SURA',
 			passport: 'NO',
 			displayName: 'johndoe',
@@ -292,8 +387,8 @@ const NewInfluencer = () => {
 															ariaLabel='Ciudad'
 															placeholder='Seleccione...'
 															list={cities.map((city) => ({
-																value: city.id, // Use the gender ID as the value
-																text: city.city_name, // Use the gender description as the text
+																value: city.id, 
+																text: city.city_name,  
 															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
@@ -364,7 +459,7 @@ const NewInfluencer = () => {
 													</FormGroup>
 												</div>
 												<div className='col-6'>
-													<FormGroup id='gender' label='Género' isFloating>
+													<FormGroup id='gender_id' label='Género' isFloating>
 														<Select
 															ariaLabel='Género'
 															placeholder='Seleccione...'
@@ -374,10 +469,10 @@ const NewInfluencer = () => {
 															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
-															value={formik.values.gender}
+															value={formik.values.gender_id}
 															isValid={formik.isValid}
-															isTouched={formik.touched.gender}
-															invalidFeedback={formik.errors.gender}
+															isTouched={formik.touched.gender_id}
+															invalidFeedback={formik.errors.gender_id}
 														/>
 													</FormGroup>
 												</div>
@@ -393,16 +488,16 @@ const NewInfluencer = () => {
 												label='Número celular'
 												isFloating>
 												<Input
-													placeholder='Número celular'
-													type='tel'
-													autoComplete='tel'
+													type="tel"
+													placeholder="Número celular"
+													autoComplete="tel"
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
 													value={formik.values.phoneNumber}
 													isValid={formik.isValid}
 													isTouched={formik.touched.phoneNumber}
 													invalidFeedback={formik.errors.phoneNumber}
-													validFeedback='Looks good!'
+													validFeedback="Looks good!"
 												/>
 											</FormGroup>
 										</div>
@@ -456,39 +551,48 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-lg-6'>
-											<FormGroup
-												id='city'
-												label='Ciudad'
-												isFloating
-												formText='Seleccionar la ciudad donde radica.'>
-												<Input
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.city}
-													isValid={formik.isValid}
-													isTouched={formik.touched.city}
-													invalidFeedback={formik.errors.city}
-													validFeedback='Looks good!'
-												/>
-											</FormGroup>
+										<FormGroup
+											id='cityNac'
+											label='Ciudad'
+											isFloating
+											formText='Seleccionar la ciudad donde radica.'>
+											<Select
+												ariaLabel='Ciudad'
+												placeholder='Seleccione...'
+												list={cities.map((city) => ({
+													value: city.id, 
+													text: city.city_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.city}
+												isValid={formik.isValid}
+												isTouched={formik.touched.city}
+												invalidFeedback={formik.errors.city}
+											/>
+										</FormGroup>
 										</div>
 										<div className='col-md-3'>
-											<FormGroup id='state' label='Departamento' isFloating>
-												<Select
-													ariaLabel='State'
-													placeholder='Choose...'
-													list={[
-														{ value: 'usa', text: 'Risaralda' },
-														{ value: 'ca', text: 'Valle' },
-													]}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.state}
-													isValid={formik.isValid}
-													isTouched={formik.touched.state}
-													invalidFeedback={formik.errors.state}
-												/>
-											</FormGroup>
+											
+											<FormGroup
+											id='state'
+											label='Departamento'
+											isFloating>
+											<Select
+												ariaLabel='State'
+												placeholder='Seleccione...'
+												list={departments.map((state) => ({
+													value: state.id, 
+													text: state.department_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.state}
+												isValid={formik.isValid}
+												isTouched={formik.touched.state}
+												invalidFeedback={formik.errors.state}
+											/>
+										</FormGroup>
 										</div>
 										<div className='col-md-3'>
 											<FormGroup id='zip' label='Codigo postal' isFloating>
@@ -521,37 +625,32 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-4'>
+										<div className="col-4">
 											<FormGroup
-												id='socialInstagramCla'
-												label='Calsificación'
+												id="socialInstagramCla"
+												label="Clasificación"
 												isFloating>
 												<Input
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
+													type="text"
+													placeholder="Clasificación"
 													value={formik.values.socialInstagramCla}
-													isValid={formik.isValid}
-													isTouched={formik.touched.socialInstagramCla}
-													invalidFeedback={
-														formik.errors.socialInstagramCla
-													}
+													readOnly // Campo deshabilitado
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-4'>
+										<div className="col-4">
 											<FormGroup
-												id='socialInstagramSeg'
-												label='Número seguidores'
+												id="socialInstagramSeg"
+												label="Número seguidores"
 												isFloating>
 												<Input
-													onChange={formik.handleChange}
+													type="number"
+													placeholder="Número seguidores"
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														handleFollowersChange(Number(e.target.value))
+													}													
 													onBlur={formik.handleBlur}
 													value={formik.values.socialInstagramSeg}
-													isValid={formik.isValid}
-													isTouched={formik.touched.socialInstagramSeg}
-													invalidFeedback={
-														formik.errors.socialInstagramSeg
-													}
 												/>
 											</FormGroup>
 										</div>
@@ -568,33 +667,32 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-4'>
+										<div className="col-4">
 											<FormGroup
-												id='socialTikCla'
-												label='Calsificación'
+												id="socialTikCla"
+												label="Clasificación TikTok"
 												isFloating>
 												<Input
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
+													type="text"
+													placeholder="Clasificación TikTok"
 													value={formik.values.socialTikCla}
-													isValid={formik.isValid}
-													isTouched={formik.touched.socialTikCla}
-													invalidFeedback={formik.errors.socialTikCla}
+													readOnly // Campo deshabilitado
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-4'>
+										<div className="col-4">
 											<FormGroup
-												id='socialTikSeg'
-												label='Número seguidores'
+												id="socialTikSeg"
+												label="Número de seguidores TikTok"
 												isFloating>
 												<Input
-													onChange={formik.handleChange}
+													type="number"
+													placeholder="Número de seguidores TikTok"
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														handleTikTokFollowersChange(Number(e.target.value))
+													}
 													onBlur={formik.handleBlur}
 													value={formik.values.socialTikSeg}
-													isValid={formik.isValid}
-													isTouched={formik.touched.socialTikSeg}
-													invalidFeedback={formik.errors.socialTikSeg}
 												/>
 											</FormGroup>
 										</div>
@@ -683,7 +781,7 @@ const NewInfluencer = () => {
 											value={formik.values.birthdayDate}
 										/>
 										<PreviewItem title='Edad' value={formik.values.year} />
-										<PreviewItem title='Genero' value={formik.values.gender} />
+										<PreviewItem title='Genero' value={formik.values.gender_id} />
 										<PreviewItem title='Cedula' value={formik.values.idUser} />
 										<PreviewItem
 											title='Display Name'
