@@ -3,9 +3,11 @@ import authHeader from './auth-header';
 
 const API_URL = 'http://127.0.0.1:8081/api/influencer/';
 const GENDER_API_URL = 'http://127.0.0.1:8081/api/genders'; // Add Gender API endpoint
-const CITIES_API_URL = 'http://127.0.0.1:8081/api/cities'; // Add Gender API endpoint
-const DEPARTMENTS_API_URL = 'http://127.0.0.1:8081/api/departments'; // Add Gender API endpoint
-const INFLU_CLASSES_API_URL = 'http://127.0.0.1:8081/api/classes'; // Add Gender API endpoint
+const CITIES_API_URL = 'http://127.0.0.1:8081/api/cities'; // Add Cities API endpoint
+const DEPARTMENTS_API_URL = 'http://127.0.0.1:8081/api/departments'; // Add States API endpoint
+const INFLU_CLASSES_API_URL = 'http://127.0.0.1:8081/api/classes'; // Add Categories API endpoint
+const EHTNIC_API_URL = 'http://127.0.0.1:8081/api/ethnic'; // Add Categories API endpoint
+
 
 const getAll = () => {
 	return axios.get(`${API_URL}all`, { headers: authHeader() });
@@ -41,12 +43,17 @@ const getDepartments = () => {
 	return axios.get(DEPARTMENTS_API_URL); // No
 };
 
+const getEthnicGroups = () => {
+	return axios.get(`${EHTNIC_API_URL}`, { headers: authHeader() });
+};
+
 const UserService = {
 	getAll,
 	addInfluencer,
 	deleteInfluencer,
 	updateInfluencer,
 	getInfluencerClasses,
+	getEthnicGroups,
 	getGenders,
 	getCities,
 	getDepartments, // Export the new method

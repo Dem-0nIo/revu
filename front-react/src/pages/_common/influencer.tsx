@@ -7,6 +7,7 @@ interface Influencer {
 	birthdayDate: string;
 	year: string;
 	gender: string;
+	ethnic: string;
 	eps: string;
 	passport: string;
 	displayName: string;

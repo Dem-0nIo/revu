@@ -24,6 +24,7 @@ import InfluService from '../../../services/influ.service';
 const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
+	ethnic_id: Yup.string(), // Not required
 	idUser: Yup.number()
 	.typeError('Debe ser un número')
 	.positive('Debe ser un número positivo')
@@ -120,6 +121,11 @@ interface InfluencerClass {
 	max_followers: number | null; // null si no hay límite superior
 	class_name: string;
   }
+
+  interface Ethnic {
+	id: number;
+	ethnicity_name: string;
+}  
   
 
 const NewInfluencer = () => {
@@ -130,6 +136,7 @@ const NewInfluencer = () => {
 	const [cities, setCities] = useState<City[]>([]);
 	const [departments, setDepartments] = useState<Department[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
+	const [ethnicGroup, setEthnicity] = useState<Ethnic[]>([]);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -220,6 +227,20 @@ const NewInfluencer = () => {
 		fetchInfluencerClasses();
 	}, []);
 
+	// Fetch Ethnic group
+	useEffect(() => {
+		async function fetchEthnicityGroup() {
+			try {
+				const response = await InfluService.getEthnicGroups(); // Asegúrate de tener este método en tu servicio
+				console.log("Etnias cargadas:", response.data); // Verifica el contenido
+				setEthnicity(response.data);
+			} catch (error) {
+				console.error("Failed to fetch influencer classes:", error);
+			}
+		}
+		fetchEthnicityGroup();
+	}, []);
+
 	async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
@@ -252,14 +273,15 @@ const NewInfluencer = () => {
 			city: 'Pereira',
 			state: 'Valle',
 			zip: '660004',
+			ethnic_id: '',
 			emailNotification: [''],
 			pushNotification: [''],
 			phoneNumberWhp: '1234566',
 			socialInstagram: '@instagrampedro',
-			socialInstagramCla: 'nano',
-			socialInstagramSeg: '1234567',
+			socialInstagramCla: 'Nano',
+			socialInstagramSeg: '1234',
 			socialTik: '@instagrampedro',
-			socialTikCla: 'micro',
+			socialTikCla: 'Micro',
 			socialTikSeg: '1234567',
 			socialNetwork: [''],
 			image: 'null',
@@ -423,18 +445,18 @@ const NewInfluencer = () => {
 												</div>
 												<div className='col-md-4'>
 													<FormGroup id='year' label='Edad' isFloating>
-													<Input
-														type='number'
-														placeholder='Edad'
-														autoComplete='off'
-														onChange={formik.handleChange}
-														onBlur={formik.handleBlur}
-														value={formik.values.year}
-														isValid={formik.isValid}
-														isTouched={formik.touched.year}
-														invalidFeedback={formik.errors.year}
-														validFeedback='Looks good!'
-													/>
+														<Input
+															type='number'
+															placeholder='Edad'
+															autoComplete='off'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.year}
+															isValid={formik.isValid}
+															isTouched={formik.touched.year}
+															invalidFeedback={formik.errors.year}
+															validFeedback='Looks good!'
+														/>
 													</FormGroup>
 												</div>
 												<div className='col-6'>
@@ -481,8 +503,8 @@ const NewInfluencer = () => {
 									</Card>
 								</WizardItem>
 								<WizardItem id='step2' title='Información de contacto'>
-									<div className='row g-4'>
-										<div className='col-12'>
+								<div className='row g-4'>
+									<div className='col-md-3'>
 											<FormGroup
 												id='phoneNumber'
 												label='Número celular'
@@ -501,7 +523,7 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-12'>
+										<div className='col-md-3'>
 											<FormGroup id='emailAddress' label='Email' isFloating>
 												<Input
 													type='email'
@@ -517,7 +539,7 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-lg-12'>
+										<div className='col-md-3'>
 											<FormGroup
 												id='addressLine'
 												label='Dirección'
@@ -533,7 +555,7 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-lg-12'>
+										<div className='col-md-3'>
 											<FormGroup
 												id='addressLine2'
 												label='Adicional'
@@ -550,49 +572,48 @@ const NewInfluencer = () => {
 											</FormGroup>
 										</div>
 
-										<div className='col-lg-6'>
-										<FormGroup
-											id='cityNac'
-											label='Ciudad'
-											isFloating
-											formText='Seleccionar la ciudad donde radica.'>
-											<Select
-												ariaLabel='Ciudad'
-												placeholder='Seleccione...'
-												list={cities.map((city) => ({
-													value: city.id, 
-													text: city.city_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.city}
-												isValid={formik.isValid}
-												isTouched={formik.touched.city}
-												invalidFeedback={formik.errors.city}
-											/>
-										</FormGroup>
+										<div className='col-md-3'>
+											<FormGroup
+												id='cityNac'
+												label='Ciudad'
+												isFloating
+												formText='Seleccionar la ciudad donde radica.'>
+												<Select
+													ariaLabel='Ciudad'
+													placeholder='Seleccione...'
+													list={cities.map((city) => ({
+														value: city.id, 
+														text: city.city_name, 
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.city}
+													isValid={formik.isValid}
+													isTouched={formik.touched.city}
+													invalidFeedback={formik.errors.city}
+												/>
+											</FormGroup>
 										</div>
 										<div className='col-md-3'>
-											
 											<FormGroup
-											id='state'
-											label='Departamento'
-											isFloating>
-											<Select
-												ariaLabel='State'
-												placeholder='Seleccione...'
-												list={departments.map((state) => ({
-													value: state.id, 
-													text: state.department_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.state}
-												isValid={formik.isValid}
-												isTouched={formik.touched.state}
-												invalidFeedback={formik.errors.state}
-											/>
-										</FormGroup>
+												id='state'
+												label='Departamento'
+												isFloating>
+												<Select
+													ariaLabel='State'
+													placeholder='Seleccione...'
+													list={departments.map((state) => ({
+														value: state.id,
+														text: state.department_name,
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.state}
+													isValid={formik.isValid}
+													isTouched={formik.touched.state}
+													invalidFeedback={formik.errors.state}
+												/>
+											</FormGroup>
 										</div>
 										<div className='col-md-3'>
 											<FormGroup id='zip' label='Codigo postal' isFloating>
@@ -603,6 +624,28 @@ const NewInfluencer = () => {
 													isValid={formik.isValid}
 													isTouched={formik.touched.zip}
 													invalidFeedback={formik.errors.zip}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-3'>
+											<FormGroup
+												id='ethnic'
+												label='Etnia'
+												isFloating
+												formText='Seleccionar la etnia si pertenece a alguna.'>
+												<Select
+													ariaLabel='Etnia'
+													placeholder='Seleccione...'
+													list={ethnicGroup.map((ethnic) => ({
+														value: ethnic.id, 
+														text: ethnic.ethnicity_name, 
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.ethnic_id}
+													isValid={formik.isValid}
+													isTouched={formik.touched.ethnic_id}
+													invalidFeedback={formik.errors.ethnic_id}
 												/>
 											</FormGroup>
 										</div>
@@ -843,6 +886,11 @@ const NewInfluencer = () => {
 										<PreviewItem
 											title='Seguidores'
 											value={formik.values.socialTikSeg}
+										/>
+
+										<PreviewItem
+											title='Genero'
+											value={formik.values.gender_id}
 										/>
 
 										<PreviewItem

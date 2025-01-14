@@ -79,6 +79,7 @@ export const TableBody = ({
 		costo_3: string;
 		city: string;
 		gender: string;
+		ethnic: string;
 		eps: string;
 		passport: string;
 		socialInstagram: string;

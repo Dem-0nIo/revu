@@ -26,6 +26,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    ethnic_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     eps: {
       type: Sequelize.STRING,
     },

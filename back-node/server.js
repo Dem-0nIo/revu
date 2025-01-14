@@ -56,6 +56,7 @@ require("./app/routes/gender.routes", cors(corsOptions))(app);
 require("./app/routes/cities.routes", cors(corsOptions))(app);
 require("./app/routes/departments.routes", cors(corsOptions))(app);
 require("./app/routes/influ_classes.routes", cors(corsOptions))(app);
+require("./app/routes/ethnic.routes", cors(corsOptions))(app);
 
 
 

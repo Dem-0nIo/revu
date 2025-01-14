@@ -75,6 +75,7 @@ CREATE TABLE `influencers` (
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,
   `eps` varchar(255) DEFAULT NULL,
+  `ethnic_id` INT DEFAULT NULL,
   `passport` varchar(255) DEFAULT NULL,
   `displayName` varchar(255) DEFAULT NULL,
   `emailAddress` varchar(255) DEFAULT NULL,
@@ -376,6 +377,68 @@ VALUES
     ('Macro', 100000, 999999),
     ('Mega', 1000000, NULL);
 
+-- Crear la tabla de etnias si no existe
+CREATE TABLE IF NOT EXISTS ethnic_groups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ethnicity_name VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Insertar las etnias en la tabla
+INSERT INTO ethnic_groups (ethnicity_name) VALUES
+('Wayuu (Guajira)'),
+('Embera (Chocó, Risaralda, Antioquia)'),
+('Nasa (Cauca)'),
+('Arhuaco (Sierra Nevada de Santa Marta)'),
+('Kogui (Sierra Nevada de Santa Marta)'),
+('Zenú (Córdoba y Sucre)'),
+('Awá (Nariño y Putumayo)'),
+('Ticuna (Amazonas)'),
+('Uitoto (Amazonas y Caquetá)'),
+('Sikuani (Orinoquía)'),
+('Afrodescendiente');
+
+-- Crear la tabla hair_types (tipos de cabello)
+CREATE TABLE IF NOT EXISTS hair_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hair_type_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Insertar datos de ejemplo para tipos de cabello
+INSERT INTO hair_types (hair_type_name) VALUES 
+('Liso'),
+('Ondulado'),
+('Rizado'),
+('Muy rizado');
+
+-- Crear la tabla hair_colors (colores de cabello)
+CREATE TABLE IF NOT EXISTS hair_colors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hair_color_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Insertar datos de ejemplo para colores de cabello
+INSERT INTO hair_colors (hair_color_name) VALUES 
+('Negro'),
+('Castaño'),
+('Rubio'),
+('Pelirrojo'),
+('Gris'),
+('Blanco');
+
+-- Crear la tabla skin_colors (colores de piel)
+CREATE TABLE IF NOT EXISTS skin_colors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    skin_color_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Insertar datos de ejemplo para colores de piel
+INSERT INTO skin_colors (skin_color_name) VALUES 
+('Pálida'),
+('Marfil'),
+('Beige'),
+('Trigueña'),
+('Marrón'),
+('Negra');
 --
 -- Indices de la tabla `cotizaciones`
 --
@@ -386,9 +449,17 @@ ALTER TABLE `cotizaciones`
 -- Indices de la tabla `influencers`
 --
 ALTER TABLE `influencers`
-  ADD PRIMARY KEY (`idUser`),
+  ADD PRIMARY KEY (`idUser`);
+
+ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_gender`
   FOREIGN KEY (`gender_id`) REFERENCES `genders` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_ethnic`
+  FOREIGN KEY (`ethnic_id`) REFERENCES `ethnic_groups` (`id`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 
@@ -414,18 +485,10 @@ ALTER TABLE `user_roles`
   ADD KEY `userId` (`userId`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Restricciones para tablas volcadas
---
 
 --
 -- Filtros para la tabla `user_roles`
