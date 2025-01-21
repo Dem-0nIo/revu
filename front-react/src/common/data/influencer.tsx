@@ -6,8 +6,8 @@ interface Influencer {
 	cityNac: string;
 	birthdayDate: string;
 	year: string;
-	gender: string;
-	ethnic: string;
+	gender_id: number;
+	ethnic_id: number;
 	eps: string;
 	passport: string;
 	displayName: string;

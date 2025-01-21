@@ -24,7 +24,7 @@ import InfluService from '../../../services/influ.service';
 const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
-	ethnic_id: Yup.string(), // Not required
+	ethnic_id: Yup.number(), // Not required
 	idUser: Yup.number()
 	.typeError('Debe ser un número')
 	.positive('Debe ser un número positivo')
@@ -122,10 +122,25 @@ interface InfluencerClass {
 	class_name: string;
   }
 
-  interface Ethnic {
+interface Ethnic {
 	id: number;
 	ethnicity_name: string;
-}  
+} 
+
+interface HairColor {
+	id: number;
+	hair_color_name: string;
+} 
+
+interface HairType {
+	id: number;
+	hair_type_name: string;
+} 
+
+interface SkinColor {
+	id: number;
+	skin_color_name: string;
+} 
   
 
 const NewInfluencer = () => {
@@ -137,6 +152,9 @@ const NewInfluencer = () => {
 	const [departments, setDepartments] = useState<Department[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [ethnicGroup, setEthnicity] = useState<Ethnic[]>([]);
+	const [hairColor, setHairColor] = useState<HairColor[]>([]);
+	const [hairType, setHairType] = useState<HairType[]>([]);
+	const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -241,6 +259,45 @@ const NewInfluencer = () => {
 		fetchEthnicityGroup();
 	}, []);
 
+	useEffect(() => {
+		async function fetchHairColor() {
+			try {
+				const response = await InfluService.getHairColor(); // Asegúrate de tener este método en tu servicio
+				console.log("Color de cabello:", response.data); // Verifica el contenido
+				setHairColor(response.data);
+			} catch (error) {
+				console.error("Failed to fetch hair color:", error);
+			}
+		}
+		fetchHairColor();
+	}, []);
+
+	useEffect(() => {
+		async function fetchHairType() {
+			try {
+				const response = await InfluService.getHairTypes(); // Asegúrate de tener este método en tu servicio
+				console.log("Tipo de cabello cargado:", response.data); // Verifica el contenido
+				setHairType(response.data);
+			} catch (error) {
+				console.error("Failed to fetch hair type:", error);
+			}
+		}
+		fetchHairType();
+	}, []);
+
+	useEffect(() => {
+		async function fetchSkinColor() {
+			try {
+				const response = await InfluService.getSkinColors(); // Asegúrate de tener este método en tu servicio
+				console.log("Color de piel cargado: ", response.data); // Verifica el contenido
+				setSkinColor(response.data);
+			} catch (error) {
+				console.error("Failed to fetch skin color: ", error);
+			}
+		}
+		fetchSkinColor();
+	}, []);
+
 	async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
@@ -263,6 +320,10 @@ const NewInfluencer = () => {
 			birthdayDate: '10/10/2024',
 			year: '45',
 			gender_id: '1',
+			ethnic_id: '1',
+			hair_color_id: '1',
+			hair_type_id: '1',
+			skin_color_id: '1',
 			eps: 'SURA',
 			passport: 'NO',
 			displayName: 'johndoe',
@@ -273,7 +334,6 @@ const NewInfluencer = () => {
 			city: 'Pereira',
 			state: 'Valle',
 			zip: '660004',
-			ethnic_id: '',
 			emailNotification: [''],
 			pushNotification: [''],
 			phoneNumberWhp: '1234566',
@@ -286,8 +346,8 @@ const NewInfluencer = () => {
 			socialNetwork: [''],
 			image: 'null',
 			costo_1: '1234567',
-			costo_2: '1234567',
-			costo_3: '1234567',
+			costo_2: '7654321',
+			costo_3: '2589631',
 		},
 
 		onSubmit: (values) => {
@@ -483,6 +543,7 @@ const NewInfluencer = () => {
 												<div className='col-6'>
 													<FormGroup id='gender_id' label='Género' isFloating>
 														<Select
+															name="gender_id"
 															ariaLabel='Género'
 															placeholder='Seleccione...'
 															list={genders.map((gender) => ({
@@ -498,79 +559,79 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='phoneNumber'
+														label='Número celular'
+														isFloating>
+														<Input
+															type="tel"
+															placeholder="Número celular"
+															autoComplete="tel"
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.phoneNumber}
+															isValid={formik.isValid}
+															isTouched={formik.touched.phoneNumber}
+															invalidFeedback={formik.errors.phoneNumber}
+															validFeedback="Looks good!"
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup id='emailAddress' label='Email' isFloating>
+														<Input
+															type='email'
+															placeholder='Emails'
+															autoComplete='email'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.emailAddress}
+															isValid={formik.isValid}
+															isTouched={formik.touched.emailAddress}
+															invalidFeedback={formik.errors.emailAddress}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='addressLine'
+														label='Dirección'
+														isFloating>
+														<Input
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.addressLine}
+															isValid={formik.isValid}
+															isTouched={formik.touched.addressLine}
+															invalidFeedback={formik.errors.addressLine}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='addressLine2'
+														label='Adicional'
+														isFloating>
+														<Input
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.addressLine2}
+															isValid={formik.isValid}
+															isTouched={formik.touched.addressLine2}
+															invalidFeedback={formik.errors.addressLine2}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
 											</div>
 										</CardBody>
 									</Card>
 								</WizardItem>
 								<WizardItem id='step2' title='Información de contacto'>
 								<div className='row g-4'>
-									<div className='col-md-3'>
-											<FormGroup
-												id='phoneNumber'
-												label='Número celular'
-												isFloating>
-												<Input
-													type="tel"
-													placeholder="Número celular"
-													autoComplete="tel"
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.phoneNumber}
-													isValid={formik.isValid}
-													isTouched={formik.touched.phoneNumber}
-													invalidFeedback={formik.errors.phoneNumber}
-													validFeedback="Looks good!"
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup id='emailAddress' label='Email' isFloating>
-												<Input
-													type='email'
-													placeholder='Emails'
-													autoComplete='email'
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.emailAddress}
-													isValid={formik.isValid}
-													isTouched={formik.touched.emailAddress}
-													invalidFeedback={formik.errors.emailAddress}
-													validFeedback='Looks good!'
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='addressLine'
-												label='Dirección'
-												isFloating>
-												<Input
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.addressLine}
-													isValid={formik.isValid}
-													isTouched={formik.touched.addressLine}
-													invalidFeedback={formik.errors.addressLine}
-													validFeedback='Looks good!'
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='addressLine2'
-												label='Adicional'
-												isFloating>
-												<Input
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.addressLine2}
-													isValid={formik.isValid}
-													isTouched={formik.touched.addressLine2}
-													invalidFeedback={formik.errors.addressLine2}
-													validFeedback='Looks good!'
-												/>
-											</FormGroup>
-										</div>
 
 										<div className='col-md-3'>
 											<FormGroup
@@ -634,6 +695,7 @@ const NewInfluencer = () => {
 												isFloating
 												formText='Seleccionar la etnia si pertenece a alguna.'>
 												<Select
+													name='ethnic_id'
 													ariaLabel='Etnia'
 													placeholder='Seleccione...'
 													list={ethnicGroup.map((ethnic) => ({
@@ -646,6 +708,72 @@ const NewInfluencer = () => {
 													isValid={formik.isValid}
 													isTouched={formik.touched.ethnic_id}
 													invalidFeedback={formik.errors.ethnic_id}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-3'>
+											<FormGroup
+												id='hair_color'
+												label='Color de cabello'
+												isFloating
+												formText='Seleccionar el color de cabello.'>
+												<Select
+													ariaLabel='Color de cabello'
+													placeholder='Seleccione...'
+													list={hairColor.map((hairColors) => ({
+														value: hairColors.id, 
+														text: hairColors.hair_color_name, 
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.hair_color_id}
+													isValid={formik.isValid}
+													isTouched={formik.touched.hair_color_id}
+													invalidFeedback={formik.errors.hair_color_id}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-3'>
+											<FormGroup
+												id='hair_type'
+												label='Tipo de cabello'
+												isFloating
+												formText='Seleccionar tipo de cabello.'>
+												<Select
+													ariaLabel='Tipo de cabello'
+													placeholder='Seleccione...'
+													list={hairType.map((hairTypes) => ({
+														value: hairTypes.id, 
+														text: hairTypes.hair_type_name, 
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.hair_type_id}
+													isValid={formik.isValid}
+													isTouched={formik.touched.hair_type_id}
+													invalidFeedback={formik.errors.hair_type_id}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-3'>
+											<FormGroup
+												id='skin_color'
+												label='Color de piel'
+												isFloating
+												formText='Seleccionar color de piel.'>
+												<Select
+													ariaLabel='color de piel'
+													placeholder='Seleccione...'
+													list={skinColor.map((skinColors) => ({
+														value: skinColors.id, 
+														text: skinColors.skin_color_name, 
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.skin_color_id}
+													isValid={formik.isValid}
+													isTouched={formik.touched.skin_color_id}
+													invalidFeedback={formik.errors.skin_color_id}
 												/>
 											</FormGroup>
 										</div>
@@ -741,7 +869,7 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-4'>
-											<FormGroup id='costo_1' label='Precio 1' isFloating>
+											<FormGroup id='costo_1' label='Precio Historia' isFloating>
 												<Input
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
@@ -753,7 +881,7 @@ const NewInfluencer = () => {
 											</FormGroup>
 										</div>
 										<div className='col-4'>
-											<FormGroup id='costo_2' label='Precio 2' isFloating>
+											<FormGroup id='costo_2' label='Precio Reel' isFloating>
 												<Input
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
@@ -766,7 +894,7 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-4'>
-											<FormGroup id='costo_3' label='Precio 3' isFloating>
+											<FormGroup id='costo_3' label='Precio Youtube' isFloating>
 												<Input
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}

@@ -57,6 +57,8 @@ CREATE TABLE IF NOT EXISTS `genders` (
 INSERT INTO genders (description) VALUES
 ('Masculino'),
 ('Femenino'),
+('Gay'),
+('Lesbiana'),
 ('Homosexual'),
 ('No binario');
 
@@ -74,8 +76,11 @@ CREATE TABLE `influencers` (
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,
-  `eps` varchar(255) DEFAULT NULL,
   `ethnic_id` INT DEFAULT NULL,
+  `eps` varchar(255) DEFAULT NULL,
+  `hair_color_id` INT DEFAULT NULL,
+  `hair_type_id` INT DEFAULT NULL,
+  `skin_color_id` INT DEFAULT NULL,
   `passport` varchar(255) DEFAULT NULL,
   `displayName` varchar(255) DEFAULT NULL,
   `emailAddress` varchar(255) DEFAULT NULL,
@@ -100,7 +105,8 @@ CREATE TABLE `influencers` (
   `costo_2` int(11) DEFAULT NULL,
   `costo_3` int(11) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -408,7 +414,7 @@ INSERT INTO hair_types (hair_type_name) VALUES
 ('Liso'),
 ('Ondulado'),
 ('Rizado'),
-('Muy rizado');
+('Crespo (Afro)');
 
 -- Crear la tabla hair_colors (colores de cabello)
 CREATE TABLE IF NOT EXISTS hair_colors (
@@ -422,8 +428,7 @@ INSERT INTO hair_colors (hair_color_name) VALUES
 ('Castaño'),
 ('Rubio'),
 ('Pelirrojo'),
-('Gris'),
-('Blanco');
+('Gris o Canoso');
 
 -- Crear la tabla skin_colors (colores de piel)
 CREATE TABLE IF NOT EXISTS skin_colors (
@@ -433,13 +438,175 @@ CREATE TABLE IF NOT EXISTS skin_colors (
 
 -- Insertar datos de ejemplo para colores de piel
 INSERT INTO skin_colors (skin_color_name) VALUES 
-('Pálida'),
-('Marfil'),
-('Beige'),
-('Trigueña'),
-('Marrón'),
-('Negra');
---
+('Piel blanca'),
+('Piel trigueña'),
+('Piel morena'),
+('Piel negra');
+
+CREATE TABLE IF NOT EXISTS tags_categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  category_name VARCHAR(100) NOT NULL UNIQUE);
+
+CREATE TABLE IF NOT EXISTS sub_categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  subcategory_name VARCHAR(100) NOT NULL,
+  tag_category_id INT NOT NULL,
+  FOREIGN KEY (tag_category_id) REFERENCES tags_categories(id)
+  ON DELETE CASCADE ON UPDATE CASCADE);
+
+INSERT INTO tags_categories (category_name) VALUES
+('Moda'),
+('Estilo de vida'),
+('Salud'),
+('Hogar y Decoración'),
+('Viajes y Turismo'),
+('Entretenimiento y Cultura'),
+('Gastronomía y Comida'),
+('Deportes y Fitness'),
+('Tecnoloigía y Gadgets'),
+('Negocios y Educación'),
+('Familia y Crianza'),
+('Belleza'),
+('Arte y Creatividad'),
+('Animales y Mascotas'),
+('Gaming'),
+('Activismo y Causas sociales');
+
+-- Insertar subcategorías
+INSERT INTO sub_categories (subcategory_name, tag_category_id) VALUES
+-- Subcategorías de Moda
+('Diseño de Ropa', 1),
+('Estilo Personal', 1),
+('Modelo', 1),
+('Tips y Tendencias de Moda', 1),
+('Accesorios', 1),
+('Calzado', 1),
+-- Subcategorías de Estilo de Vida
+('Rutina Diaria', 2),
+('Lujo', 2),
+('Familia', 2),
+('Yoga y Meditación', 2),
+('Estilo de Vida Saludable', 2),
+('Minimalismo', 2),
+('Vida en el Campo', 2),
+('Espiritualidad', 2),
+('Culturas Alternativas', 2),
+-- Subcategorías de Salud
+('Skin Care', 3),
+('Cuidado del Cabello', 3),
+('Cuidado de Manos y Uñas', 3),
+('Salud Mental', 3),
+('Médico', 3),
+('Nutrición', 3),
+('Espiritualidad', 3),
+('Naturista', 3),
+-- Subcategorías de Hogar y Decoración
+('Decoración de Interiores', 4),
+('Organización del Hogar', 4),
+('Hazlo Tú Mismo/DIY', 4),
+-- Subcategorías de Viajes y Turismo
+('Viajes por el Mundo', 5),
+('Turismo Urbano', 5),
+('Ecoturismo', 5),
+('Destinos de Playa', 5),
+('Viajes de Lujo', 5),
+('Mochileros', 5),
+('Viajes Familiares', 5),
+('Económicos', 5),
+-- Subcategorías de Entretenimiento y Cultura
+('Chisme y Farándula', 6),
+('Humor', 6),
+('Streamers', 6),
+('Opinión Musical', 6),
+-- Subcategorías de Gastronomía y Comida
+('Foodies', 7),
+('Recetas Caseras', 7),
+('Chef\'s', 7),
+('Comida Saludable', 7),
+('Bebidas', 7),
+('Recetas Keto', 7),
+('Recetas para Niños', 7),
+-- Subcategorías de Deportes y Fitness
+('Deportistas Profesionales', 8),
+('Moteros', 8),
+('Fitness', 8),
+('Gym', 8),
+('Fútbol', 8),
+-- Subcategorías de Tecnología y Gadgets
+('Gadgets', 9),
+('Computación', 9),
+('Apps', 9),
+('Unboxing', 9),
+('Startups', 9),
+('Celulares', 9),
+('Cámaras', 9),
+-- Subcategorías de Negocios y Educación
+('Desarrollo Personal', 10),
+('Emprendimiento', 10),
+('Finanzas Personales', 10),
+('Idiomas', 10),
+('Ciencia y Tecnología', 10),
+('Historia y Cultura', 10),
+('Arquitectura', 10),
+('Ingeniería Civil', 10),
+('Derecho', 10),
+('Desarrollo de Software', 10),
+('Inteligencia Artificial', 10),
+('Política', 10),
+('Bienes Raíces', 10),
+('Marketing', 10),
+('Marketing Digital', 10),
+-- Subcategorías de Familia y Crianza
+('Maternidad y Paternidad', 11),
+('Educación Infantil', 11),
+('Crianza Positiva', 11),
+('Actividades para Niños', 11),
+-- Subcategorías de Belleza
+('Tratamientos Estéticos', 12),
+('Peinados', 12),
+('Makeup', 12),
+-- Subcategorías de Arte y Creatividad
+('Fotografía', 13),
+('Diseño Gráfico', 13),
+('Músicos', 13),
+('Actores', 13),
+('Tatuajes', 13),
+('Grafiti', 13),
+-- Subcategorías de Animales y Mascotas
+('Cuidado de Mascotas', 14),
+('Entrenamiento de Mascotas', 14),
+('Rescate', 14),
+('Vida con Mascotas', 14),
+('Ganadería', 14),
+('Caballos', 14),
+('Animales del Campo', 14),
+-- Subcategorías de Gaming
+('Gameplay en Vivo', 15),
+('Esports', 15),
+('Desarrollo de Juegos', 15),
+('Accesorios Gaming', 15),
+-- Subcategorías de Activismo y Causas Sociales
+('Medio Ambiente', 16),
+('Derechos Humanos', 16),
+('Activismo Comunitario', 16),
+('Conciencia Social', 16),
+('Política', 16);
+
+
+-- Tabla intermedia para relacionar influencers con tags
+CREATE TABLE IF NOT EXISTS influencer_tags (
+    influencer_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    PRIMARY KEY (influencer_id, tag_id),
+    FOREIGN KEY (influencer_id) REFERENCES influencers(idUser)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES sub_categories(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
 -- Indices de la tabla `cotizaciones`
 --
 ALTER TABLE `cotizaciones`
@@ -447,9 +614,6 @@ ALTER TABLE `cotizaciones`
 
 --
 -- Indices de la tabla `influencers`
---
-ALTER TABLE `influencers`
-  ADD PRIMARY KEY (`idUser`);
 
 ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_gender`
@@ -463,6 +627,26 @@ ALTER TABLE `influencers`
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_hair_color`
+  FOREIGN KEY (`hair_color_id`) REFERENCES `hair_colors` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_hair_type`
+  FOREIGN KEY (`hair_type_id`) REFERENCES `hair_types` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_skin_color`
+  FOREIGN KEY (`skin_color_id`) REFERENCES `skin_colors` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE influencers ENGINE=InnoDB;
+ALTER TABLE sub_categories ENGINE=InnoDB;  
 --
 -- Indices de la tabla `roles`
 --

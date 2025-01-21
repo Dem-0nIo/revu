@@ -1,0 +1,25 @@
+{
+    "name": "@types/pascalcase",
+    "version": "1.0.3",
+    "description": "TypeScript definitions for pascalcase",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/pascalcase",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "IdeFFiX",
+            "githubUsername": "ideffix",
+            "url": "https://github.com/ideffix"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/pascalcase"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "202cc51b30d5c92317aa9160a38f894e71dcdda832285df643b5db4f1e9c7cd4",
+    "typeScriptVersion": "4.5"
+}

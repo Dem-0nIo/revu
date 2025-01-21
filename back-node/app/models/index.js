@@ -41,6 +41,11 @@ db.cities = require("../models/cities.model.js")(sequelize, Sequelize);
 db.departments = require("../models/departments.model.js")(sequelize, Sequelize);
 db.influencer_classes = require("../models/influencer_classes.model.js")(sequelize, Sequelize);
 db.ethnic = require("../models/ethnic.model.js")(sequelize, Sequelize);
+db.hair_types = require("../models/hair_types.model.js")(sequelize, Sequelize);
+db.hair_colors = require("../models/hair_colors.model.js")(sequelize, Sequelize);
+db.skin_colors = require("../models/skin_colors.model.js")(sequelize, Sequelize);
+db.TagsCategory = require("../models/tags_category.model.js")(sequelize, Sequelize);
+db.SubCategory = require("../models/sub_category.model.js")(sequelize, Sequelize);
 
 
 db.role.belongsToMany(db.user, {

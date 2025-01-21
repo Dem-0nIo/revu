@@ -186,7 +186,8 @@ const Users = () => {
 												onChange={formik.handleChange}
 												className='form-select'>
 												<option value='3'>Administrador</option>
-												<option value='1'>Usuario</option>
+												<option value='1'>CCT</option>
+												<option value='2'>Reclutador</option>
 											</select>
 										</FormGroup>
 									</div>
