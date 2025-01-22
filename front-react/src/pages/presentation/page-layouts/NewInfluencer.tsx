@@ -25,7 +25,7 @@ const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
 	ethnic_id: Yup.number(), // Not required
-	city: Yup.string(),
+	cityNac: Yup.string(),
 	idUser: Yup.number()
 	.typeError('Debe ser un número')
 	.positive('Debe ser un número positivo')
@@ -344,7 +344,7 @@ const NewInfluencer = () => {
 			firstName: 'John',
 			lastName: 'Doe',
 			idUser: '90998909',
-			cityNac: 'Cali',
+			cityNac: '1',
 			birthdayDate: '10/10/2024',
 			year: '45',
 			gender_id: '1',
@@ -492,10 +492,11 @@ const NewInfluencer = () => {
 												<div className='col-md-4'>
 													<FormGroup
 														id='cityNac'
-														label='Ciudad'
+														label='Ciudad de nacimiento'
 														isFloating>
 														<Select
-															ariaLabel='Ciudad'
+															name="cityNac"
+															ariaLabel='Ciudad de nacimiento'
 															placeholder='Seleccione...'
 															list={cities.map((city) => ({
 																value: city.id, 
@@ -503,10 +504,10 @@ const NewInfluencer = () => {
 															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
-															value={formik.values.city}
+															value={formik.values.cityNac}
 															isValid={formik.isValid}
-															isTouched={formik.touched.city}
-															invalidFeedback={formik.errors.city}
+															isTouched={formik.touched.cityNac}
+															invalidFeedback={formik.errors.cityNac}
 														/>
 													</FormGroup>
 												</div>
@@ -662,172 +663,173 @@ const NewInfluencer = () => {
 								<WizardItem id='step2' title='Información de contacto'>
 								<div className='row g-4'>
 									<div className='col-md-3'>
-											<FormGroup
-												id='country_id'
-												label='País'
-												isFloating>
-												<Select
-													ariaLabel='Country'
-													placeholder='Seleccione...'
-													list={countries.map((country) => ({
-														value: country.id,
-														text: country.name,
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.country_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.country_id}
-													invalidFeedback={formik.errors.country_id}
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='state_id'
-												label='Departamento'
-												isFloating>
-												<Select
-													ariaLabel='State'
-													placeholder='Seleccione...'
-													list={departments.map((state) => ({
-														value: state.id,
-														text: state.department_name,
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.state_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.state_id}
-													invalidFeedback={formik.errors.state_id}
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='city_id'
-												label='Ciudad'
-												isFloating
-												formText='Seleccionar la ciudad donde radica.'>
-												<Select
-													ariaLabel='Ciudad'
-													placeholder='Seleccione...'
-													list={cities.map((city) => ({
-														value: city.id, 
-														text: city.city_name, 
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.city_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.city_id}
-													invalidFeedback={formik.errors.city_id}
-												/>
-											</FormGroup>
-										</div>
-										
-										<div className='col-md-3'>
-											<FormGroup id='zip' label='Codigo postal' isFloating>
-												<Input
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.zip}
-													isValid={formik.isValid}
-													isTouched={formik.touched.zip}
-													invalidFeedback={formik.errors.zip}
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='ethnic'
-												label='Etnia'
-												isFloating
-												formText='Seleccionar la etnia si pertenece a alguna.'>
-												<Select
-													name='ethnic_id'
-													ariaLabel='Etnia'
-													placeholder='Seleccione...'
-													list={ethnicGroup.map((ethnic) => ({
-														value: ethnic.id, 
-														text: ethnic.ethnicity_name, 
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.ethnic_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.ethnic_id}
-													invalidFeedback={formik.errors.ethnic_id}
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='hair_color'
-												label='Color de cabello'
-												isFloating
-												formText='Seleccionar el color de cabello.'>
-												<Select
-													ariaLabel='Color de cabello'
-													placeholder='Seleccione...'
-													list={hairColor.map((hairColors) => ({
-														value: hairColors.id, 
-														text: hairColors.hair_color_name, 
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.hair_color_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.hair_color_id}
-													invalidFeedback={formik.errors.hair_color_id}
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='hair_type'
-												label='Tipo de cabello'
-												isFloating
-												formText='Seleccionar tipo de cabello.'>
-												<Select
-													ariaLabel='Tipo de cabello'
-													placeholder='Seleccione...'
-													list={hairType.map((hairTypes) => ({
-														value: hairTypes.id, 
-														text: hairTypes.hair_type_name, 
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.hair_type_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.hair_type_id}
-													invalidFeedback={formik.errors.hair_type_id}
-												/>
-											</FormGroup>
-										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='skin_color'
-												label='Color de piel'
-												isFloating
-												formText='Seleccionar color de piel.'>
-												<Select
-													ariaLabel='color de piel'
-													placeholder='Seleccione...'
-													list={skinColor.map((skinColors) => ({
-														value: skinColors.id, 
-														text: skinColors.skin_color_name, 
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.skin_color_id}
-													isValid={formik.isValid}
-													isTouched={formik.touched.skin_color_id}
-													invalidFeedback={formik.errors.skin_color_id}
-												/>
-											</FormGroup>
-										</div>
+										<FormGroup
+											id='country_id'
+											label='País'
+											isFloating>
+											<Select
+												ariaLabel='Country'
+												placeholder='Seleccione...'
+												list={countries.map((country) => ({
+													value: country.id,
+													text: country.name,
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.country_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.country_id}
+												invalidFeedback={formik.errors.country_id}
+											/>
+										</FormGroup>
 									</div>
+									<div className='col-md-3'>
+										<FormGroup
+											id='state_id'
+											label='Departamento'
+											isFloating>
+											<Select
+												ariaLabel='State'
+												placeholder='Seleccione...'
+												list={departments.map((state) => ({
+													value: state.id,
+													text: state.department_name,
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.state_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.state_id}
+												invalidFeedback={formik.errors.state_id}
+											/>
+										</FormGroup>
+									</div>
+									<div className='col-md-3'>
+										<FormGroup
+											id='city_id'
+											label='Ciudad'
+											isFloating
+											formText='Seleccionar la ciudad donde radica.'>
+											<Select
+												ariaLabel='Ciudad'
+												placeholder='Seleccione...'
+												list={cities.map((city) => ({
+													value: city.id, 
+													text: city.city_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.city_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.city_id}
+												invalidFeedback={formik.errors.city_id}
+											/>
+										</FormGroup>
+									</div>
+									
+									<div className='col-md-3'>
+										<FormGroup id='zip' label='Codigo postal' isFloating>
+											<Input
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.zip}
+												isValid={formik.isValid}
+												isTouched={formik.touched.zip}
+												invalidFeedback={formik.errors.zip}
+											/>
+										</FormGroup>
+									</div>
+									<div className='col-md-3'>
+										<FormGroup
+											id='ethnic'
+											label='Etnia'
+											isFloating
+											formText='Seleccionar la etnia si pertenece a alguna.'>
+											<Select
+												name='ethnic_id'
+												ariaLabel='Etnia'
+												placeholder='Seleccione...'
+												list={ethnicGroup.map((ethnic) => ({
+													value: ethnic.id, 
+													text: ethnic.ethnicity_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.ethnic_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.ethnic_id}
+												invalidFeedback={formik.errors.ethnic_id}
+											/>
+										</FormGroup>
+									</div>
+									<div className='col-md-3'>
+										<FormGroup
+											id='hair_color'
+											label='Color de cabello'
+											isFloating
+											formText='Seleccionar el color de cabello.'>
+											<Select
+												ariaLabel='Color de cabello'
+												placeholder='Seleccione...'
+												list={hairColor.map((hairColors) => ({
+													value: hairColors.id, 
+													text: hairColors.hair_color_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.hair_color_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.hair_color_id}
+												invalidFeedback={formik.errors.hair_color_id}
+											/>
+										</FormGroup>
+									</div>
+									<div className='col-md-3'>
+										<FormGroup
+											id='hair_type'
+											label='Tipo de cabello'
+											isFloating
+											formText='Seleccionar tipo de cabello.'>
+											<Select
+												ariaLabel='Tipo de cabello'
+												placeholder='Seleccione...'
+												list={hairType.map((hairTypes) => ({
+													value: hairTypes.id, 
+													text: hairTypes.hair_type_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.hair_type_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.hair_type_id}
+												invalidFeedback={formik.errors.hair_type_id}
+											/>
+										</FormGroup>
+									</div>
+									<div className='col-md-3'>
+										<FormGroup
+											id='skin_color'
+											label='Color de piel'
+											isFloating
+											formText='Seleccionar color de piel.'>
+											<Select
+												ariaLabel='color de piel'
+												placeholder='Seleccione...'
+												list={skinColor.map((skinColors) => ({
+													value: skinColors.id, 
+													text: skinColors.skin_color_name, 
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.skin_color_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.skin_color_id}
+												invalidFeedback={formik.errors.skin_color_id}
+											/>
+										</FormGroup>
+									</div>
+								</div>
+
 								</WizardItem>
 								<WizardItem id='step3' title='Información redes'>
 									<div className='row g-4'>
@@ -996,7 +998,7 @@ const NewInfluencer = () => {
 											title='Apellidos'
 											value={formik.values.lastName}
 										/>
-										<PreviewItem title='Ciudad' value={formik.values.city} />
+										<PreviewItem title='Ciudad' value={formik.values.cityNac} />
 										<PreviewItem
 											title='Fecha Nacimiento'
 											value={formik.values.birthdayDate}
@@ -1028,16 +1030,15 @@ const NewInfluencer = () => {
 											title='Dirección Adicional'
 											value={formik.values.addressLine2}
 										/>
-										<PreviewItem title='Ciudad' value={formik.values.city} />
+										<PreviewItem title='Ciudad' value={formik.values.city_id} />
 										<PreviewItem
 											title='Departamento'
-											value={formik.values.state}
+											value={formik.values.state_id}
 										/>
 										<PreviewItem
 											title='Codigo Postal'
 											value={formik.values.zip}
 										/>
-
 										<div className='col-9 offset-3'>
 											<h3 className='mt-4'>Informacion Redes Sociales</h3>
 										</div>

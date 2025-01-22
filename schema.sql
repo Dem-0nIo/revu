@@ -71,7 +71,7 @@ CREATE TABLE `influencers` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `cityNac` varchar(255) DEFAULT NULL,
+  `cityNac` INT DEFAULT NULL,
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,
@@ -650,6 +650,12 @@ ALTER TABLE `cotizaciones`
 ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_city`
   FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_cityNac`
+  FOREIGN KEY (`cityNac`) REFERENCES `cities` (`id`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 

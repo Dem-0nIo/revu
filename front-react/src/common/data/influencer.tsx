@@ -15,8 +15,9 @@ interface Influencer {
 	addressLine: string;
 	phoneNumber: string;
 	addressLine2: string;
-	city: string;
-	state: string;
+	city_id: number;
+	state_id: number;
+	country_id: number;
 	zip: string;
 	emailNotification: string[];
 	pushNotification: string[];
