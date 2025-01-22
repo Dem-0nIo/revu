@@ -59,7 +59,6 @@ INSERT INTO genders (description) VALUES
 ('Femenino'),
 ('Gay'),
 ('Lesbiana'),
-('Homosexual'),
 ('No binario');
 
 -- --------------------------------------------------------
@@ -443,18 +442,18 @@ INSERT INTO skin_colors (skin_color_name) VALUES
 ('Piel morena'),
 ('Piel negra');
 
-CREATE TABLE IF NOT EXISTS tags_categories (
+CREATE TABLE IF NOT EXISTS TagsCategories (
   id INT AUTO_INCREMENT PRIMARY KEY,
   category_name VARCHAR(100) NOT NULL UNIQUE);
 
-CREATE TABLE IF NOT EXISTS sub_categories (
+CREATE TABLE IF NOT EXISTS SubCategories (
   id INT AUTO_INCREMENT PRIMARY KEY,
   subcategory_name VARCHAR(100) NOT NULL,
   tag_category_id INT NOT NULL,
-  FOREIGN KEY (tag_category_id) REFERENCES tags_categories(id)
+  FOREIGN KEY (tag_category_id) REFERENCES TagsCategories(id)
   ON DELETE CASCADE ON UPDATE CASCADE);
 
-INSERT INTO tags_categories (category_name) VALUES
+INSERT INTO TagsCategories (category_name) VALUES
 ('Moda'),
 ('Estilo de vida'),
 ('Salud'),
@@ -463,7 +462,7 @@ INSERT INTO tags_categories (category_name) VALUES
 ('Entretenimiento y Cultura'),
 ('Gastronomía y Comida'),
 ('Deportes y Fitness'),
-('Tecnoloigía y Gadgets'),
+('Tecnología y Gadgets'),
 ('Negocios y Educación'),
 ('Familia y Crianza'),
 ('Belleza'),
@@ -473,7 +472,7 @@ INSERT INTO tags_categories (category_name) VALUES
 ('Activismo y Causas sociales');
 
 -- Insertar subcategorías
-INSERT INTO sub_categories (subcategory_name, tag_category_id) VALUES
+INSERT INTO SubCategories (subcategory_name, tag_category_id) VALUES
 -- Subcategorías de Moda
 ('Diseño de Ropa', 1),
 ('Estilo Personal', 1),

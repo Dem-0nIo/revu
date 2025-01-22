@@ -19,6 +19,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
+    },
+    {
+      timestamps: false, // Opcional: Si no necesitas createdAt y updatedAt
+    },
+    {
+      tableName: "SubCategories", // Match the database table name
     });
   
     SubCategory.associate = (models) => {

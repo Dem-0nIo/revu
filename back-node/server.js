@@ -60,8 +60,7 @@ require("./app/routes/ethnic.routes", cors(corsOptions))(app);
 require("./app/routes/hair_colors.routes", cors(corsOptions))(app);
 require("./app/routes/hair_types.routes", cors(corsOptions))(app);
 require("./app/routes/skin_colors.routes", cors(corsOptions))(app);
-
-
+require("./app/routes/tags.routes", cors(corsOptions))(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 8081;
@@ -69,21 +68,25 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
+db.TagsCategory.findAll({ include: [{ model: db.SubCategory, as: 'sub_category'}], })
+    .then((categories) => console.log(categories))
+    .catch((error) => console.error("Error fetching categories:", error));
+
 /** Only for initial data, comment to first init */
 function initial() {
   Role.create({
     id: 1,
-    name: "user",
+    name: "admin",
   });
 
   Role.create({
     id: 2,
-    name: "moderator",
+    name: "cct",
   });
 
   Role.create({
     id: 3,
-    name: "admin",
+    name: "reclutador",
   });
   User.create({
     username: "admin",

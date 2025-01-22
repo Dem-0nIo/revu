@@ -10,12 +10,17 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
+    },
+    {
+      timestamps: false, // Opcional: Si no necesitas createdAt y updatedAt
+    },
+    {
+      tableName: "TagsCategories", // Match the database table name
     });
   
     TagsCategory.associate = (models) => {
       TagsCategory.hasMany(models.SubCategory, {
-        foreignKey: 'tag_category_id',
-        as: 'subcategories',
+        as: 'sub_category',
       });
     };
   

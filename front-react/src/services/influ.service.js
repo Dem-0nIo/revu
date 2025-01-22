@@ -1,7 +1,8 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://127.0.0.1:8081/api/influencer/';
+const API_URL = 'http://127.0.0.1:8081/api/';
+const INFLUENCER_URL = 'http://127.0.0.1:8081/api/influencer/';
 const GENDER_API_URL = 'http://127.0.0.1:8081/api/genders'; // Add Gender API endpoint
 const CITIES_API_URL = 'http://127.0.0.1:8081/api/cities'; // Add Cities API endpoint
 const DEPARTMENTS_API_URL = 'http://127.0.0.1:8081/api/departments'; // Add States API endpoint
@@ -12,19 +13,19 @@ const HAIR_COLOR_URL = 'http://127.0.0.1:8081/api/hair_color'; // Add hair type 
 const SKIN_COLOR_URL = 'http://127.0.0.1:8081/api/skin_color'; // Add hair type API endpoint
 
 const getAll = () => {
-	return axios.get(`${API_URL}all`, { headers: authHeader() });
+	return axios.get(`${INFLUENCER_URL}all`, { headers: authHeader() });
 };
 
 const addInfluencer = (values) => {
-	return axios.post(`${API_URL}register`, values, { headers: authHeader() });
+	return axios.post(`${INFLUENCER_URL}register`, values, { headers: authHeader() });
 };
 
 const deleteInfluencer = (id) => {
-	return axios.post(`${API_URL}delete`, { id }, { headers: authHeader() });
+	return axios.post(`${INFLUENCER_URL}delete`, { id }, { headers: authHeader() });
 };
 
 const updateInfluencer = (values) => {
-	return axios.post(`${API_URL}update`, { values }, { headers: authHeader() });
+	return axios.post(`${INFLUENCER_URL}update`, { values }, { headers: authHeader() });
 };
 
 const getInfluencerClasses = () => {
@@ -61,6 +62,18 @@ const getSkinColors = () => {
 	return axios.get(`${SKIN_COLOR_URL}`, { headers: authHeader() });
 };
 
+const getCategoriesSubcategories = () => {
+	return axios.get(`${API_URL}categories-with-subcategories`, { headers: authHeader() });
+};
+
+const categories = () => {
+	return axios.get(`${API_URL}categories`, { headers: authHeader() });
+};
+
+const subCategories = () => {
+	return axios.get(`${API_URL}subcategories`, { headers: authHeader() });
+};
+
 const UserService = {
 	getAll,
 	addInfluencer,
@@ -73,7 +86,10 @@ const UserService = {
 	getHairTypes,
 	getSkinColors,
 	getCities,
-	getDepartments, // Export the new method
+	getDepartments,
+	getCategoriesSubcategories,
+	categories,
+	subCategories, // Export the new method
 };
 
 export default UserService;

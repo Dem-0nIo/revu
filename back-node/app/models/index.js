@@ -34,7 +34,6 @@ db.influ = require("../models/influencer.model.js")(sequelize, Sequelize);
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.cotizaciones = require("../models/cotizaciones.model.js")(sequelize, Sequelize);
-
 db.roles = require("../models/user_roles.model.js")(sequelize, Sequelize);
 db.gender = require("../models/gender.model.js")(sequelize, Sequelize);
 db.cities = require("../models/cities.model.js")(sequelize, Sequelize);
@@ -47,6 +46,15 @@ db.skin_colors = require("../models/skin_colors.model.js")(sequelize, Sequelize)
 db.TagsCategory = require("../models/tags_category.model.js")(sequelize, Sequelize);
 db.SubCategory = require("../models/sub_category.model.js")(sequelize, Sequelize);
 
+// Call associations after model initialization
+db.TagsCategory.hasMany(db.SubCategory, {
+  foreignKey: 'tag_category_id',
+  as: 'sub_category', // Ensure alias matches model definition
+});
+db.SubCategory.belongsTo(db.TagsCategory, {
+  foreignKey: 'tag_category_id',
+  as: 'category', // Ensure alias matches model definition
+});
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -55,6 +63,6 @@ db.user.belongsToMany(db.role, {
   through: "user_roles",
 });
 
-db.ROLES = ["user", "admin", "moderator"];
+db.ROLES = ["admin", "cct", "reclutador"];
 
 module.exports = db;

@@ -6,12 +6,15 @@ const SubCategory = db.SubCategory;
 exports.getCategoriesWithSubcategories = async (req, res) => {
   try {
     const categories = await TagsCategory.findAll({
-      include: {
-        model: SubCategory,
-        as: 'subcategories',
-        attributes: ['id', 'subcategory_name'],
-      },
+      include: [
+            {
+                model: SubCategory,
+                as: 'sub_category',
+                attributes: ['id', 'subcategory_name'],
+            },
+        ],  
     });
+    console.log(JSON.stringify(categories, null, 2));
     res.status(200).json(categories);
   } catch (error) {
     console.error('Error al obtener categorías:', error);

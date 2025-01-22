@@ -43,9 +43,11 @@ services:
       - DB_PASSWORD=$MYSQL_PASSWORD
       - DB_NAME=$MYSQL_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
-    volumes:
-      - .:/app
-    command: sh -c "npm install && npm run start"
+    #volumes:
+    #  - .:/back-node
+    command: sh -c "npm start"
+      #- .:/app
+    #command: sh -c "npm install && npm run start"
 
   front_app:
     container_name: front_app

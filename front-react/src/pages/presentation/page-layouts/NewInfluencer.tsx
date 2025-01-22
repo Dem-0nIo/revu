@@ -632,7 +632,6 @@ const NewInfluencer = () => {
 								</WizardItem>
 								<WizardItem id='step2' title='Información de contacto'>
 								<div className='row g-4'>
-
 										<div className='col-md-3'>
 											<FormGroup
 												id='cityNac'
