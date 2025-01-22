@@ -51,11 +51,14 @@ module.exports = (sequelize, Sequelize) => {
     addressLine2: {
       type: Sequelize.STRING,
     },
-    city: {
-      type: Sequelize.STRING,
+    city_id: {
+      type: Sequelize.INTEGER,
     },
-    state: {
-      type: Sequelize.STRING,
+    state_id: {
+      type: Sequelize.INTEGER,
+    },
+    country_id: {
+      type: Sequelize.INTEGER,
     },
     zip: {
       type: Sequelize.STRING,

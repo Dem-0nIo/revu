@@ -45,6 +45,7 @@ db.hair_colors = require("../models/hair_colors.model.js")(sequelize, Sequelize)
 db.skin_colors = require("../models/skin_colors.model.js")(sequelize, Sequelize);
 db.TagsCategory = require("../models/tags_category.model.js")(sequelize, Sequelize);
 db.SubCategory = require("../models/sub_category.model.js")(sequelize, Sequelize);
+db.Country = require("../models/country.model.js")(sequelize, Sequelize);
 
 // Call associations after model initialization
 db.TagsCategory.hasMany(db.SubCategory, {

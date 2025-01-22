@@ -86,8 +86,9 @@ CREATE TABLE `influencers` (
   `addressLine` varchar(255) DEFAULT NULL,
   `phoneNumber` varchar(255) DEFAULT NULL,
   `addressLine2` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
+  `city_id` INT DEFAULT NULL,
+  `state_id` INT DEFAULT NULL,
+  `country_id` INT DEFAULT NULL,
   `zip` varchar(255) DEFAULT NULL,
   `emailNotification` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`emailNotification`)),
   `pushNotification` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`pushNotification`)),
@@ -367,6 +368,38 @@ INSERT INTO cities (city_name, department_id) VALUES
 -- Vichada
 ('Puerto Carreño', (SELECT id FROM departments WHERE department_name = 'Vichada'));
 
+CREATE TABLE IF NOT EXISTS countries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,            -- Nombre del país en español
+    name_en VARCHAR(100) NOT NULL,         -- Nombre del país en inglés
+    iso_code CHAR(3) NOT NULL UNIQUE,      -- Código ISO Alpha-3 (ej: USA, MEX)
+    iso_code_2 CHAR(2) NOT NULL UNIQUE,    -- Código ISO Alpha-2 (ej: US, MX)
+    region VARCHAR(100),                   -- Región (ej: América, Europa)
+    is_active BOOLEAN DEFAULT 1,           -- Estado del país (1 = habilitado, 0 = deshabilitado)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de creación
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Fecha de actualización
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO countries (name, name_en, iso_code, iso_code_2, region, is_active) VALUES
+('Argentina', 'Argentina', 'ARG', 'AR', 'América Latina', 1),
+('Bolivia', 'Bolivia', 'BOL', 'BO', 'América Latina', 1),
+('Brasil', 'Brazil', 'BRA', 'BR', 'América Latina', 1),
+('Chile', 'Chile', 'CHL', 'CL', 'América Latina', 1),
+('Colombia', 'Colombia', 'COL', 'CO', 'América Latina', 1),
+('Costa Rica', 'Costa Rica', 'CRI', 'CR', 'América Latina', 1),
+('Cuba', 'Cuba', 'CUB', 'CU', 'América Latina', 1),
+('Ecuador', 'Ecuador', 'ECU', 'EC', 'América Latina', 1),
+('El Salvador', 'El Salvador', 'SLV', 'SV', 'América Latina', 1),
+('Guatemala', 'Guatemala', 'GTM', 'GT', 'América Latina', 1),
+('Honduras', 'Honduras', 'HND', 'HN', 'América Latina', 1),
+('México', 'Mexico', 'MEX', 'MX', 'América Latina', 1),
+('Nicaragua', 'Nicaragua', 'NIC', 'NI', 'América Latina', 1),
+('Panamá', 'Panama', 'PAN', 'PA', 'América Latina', 1),
+('Paraguay', 'Paraguay', 'PRY', 'PY', 'América Latina', 1),
+('Perú', 'Peru', 'PER', 'PE', 'América Latina', 1),
+('República Dominicana', 'Dominican Republic', 'DOM', 'DO', 'América Latina', 1),
+('Uruguay', 'Uruguay', 'URY', 'UY', 'América Latina', 1),
+('Venezuela', 'Venezuela', 'VEN', 'VE', 'América Latina', 1);
 
 CREATE TABLE IF NOT EXISTS influencer_classes (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -613,6 +646,24 @@ ALTER TABLE `cotizaciones`
 
 --
 -- Indices de la tabla `influencers`
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_city`
+  FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_state`
+  FOREIGN KEY (`state_id`) REFERENCES `departments` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
+
+ALTER TABLE `influencers`
+  ADD CONSTRAINT `fk_countries`
+  FOREIGN KEY (`countries_id`) REFERENCES `countries` (`id`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
 
 ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_gender`

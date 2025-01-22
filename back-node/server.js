@@ -61,6 +61,7 @@ require("./app/routes/hair_colors.routes", cors(corsOptions))(app);
 require("./app/routes/hair_types.routes", cors(corsOptions))(app);
 require("./app/routes/skin_colors.routes", cors(corsOptions))(app);
 require("./app/routes/tags.routes", cors(corsOptions))(app);
+require("./app/routes/countries.routes", cors(corsOptions))(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 8081;

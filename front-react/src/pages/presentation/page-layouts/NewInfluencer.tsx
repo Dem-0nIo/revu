@@ -25,6 +25,7 @@ const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
 	ethnic_id: Yup.number(), // Not required
+	city: Yup.string(),
 	idUser: Yup.number()
 	.typeError('Debe ser un número')
 	.positive('Debe ser un número positivo')
@@ -74,6 +75,9 @@ const SignupSchema = Yup.object({
 	costo_1: Yup.string().required('Es un campo obligatorio'),
 	// gender
 	gender_id: Yup.string().required("Es un campo obligatorio"),
+	city_id: Yup.number(),
+	state_id: Yup.number(),
+	country_id: Yup.number(),
 	zip: Yup.number()
     .typeError('Debe ser un número')
     .positive('Debe ser un número positivo')
@@ -102,6 +106,16 @@ const PreviewItem: FC<IPreviewItemProps> = ({ title, value }) => {
 interface Gender {
 	id: number;
 	description: string;
+}
+
+// Define the City type
+interface Country {
+	id: number;
+	name: string;
+	name_en: string;
+	iso_code: string;
+	iso_code_2: string;
+	region: string;
 }
 
 // Define the City type
@@ -150,6 +164,7 @@ const NewInfluencer = () => {
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
 	const [departments, setDepartments] = useState<Department[]>([]);
+	const [countries, setCountry] = useState<Country[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [ethnicGroup, setEthnicity] = useState<Ethnic[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
@@ -298,6 +313,19 @@ const NewInfluencer = () => {
 		fetchSkinColor();
 	}, []);
 
+	useEffect(() => {
+		async function fetchCountry() {
+			try {
+				const response = await InfluService.getCountries(); // Asegúrate de tener este método en tu servicio
+				console.log("Paises cargados: ", response.data); // Verifica el contenido
+				setCountry(response.data);
+			} catch (error) {
+				console.error("Failed to fetch countries: ", error);
+			}
+		}
+		fetchCountry();
+	}, []);
+
 	async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
@@ -331,8 +359,9 @@ const NewInfluencer = () => {
 			phoneNumber: '12345566',
 			addressLine: 'calle 1',
 			addressLine2: 'calle 2',
-			city: 'Pereira',
-			state: 'Valle',
+			city_id: '1',
+			state_id: '1',
+			country_id: '1',
 			zip: '660004',
 			emailNotification: [''],
 			pushNotification: [''],
@@ -632,9 +661,51 @@ const NewInfluencer = () => {
 								</WizardItem>
 								<WizardItem id='step2' title='Información de contacto'>
 								<div className='row g-4'>
+									<div className='col-md-3'>
+											<FormGroup
+												id='country_id'
+												label='País'
+												isFloating>
+												<Select
+													ariaLabel='Country'
+													placeholder='Seleccione...'
+													list={countries.map((country) => ({
+														value: country.id,
+														text: country.name,
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.country_id}
+													isValid={formik.isValid}
+													isTouched={formik.touched.country_id}
+													invalidFeedback={formik.errors.country_id}
+												/>
+											</FormGroup>
+										</div>
 										<div className='col-md-3'>
 											<FormGroup
-												id='cityNac'
+												id='state_id'
+												label='Departamento'
+												isFloating>
+												<Select
+													ariaLabel='State'
+													placeholder='Seleccione...'
+													list={departments.map((state) => ({
+														value: state.id,
+														text: state.department_name,
+													}))}
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.state_id}
+													isValid={formik.isValid}
+													isTouched={formik.touched.state_id}
+													invalidFeedback={formik.errors.state_id}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-3'>
+											<FormGroup
+												id='city_id'
 												label='Ciudad'
 												isFloating
 												formText='Seleccionar la ciudad donde radica.'>
@@ -647,34 +718,14 @@ const NewInfluencer = () => {
 													}))}
 													onChange={formik.handleChange}
 													onBlur={formik.handleBlur}
-													value={formik.values.city}
+													value={formik.values.city_id}
 													isValid={formik.isValid}
-													isTouched={formik.touched.city}
-													invalidFeedback={formik.errors.city}
+													isTouched={formik.touched.city_id}
+													invalidFeedback={formik.errors.city_id}
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-md-3'>
-											<FormGroup
-												id='state'
-												label='Departamento'
-												isFloating>
-												<Select
-													ariaLabel='State'
-													placeholder='Seleccione...'
-													list={departments.map((state) => ({
-														value: state.id,
-														text: state.department_name,
-													}))}
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.state}
-													isValid={formik.isValid}
-													isTouched={formik.touched.state}
-													invalidFeedback={formik.errors.state}
-												/>
-											</FormGroup>
-										</div>
+										
 										<div className='col-md-3'>
 											<FormGroup id='zip' label='Codigo postal' isFloating>
 												<Input

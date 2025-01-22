@@ -11,6 +11,7 @@ const EHTNIC_API_URL = 'http://127.0.0.1:8081/api/ethnic'; // Add Ethnics API en
 const HAIR_TYPE_URL = 'http://127.0.0.1:8081/api/hair_type'; // Add hair type API endpoint
 const HAIR_COLOR_URL = 'http://127.0.0.1:8081/api/hair_color'; // Add hair type API endpoint
 const SKIN_COLOR_URL = 'http://127.0.0.1:8081/api/skin_color'; // Add hair type API endpoint
+const COUNTRY_API_URL = 'http://127.0.0.1:8081/api/countries'; // Add country API endpoint
 
 const getAll = () => {
 	return axios.get(`${INFLUENCER_URL}all`, { headers: authHeader() });
@@ -35,6 +36,11 @@ const getInfluencerClasses = () => {
 // New method to fetch genders
 const getGenders = () => {
 	return axios.get(GENDER_API_URL); // No auth headers needed unless required
+};
+
+// New method to fetch genders
+const getCountries = () => {
+	return axios.get(COUNTRY_API_URL); // No auth headers needed unless required
 };
 
 // New method to fetch genders
@@ -85,6 +91,7 @@ const UserService = {
 	getHairColor,
 	getHairTypes,
 	getSkinColors,
+	getCountries,
 	getCities,
 	getDepartments,
 	getCategoriesSubcategories,
