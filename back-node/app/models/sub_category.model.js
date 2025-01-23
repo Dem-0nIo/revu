@@ -32,6 +32,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'tag_category_id',
         as: 'category',
       });
+      SubCategory.belongsToMany(models.Influencer , { 
+        through: models.InfluencerSubcategories, 
+        foreignKey: 'subcategoryId', 
+      });
+      SubCategory.hasMany(models.InfluencerSubcategories, {
+        foreignKey: 'subcategoryId',
+        as: 'influencerSubcategories',
+      });
     };
   
     return SubCategory;

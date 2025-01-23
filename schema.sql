@@ -626,16 +626,12 @@ INSERT INTO SubCategories (subcategory_name, tag_category_id) VALUES
 
 
 -- Tabla intermedia para relacionar influencers con tags
-CREATE TABLE IF NOT EXISTS influencer_tags (
-    influencer_id INT NOT NULL,
-    tag_id INT NOT NULL,
-    PRIMARY KEY (influencer_id, tag_id),
-    FOREIGN KEY (influencer_id) REFERENCES influencers(idUser)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (tag_id) REFERENCES sub_categories(id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS InfluencerSubcategories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    influencerId INT NOT NULL,
+    subcategoryId INT NOT NULL,
+    FOREIGN KEY (influencerId) REFERENCES influencers(idUser) ON DELETE CASCADE,
+    FOREIGN KEY (subcategoryId) REFERENCES SubCategories(id) ON DELETE CASCADE
 );
 
 

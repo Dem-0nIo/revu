@@ -1,5 +1,6 @@
 const db = require("../models");
 const Influ = db.influ;
+const InfluencerSubcategories = db.InfluencerSubcategories;
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -16,65 +17,118 @@ const fileUpload = multer({
 }).single("image");
 
 exports.registerinfluencer = async (req, res) => {
-  const vart = req.body;
+  try {
+    const {
+      firstName,
+      lastName,
+      idUser,
+      cityNac,
+      birthdayDate,
+      year,
+      gender_id,
+      ethnic_id,
+      eps,
+      passport,
+      displayName,
+      emailAddress,
+      phoneNumber,
+      addressLine,
+      addressLine2,
+      city_id,
+      state_id,
+      country_id,
+      zip,
+      emailNotification,
+      pushNotification,
+      phoneNumberWhp,
+      socialInstagram,
+      socialInstagramSeg,
+      socialTik,
+      socialTikSeg,
+      socialNetwork,
+      costo_1,
+      costo_2,
+      costo_3,
+      subcategories,// Subcategories array from request
+    } = req.body;
 
-  const { socialInstagramSeg } = req.body;
+    console.log(JSON.stringify(req.body));
 
-  // Validate and find the influencer class based on the number of followers
-  const matchedClass = await db.influencer_classes.findOne({
-    where: {
+    // Determine classification based on socialInstagramSeg
+    const matchedClass = await db.influencer_classes.findOne({
+      where: {
         min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
         max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
-    },
-  });
-
-  // Add logic to handle the matched class (optional)
-  const classification = matchedClass ? matchedClass.class_name : "Unknown";
-
-  // Save User to Database
-  const newInfluencer = await Influ.create({
-    firstName: vart.firstName,
-    lastName: vart.lastName,
-    idUser: vart.idUser,
-    cityNac: vart.cityNac,
-    birthdayDate: vart.birthdayDate,
-    year: vart.year,
-    gender_id: vart.gender_id,
-    ethnic_id: vart.ethnic_id,
-    eps: vart.eps,
-    passport: vart.passport,
-    displayName: vart.displayName,
-    emailAddress: vart.emailAddress,
-    phoneNumber: vart.phoneNumber,
-    addressLine: vart.addressLine,
-    addressLine2: vart.addressLine2,
-    city_id: vart.city_id,
-    state_id: vart.state_id,
-    country_id: vart.country_id,
-    zip: vart.zip,
-    emailNotification: vart.emailNotification,
-    pushNotification: vart.pushNotification,
-    phoneNumberWhp: vart.phoneNumberWhp,
-    socialInstagram: vart.socialInstagram,
-    socialInstagramCla: classification,
-    socialInstagramSeg: vart.socialInstagramSeg,
-    socialTik: vart.socialTik,
-    socialTikCla: vart.socialTikCla,
-    socialTikSeg: vart.socialTikSeg,
-    socialNetwork: vart.socialNetwork,
-    img: "/",
-    costo_1: vart.costo_1,
-    costo_2: vart.costo_2,
-    costo_3: vart.costo_3,
-  })
-    .then(() => {
-      res.status(200).send("se ingreso con exito");
-      console.log("se ingreso con exito");
-    })
-    .catch((err) => {
-      res.status(500).send("Se presenta un error, intentelo mas tarde");
-      console.error(err); // Update to console.error for better error logging
+      },
     });
+
+    const classification = matchedClass ? matchedClass.class_name : "Unknown";
+
+    // Save influencer to the database
+    const newInfluencer = await Influ.create({
+      firstName,
+      lastName,
+      idUser,
+      cityNac,
+      birthdayDate,
+      year,
+      gender_id,
+      ethnic_id,
+      eps,
+      passport,
+      displayName,
+      emailAddress,
+      phoneNumber,
+      addressLine,
+      addressLine2,
+      city_id,
+      state_id,
+      country_id,
+      zip,
+      emailNotification,
+      pushNotification,
+      phoneNumberWhp,
+      socialInstagram,
+      socialInstagramCla: classification,
+      socialInstagramSeg,
+      socialTik,
+      socialTikCla: "Unknown", // Add logic for TikTok classification if necessary
+      socialTikSeg,
+      socialNetwork,
+      img: "/", // Default image or logic to handle uploaded image
+      costo_1,
+      costo_2,
+      costo_3,
+    });
+
+    console.log("Subcategories received:", subcategories);
+
+    // Handle subcategories if provided
+    if (subcategories && subcategories.length > 0) {
+      console.log("Subcategories to save:", subcategories);
+      const subcategoryData = subcategories.map((subcatId) => ({
+        influencerId: newInfluencer.idUser,
+        subcategoryId: subcatId,
+      }));
+
+      console.log("Subcategory data prepared:", subcategoryData);
+
+      try {
+        await db.InfluencerSubcategories.bulkCreate(subcategoryData);
+        console.log("Subcategories saved successfully.");
+      } catch (error) {
+        console.error("Error saving subcategories:", error);
+      }
+    }
+
+    // Send a success response
+    res.status(201).json({ message: "Influencer created successfully", influencer: newInfluencer });
+  } catch (error) {
+    console.error("Error creating influencer:", error);
+
+    // Ensure a single response is sent
+    res.status(500).json({ message: "Error creating influencer", error: error.message });
+  }
 };
 
 exports.registerinflu = async (req, res, fileUpload) => {

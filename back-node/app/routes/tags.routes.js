@@ -1,5 +1,4 @@
 const express = require('express');
-const router = express.Router();
 const tagsController = require('../controllers/tags.controller');
 
 // Route to get all departments
@@ -12,6 +11,8 @@ module.exports = function (app) {
         next();
       });
     app.get("/api/categories-with-subcategories", tagsController.getCategoriesWithSubcategories);
+    app.get("/api/subcategories/:id", tagsController.getSubcategoryById);
+    app.get("/api/categories", tagsController.getCategories);
     app.post("/api/categories", tagsController.createCategory);
     app.post("/api/subcategories", tagsController.createSubcategory);
 };

@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable no-console */
 import React, { FC, useState, useEffect } from 'react';
-import { ErrorMessage, useFormik } from 'formik';
+import {useFormik } from 'formik';
 import * as Yup from 'yup';
 import Card, {
 	CardBody,
@@ -21,73 +21,114 @@ import Page from '../../../layout/Page/Page';
 import showNotification from '../../../components/extras/showNotification';
 import InfluService from '../../../services/influ.service';
 
-const SignupSchema = Yup.object({
-	firstName: Yup.string().required('Es un campo obligatorio'),
-	lastName: Yup.string().required('Es un campo obligatorio'),
-	ethnic_id: Yup.number(), // Not required
-	cityNac: Yup.string(),
-	idUser: Yup.number()
-	.typeError('Debe ser un número')
-	.positive('Debe ser un número positivo')
-	.integer('Debe ser un número entero')
-	.required('Es un campo obligatorio y numérico'),
-	year: Yup.number()
-    .typeError('Debe ser un número')
-    .positive('Debe ser un número positivo')
-    .integer('Debe ser un número entero')
-    .test(
-		'len',
-		'Debe tener exactamente 2 dígitos',
-		(val) => (val ? val.toString().length === 2 : false) // Retorna `false` si `val` es undefined
-	)
-    .required('Es un campo obligatorio y numérico'),
-	displayName: Yup.string().required('Es un campo obligatorio'),
-	// segundo
-	phoneNumber: Yup.string()
-	.matches(
-	  /^(\+)?\d+$/,
-	  "El número de teléfono solo puede contener dígitos y un '+' opcional al inicio"
-	)
-	.test(
-		'len',
-		'Debe tener no mas de 11 dígitos',
-		(val) => (val ? val.toString().length <= 12 : false) // Retorna `false` si `val` es undefined
-	)
-	.required("Es un campo obligatorio"),
-	emailAddress: Yup.string()
-		.email('Ingresar un correo valido')
-		.required('Es un campo obligatorio'),
-	addressLine: Yup.string().required('Es un campo obligatorio'),
-	// Tercero
-	socialInstagram: Yup.string().required('Es un campo obligatorio'),
-	socialInstagramCla: Yup.string().required('Es un campo obligatorio'),
-	socialInstagramSeg: Yup.number()
-    .typeError("Debe ser un número")
-    .positive("Debe ser un número positivo")
-    .integer("Debe ser un número entero")
-    .required("Es un campo obligatorio"),
-	socialTikSeg: Yup.number()
-    .typeError("Debe ser un número")
-    .positive("Debe ser un número positivo")
-    .integer("Debe ser un número entero")
-    .required("Es un campo obligatorio"),
-	socialTikCla: Yup.string().required("Es un campo obligatorio"),
-	costo_1: Yup.string().required('Es un campo obligatorio'),
-	// gender
-	gender_id: Yup.string().required("Es un campo obligatorio"),
-	city_id: Yup.number(),
-	state_id: Yup.number(),
-	country_id: Yup.number(),
-	zip: Yup.number()
-    .typeError('Debe ser un número')
-    .positive('Debe ser un número positivo')
-    .integer('Debe ser un número entero')
-    .test(
-		'len',
-		'Debe tener exactamente 6 dígitos',
-		(val) => (val ? val.toString().length === 6 : false) // Retorna `false` si `val` es undefined
-	)
+// Extract initialValues
+const initialValues = {
+    firstName: 'John',
+    lastName: 'Doe',
+    idUser: '90998909',
+    cityNac: '1',
+    birthdayDate: '10/10/2024',
+    year: '45',
+    gender_id: '1',
+    ethnic_id: '1',
+    hair_color_id: '1',
+    hair_type_id: '1',
+    skin_color_id: '1',
+    eps: 'SURA',
+    passport: 'NO',
+    displayName: 'johndoe',
+    emailAddress: 'johndoe@site.com',
+    phoneNumber: '12345566',
+    addressLine: 'calle 1',
+    addressLine2: 'calle 2',
+    city_id: '1',
+    state_id: '1',
+    country_id: '1',
+    zip: '660004',
+    emailNotification: [''],
+    pushNotification: [''],
+    phoneNumberWhp: '1234566',
+    socialInstagram: '@instagrampedro',
+    socialInstagramCla: 'Nano',
+    socialInstagramSeg: '1234',
+    socialTik: '@instagrampedro',
+    socialTikCla: 'Micro',
+    socialTikSeg: '1234567',
+    socialNetwork: [''],
+    image: 'null',
+    costo_1: '1234567',
+    costo_2: '7654321',
+    costo_3: '2589631',
+};
+
+// Extract validationSchema
+const validationSchema = Yup.object({
+    firstName: Yup.string().required('Es un campo obligatorio'),
+    lastName: Yup.string().required('Es un campo obligatorio'),
+    ethnic_id: Yup.number(), // Not required
+    cityNac: Yup.string(),
+    idUser: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .required('Es un campo obligatorio y numérico'),
+    year: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .test(
+            'len',
+            'Debe tener exactamente 2 dígitos',
+            (val) => (val ? val.toString().length === 2 : false) // Retorna `false` si `val` es undefined
+        )
+        .required('Es un campo obligatorio y numérico'),
+    displayName: Yup.string().required('Es un campo obligatorio'),
+    phoneNumber: Yup.string()
+        .matches(
+            /^(\+)?\d+$/,
+            "El número de teléfono solo puede contener dígitos y un '+' opcional al inicio"
+        )
+        .test(
+            'len',
+            'Debe tener no más de 11 dígitos',
+            (val) => (val ? val.toString().length <= 12 : false)
+        )
+        .required('Es un campo obligatorio'),
+    emailAddress: Yup.string()
+        .email('Ingresar un correo valido')
+        .required('Es un campo obligatorio'),
+    addressLine: Yup.string().required('Es un campo obligatorio'),
+    socialInstagram: Yup.string().required('Es un campo obligatorio'),
+    socialInstagramCla: Yup.string().required('Es un campo obligatorio'),
+    socialInstagramSeg: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .required('Es un campo obligatorio'),
+    socialTikSeg: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .required('Es un campo obligatorio'),
+    socialTikCla: Yup.string().required('Es un campo obligatorio'),
+    costo_1: Yup.string().required('Es un campo obligatorio'),
+    gender_id: Yup.string().required('Es un campo obligatorio'),
+    city_id: Yup.number(),
+    state_id: Yup.number(),
+    country_id: Yup.number(),
+    zip: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .test(
+            'len',
+            'Debe tener exactamente 6 dígitos',
+            (val) => (val ? val.toString().length === 6 : false)
+        ),
 });
+
+// Extract onSubmit handler
+
 
 interface IPreviewItemProps {
 	title: string;
@@ -101,6 +142,16 @@ const PreviewItem: FC<IPreviewItemProps> = ({ title, value }) => {
 		</>
 	);
 };
+
+interface Category {
+    id: number;
+    category_name: string;
+}
+
+interface SubCategory {
+	id: number;
+	subcategory_name: string;
+}
 
 // Define the Gender type
 interface Gender {
@@ -158,9 +209,8 @@ interface SkinColor {
   
 
 const NewInfluencer = () => {
-	const formdata = new FormData();
+	
 	const [successful, setSuccessful] = useState(false);
-	const [message, setMessage] = useState('error por defecto');
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
 	const [departments, setDepartments] = useState<Department[]>([]);
@@ -170,6 +220,11 @@ const NewInfluencer = () => {
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
 	const [hairType, setHairType] = useState<HairType[]>([]);
 	const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
+
+	const [categories, setCategories] = useState<Category[]>([]);
+	const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
+	const [selectedSubcategories, setSelectedSubcategories] = useState<any[]>([]);
+	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -182,6 +237,10 @@ const NewInfluencer = () => {
 		{ id: 2, name: 'TikTok' },
 		{ id: 3, name: 'Facebook' },
 	];
+
+	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setSelectedCategoryId(Number(e.target.value));
+	};
 
 	// Handle classification update
 	const handleFollowersChange = (followers: number) => {
@@ -206,6 +265,71 @@ const NewInfluencer = () => {
 		console.log("Clase TikTok coincidente:", matchedClass); // Verifica si encuentra una clase
 		formik.setFieldValue("socialTikCla", matchedClass?.class_name || "");
 	};
+
+	const handleSubmit = async (values: any) => {
+		try {
+			// Prepare the payload for submission, including all form values and subcategories
+			const payload = {
+				firstName: values.firstName,
+				lastName: values.lastName,
+				idUser: values.idUser,
+				cityNac: values.cityNac,
+				birthdayDate: values.birthdayDate,
+				year: values.year,
+				gender_id: values.gender_id,
+				ethnic_id: values.ethnic_id,
+				hair_color_id: values.hair_color_id,
+				hair_type_id: values.hair_type_id,
+				skin_color_id: values.skin_color_id,
+				eps: values.eps,
+				passport: values.passport,
+				displayName: values.displayName,
+				emailAddress: values.emailAddress,
+				phoneNumber: values.phoneNumber,
+				addressLine: values.addressLine,
+				addressLine2: values.addressLine2,
+				city_id: values.city_id,
+				state_id: values.state_id,
+				country_id: values.country_id,
+				zip: values.zip,
+				emailNotification: values.emailNotification,
+				pushNotification: values.pushNotification,
+				phoneNumberWhp: values.phoneNumberWhp,
+				socialInstagram: values.socialInstagram,
+				socialInstagramCla: values.socialInstagramCla,
+				socialInstagramSeg: values.socialInstagramSeg,
+				socialTik: values.socialTik,
+				socialTikCla: values.socialTikCla,
+				socialTikSeg: values.socialTikSeg,
+				socialNetwork: values.socialNetwork,
+				image: values.image,
+				costo_1: values.costo_1,
+				costo_2: values.costo_2,
+				costo_3: values.costo_3,
+				subcategories: selectedSubcategories.map((subcat) => subcat.id), // Add selected subcategories IDs
+			};
+	
+			// Debugging: Log the payload before sending
+			console.log("Payload to be sent:", payload);
+	
+			// API call to save influencer data
+			const resp = await InfluService.addInfluencer(payload);
+	
+			if (resp) {
+				// Display success notification
+				showNotification('Ingreso de usuario', 'Ingreso exitoso', 'info');
+	
+				// Optionally reset form and selected subcategories
+				formik.resetForm();
+				setSelectedSubcategories([]);
+			}
+		} catch (error) {
+			// Log error and show notification
+			console.error("Error submitting influencer:", error);
+			showNotification('Error', String(error), 'danger');
+		}
+	};
+	
 
 	// Fetch genders from the API
 	useEffect(() => {
@@ -274,6 +398,7 @@ const NewInfluencer = () => {
 		fetchEthnicityGroup();
 	}, []);
 
+	// Fetch Hair Color group
 	useEffect(() => {
 		async function fetchHairColor() {
 			try {
@@ -287,6 +412,7 @@ const NewInfluencer = () => {
 		fetchHairColor();
 	}, []);
 
+	// Fetch Hair type group
 	useEffect(() => {
 		async function fetchHairType() {
 			try {
@@ -300,6 +426,8 @@ const NewInfluencer = () => {
 		fetchHairType();
 	}, []);
 
+
+	// Fetch Skin Color group
 	useEffect(() => {
 		async function fetchSkinColor() {
 			try {
@@ -313,6 +441,7 @@ const NewInfluencer = () => {
 		fetchSkinColor();
 	}, []);
 
+	// Fetch Country group
 	useEffect(() => {
 		async function fetchCountry() {
 			try {
@@ -325,6 +454,35 @@ const NewInfluencer = () => {
 		}
 		fetchCountry();
 	}, []);
+
+	// Fetch categories
+	useEffect(() => {
+		async function fetchCategories() {
+			try {
+				const response = await InfluService.getCategories(); // Create this service
+				setCategories(response.data);
+			} catch (error) {
+				console.error("Failed to fetch categories:", error);
+			}
+		}
+		fetchCategories();
+	}, []);
+
+	// Fetch subcategories for selected category
+	useEffect(() => {
+		if (!selectedCategoryId) return;
+		console.log("Category selected:", selectedCategoryId);
+
+		async function fetchSubcategories() {
+			try {
+				const response = await InfluService.getSubcategories(selectedCategoryId); // Create this service
+				setSubcategories(response.data as SubCategory[]);
+			} catch (error) {
+				console.error("Failed to fetch subcategories:", error);
+			}
+		}
+		fetchSubcategories();
+	}, [selectedCategoryId]);
 
 	async function addInflu(values: any) {
 		try {
@@ -340,50 +498,10 @@ const NewInfluencer = () => {
 	}
 
 	const formik = useFormik({
-		initialValues: {
-			firstName: 'John',
-			lastName: 'Doe',
-			idUser: '90998909',
-			cityNac: '1',
-			birthdayDate: '10/10/2024',
-			year: '45',
-			gender_id: '1',
-			ethnic_id: '1',
-			hair_color_id: '1',
-			hair_type_id: '1',
-			skin_color_id: '1',
-			eps: 'SURA',
-			passport: 'NO',
-			displayName: 'johndoe',
-			emailAddress: 'johndoe@site.com',
-			phoneNumber: '12345566',
-			addressLine: 'calle 1',
-			addressLine2: 'calle 2',
-			city_id: '1',
-			state_id: '1',
-			country_id: '1',
-			zip: '660004',
-			emailNotification: [''],
-			pushNotification: [''],
-			phoneNumberWhp: '1234566',
-			socialInstagram: '@instagrampedro',
-			socialInstagramCla: 'Nano',
-			socialInstagramSeg: '1234',
-			socialTik: '@instagrampedro',
-			socialTikCla: 'Micro',
-			socialTikSeg: '1234567',
-			socialNetwork: [''],
-			image: 'null',
-			costo_1: '1234567',
-			costo_2: '7654321',
-			costo_3: '2589631',
-		},
-
-		onSubmit: (values) => {
-			addInflu(values);
-		},
-		validationSchema: SignupSchema,
-	});
+        initialValues,
+        validationSchema,
+        onSubmit: handleSubmit,
+    });
 
 	return (
 		<PageWrapper title='Nuevo Ingreso'>
@@ -827,6 +945,70 @@ const NewInfluencer = () => {
 												invalidFeedback={formik.errors.skin_color_id}
 											/>
 										</FormGroup>
+									</div>
+									<div className='col-md-4'>
+										<FormGroup id='category_id' label='Categoría' isFloating>
+											<Select
+												name="category_id"
+												ariaLabel='Categoría'
+												placeholder='Seleccione una categoría...'
+												list={categories.map((cat) => ({
+													value: cat.id,
+													text: cat.category_name,
+												}))}
+												onChange={handleCategoryChange}
+												value={selectedCategoryId ? String(selectedCategoryId) : ''}
+											/>
+										</FormGroup>
+									</div>
+
+									<div className='col-md-4'>
+										<FormGroup id='subcategory_id' label='Subcategoría' isFloating>
+											<Select
+												name="subcategory_id"
+												ariaLabel='Subcategoría'
+												placeholder='Seleccione una subcategoría...'
+												list={subcategories.map((subcat) => ({
+													value: subcat.id,
+													text: subcat.subcategory_name,
+												}))}
+												onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+													const subcategoryId = parseInt(e.target.value, 10); // Convert value to a number
+													const subcategoryName = subcategories.find((subcat) => subcat.id === subcategoryId)?.subcategory_name;
+													setSelectedSubcategories([...selectedSubcategories, { id: subcategoryId, name: subcategoryName }]);
+												}}
+											/>
+										</FormGroup>
+									</div>
+
+									<div className='col-md-4'>
+										<Button
+											color='info'
+											onClick={() => console.log('Subcategories Selected:', selectedSubcategories)}
+										>
+											Agregar Subcategoria
+										</Button>
+									</div>
+									<div className='col-md-12'>
+										<h5>Subcategorías seleccionadas:</h5>
+										<ul>
+											{selectedSubcategories.map((subcat) => (
+												<li key={subcat.id}>
+													{subcat.name}{' '}
+													<Button
+														color='danger'
+														size='sm'
+														onClick={() =>
+															setSelectedSubcategories(
+																selectedSubcategories.filter((s) => s.id !== subcat.id)
+															)
+														}
+													>
+														Eliminar
+													</Button>
+												</li>
+											))}
+										</ul>
 									</div>
 								</div>
 

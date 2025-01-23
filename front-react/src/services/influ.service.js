@@ -72,12 +72,12 @@ const getCategoriesSubcategories = () => {
 	return axios.get(`${API_URL}categories-with-subcategories`, { headers: authHeader() });
 };
 
-const categories = () => {
+const getCategories = () => {
 	return axios.get(`${API_URL}categories`, { headers: authHeader() });
 };
 
-const subCategories = () => {
-	return axios.get(`${API_URL}subcategories`, { headers: authHeader() });
+const getSubcategories = (id) => {
+	return axios.get(`${API_URL}subcategories/${id}`, { id }, { headers: authHeader() });
 };
 
 const UserService = {
@@ -95,8 +95,8 @@ const UserService = {
 	getCities,
 	getDepartments,
 	getCategoriesSubcategories,
-	categories,
-	subCategories, // Export the new method
+	getCategories,
+	getSubcategories, // Export the new method
 };
 
 export default UserService;

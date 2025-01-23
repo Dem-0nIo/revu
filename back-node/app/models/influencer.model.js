@@ -108,5 +108,16 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 
+  Influencer.associate = (models) => {
+    Influencer.hasMany(models.InfluencerSubcategories, {
+        foreignKey: 'influencerId',
+        as: 'influencerSubcategories',
+    });
+    Influencer.belongsToMany(models.SubCategory, {
+      through: models.InfluencerSubcategories,
+      foreignKey: "influencerId",
+    });
+  };
+
   return Influencer;
 };
