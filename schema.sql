@@ -625,6 +625,16 @@ INSERT INTO SubCategories (subcategory_name, tag_category_id) VALUES
 ('Política', 16);
 
 
+-- Crear tabla para las clases sociales
+CREATE TABLE social_classes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Insertar valores iniciales
+INSERT INTO social_classes (class_name)
+VALUES ('Alta'), ('Media'), ('Baja');
+
 -- Tabla intermedia para relacionar influencers con tags
 CREATE TABLE IF NOT EXISTS InfluencerSubcategories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -635,10 +645,12 @@ CREATE TABLE IF NOT EXISTS InfluencerSubcategories (
 );
 
 
--- Indices de la tabla `cotizaciones`
---
-ALTER TABLE `cotizaciones`
-  ADD PRIMARY KEY (`idCotizacion`);
+-- Agregar columna a la tabla influencers para referenciar a social_classes
+ALTER TABLE influencers
+ADD COLUMN social_class_id INT,
+ADD CONSTRAINT fk_social_class
+FOREIGN KEY (social_class_id) REFERENCES social_classes(id)
+ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Indices de la tabla `influencers`
@@ -700,6 +712,12 @@ ALTER TABLE `influencers`
 ALTER TABLE influencers ENGINE=InnoDB;
 ALTER TABLE sub_categories ENGINE=InnoDB;  
 --
+
+-- Indices de la tabla `cotizaciones`
+--
+ALTER TABLE `cotizaciones`
+  ADD PRIMARY KEY (`idCotizacion`);
+
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
