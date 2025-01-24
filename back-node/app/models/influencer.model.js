@@ -1,3 +1,5 @@
+const SocialClass = require('./socialClass.model'); // Adjust the path as needed
+
 module.exports = (sequelize, Sequelize) => {
   const Influencer = sequelize.define("influencers", {
     firstName: {
@@ -29,6 +31,14 @@ module.exports = (sequelize, Sequelize) => {
     ethnic_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
+    },
+    social_class_id: {
+      type: Sequelize.INTEGER,
+      references: {
+          model: SocialClass,
+          key: 'id',
+      },
+      allowNull: true,
     },
     eps: {
       type: Sequelize.STRING,
@@ -106,6 +116,8 @@ module.exports = (sequelize, Sequelize) => {
     costo_3: {
       type: Sequelize.INTEGER,
     },
+  }, {
+    tableName: 'influencers',
   });
 
   Influencer.associate = (models) => {
@@ -117,6 +129,10 @@ module.exports = (sequelize, Sequelize) => {
       through: models.InfluencerSubcategories,
       foreignKey: "influencerId",
     });
+    Influencer.belongsTo(models.SocialClass, { 
+      foreignKey: 'social_class_id', as: 'socialClass' 
+    });
+
   };
 
   return Influencer;

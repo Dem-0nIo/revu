@@ -47,6 +47,8 @@ db.TagsCategory = require("../models/tags_category.model.js")(sequelize, Sequeli
 db.SubCategory = require("../models/sub_category.model.js")(sequelize, Sequelize);
 db.Country = require("../models/country.model.js")(sequelize, Sequelize);
 db.InfluencerSubcategories = require("../models/influencerSubcategories.model.js")(sequelize, Sequelize);
+db.SocialClass = require("../models/socialClass.model.js")(sequelize, Sequelize);
+
 
 // Call associations after model initialization
 db.TagsCategory.hasMany(db.SubCategory, {

@@ -1,8 +1,5 @@
 const { json } = require("sequelize");
 const db = require("../models");
-console.log("*******Consulta bd cities***********"); 
-console.log(db.cities);
-console.log("*******Consulta bd cities***********");  
 const City = db.cities;
 
 exports.getAllCities = async (req, res) => {
