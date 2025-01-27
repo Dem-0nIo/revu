@@ -86,6 +86,7 @@ CREATE TABLE `influencers` (
   `addressLine` varchar(255) DEFAULT NULL,
   `phoneNumber` varchar(255) DEFAULT NULL,
   `addressLine2` varchar(255) DEFAULT NULL,
+  `social_class_id` INT DEFAULT NULL,
   `city_id` INT DEFAULT NULL,
   `state_id` INT DEFAULT NULL,
   `country_id` INT DEFAULT NULL,
@@ -99,11 +100,28 @@ CREATE TABLE `influencers` (
   `socialTik` varchar(255) DEFAULT NULL,
   `socialTikCla` varchar(255) DEFAULT NULL,
   `socialTikSeg` varchar(255) DEFAULT NULL,
+  `socialFace` varchar(255) DEFAULT NULL,
+  `socialFaceCla` varchar(255) DEFAULT NULL,
+  `socialFaceSeg` varchar(255) DEFAULT NULL,
+  `socialUTube` varchar(255) DEFAULT NULL,
+  `socialUTubeCla` varchar(255) DEFAULT NULL,
+  `socialUTubeSeg` varchar(255) DEFAULT NULL,
   `socialNetwork` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`socialNetwork`)),
+  `celebrity` TINYINT(1) NOT NULL DEFAULT 1,
   `img` varchar(255) DEFAULT NULL,
   `costo_1` int(11) DEFAULT NULL,
   `costo_2` int(11) DEFAULT NULL,
   `costo_3` int(11) DEFAULT NULL,
+  `costo_4` int(11) DEFAULT NULL,
+  `costo_5` int(11) DEFAULT NULL,
+  `costo_6` int(11) DEFAULT NULL,
+  `costo_7` int(11) DEFAULT NULL,
+  `costo_8` int(11) DEFAULT NULL,
+  `costo_9` int(11) DEFAULT NULL,
+  `costo_10` int(11) DEFAULT NULL,
+  `costo_11` int(11) DEFAULT NULL,
+  `costo_12` int(11) DEFAULT NULL,
+  `costo_13` int(11) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`idUser`)
@@ -647,10 +665,10 @@ CREATE TABLE IF NOT EXISTS InfluencerSubcategories (
 
 -- Agregar columna a la tabla influencers para referenciar a social_classes
 ALTER TABLE influencers
-ADD COLUMN social_class_id INT,
-ADD CONSTRAINT fk_social_class
-FOREIGN KEY (social_class_id) REFERENCES social_classes(id)
-ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT fk_social_class
+  FOREIGN KEY (social_class_id) REFERENCES social_classes(id)
+  ON DELETE SET NULL 
+  ON UPDATE CASCADE;
 
 --
 -- Indices de la tabla `influencers`
@@ -675,7 +693,7 @@ ALTER TABLE `influencers`
 
 ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_countries`
-  FOREIGN KEY (`countries_id`) REFERENCES `countries` (`id`)
+  FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 

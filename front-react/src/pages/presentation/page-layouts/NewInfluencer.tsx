@@ -41,6 +41,8 @@ const initialValues = {
     phoneNumber: '12345566',
     addressLine: 'calle 1',
     addressLine2: 'calle 2',
+	social_class_id: '1',
+	celebrity: '1',
     city_id: '1',
     state_id: '1',
     country_id: '1',
@@ -54,11 +56,27 @@ const initialValues = {
     socialTik: '@instagrampedro',
     socialTikCla: 'Micro',
     socialTikSeg: '1234567',
+	socialFace: '@facepedro',
+    socialFaceCla: 'Nano',
+    socialFaceSeg: '1234',
+    socialUTube: '@Youtubepedro',
+    socialUTubeCla: 'Micro',
+    socialUTubeSeg: '1234567',
     socialNetwork: [''],
     image: 'null',
-    costo_1: '1234567',
-    costo_2: '7654321',
-    costo_3: '2589631',
+    costo_1: '$1234567',
+    costo_2: '$7654321',
+    costo_3: '$2589631',
+	costo_4: '$1234567',
+    costo_5: '$7654321',
+    costo_6: '$2589631',
+	costo_7: '$1234567',
+    costo_8: '$7654321',
+    costo_9: '$2589631',
+	costo_10: '$1234567',
+    costo_11: '$7654321',
+    costo_12: '$2589631',
+	costo_13: '$2589631',
 };
 
 // Extract validationSchema
@@ -105,15 +123,108 @@ const validationSchema = Yup.object({
         .positive('Debe ser un número positivo')
         .integer('Debe ser un número entero')
         .required('Es un campo obligatorio'),
+	socialTik: Yup.string().required('Es un campo obligatorio'),
     socialTikSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
         .integer('Debe ser un número entero')
         .required('Es un campo obligatorio'),
     socialTikCla: Yup.string().required('Es un campo obligatorio'),
-    costo_1: Yup.string().required('Es un campo obligatorio'),
+	socialFace: Yup.string().required('Es un campo obligatorio'),
+    socialFaceCla: Yup.string().required('Es un campo obligatorio'),
+    socialFaceSeg: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .required('Es un campo obligatorio'),
+	socialUTube: Yup.string().required('Es un campo obligatorio'),
+    socialUTubeCla: Yup.string().required('Es un campo obligatorio'),
+    socialUTubeSeg: Yup.number()
+        .typeError('Debe ser un número')
+        .positive('Debe ser un número positivo')
+        .integer('Debe ser un número entero')
+        .required('Es un campo obligatorio'),
+	costo_1: Yup.string()
+        .required('Es un campo obligatorio')
+        .test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+            if (!value) return false;
+            return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+        }),
+	costo_2: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_3: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_4: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_5: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_6: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_7: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_8: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_9: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_10: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_11: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_12: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
+	costo_13: Yup.string()
+	.required('Es un campo obligatorio')
+	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
+		if (!value) return false;
+		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
+	}),
     gender_id: Yup.string().required('Es un campo obligatorio'),
     city_id: Yup.number(),
+	celebrity: Yup.number(),
     state_id: Yup.number(),
     country_id: Yup.number(),
     zip: Yup.number()
@@ -129,7 +240,6 @@ const validationSchema = Yup.object({
 
 // Extract onSubmit handler
 
-
 interface IPreviewItemProps {
 	title: string;
 	value: any | any[];
@@ -142,6 +252,11 @@ const PreviewItem: FC<IPreviewItemProps> = ({ title, value }) => {
 		</>
 	);
 };
+
+interface SocialClass {
+	id: number;
+	class_name: string;
+}
 
 interface Category {
     id: number;
@@ -225,6 +340,7 @@ const NewInfluencer = () => {
 	const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
 	const [selectedSubcategories, setSelectedSubcategories] = useState<any[]>([]);
 	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+	const [socialClasses, setSocialClasses] = useState<SocialClass[]>([]);
 
 	const TABS = {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
@@ -236,6 +352,7 @@ const NewInfluencer = () => {
 		{ id: 1, name: 'Instagram' },
 		{ id: 2, name: 'TikTok' },
 		{ id: 3, name: 'Facebook' },
+		{ id: 4, name: 'YouTube' },
 	];
 
 	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -266,6 +383,30 @@ const NewInfluencer = () => {
 		formik.setFieldValue("socialTikCla", matchedClass?.class_name || "");
 	};
 
+	// Handle TikTok classification update
+	const handleFaceFollowersChange = (followers: number) => {
+		formik.setFieldValue("socialFaceSeg", followers); // Actualiza el número de seguidores
+		const matchedClass = influencerClasses.find(
+			(cls) =>
+				followers >= cls.min_followers &&
+				(cls.max_followers === null || followers <= cls.max_followers)
+		);
+		console.log("Clase Face coincidente:", matchedClass); // Verifica si encuentra una clase
+		formik.setFieldValue("socialFaceCla", matchedClass?.class_name || "");
+	};
+
+	// Handle TikTok classification update
+	const handleUTubeFollowersChange = (followers: number) => {
+		formik.setFieldValue("socialUTubeSeg", followers); // Actualiza el número de seguidores
+		const matchedClass = influencerClasses.find(
+			(cls) =>
+				followers >= cls.min_followers &&
+				(cls.max_followers === null || followers <= cls.max_followers)
+		);
+		console.log("Clase UTube coincidente:", matchedClass); // Verifica si encuentra una clase
+		formik.setFieldValue("socialUTubeCla", matchedClass?.class_name || "");
+	};
+
 	const handleSubmit = async (values: any) => {
 		try {
 			// Prepare the payload for submission, including all form values and subcategories
@@ -288,6 +429,8 @@ const NewInfluencer = () => {
 				phoneNumber: values.phoneNumber,
 				addressLine: values.addressLine,
 				addressLine2: values.addressLine2,
+				social_class_id: values.social_class_id,
+				celebrity: values.celebrity,
 				city_id: values.city_id,
 				state_id: values.state_id,
 				country_id: values.country_id,
@@ -303,9 +446,19 @@ const NewInfluencer = () => {
 				socialTikSeg: values.socialTikSeg,
 				socialNetwork: values.socialNetwork,
 				image: values.image,
-				costo_1: values.costo_1,
-				costo_2: values.costo_2,
-				costo_3: values.costo_3,
+				costo_1: values.costo_1.replace('$', ''),
+				costo_2: values.costo_2.replace('$', ''),
+				costo_3: values.costo_3.replace('$', ''),
+				costo_4: values.costo_4.replace('$', ''),
+				costo_5: values.costo_5.replace('$', ''),
+				costo_6: values.costo_6.replace('$', ''),
+				costo_7: values.costo_7.replace('$', ''),
+				costo_8: values.costo_8.replace('$', ''),
+				costo_9: values.costo_9.replace('$', ''),
+				costo_10: values.costo_10.replace('$', ''),
+				costo_11: values.costo_11.replace('$', ''),
+				costo_12: values.costo_12.replace('$', ''),
+				costo_13: values.costo_13.replace('$', ''),
 				subcategories: selectedSubcategories.map((subcat) => subcat.id), // Add selected subcategories IDs
 			};
 	
@@ -330,6 +483,18 @@ const NewInfluencer = () => {
 		}
 	};
 	
+	// Fetch social classes from the API
+	useEffect(() => {
+		async function fetchSocialClasses() {
+			try {
+				const response = await InfluService.getSocialClasses(); // Make sure to create this service method
+				setSocialClasses(response.data);
+			} catch (error) {
+				console.error("Failed to fetch social classes:", error);
+			}
+		}
+		fetchSocialClasses();
+	}, []);
 
 	// Fetch genders from the API
 	useEffect(() => {
@@ -425,7 +590,6 @@ const NewInfluencer = () => {
 		}
 		fetchHairType();
 	}, []);
-
 
 	// Fetch Skin Color group
 	useEffect(() => {
@@ -550,7 +714,7 @@ const NewInfluencer = () => {
 										</CardHeader>
 										<CardBody className='pt-0'>
 											<div className='row g-4'>
-												<div className='col-md-4'>
+												<div className='col-3'>
 													<FormGroup
 														id='firstName'
 														label='Primer Nombre'
@@ -570,7 +734,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-md-4'>
+												<div className='col-md-3'>
 													<FormGroup
 														id='lastName'
 														label='Segundo Nombre'
@@ -588,7 +752,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-md-4'>
+												<div className='col-md-3'>
 													<FormGroup
 														id='idUser'
 														label='Cedula'
@@ -607,7 +771,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-md-4'>
+												<div className='col-md-3'>
 													<FormGroup
 														id='cityNac'
 														label='Ciudad de nacimiento'
@@ -629,7 +793,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-md-4'>
+												<div className='col-md-3'>
 													<FormGroup
 														id='birthdayDate'
 														label='Fecha de nacimiento'
@@ -651,7 +815,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-md-4'>
+												<div className='col-md-3'>
 													<FormGroup id='year' label='Edad' isFloating>
 														<Input
 															type='number'
@@ -667,7 +831,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-6'>
+												<div className='col-md-3'>
 													<FormGroup
 														id='displayName'
 														label='NickName'
@@ -688,7 +852,7 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												<div className='col-6'>
+												<div className='col-md-3'>
 													<FormGroup id='gender_id' label='Género' isFloating>
 														<Select
 															name="gender_id"
@@ -771,6 +935,25 @@ const NewInfluencer = () => {
 															isTouched={formik.touched.addressLine2}
 															invalidFeedback={formik.errors.addressLine2}
 															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-3'>
+													<FormGroup id='social_class_id' label='Clase social' isFloating>
+														<Select
+															name="social_class_id"
+															ariaLabel='Clase Social'
+															placeholder='Seleccione...'
+															list={socialClasses.map((socialClass) => ({
+																value: socialClass.id, // Use the gender ID as the value
+																text: socialClass.class_name, // Use the gender description as the text
+															}))}
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.social_class_id}
+															isValid={formik.isValid}
+															isTouched={formik.touched.social_class_id}
+															invalidFeedback={formik.errors.social_class_id}
 														/>
 													</FormGroup>
 												</div>
@@ -1103,9 +1286,101 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-4'>
-											<FormGroup id='costo_1' label='Precio Historia' isFloating>
+											<FormGroup
+												id='socialFace'
+												label='Facebook'
+												isFloating>
 												<Input
 													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.socialFace}
+													isValid={formik.isValid}
+													isTouched={formik.touched.socialFace}
+													invalidFeedback={formik.errors.socialFace}
+												/>
+											</FormGroup>
+										</div>
+										<div className="col-4">
+											<FormGroup
+												id="socialFaceCla"
+												label="Clasificación"
+												isFloating>
+												<Input
+													type="text"
+													placeholder="Clasificación"
+													value={formik.values.socialFaceCla}
+													readOnly // Campo deshabilitado
+												/>
+											</FormGroup>
+										</div>
+										<div className="col-4">
+											<FormGroup
+												id="socialFaceSeg"
+												label="Número seguidores"
+												isFloating>
+												<Input
+													type="number"
+													placeholder="Número seguidores"
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														handleFaceFollowersChange(Number(e.target.value))
+													}													
+													onBlur={formik.handleBlur}
+													value={formik.values.socialFaceSeg}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-4'>
+											<FormGroup
+												id='socialUTube'
+												label='YouTube'
+												isFloating>
+												<Input
+													onChange={formik.handleChange}
+													onBlur={formik.handleBlur}
+													value={formik.values.socialUTube}
+													isValid={formik.isValid}
+													isTouched={formik.touched.socialUTube}
+													invalidFeedback={formik.errors.socialUTube}
+												/>
+											</FormGroup>
+										</div>
+										<div className="col-4">
+											<FormGroup
+												id="socialUTubeCla"
+												label="Clasificación"
+												isFloating>
+												<Input
+													type="text"
+													placeholder="Clasificación"
+													value={formik.values.socialUTubeCla}
+													readOnly // Campo deshabilitado
+												/>
+											</FormGroup>
+										</div>
+										<div className="col-4">
+											<FormGroup
+												id="socialUTubeSeg"
+												label="Número seguidores"
+												isFloating>
+												<Input
+													type="number"
+													placeholder="Número seguidores"
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														handleUTubeFollowersChange(Number(e.target.value))
+													}													
+													onBlur={formik.handleBlur}
+													value={formik.values.socialUTubeSeg}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_1' label='IG Historia 15 seg.' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_1', value);
+													}}
 													onBlur={formik.handleBlur}
 													value={formik.values.costo_1}
 													isValid={formik.isValid}
@@ -1114,10 +1389,13 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-4'>
-											<FormGroup id='costo_2' label='Precio Reel' isFloating>
+										<div className='col-3'>
+											<FormGroup id='costo_2' label='IG Rafaga Hist. 45-60 seg' isFloating>
 												<Input
-													onChange={formik.handleChange}
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_2', value);
+													}}
 													onBlur={formik.handleBlur}
 													value={formik.values.costo_2}
 													isValid={formik.isValid}
@@ -1127,10 +1405,13 @@ const NewInfluencer = () => {
 											</FormGroup>
 										</div>
 
-										<div className='col-4'>
-											<FormGroup id='costo_3' label='Precio Youtube' isFloating>
+										<div className='col-3'>
+											<FormGroup id='costo_3' label='IG Reel' isFloating>
 												<Input
-													onChange={formik.handleChange}
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_3', value);
+													}}
 													onBlur={formik.handleBlur}
 													value={formik.values.costo_3}
 													isValid={formik.isValid}
@@ -1139,8 +1420,170 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
+										<div className='col-3'>
+											<FormGroup id='costo_4' label='IG Reel en colaboración' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_4', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_4}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_4}
+													invalidFeedback={formik.errors.costo_4}
+												/>
+											</FormGroup>
+										</div>
 
-										<div className='col-12'>
+										<div className='col-3'>
+											<FormGroup id='costo_5' label='IG Foto Post' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_5', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_5}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_5}
+													invalidFeedback={formik.errors.costo_5}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_6' label='Video en Facebook' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_6', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_6}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_6}
+													invalidFeedback={formik.errors.costo_6}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id="costo_7" label="Reel's en Facebook" isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_7', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_7}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_7}
+													invalidFeedback={formik.errors.costo_7}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_8' label='Historia en Facebook' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_8', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_8}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_8}
+													invalidFeedback={formik.errors.costo_8}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_9' label='TikTok' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_9', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_9}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_9}
+													invalidFeedback={formik.errors.costo_9}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_10' label='Mención en Video en Youtube' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_10', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_10}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_10}
+													invalidFeedback={formik.errors.costo_10}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_11' label='Asistencia a eventos' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_11', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_11}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_11}
+													invalidFeedback={formik.errors.costo_11}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_12' label='Imagen pauta digital (1 mes)' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_12', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_12}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_12}
+													invalidFeedback={formik.errors.costo_12}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-3'>
+											<FormGroup id='costo_13' label='UGC' isFloating>
+												<Input
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
+														formik.setFieldValue('costo_13', value);
+													}}
+													onBlur={formik.handleBlur}
+													value={formik.values.costo_13}
+													isValid={formik.isValid}
+													isTouched={formik.touched.costo_13}
+													invalidFeedback={formik.errors.costo_13}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-3' />
+										<div className='col-3' />
+										<div className='col-3' />
+
+										<div className='col-6'>
 											<FormGroup>
 												<Label htmlFor='emailNotification'>
 													Redes Sociales
@@ -1161,6 +1604,21 @@ const NewInfluencer = () => {
 														/>
 													))}
 												</ChecksGroup>
+											</FormGroup>
+										</div>
+										<div className='col-6'>
+											<FormGroup>
+												<Checks
+													type='switch' // or 'checkbox', depending on your preference
+													id='celebrity'
+													name='celebrity'
+													label='Celebrity?'
+													value='1' // Example value, you can modify it as needed
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														formik.setFieldValue('celebrity', e.target.checked ? '1' : '0')
+													}
+													checked={formik.values.celebrity === '1'}
+												/>
 											</FormGroup>
 										</div>
 									</div>

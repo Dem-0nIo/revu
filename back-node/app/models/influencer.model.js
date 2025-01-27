@@ -61,6 +61,9 @@ module.exports = (sequelize, Sequelize) => {
     addressLine2: {
       type: Sequelize.STRING,
     },
+    celebrity: {
+      type: Sequelize.INTEGER,
+    },
     city_id: {
       type: Sequelize.INTEGER,
     },
@@ -100,6 +103,24 @@ module.exports = (sequelize, Sequelize) => {
     socialTikSeg: {
       type: Sequelize.STRING,
     },
+    socialFace: {
+      type: Sequelize.STRING,
+    },
+    socialFaceCla: {
+      type: Sequelize.STRING,
+    },
+    socialFaceSeg: {
+      type: Sequelize.STRING,
+    },
+    socialUtube: {
+      type: Sequelize.STRING,
+    },
+    socialUTubeCla: {
+      type: Sequelize.STRING,
+    },
+    socialUTubeSeg: {
+      type: Sequelize.STRING,
+    },
     socialNetwork: {
       type: Sequelize.JSON,
     },
@@ -114,6 +135,36 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
     },
     costo_3: {
+      type: Sequelize.INTEGER,
+    },
+    costo_4: {
+      type: Sequelize.INTEGER,
+    },
+    costo_5: {
+      type: Sequelize.INTEGER,
+    },
+    costo_6: {
+      type: Sequelize.INTEGER,
+    },
+    costo_7: {
+      type: Sequelize.INTEGER,
+    },
+    costo_8: {
+      type: Sequelize.INTEGER,
+    },
+    costo_9: {
+      type: Sequelize.INTEGER,
+    },
+    costo_10: {
+      type: Sequelize.INTEGER,
+    },
+    costo_11: {
+      type: Sequelize.INTEGER,
+    },
+    costo_12: {
+      type: Sequelize.INTEGER,
+    },
+    costo_13: {
       type: Sequelize.INTEGER,
     },
   }, {
