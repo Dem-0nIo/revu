@@ -20,6 +20,6 @@ ADD nginx.conf /etc/nginx/conf.d/default.conf
 # Copy the built app from the build stage
 COPY --from=build /front-react/build /usr/share/nginx/html
 
-EXPOSE 3000
+EXPOSE 8082
 
 CMD ["nginx", "-g", "daemon off;"]
