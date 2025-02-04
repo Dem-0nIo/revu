@@ -28,7 +28,7 @@ import UserData from '../../_common/user';
 const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
-	displayName: Yup.string().required('Es un campo obligatorio'),
+	username: Yup.string().required('Es un campo obligatorio'),
 	phone: Yup.string().required('Es un campo obligatorio'),
 	emailAddress: Yup.string()
 		.email('Ingresar un correo valido')
@@ -40,6 +40,49 @@ const Users = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [successful, setSuccessful] = useState(false);
 	const [message, setMessage] = useState('error por defecto');
+
+	const handleSubmit = async (values: any) => {
+		console.log("Valores enviados:", values); // Verifica los datos antes de enviarlos
+	
+		try {
+
+			const payload = {
+				username: values.displayName,
+				email: values.emailAddress,
+				password: values.newPassword,
+				firstName: values.firstName,
+				lastName: values.lastName,
+				phone: values.phone,
+				rol: values.rol,
+			};
+
+			console.log("Payload to be sent:", payload);
+			const resp = await UserService.addUser(payload);
+			if (resp) {
+				setSuccessful(true);
+				addRolUser({ idUser: resp.data.userId, rol: values.rol });
+				// Display success notification
+				showNotification('Creacion de usuario', 'Ingreso exitoso', 'info');
+	
+				// Optionally reset form
+				formik.resetForm();
+			}
+			/* const response = await fetch("/api/users", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(values),
+			});
+	
+			const result = await response.json();
+			console.log("Respuesta del backend:", result); */
+		} catch (error) {
+			// Log error and show notification
+			console.error("Error submitting user:", error);
+			showNotification('Error', String(error), 'danger');
+		}
+	};
 
 	async function addUser(values: any) {
 		try {
@@ -80,7 +123,8 @@ const Users = () => {
 		},
 		//validationSchema: SignupSchema,
 		onSubmit: () => {
-			addUser(formik.values);
+			handleSubmit(formik.values);
+			// addUser(formik.values);
 		},
 	});
 
@@ -114,9 +158,9 @@ const Users = () => {
 							<CardBody>
 								<div className='row g-4'>
 									<div className='col-md-6'>
-										<FormGroup id='firstName' label='Primer Nombre' isFloating>
+										<FormGroup id='firstName' label='Nombre' isFloating>
 											<Input
-												placeholder='Primer Nombre'
+												placeholder='Nombre'
 												autoComplete='additional-name'
 												onChange={formik.handleChange}
 												onBlur={formik.handleBlur}
@@ -178,7 +222,7 @@ const Users = () => {
 							<CardBody>
 								<div className='row g-4'>
 									<div className='col-md-6'>
-										<FormGroup id='rol' label='Primer Nombre' isFloating>
+										<FormGroup id='rol' label='Rol' isFloating>
 											<select
 												id='rol'
 												name='rol'

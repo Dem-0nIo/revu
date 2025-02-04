@@ -44,10 +44,12 @@ exports.assignUserRole = (req, res) => {
 };
 
 exports.registerUser = async (req, res) => {
+  console.log("Datos recibidos en el backend:", req.body); // 🔍 Verifica el body recibido
+  const { firstname, lastname, username, phone, email } = req.body;
   //const body = req.body;
   //console.log(req.body);
   // Check if username already exists
-  const user = await checkIfUsernameExists(req.body.displayName);
+  const user = await checkIfUsernameExists(req.body.username);
   if (user) {
     return res.status(400).send({
       message: "El nombre de usuario ya existe",
@@ -57,13 +59,14 @@ exports.registerUser = async (req, res) => {
   // Save User to Database
   try {
     const result = await User.create({
-      username: req.body.displayName,
-      email: req.body.emailAddress,
-      password: bcrypt.hashSync(req.body.newPassword, 8),
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
-      phone: req.body.phone,
+      username: username,
+      email: email,
+      password: bcrypt.hashSync(req.body.password, 8),
+      firstname: firstname,
+      lastname: lastname,
+      phone: phone,
     });
+    console.log("Resultado de la creación");
     console.log(result.dataValues.id);
 
     res.status(201).send({

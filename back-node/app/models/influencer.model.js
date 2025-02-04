@@ -1,4 +1,6 @@
 const SocialClass = require('./socialClass.model'); // Adjust the path as needed
+const Gender = require('./gender.model'); // Adjust the path as needed
+
 
 module.exports = (sequelize, Sequelize) => {
   const Influencer = sequelize.define("influencers", {
@@ -15,9 +17,6 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    cityNac: {
-      type: Sequelize.STRING,
-    },
     birthdayDate: {
       type: Sequelize.STRING,
     },
@@ -26,11 +25,26 @@ module.exports = (sequelize, Sequelize) => {
     },
     gender_id: {
       type: Sequelize.INTEGER,
+      references: {
+        model: Gender,
+        key: 'id',
+      },
       allowNull: false,
     },
-    ethnic_id: {
+    hair_color_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
+    },
+    hair_type_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    skin_color_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+	  contact: {
+      type: Sequelize.STRING,
     },
     social_class_id: {
       type: Sequelize.INTEGER,
@@ -39,9 +53,6 @@ module.exports = (sequelize, Sequelize) => {
           key: 'id',
       },
       allowNull: true,
-    },
-    eps: {
-      type: Sequelize.STRING,
     },
     passport: {
       type: Sequelize.STRING,
@@ -58,23 +69,11 @@ module.exports = (sequelize, Sequelize) => {
     phoneNumber: {
       type: Sequelize.STRING,
     },
-    addressLine2: {
-      type: Sequelize.STRING,
-    },
     celebrity: {
-      type: Sequelize.INTEGER,
-    },
-    city_id: {
-      type: Sequelize.INTEGER,
-    },
-    state_id: {
       type: Sequelize.INTEGER,
     },
     country_id: {
       type: Sequelize.INTEGER,
-    },
-    zip: {
-      type: Sequelize.STRING,
     },
     emailNotification: {
       type: Sequelize.JSON,

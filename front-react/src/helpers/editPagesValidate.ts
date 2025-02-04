@@ -4,11 +4,9 @@ interface IValues {
 	birthdayDate: string;
 	year: string;
 	gender: string;
-	eps: string;
 	emailAddress: string;
 	phoneNumber: string;
 	addressLine: string;
-	addressLine2: string;
 	phoneNumberWhp: string;
 	socialInstagram: string;
 	socialInstagramCla: string;
@@ -29,11 +27,9 @@ const validate = (values: IValues) => {
 		birthdayDate: '',
 		year: '',
 		gender: '',
-		eps: '',
 		emailAddress: '',
 		phoneNumber: '',
 		addressLine: '',
-		addressLine2: '',
 		phoneNumberWhp: '',
 		socialInstagram: '',
 		socialInstagramCla: '',
