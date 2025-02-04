@@ -2,6 +2,11 @@ const { UniqueConstraintError } = require("sequelize");
 
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define("users", {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,  // Esto asegura que Sequelize maneje la clave primaria correctamente
+    },
     username: {
       type: Sequelize.STRING,
       allowNull: false,

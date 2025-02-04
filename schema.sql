@@ -71,12 +71,10 @@ CREATE TABLE `influencers` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `cityNac` INT DEFAULT NULL,
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,
-  `ethnic_id` INT DEFAULT NULL,
-  `eps` varchar(255) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
   `hair_color_id` INT DEFAULT NULL,
   `hair_type_id` INT DEFAULT NULL,
   `skin_color_id` INT DEFAULT NULL,
@@ -85,10 +83,7 @@ CREATE TABLE `influencers` (
   `emailAddress` varchar(255) DEFAULT NULL,
   `addressLine` varchar(255) DEFAULT NULL,
   `phoneNumber` varchar(255) DEFAULT NULL,
-  `addressLine2` varchar(255) DEFAULT NULL,
   `social_class_id` INT DEFAULT NULL,
-  `city_id` INT DEFAULT NULL,
-  `state_id` INT DEFAULT NULL,
   `country_id` INT DEFAULT NULL,
   `zip` varchar(255) DEFAULT NULL,
   `emailNotification` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`emailNotification`)),
@@ -156,7 +151,7 @@ INSERT INTO `roles` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -433,26 +428,6 @@ VALUES
     ('Macro', 100000, 999999),
     ('Mega', 1000000, NULL);
 
--- Crear la tabla de etnias si no existe
-CREATE TABLE IF NOT EXISTS ethnic_groups (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ethnicity_name VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Insertar las etnias en la tabla
-INSERT INTO ethnic_groups (ethnicity_name) VALUES
-('Wayuu (Guajira)'),
-('Embera (Chocó, Risaralda, Antioquia)'),
-('Nasa (Cauca)'),
-('Arhuaco (Sierra Nevada de Santa Marta)'),
-('Kogui (Sierra Nevada de Santa Marta)'),
-('Zenú (Córdoba y Sucre)'),
-('Awá (Nariño y Putumayo)'),
-('Ticuna (Amazonas)'),
-('Uitoto (Amazonas y Caquetá)'),
-('Sikuani (Orinoquía)'),
-('Afrodescendiente');
-
 -- Crear la tabla hair_types (tipos de cabello)
 CREATE TABLE IF NOT EXISTS hair_types (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -674,24 +649,6 @@ ALTER TABLE influencers
 -- Indices de la tabla `influencers`
 
 ALTER TABLE `influencers`
-  ADD CONSTRAINT `fk_city`
-  FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
-  ON DELETE SET NULL
-  ON UPDATE CASCADE;
-
-ALTER TABLE `influencers`
-  ADD CONSTRAINT `fk_cityNac`
-  FOREIGN KEY (`cityNac`) REFERENCES `cities` (`id`)
-  ON DELETE SET NULL
-  ON UPDATE CASCADE;
-
-ALTER TABLE `influencers`
-  ADD CONSTRAINT `fk_state`
-  FOREIGN KEY (`state_id`) REFERENCES `departments` (`id`)
-  ON DELETE SET NULL
-  ON UPDATE CASCADE;
-
-ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_countries`
   FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
   ON DELETE SET NULL
@@ -700,12 +657,6 @@ ALTER TABLE `influencers`
 ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_gender`
   FOREIGN KEY (`gender_id`) REFERENCES `genders` (`id`)
-  ON DELETE SET NULL
-  ON UPDATE CASCADE;
-
-ALTER TABLE `influencers`
-  ADD CONSTRAINT `fk_ethnic`
-  FOREIGN KEY (`ethnic_id`) REFERENCES `ethnic_groups` (`id`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 
@@ -728,7 +679,7 @@ ALTER TABLE `influencers`
   ON UPDATE CASCADE;
 
 ALTER TABLE influencers ENGINE=InnoDB;
-ALTER TABLE sub_categories ENGINE=InnoDB;  
+ALTER TABLE SubCategories ENGINE=InnoDB;  
 --
 
 -- Indices de la tabla `cotizaciones`
@@ -745,7 +696,6 @@ ALTER TABLE `roles`
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
@@ -756,11 +706,6 @@ ALTER TABLE `user_roles`
   ADD UNIQUE KEY `user_roles_userId_roleId_unique` (`roleId`,`userId`),
   ADD KEY `userId` (`userId`);
 
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Filtros para la tabla `user_roles`

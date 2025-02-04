@@ -8,7 +8,6 @@ interface IValues {
 	emailAddress: string;
 	phoneNumber: string;
 	addressLine: string;
-	addressLine2: string;
 	phoneNumberWhp: string;
 	socialInstagram: string;
 	socialInstagramCla: string;
@@ -32,7 +31,6 @@ const validate = (values: IValues) => {
 		emailAddress: '',
 		phoneNumber: '',
 		addressLine: '',
-		addressLine2: '',
 		phoneNumberWhp: '',
 		socialInstagram: '',
 		socialInstagramCla: '',

@@ -3,21 +3,18 @@ interface Influencer {
 	firstName: string;
 	lastName: string;
 	idUser: number;
-	cityNac: string;
 	birthdayDate: string;
 	year: string;
 	gender: string;
-	ethnic: string;
-	eps: string;
+	hair_color_id: number,
+    hair_type_id: number,
+    skin_color_id: number,
+	contact: string,
 	passport: string;
 	displayName: string;
 	emailAddress: string;
 	addressLine: string;
 	phoneNumber: string;
-	addressLine2: string;
-	city: string;
-	state: string;
-	zip: string;
 	emailNotification: string[];
 	pushNotification: string[];
 	phoneNumberWhp: string;
