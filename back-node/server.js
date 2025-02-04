@@ -12,13 +12,33 @@ const publicDirectoryPath = path.join(__dirname, "./app/images");
 app.use(express.static(publicDirectoryPath));
 console.log(publicDirectoryPath);
 
+const allowedOrigins = [
+	'http://localhost',
+	'http://165.22.179.233',
+	'http://revuagencyapp.com'
+];
+
+
+
 //puerto de conexión con back
 var corsOptions = {
-  origin: "*",
+  origin: "http://165.22.179.233",
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors({ 
+	origin: function (origin, callback) {  
+		if (!origin || allowedOrigins.includes(origin)) {   
+			callback(null, true);  
+		} else {   
+			callback(new error('CORS not allowed'));  
+		}
+	}, 
+	credentials: true
+	}));
+
+// Rutas
+//app.use('/api/auth', require('./app/routes/auth'));
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -66,7 +86,7 @@ require("./app/routes/socialClass.routes", cors(corsOptions))(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 8081;
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 

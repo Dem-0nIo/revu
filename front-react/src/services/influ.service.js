@@ -1,17 +1,18 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://127.0.0.1:8081/api/';
-const INFLUENCER_URL = 'http://127.0.0.1:8081/api/influencer/';
-const GENDER_API_URL = 'http://127.0.0.1:8081/api/genders'; // Add Gender API endpoint
-const CITIES_API_URL = 'http://127.0.0.1:8081/api/cities'; // Add Cities API endpoint
-const DEPARTMENTS_API_URL = 'http://127.0.0.1:8081/api/departments'; // Add States API endpoint
-const INFLU_CLASSES_API_URL = 'http://127.0.0.1:8081/api/classes'; // Add Categories API endpoint
-const EHTNIC_API_URL = 'http://127.0.0.1:8081/api/ethnic'; // Add Ethnics API endpoint
-const HAIR_TYPE_URL = 'http://127.0.0.1:8081/api/hair_type'; // Add hair type API endpoint
-const HAIR_COLOR_URL = 'http://127.0.0.1:8081/api/hair_color'; // Add hair type API endpoint
-const SKIN_COLOR_URL = 'http://127.0.0.1:8081/api/skin_color'; // Add hair type API endpoint
-const COUNTRY_API_URL = 'http://127.0.0.1:8081/api/countries'; // Add country API endpoint
+
+const API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/`;
+const INFLUENCER_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/influencer/`;
+const GENDER_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/genders`; // Add Gender API endpoint
+const CITIES_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/cities`; // Add Cities API endpoint
+const DEPARTMENTS_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/departments`; // Add States API endpoint
+const INFLU_CLASSES_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/classes`; // Add Categories API endpoint
+const EHTNIC_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/ethnic`; // Add Ethnics API endpoint
+const HAIR_TYPE_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/hair_type`; // Add hair type API endpoint
+const HAIR_COLOR_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/hair_color`; // Add hair type API endpoint
+const SKIN_COLOR_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/skin_color`; // Add hair type API endpoint
+const COUNTRY_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/countries`; // Add country API endpoint
 
 const getAll = () => {
 	return axios.get(`${INFLUENCER_URL}all`, { headers: authHeader() });

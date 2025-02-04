@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-// const API_URL = 'http://127.0.0.1:8081/api/auth/' 3.22.183.55;
+const API_URL = process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081';
+
+console.log("API_URL resolved: " , API_URL);
 
 const register = (username, email, password) => {
-	return axios.post('http://127.0.0.1:8081/api/auth/signup', {
+	return axios.post(`${API_URL}/api/auth/signup`, {
 		username,
 		email,
 		password,
@@ -17,7 +19,7 @@ const isAdmin = () => {
 
 const login = (username, password) => {
 	return axios
-		.post('http://127.0.0.1:8081/api/auth/signin', {
+		.post(`${API_URL}/api/auth/signin`, {
 			username,
 			password,
 		})

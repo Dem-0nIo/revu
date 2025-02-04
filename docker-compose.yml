@@ -12,8 +12,8 @@ services:
       - MYSQL_DATABASE=$MYSQL_DATABASE
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
+      timeout: 60s
+      retries: 30
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     expose:
@@ -54,6 +54,8 @@ services:
     build: ./front-react
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    environment:
+      - REACT_APP_URL_API=http://165.22.179.233:8081
     working_dir: /front-react
     depends_on:
       - back_app
@@ -61,8 +63,9 @@ services:
     volumes:
       - .:/src
   nginx:
-    build: ./front-react
+    image: nginx:latest
+    container_name: nginx
     ports:
-      - 80:80
+      - 8080:8080
     depends_on:
       - front_app
