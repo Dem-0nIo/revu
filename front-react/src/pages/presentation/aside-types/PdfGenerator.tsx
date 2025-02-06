@@ -9,7 +9,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable new-cap */
 /* eslint-disable no-plusplus */
-import jsPDF from 'jspdf';
+import {jsPDF} from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import { format } from 'date-fns';
 
@@ -49,7 +49,7 @@ export const PdfGenerator = (listaCompras: any[]) => {
     pdf.text('Contacto', 13, 23)
     pdf.setFont('times', 'normal');
     pdf.text("Revu, lo soñamos lo vivimos", 13, 28)
-    pdf.text("Número de Telfóno", 16, 32)
+    pdf.text("Número de Teléfono", 16, 32)
     pdf.setFont('times', 'bold')
     pdf.text('RQ No      :', 130, 23)
     pdf.text('RQ Fecha   :', 130, 27)
@@ -64,7 +64,7 @@ export const PdfGenerator = (listaCompras: any[]) => {
     pdf.setFont('times', 'bold')
     pdf.text('Dirección :', 130, 39)
     pdf.setFont('times', 'normal')
-    pdf.text('Acá la dirección', 130, 44)
+    pdf.text('Aquí la dirección', 130, 44)
     pdf.text('Calle 1, #34-12', 130, 48)
 
     // Generate the vendor-specific content
@@ -95,7 +95,7 @@ export const PdfGenerator = (listaCompras: any[]) => {
         item.socialInstagramSeg?.toString(),
         item.costo_1?.toString(),
     ]);
-    const itemDetailsHeaders = ['No', 'Nombre', 'NikName', 'Intagram', 'Clasificación', 'Seguidores', 'Precio'];
+    const itemDetailsHeaders = ['No', 'Nombre', 'NikName', 'Instagram', 'Clasificación', 'Seguidores', 'Precio'];
     const columnWidths = [10, 30, 30, 30, 30, 30, 30]; // Adjust column widths as needed
 
     pdf.setFont('times');
