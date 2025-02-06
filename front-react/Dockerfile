@@ -1,10 +1,11 @@
-FROM node:19-alpine as build
+FROM node:19-alpine AS build
 
 WORKDIR /front-react
 
 # Copy only package files and the locally downloaded node_modules folder
 COPY package*.json ./
-COPY node_modules/ ./node_modules/
+RUN npm install --legacy-peer-deps
+# COPY node_modules/ ./node_modules/
 
 # Copy the rest of the application code
 COPY . .
@@ -12,14 +13,17 @@ COPY . .
 # Build the application
 RUN npm run build
 
-FROM nginx:alpine3.19
+FROM nginx:latest
+
+# Copiar la configuración de Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Add the nginx configuration
-ADD nginx.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the built app from the build stage
 COPY --from=build /front-react/build /usr/share/nginx/html
 
-EXPOSE 8082
+# EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

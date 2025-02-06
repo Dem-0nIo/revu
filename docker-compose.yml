@@ -45,23 +45,28 @@ services:
       - DB_PORT=$MYSQLDB_DOCKER_PORT
     volumes:
       - .:/app
-    command: sh -c "npm install && npm run start"
+    command: ["sh", "-c", "npm start"]
 
   front_app:
     container_name: front_app
-    build: ./front-react
-    ports:
-      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    build: 
+      context: ./front-react
+      dockerfile: Dockerfile
     working_dir: /front-react
     depends_on:
       - back_app
     env_file: ./.env
     volumes:
       - .:/src
+      - ./front-react:/front-react
+
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
-      - 8080:80
+      - "8080:80"
+    volumes:
+      - ./front-react/nginx.conf:/etc/nginx/nginx.conf
+      - ./front-react/build:/usr/share/nginx/html
     depends_on:
       - front_app
