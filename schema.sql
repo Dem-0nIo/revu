@@ -70,7 +70,7 @@ INSERT INTO genders (description) VALUES
 CREATE TABLE `influencers` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
-  `idUser` INT AUTO_INCREMENT PRIMARY KEY,
+  `idUser` INT AUTO_INCREMENT,
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,
