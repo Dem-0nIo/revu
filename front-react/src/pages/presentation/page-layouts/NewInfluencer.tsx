@@ -26,7 +26,6 @@ const initialValues = {
     firstName: 'John',
     lastName: 'Doe',
     idUser: '90998909',
-    cityNac: '1',
     birthdayDate: '10/10/2024',
     year: '45',
     gender_id: '1',
@@ -375,7 +374,6 @@ const NewInfluencer = () => {
 				firstName: values.firstName,
 				lastName: values.lastName,
 				idUser: values.idUser,
-				cityNac: values.cityNac,
 				birthdayDate: values.birthdayDate,
 				year: values.year,
 				gender_id: values.gender_id,
@@ -507,20 +505,6 @@ const NewInfluencer = () => {
 			}
 		}
 		fetchInfluencerClasses();
-	}, []);
-
-	// Fetch Ethnic group
-	useEffect(() => {
-		async function fetchEthnicityGroup() {
-			try {
-				const response = await InfluService.getEthnicGroups(); // Asegúrate de tener este método en tu servicio
-				console.log("Etnias cargadas:", response.data); // Verifica el contenido
-				setEthnicity(response.data);
-			} catch (error) {
-				console.error("Failed to fetch influencer classes:", error);
-			}
-		}
-		fetchEthnicityGroup();
 	}, []);
 
 	// Fetch Hair Color group
