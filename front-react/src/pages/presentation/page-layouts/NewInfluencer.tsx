@@ -671,31 +671,6 @@ const NewInfluencer = () => {
 		<PageWrapper title='Nuevo Ingreso'>
 			<Page>
 				<div className='row h-100 pb-3'>
-					<div className='col-lg-4 col-md-6'>
-						<Card stretch>
-							<CardHeader>
-								<CardLabel icon='AccountCircle'>
-									<CardTitle tag='div' className='h5'>
-										Información
-									</CardTitle>
-								</CardLabel>
-							</CardHeader>
-							<CardBody isScrollable>
-								<div className='row g-3'>
-									<div className='col-12'>
-										<Button
-											icon='Contacts'
-											color='info'
-											className='w-100 p-3'
-											isLight={TABS.ACCOUNT_DETAIL !== activeTab}
-											onClick={() => setActiveTab(TABS.ACCOUNT_DETAIL)}>
-											{TABS.ACCOUNT_DETAIL}
-										</Button>
-									</div>
-								</div>
-							</CardBody>
-						</Card>
-					</div>
 					<div className='col-lg-8 col-md-6'>
 						{TABS.ACCOUNT_DETAIL === activeTab && (
 							<Wizard
@@ -773,28 +748,6 @@ const NewInfluencer = () => {
 												</div>
 												<div className='col-md-3'>
 													<FormGroup
-														id='cityNac'
-														label='Ciudad de nacimiento'
-														isFloating>
-														<Select
-															name="cityNac"
-															ariaLabel='Ciudad de nacimiento'
-															placeholder='Seleccione...'
-															list={cities.map((city) => ({
-																value: city.id, 
-																text: city.city_name,  
-															}))}
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.cityNac}
-															isValid={formik.isValid}
-															isTouched={formik.touched.cityNac}
-															invalidFeedback={formik.errors.cityNac}
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup
 														id='birthdayDate'
 														label='Fecha de nacimiento'
 														isFloating>
@@ -834,9 +787,8 @@ const NewInfluencer = () => {
 												<div className='col-md-3'>
 													<FormGroup
 														id='displayName'
-														label='NickName'
-														isFloating
-														formText='Así será como se mostrará tu nombre en la sección de cuenta y en reseñas'>
+														label='Nombre Artístico'
+														isFloating>
 														<Input
 															placeholder='Display Name'
 															autoComplete='username'
@@ -918,22 +870,6 @@ const NewInfluencer = () => {
 															isValid={formik.isValid}
 															isTouched={formik.touched.addressLine}
 															invalidFeedback={formik.errors.addressLine}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup
-														id='addressLine2'
-														label='Adicional'
-														isFloating>
-														<Input
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.addressLine2}
-															isValid={formik.isValid}
-															isTouched={formik.touched.addressLine2}
-															invalidFeedback={formik.errors.addressLine2}
 															validFeedback='Looks good!'
 														/>
 													</FormGroup>
@@ -1024,42 +960,6 @@ const NewInfluencer = () => {
 												isValid={formik.isValid}
 												isTouched={formik.touched.city_id}
 												invalidFeedback={formik.errors.city_id}
-											/>
-										</FormGroup>
-									</div>
-									
-									<div className='col-md-3'>
-										<FormGroup id='zip' label='Codigo postal' isFloating>
-											<Input
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.zip}
-												isValid={formik.isValid}
-												isTouched={formik.touched.zip}
-												invalidFeedback={formik.errors.zip}
-											/>
-										</FormGroup>
-									</div>
-									<div className='col-md-3'>
-										<FormGroup
-											id='ethnic'
-											label='Etnia'
-											isFloating
-											formText='Seleccionar la etnia si pertenece a alguna.'>
-											<Select
-												name='ethnic_id'
-												ariaLabel='Etnia'
-												placeholder='Seleccione...'
-												list={ethnicGroup.map((ethnic) => ({
-													value: ethnic.id, 
-													text: ethnic.ethnicity_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.ethnic_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.ethnic_id}
-												invalidFeedback={formik.errors.ethnic_id}
 											/>
 										</FormGroup>
 									</div>
@@ -1650,7 +1550,7 @@ const NewInfluencer = () => {
 										<PreviewItem title='Genero' value={formik.values.gender_id} />
 										<PreviewItem title='Cedula' value={formik.values.idUser} />
 										<PreviewItem
-											title='Display Name'
+											title='Nombre artístico'
 											value={formik.values.displayName}
 										/>
 										{/* Informacion de contacto */}
@@ -1669,19 +1569,7 @@ const NewInfluencer = () => {
 											title='Dirección'
 											value={formik.values.addressLine}
 										/>
-										<PreviewItem
-											title='Dirección Adicional'
-											value={formik.values.addressLine2}
-										/>
-										<PreviewItem title='Ciudad' value={formik.values.city_id} />
-										<PreviewItem
-											title='Departamento'
-											value={formik.values.state_id}
-										/>
-										<PreviewItem
-											title='Codigo Postal'
-											value={formik.values.zip}
-										/>
+										
 										<div className='col-9 offset-3'>
 											<h3 className='mt-4'>Informacion Redes Sociales</h3>
 										</div>
