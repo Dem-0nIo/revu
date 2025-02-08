@@ -717,10 +717,10 @@ const NewInfluencer = () => {
 												<div className='col-3'>
 													<FormGroup
 														id='firstName'
-														label='Primer Nombre'
+														label='Nombre'
 														isFloating>
 														<Input
-															placeholder='Primer nombre'
+															placeholder='Nombre'
 															autoComplete='additional-name'
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
@@ -737,7 +737,7 @@ const NewInfluencer = () => {
 												<div className='col-md-3'>
 													<FormGroup
 														id='lastName'
-														label='Segundo Nombre'
+														label='Apellido'
 														isFloating>
 														<Input
 															placeholder='Last Name'
@@ -1070,6 +1070,7 @@ const NewInfluencer = () => {
 											isFloating
 											formText='Seleccionar el color de cabello.'>
 											<Select
+												name = 'hair_color_id'
 												ariaLabel='Color de cabello'
 												placeholder='Seleccione...'
 												list={hairColor.map((hairColors) => ({
@@ -1092,6 +1093,7 @@ const NewInfluencer = () => {
 											isFloating
 											formText='Seleccionar tipo de cabello.'>
 											<Select
+												name = 'hair_type_id'
 												ariaLabel='Tipo de cabello'
 												placeholder='Seleccione...'
 												list={hairType.map((hairTypes) => ({
@@ -1114,6 +1116,7 @@ const NewInfluencer = () => {
 											isFloating
 											formText='Seleccionar color de piel.'>
 											<Select
+												name = 'skin_color_id'
 												ariaLabel='color de piel'
 												placeholder='Seleccione...'
 												list={skinColor.map((skinColors) => ({
