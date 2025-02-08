@@ -154,6 +154,14 @@ exports.registerinfluencer = async (req, res) => {
   } catch (error) {
     console.error("Error creating influencer:", error);
 
+    // Manejar error de clave única (ID duplicado)
+    if (error.name === "SequelizeUniqueConstraintError") {
+      return res.status(400).json({
+        message: "Error: ID duplicado",
+        error: error.errors.map(err => err.message), // Extrae los mensajes detallados de MySQL
+      });
+    }
+
     // Ensure a single response is sent
     res.status(500).json({ message: "Error creating influencer", error: error.message });
   }
