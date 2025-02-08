@@ -23,6 +23,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     gender_id: {
       type: Sequelize.INTEGER,
+      references: {
+        model: Gender,
+        key: 'id',
+      },
       allowNull: false,
     },
     social_class_id: {
@@ -33,9 +37,22 @@ module.exports = (sequelize, Sequelize) => {
       },
       allowNull: true,
     },
-    eps: {
+    hair_color_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    hair_type_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    skin_color_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+	  contact: {
       type: Sequelize.STRING,
     },
+
     passport: {
       type: Sequelize.STRING,
     },
@@ -51,9 +68,6 @@ module.exports = (sequelize, Sequelize) => {
     phoneNumber: {
       type: Sequelize.STRING,
     },
-    addressLine2: {
-      type: Sequelize.STRING,
-    },
     celebrity: {
       type: Sequelize.INTEGER,
     },
@@ -65,9 +79,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     country_id: {
       type: Sequelize.INTEGER,
-    },
-    zip: {
-      type: Sequelize.STRING,
     },
     emailNotification: {
       type: Sequelize.JSON,

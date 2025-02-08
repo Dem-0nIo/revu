@@ -45,7 +45,6 @@ const initialValues = {
     city_id: '1',
     state_id: '1',
     country_id: '1',
-    zip: '660004',
     emailNotification: [''],
     pushNotification: [''],
     phoneNumberWhp: '1234566',
@@ -380,7 +379,7 @@ const NewInfluencer = () => {
 				hair_color_id: values.hair_color_id,
 				hair_type_id: values.hair_type_id,
 				skin_color_id: values.skin_color_id,
-				eps: values.eps,
+				contact: values.contact,
 				passport: values.passport,
 				displayName: values.displayName,
 				emailAddress: values.emailAddress,
@@ -392,7 +391,6 @@ const NewInfluencer = () => {
 				city_id: values.city_id,
 				state_id: values.state_id,
 				country_id: values.country_id,
-				zip: values.zip,
 				emailNotification: values.emailNotification,
 				pushNotification: values.pushNotification,
 				phoneNumberWhp: values.phoneNumberWhp,
@@ -402,6 +400,12 @@ const NewInfluencer = () => {
 				socialTik: values.socialTik,
 				socialTikCla: values.socialTikCla,
 				socialTikSeg: values.socialTikSeg,
+				socialFace: values.socialTik,
+				socialFaceCla: values.socialTikCla,
+				socialFaceSeg: values.socialTikSeg,
+				socialUTube: values.socialTik,
+				socialUTubeCla: values.socialTikCla,
+				socialUTubeSeg: values.socialTikSeg,
 				socialNetwork: values.socialNetwork,
 				image: values.image,
 				costo_1: values.costo_1.replace('$', ''),
@@ -615,7 +619,7 @@ const NewInfluencer = () => {
 		<PageWrapper title='Nuevo Ingreso'>
 			<Page>
 				<div className='row h-100 pb-3'>
-					<div className='col-lg-8 col-md-6'>
+					<div className='col-lg-12 col-md-8'>
 						{TABS.ACCOUNT_DETAIL === activeTab && (
 							<Wizard
 								isHeader
@@ -633,101 +637,6 @@ const NewInfluencer = () => {
 										</CardHeader>
 										<CardBody className='pt-0'>
 											<div className='row g-4'>
-												<div className='col-3'>
-													<FormGroup
-														id='firstName'
-														label='Nombre'
-														isFloating>
-														<Input
-															placeholder='Nombre'
-															autoComplete='additional-name'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.firstName}
-															isValid={formik.isValid}
-															isTouched={formik.touched.firstName}
-															invalidFeedback={
-																formik.errors.firstName
-															}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup
-														id='lastName'
-														label='Apellido'
-														isFloating>
-														<Input
-															placeholder='Last Name'
-															autoComplete='family-name'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.lastName}
-															isValid={formik.isValid}
-															isTouched={formik.touched.lastName}
-															invalidFeedback={formik.errors.lastName}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup
-														id='idUser'
-														label='Cedula'
-														isFloating>
-														<Input
-															type='number'
-															placeholder='Cedula'
-															autoComplete='additional-name'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.idUser}
-															isValid={formik.isValid}
-															isTouched={formik.touched.idUser}
-															invalidFeedback={formik.errors.idUser}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup
-														id='birthdayDate'
-														label='Fecha de nacimiento'
-														isFloating>
-														<Input
-															type='text'
-															autoComplete='cc-exp'
-															placeholder='MM/YY'
-															mask='99/99'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.birthdayDate}
-															isValid={formik.isValid}
-															isTouched={formik.touched.firstName}
-															invalidFeedback={
-																formik.errors.birthdayDate
-															}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup id='year' label='Edad' isFloating>
-														<Input
-															type='number'
-															placeholder='Edad'
-															autoComplete='off'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.year}
-															isValid={formik.isValid}
-															isTouched={formik.touched.year}
-															invalidFeedback={formik.errors.year}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
 												<div className='col-md-3'>
 													<FormGroup
 														id='displayName'
@@ -748,73 +657,84 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
+												<div className='col-3'>
+													<FormGroup
+														id='firstName'
+														label='Nombres'
+														isFloating>
+														<Input
+															placeholder='Nombre'
+															autoComplete='additional-name'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.firstName}
+															isValid={formik.isValid}
+															isTouched={formik.touched.firstName}
+															invalidFeedback={
+																formik.errors.firstName
+															}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
 												<div className='col-md-3'>
-													<FormGroup id='gender_id' label='Género' isFloating>
+													<FormGroup
+														id='lastName'
+														label='Apellidos'
+														isFloating>
+														<Input
+															placeholder='Last Name'
+															autoComplete='family-name'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.lastName}
+															isValid={formik.isValid}
+															isTouched={formik.touched.lastName}
+															invalidFeedback={formik.errors.lastName}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='country_id'
+														label='País de residencia'
+														isFloating>
 														<Select
-															name="gender_id"
-															ariaLabel='Género'
+															ariaLabel='Country'
 															placeholder='Seleccione...'
-															list={genders.map((gender) => ({
-																value: gender.id, // Use the gender ID as the value
-																text: gender.description, // Use the gender description as the text
+															list={countries.map((country) => ({
+																value: country.id,
+																text: country.name,
 															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
-															value={formik.values.gender_id}
+															value={formik.values.country_id}
 															isValid={formik.isValid}
-															isTouched={formik.touched.gender_id}
-															invalidFeedback={formik.errors.gender_id}
+															isTouched={formik.touched.country_id}
+															invalidFeedback={formik.errors.country_id}
 														/>
 													</FormGroup>
 												</div>
 												<div className='col-md-3'>
 													<FormGroup
-														id='phoneNumber'
-														label='Número celular'
-														isFloating>
-														<Input
-															type="tel"
-															placeholder="Número celular"
-															autoComplete="tel"
+														id='city_id'
+														label='Ciudad'
+														isFloating
+														formText='Seleccionar la ciudad donde radica.'>
+														<Select
+															ariaLabel='Ciudad'
+															placeholder='Seleccione...'
+															list={cities.map((city) => ({
+																value: city.id, 
+																text: city.city_name, 
+															}))}
 															onChange={formik.handleChange}
 															onBlur={formik.handleBlur}
-															value={formik.values.phoneNumber}
+															value={formik.values.city_id}
 															isValid={formik.isValid}
-															isTouched={formik.touched.phoneNumber}
-															invalidFeedback={formik.errors.phoneNumber}
-															validFeedback="Looks good!"
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup id='emailAddress' label='Email' isFloating>
-														<Input
-															type='email'
-															placeholder='Emails'
-															autoComplete='email'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.emailAddress}
-															isValid={formik.isValid}
-															isTouched={formik.touched.emailAddress}
-															invalidFeedback={formik.errors.emailAddress}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div>
-												<div className='col-md-3'>
-													<FormGroup
-														id='addressLine'
-														label='Dirección'
-														isFloating>
-														<Input
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.addressLine}
-															isValid={formik.isValid}
-															isTouched={formik.touched.addressLine}
-															invalidFeedback={formik.errors.addressLine}
-															validFeedback='Looks good!'
+															isTouched={formik.touched.city_id}
+															invalidFeedback={formik.errors.city_id}
 														/>
 													</FormGroup>
 												</div>
@@ -837,145 +757,175 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
+												<div className='col-md-3'>
+													<FormGroup id='year' label='Edad' isFloating>
+														<Input
+															type='number'
+															placeholder='Edad'
+															autoComplete='off'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.year}
+															isValid={formik.isValid}
+															isTouched={formik.touched.year}
+															invalidFeedback={formik.errors.year}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup id='gender_id' label='Sexo' isFloating>
+														<Select
+															name="gender_id"
+															ariaLabel='Sexo'
+															placeholder='Seleccione...'
+															list={genders.map((gender) => ({
+																value: gender.id, // Use the gender ID as the value
+																text: gender.description, // Use the gender description as the text
+															}))}
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.gender_id}
+															isValid={formik.isValid}
+															isTouched={formik.touched.gender_id}
+															invalidFeedback={formik.errors.gender_id}
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='hair_type'
+														label='Tipo de cabello'
+														isFloating
+														formText='Seleccionar tipo de cabello.'>
+														<Select
+															name = 'hair_type_id'
+															ariaLabel='Tipo de cabello'
+															placeholder='Seleccione...'
+															list={hairType.map((hairTypes) => ({
+																value: hairTypes.id, 
+																text: hairTypes.hair_type_name, 
+															}))}
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.hair_type_id}
+															isValid={formik.isValid}
+															isTouched={formik.touched.hair_type_id}
+															invalidFeedback={formik.errors.hair_type_id}
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='hair_color'
+														label='Color de cabello'
+														isFloating
+														formText='Seleccionar el color de cabello.'>
+														<Select
+															name = 'hair_color_id'
+															ariaLabel='Color de cabello'
+															placeholder='Seleccione...'
+															list={hairColor.map((hairColors) => ({
+																value: hairColors.id, 
+																text: hairColors.hair_color_name, 
+															}))}
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.hair_color_id}
+															isValid={formik.isValid}
+															isTouched={formik.touched.hair_color_id}
+															invalidFeedback={formik.errors.hair_color_id}
+														/>
+													</FormGroup>
+												</div>
+												<div className='col-md-3'>
+													<FormGroup
+														id='skin_color'
+														label='Color de piel'
+														isFloating
+														formText='Seleccionar color de piel.'>
+														<Select
+															name = 'skin_color_id'
+															ariaLabel='color de piel'
+															placeholder='Seleccione...'
+															list={skinColor.map((skinColors) => ({
+																value: skinColors.id, 
+																text: skinColors.skin_color_name, 
+															}))}
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.skin_color_id}
+															isValid={formik.isValid}
+															isTouched={formik.touched.skin_color_id}
+															invalidFeedback={formik.errors.skin_color_id}
+														/>
+													</FormGroup>
+												</div>
+												{/* 
+												<div className='col-md-3'>
+													<FormGroup
+														id='idUser'
+														label='Cedula'
+														isFloating>
+														<Input
+															type='number'
+															placeholder='Cedula'
+															autoComplete='additional-name'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.idUser}
+															isValid={formik.isValid}
+															isTouched={formik.touched.idUser}
+															invalidFeedback={formik.errors.idUser}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div> */}
+												{/* <div className='col-md-3'>
+													<FormGroup
+														id='birthdayDate'
+														label='Fecha de nacimiento'
+														isFloating>
+														<Input
+															type='text'
+															autoComplete='cc-exp'
+															placeholder='MM/YY'
+															mask='99/99'
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.birthdayDate}
+															isValid={formik.isValid}
+															isTouched={formik.touched.firstName}
+															invalidFeedback={
+																formik.errors.birthdayDate
+															}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div> */}
+												{/* <div className='col-md-3'>
+													<FormGroup
+														id='addressLine'
+														label='Dirección'
+														isFloating>
+														<Input
+															onChange={formik.handleChange}
+															onBlur={formik.handleBlur}
+															value={formik.values.addressLine}
+															isValid={formik.isValid}
+															isTouched={formik.touched.addressLine}
+															invalidFeedback={formik.errors.addressLine}
+															validFeedback='Looks good!'
+														/>
+													</FormGroup>
+												</div> */}
+												
 											</div>
 										</CardBody>
 									</Card>
 								</WizardItem>
 								<WizardItem id='step2' title='Información de contacto'>
 								<div className='row g-4'>
-									<div className='col-md-3'>
-										<FormGroup
-											id='country_id'
-											label='País'
-											isFloating>
-											<Select
-												ariaLabel='Country'
-												placeholder='Seleccione...'
-												list={countries.map((country) => ({
-													value: country.id,
-													text: country.name,
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.country_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.country_id}
-												invalidFeedback={formik.errors.country_id}
-											/>
-										</FormGroup>
-									</div>
-									<div className='col-md-3'>
-										<FormGroup
-											id='state_id'
-											label='Departamento'
-											isFloating>
-											<Select
-												ariaLabel='State'
-												placeholder='Seleccione...'
-												list={departments.map((state) => ({
-													value: state.id,
-													text: state.department_name,
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.state_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.state_id}
-												invalidFeedback={formik.errors.state_id}
-											/>
-										</FormGroup>
-									</div>
-									<div className='col-md-3'>
-										<FormGroup
-											id='city_id'
-											label='Ciudad'
-											isFloating
-											formText='Seleccionar la ciudad donde radica.'>
-											<Select
-												ariaLabel='Ciudad'
-												placeholder='Seleccione...'
-												list={cities.map((city) => ({
-													value: city.id, 
-													text: city.city_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.city_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.city_id}
-												invalidFeedback={formik.errors.city_id}
-											/>
-										</FormGroup>
-									</div>
-									<div className='col-md-3'>
-										<FormGroup
-											id='hair_color'
-											label='Color de cabello'
-											isFloating
-											formText='Seleccionar el color de cabello.'>
-											<Select
-												name = 'hair_color_id'
-												ariaLabel='Color de cabello'
-												placeholder='Seleccione...'
-												list={hairColor.map((hairColors) => ({
-													value: hairColors.id, 
-													text: hairColors.hair_color_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.hair_color_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.hair_color_id}
-												invalidFeedback={formik.errors.hair_color_id}
-											/>
-										</FormGroup>
-									</div>
-									<div className='col-md-3'>
-										<FormGroup
-											id='hair_type'
-											label='Tipo de cabello'
-											isFloating
-											formText='Seleccionar tipo de cabello.'>
-											<Select
-												name = 'hair_type_id'
-												ariaLabel='Tipo de cabello'
-												placeholder='Seleccione...'
-												list={hairType.map((hairTypes) => ({
-													value: hairTypes.id, 
-													text: hairTypes.hair_type_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.hair_type_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.hair_type_id}
-												invalidFeedback={formik.errors.hair_type_id}
-											/>
-										</FormGroup>
-									</div>
-									<div className='col-md-3'>
-										<FormGroup
-											id='skin_color'
-											label='Color de piel'
-											isFloating
-											formText='Seleccionar color de piel.'>
-											<Select
-												name = 'skin_color_id'
-												ariaLabel='color de piel'
-												placeholder='Seleccione...'
-												list={skinColor.map((skinColors) => ({
-													value: skinColors.id, 
-													text: skinColors.skin_color_name, 
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.skin_color_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.skin_color_id}
-												invalidFeedback={formik.errors.skin_color_id}
-											/>
-										</FormGroup>
-									</div>
 									<div className='col-3'>
 										<FormGroup
 											id='contact'
@@ -996,70 +946,72 @@ const NewInfluencer = () => {
 											/>
 										</FormGroup>
 									</div>
-									<div className='col-md-4'>
-										<FormGroup id='category_id' label='Categoría' isFloating>
-											<Select
-												name="category_id"
-												ariaLabel='Categoría'
-												placeholder='Seleccione una categoría...'
-												list={categories.map((cat) => ({
-													value: cat.id,
-													text: cat.category_name,
-												}))}
-												onChange={handleCategoryChange}
-												value={selectedCategoryId ? String(selectedCategoryId) : ''}
+									<div className='col-md-3'>
+										<FormGroup
+											id='phoneNumber'
+											label='Celular / Whatsapp'
+											isFloating>
+											<Input
+												type="tel"
+												placeholder="Celular / Whatsapp"
+												autoComplete="tel"
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.phoneNumber}
+												isValid={formik.isValid}
+												isTouched={formik.touched.phoneNumber}
+												invalidFeedback={formik.errors.phoneNumber}
+												validFeedback="Looks good!"
 											/>
 										</FormGroup>
 									</div>
-
-									<div className='col-md-4'>
-										<FormGroup id='subcategory_id' label='Subcategoría' isFloating>
-											<Select
-												name="subcategory_id"
-												ariaLabel='Subcategoría'
-												placeholder='Seleccione una subcategoría...'
-												list={subcategories.map((subcat) => ({
-													value: subcat.id,
-													text: subcat.subcategory_name,
-												}))}
-												onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-													const subcategoryId = parseInt(e.target.value, 10); // Convert value to a number
-													const subcategoryName = subcategories.find((subcat) => subcat.id === subcategoryId)?.subcategory_name;
-													setSelectedSubcategories([...selectedSubcategories, { id: subcategoryId, name: subcategoryName }]);
-												}}
+									<div className='col-md-3'>
+										<FormGroup id='emailAddress' label='Email' isFloating>
+											<Input
+												type='email'
+												placeholder='Emails'
+												autoComplete='email'
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.emailAddress}
+												isValid={formik.isValid}
+												isTouched={formik.touched.emailAddress}
+												invalidFeedback={formik.errors.emailAddress}
+												validFeedback='Looks good!'
 											/>
 										</FormGroup>
 									</div>
+									{/* <div className='col-md-3'>
+										<FormGroup
+											id='state_id'
+											label='Departamento'
+											isFloating>
+											<Select
+												ariaLabel='State'
+												placeholder='Seleccione...'
+												list={departments.map((state) => ({
+													value: state.id,
+													text: state.department_name,
+												}))}
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.state_id}
+												isValid={formik.isValid}
+												isTouched={formik.touched.state_id}
+												invalidFeedback={formik.errors.state_id}
+											/>
+										</FormGroup>
+									</div> */}
 
-									<div className='col-md-4'>
+									{/* <div className='col-md-4'>
 										<Button
 											color='info'
 											onClick={() => console.log('Subcategories Selected:', selectedSubcategories)}
 										>
 											Agregar Subcategoria
 										</Button>
-									</div>
-									<div className='col-md-12'>
-										<h5>Subcategorías seleccionadas:</h5>
-										<ul>
-											{selectedSubcategories.map((subcat) => (
-												<li key={subcat.id}>
-													{subcat.name}{' '}
-													<Button
-														color='danger'
-														size='sm'
-														onClick={() =>
-															setSelectedSubcategories(
-																selectedSubcategories.filter((s) => s.id !== subcat.id)
-															)
-														}
-													>
-														Eliminar
-													</Button>
-												</li>
-											))}
-										</ul>
-									</div>
+									</div> */}
+									
 								</div>
 
 								</WizardItem>
@@ -1239,6 +1191,76 @@ const NewInfluencer = () => {
 													value={formik.values.socialUTubeSeg}
 												/>
 											</FormGroup>
+										</div>
+										<div className='col-6'>
+											<FormGroup>
+												<Checks
+													type='switch' // or 'checkbox', depending on your preference
+													id='celebrity'
+													name='celebrity'
+													label='Celebrity?'
+													value='1' // Example value, you can modify it as needed
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														formik.setFieldValue('celebrity', e.target.checked ? '1' : '0')
+													}
+													checked={formik.values.celebrity === '1'}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-4'>
+											<FormGroup id='category_id' label='Categoría' isFloating>
+												<Select
+													name="category_id"
+													ariaLabel='Categoría'
+													placeholder='Seleccione una categoría...'
+													list={categories.map((cat) => ({
+														value: cat.id,
+														text: cat.category_name,
+													}))}
+													onChange={handleCategoryChange}
+													value={selectedCategoryId ? String(selectedCategoryId) : ''}
+												/>
+											</FormGroup>
+										</div>
+
+										<div className='col-md-4'>
+											<FormGroup id='subcategory_id' label='Subcategoría' isFloating>
+												<Select
+													name="subcategory_id"
+													ariaLabel='Subcategoría'
+													placeholder='Seleccione una subcategoría...'
+													list={subcategories.map((subcat) => ({
+														value: subcat.id,
+														text: subcat.subcategory_name,
+													}))}
+													onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+														const subcategoryId = parseInt(e.target.value, 10); // Convert value to a number
+														const subcategoryName = subcategories.find((subcat) => subcat.id === subcategoryId)?.subcategory_name;
+														setSelectedSubcategories([...selectedSubcategories, { id: subcategoryId, name: subcategoryName }]);
+													}}
+												/>
+											</FormGroup>
+										</div>
+										<div className='col-md-12'>
+											<h5>Subcategorías seleccionadas:</h5>
+											<ul>
+												{selectedSubcategories.map((subcat) => (
+													<li key={subcat.id}>
+														{subcat.name}{' '}
+														<Button
+															color='danger'
+															size='sm'
+															onClick={() =>
+																setSelectedSubcategories(
+																	selectedSubcategories.filter((s) => s.id !== subcat.id)
+																)
+															}
+														>
+															Eliminar
+														</Button>
+													</li>
+												))}
+											</ul>
 										</div>
 
 										<div className='col-3'>
@@ -1446,11 +1468,8 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-3' />
-										<div className='col-3' />
-										<div className='col-3' />
 
-										<div className='col-6'>
+										{/* <div className='col-6'>
 											<FormGroup>
 												<Label htmlFor='emailNotification'>
 													Redes Sociales
@@ -1472,22 +1491,8 @@ const NewInfluencer = () => {
 													))}
 												</ChecksGroup>
 											</FormGroup>
-										</div>
-										<div className='col-6'>
-											<FormGroup>
-												<Checks
-													type='switch' // or 'checkbox', depending on your preference
-													id='celebrity'
-													name='celebrity'
-													label='Celebrity?'
-													value='1' // Example value, you can modify it as needed
-													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-														formik.setFieldValue('celebrity', e.target.checked ? '1' : '0')
-													}
-													checked={formik.values.celebrity === '1'}
-												/>
-											</FormGroup>
-										</div>
+										</div> */}
+										
 									</div>
 								</WizardItem>
 								<WizardItem id='step4' title='Resumen'>
@@ -1498,7 +1503,7 @@ const NewInfluencer = () => {
 											<h4 className='mt-4'>Información Personal</h4>
 										</div>
 										<PreviewItem
-											title='Primer Nombre'
+											title='Nombre'
 											value={formik.values.firstName}
 										/>
 										<PreviewItem
@@ -1537,7 +1542,7 @@ const NewInfluencer = () => {
 											<h3 className='mt-4'>Informacion Redes Sociales</h3>
 										</div>
 
-										<PreviewItem
+										{/* <PreviewItem
 											title='Redes Activadas'
 											value={socialNetwork.map(
 												(cat) =>
@@ -1545,7 +1550,7 @@ const NewInfluencer = () => {
 														cat.id.toString(),
 													) && `${cat.name}, `,
 											)}
-										/>
+										/> */}
 										<PreviewItem
 											title='Instagram'
 											value={formik.values.socialInstagram}
