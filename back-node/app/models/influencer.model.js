@@ -1,4 +1,5 @@
 const SocialClass = require('./socialClass.model'); // Adjust the path as needed
+const Gender = require('./gender.model');
 
 module.exports = (sequelize, Sequelize) => {
   const Influencer = sequelize.define("influencers", {
