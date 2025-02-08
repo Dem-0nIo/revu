@@ -71,11 +71,10 @@ CREATE TABLE `influencers` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `cityNac` INT DEFAULT NULL,
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,
-  `ethnic_id` INT DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
   `eps` varchar(255) DEFAULT NULL,
   `hair_color_id` INT DEFAULT NULL,
   `hair_type_id` INT DEFAULT NULL,
@@ -680,12 +679,6 @@ ALTER TABLE `influencers`
   ON UPDATE CASCADE;
 
 ALTER TABLE `influencers`
-  ADD CONSTRAINT `fk_cityNac`
-  FOREIGN KEY (`cityNac`) REFERENCES `cities` (`id`)
-  ON DELETE SET NULL
-  ON UPDATE CASCADE;
-
-ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_state`
   FOREIGN KEY (`state_id`) REFERENCES `departments` (`id`)
   ON DELETE SET NULL
@@ -700,12 +693,6 @@ ALTER TABLE `influencers`
 ALTER TABLE `influencers`
   ADD CONSTRAINT `fk_gender`
   FOREIGN KEY (`gender_id`) REFERENCES `genders` (`id`)
-  ON DELETE SET NULL
-  ON UPDATE CASCADE;
-
-ALTER TABLE `influencers`
-  ADD CONSTRAINT `fk_ethnic`
-  FOREIGN KEY (`ethnic_id`) REFERENCES `ethnic_groups` (`id`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 

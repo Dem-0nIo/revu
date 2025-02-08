@@ -15,9 +15,6 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    cityNac: {
-      type: Sequelize.STRING,
-    },
     birthdayDate: {
       type: Sequelize.STRING,
     },
@@ -25,10 +22,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     gender_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    ethnic_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
