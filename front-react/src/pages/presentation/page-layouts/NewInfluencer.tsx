@@ -25,7 +25,7 @@ import InfluService from '../../../services/influ.service';
 const initialValues = {
     firstName: 'John',
     lastName: 'Doe',
-    idUser: '90998909',
+    // idUser: '90998909',
     birthdayDate: '10/10/2024',
     year: '45',
     gender_id: '1',
@@ -372,7 +372,7 @@ const NewInfluencer = () => {
 			const payload = {
 				firstName: values.firstName,
 				lastName: values.lastName,
-				idUser: values.idUser,
+				// idUser: values.idUser,
 				birthdayDate: values.birthdayDate,
 				year: values.year,
 				gender_id: values.gender_id,
@@ -719,7 +719,7 @@ const NewInfluencer = () => {
 												<div className='col-md-3'>
 													<FormGroup
 														id='city_id'
-														label='Ciudad'
+														label='Ciudad de residencia'
 														isFloating
 														formText='Seleccionar la ciudad donde radica.'>
 														<Select
@@ -1192,7 +1192,7 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-										<div className='col-6'>
+										<div className='col-4'>
 											<FormGroup>
 												<Checks
 													type='switch' // or 'checkbox', depending on your preference
@@ -1516,7 +1516,7 @@ const NewInfluencer = () => {
 										/>
 										<PreviewItem title='Edad' value={formik.values.year} />
 										<PreviewItem title='Genero'   value={genders.find(gender => gender.id === Number(formik.values.gender_id))?.description || 'No especificado'} />
-										<PreviewItem title='Cedula' value={formik.values.idUser} />
+										{/* <PreviewItem title='Cedula' value={formik.values.idUser} /> */}
 										<PreviewItem
 											title='Nombre artístico'
 											value={formik.values.displayName}
