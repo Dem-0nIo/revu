@@ -77,7 +77,8 @@ const TopSalesItem: FC<ITopSalesItemProps> = ({ numContacto, personaContacto, pr
 const CommonTopSales = () => {
 	const test = async () => {
 		// setIsLoading(true);
-		const response = await fetch('http://127.0.0.1:8081/api/cotizaciones/all');
+		const API_URL = process.env.REACT_APP_API_URL;
+		const response = await fetch(`${API_URL}/api/cotizaciones/all`);
 		const data = await response.json();
 		setInfluencer(data);
 	};

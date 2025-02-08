@@ -156,7 +156,7 @@ INSERT INTO `roles` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,

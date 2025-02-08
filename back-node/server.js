@@ -15,7 +15,8 @@ console.log(publicDirectoryPath);
 const allowedOrigins = [
 	'http://localhost',
 	'http://165.22.179.233',
-	'http://revuagencyapp.com'
+	'http://revuagencyapp.com',
+	'http://www.revuagencyapp.com'
 ];
 
 

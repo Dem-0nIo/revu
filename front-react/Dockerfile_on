@@ -1,0 +1,28 @@
+FROM node:19-alpine as build
+
+WORKDIR /app
+
+RUN apk add --no-cache nodejs npm bash
+
+# Copy only package files and the locally downloaded node_modules folder
+COPY package.json package-lock.json ./
+
+# COPY . .
+RUN npm install --legacy-peer-deps
+
+# Copy the rest of the application code
+COPY . .
+
+#Build the project
+RUN npm run build
+
+#Final stage with nginx
+FROM nginx:latest
+
+#Copy the files of front_app build result
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Copiar la configuración de Nginx
+ADD nginx.conf /etc/nginx/nginx.conf
+
+CMD ["nginx", "-g", "daemon off;"]
