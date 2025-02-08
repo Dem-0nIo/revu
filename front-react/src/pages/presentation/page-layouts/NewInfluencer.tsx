@@ -34,6 +34,7 @@ const initialValues = {
     hair_color_id: '1',
     hair_type_id: '1',
     skin_color_id: '1',
+	contact: '',
     eps: 'SURA',
     passport: 'NO',
     displayName: 'johndoe',
@@ -81,15 +82,13 @@ const initialValues = {
 
 // Extract validationSchema
 const validationSchema = Yup.object({
-    firstName: Yup.string().required('Es un campo obligatorio'),
-    lastName: Yup.string().required('Es un campo obligatorio'),
-    ethnic_id: Yup.number(), // Not required
-    cityNac: Yup.string(),
+    firstName: Yup.string(),
+    lastName: Yup.string(),
+    contact: Yup.string(), // Not required
     idUser: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero')
-        .required('Es un campo obligatorio y numérico'),
+        .integer('Debe ser un número entero'),
     year: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
@@ -98,9 +97,8 @@ const validationSchema = Yup.object({
             'len',
             'Debe tener exactamente 2 dígitos',
             (val) => (val ? val.toString().length === 2 : false) // Retorna `false` si `val` es undefined
-        )
-        .required('Es un campo obligatorio y numérico'),
-    displayName: Yup.string().required('Es un campo obligatorio'),
+        ),
+    displayName: Yup.string() ,
     phoneNumber: Yup.string()
         .matches(
             /^(\+)?\d+$/,
@@ -110,132 +108,102 @@ const validationSchema = Yup.object({
             'len',
             'Debe tener no más de 11 dígitos',
             (val) => (val ? val.toString().length <= 12 : false)
-        )
-        .required('Es un campo obligatorio'),
+        ),
     emailAddress: Yup.string()
-        .email('Ingresar un correo valido')
-        .required('Es un campo obligatorio'),
-    addressLine: Yup.string().required('Es un campo obligatorio'),
-    socialInstagram: Yup.string().required('Es un campo obligatorio'),
-    socialInstagramCla: Yup.string().required('Es un campo obligatorio'),
+        .email('Ingresar un correo valido'),
+    addressLine: Yup.string(),
+    socialInstagram: Yup.string(),
+    socialInstagramCla: Yup.string(),
     socialInstagramSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero')
-        .required('Es un campo obligatorio'),
-	socialTik: Yup.string().required('Es un campo obligatorio'),
+        .integer('Debe ser un número entero'),
+	socialTik: Yup.string(),
     socialTikSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero')
-        .required('Es un campo obligatorio'),
-    socialTikCla: Yup.string().required('Es un campo obligatorio'),
-	socialFace: Yup.string().required('Es un campo obligatorio'),
-    socialFaceCla: Yup.string().required('Es un campo obligatorio'),
+        .integer('Debe ser un número entero'),
+    socialTikCla: Yup.string(),
+	socialFace: Yup.string(),
+    socialFaceCla: Yup.string(),
     socialFaceSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero')
-        .required('Es un campo obligatorio'),
-	socialUTube: Yup.string().required('Es un campo obligatorio'),
-    socialUTubeCla: Yup.string().required('Es un campo obligatorio'),
+        .integer('Debe ser un número entero'),
+	socialUTube: Yup.string(),
+    socialUTubeCla: Yup.string(),
     socialUTubeSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero')
-        .required('Es un campo obligatorio'),
+        .integer('Debe ser un número entero'),
 	costo_1: Yup.string()
-        .required('Es un campo obligatorio')
         .test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
             if (!value) return false;
             return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
         }),
 	costo_2: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_3: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_4: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_5: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_6: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_7: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_8: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_9: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_10: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_11: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_12: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
 	costo_13: Yup.string()
-	.required('Es un campo obligatorio')
 	.test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
-    gender_id: Yup.string().required('Es un campo obligatorio'),
-    city_id: Yup.number(),
+    gender_id: Yup.string(),
 	celebrity: Yup.number(),
-    state_id: Yup.number(),
     country_id: Yup.number(),
-    zip: Yup.number()
-        .typeError('Debe ser un número')
-        .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero')
-        .test(
-            'len',
-            'Debe tener exactamente 6 dígitos',
-            (val) => (val ? val.toString().length === 6 : false)
-        ),
 });
 
 // Extract onSubmit handler
@@ -302,11 +270,6 @@ interface InfluencerClass {
 	class_name: string;
   }
 
-interface Ethnic {
-	id: number;
-	ethnicity_name: string;
-} 
-
 interface HairColor {
 	id: number;
 	hair_color_name: string;
@@ -331,7 +294,6 @@ const NewInfluencer = () => {
 	const [departments, setDepartments] = useState<Department[]>([]);
 	const [countries, setCountry] = useState<Country[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
-	const [ethnicGroup, setEthnicity] = useState<Ethnic[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
 	const [hairType, setHairType] = useState<HairType[]>([]);
 	const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
@@ -1032,6 +994,26 @@ const NewInfluencer = () => {
 											/>
 										</FormGroup>
 									</div>
+									<div className='col-3'>
+										<FormGroup
+											id='contact'
+											label='Persona de contacto'
+											isFloating>
+											<Input
+												placeholder='Persona de contacto'
+												autoComplete='contact'
+												onChange={formik.handleChange}
+												onBlur={formik.handleBlur}
+												value={formik.values.contact}
+												isValid={formik.isValid}
+												isTouched={formik.touched.contact}
+												invalidFeedback={
+													formik.errors.contact
+												}
+												validFeedback='Looks good!'
+											/>
+										</FormGroup>
+									</div>
 									<div className='col-md-4'>
 										<FormGroup id='category_id' label='Categoría' isFloating>
 											<Select
@@ -1541,13 +1523,12 @@ const NewInfluencer = () => {
 											title='Apellidos'
 											value={formik.values.lastName}
 										/>
-										<PreviewItem title='Ciudad' value={formik.values.cityNac} />
 										<PreviewItem
 											title='Fecha Nacimiento'
 											value={formik.values.birthdayDate}
 										/>
 										<PreviewItem title='Edad' value={formik.values.year} />
-										<PreviewItem title='Genero' value={formik.values.gender_id} />
+										<PreviewItem title='Genero'   value={genders.find(gender => gender.id === Number(formik.values.gender_id))?.description || 'No especificado'} />
 										<PreviewItem title='Cedula' value={formik.values.idUser} />
 										<PreviewItem
 											title='Nombre artístico'
@@ -1573,6 +1554,16 @@ const NewInfluencer = () => {
 										<div className='col-9 offset-3'>
 											<h3 className='mt-4'>Informacion Redes Sociales</h3>
 										</div>
+
+										<PreviewItem
+											title='Redes Activadas'
+											value={socialNetwork.map(
+												(cat) =>
+													formik.values.socialNetwork.includes(
+														cat.id.toString(),
+													) && `${cat.name}, `,
+											)}
+										/>
 										<PreviewItem
 											title='Instagram'
 											value={formik.values.socialInstagram}
@@ -1599,18 +1590,28 @@ const NewInfluencer = () => {
 										/>
 
 										<PreviewItem
-											title='Genero'
-											value={formik.values.gender_id}
+											title='TikTok'
+											value={formik.values.socialFace}
 										/>
-
 										<PreviewItem
-											title='Redes de contacto'
-											value={socialNetwork.map(
-												(cat) =>
-													formik.values.socialNetwork.includes(
-														cat.id.toString(),
-													) && `${cat.name}, `,
-											)}
+											title='Calsificación'
+											value={formik.values.socialFaceCla}
+										/>
+										<PreviewItem
+											title='Seguidores'
+											value={formik.values.socialFaceSeg}
+										/>
+										<PreviewItem
+											title='TikTok'
+											value={formik.values.socialUTube}
+										/>
+										<PreviewItem
+											title='Calsificación'
+											value={formik.values.socialUTubeCla}
+										/>
+										<PreviewItem
+											title='Seguidores'
+											value={formik.values.socialUTubeSeg}
 										/>
 									</div>
 								</WizardItem>
