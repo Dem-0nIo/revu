@@ -102,8 +102,8 @@ const validationSchema = Yup.object({
         )
         .test(
             'len',
-            'Debe tener no más de 11 dígitos',
-            (val) => (val ? val.toString().length <= 12 : false)
+            'Debe tener no más de 12 dígitos',
+            (val) => (val ? val.toString().length <= 13 : false)
         ),
     emailAddress: Yup.string()
         .email('Ingresar un correo valido'),

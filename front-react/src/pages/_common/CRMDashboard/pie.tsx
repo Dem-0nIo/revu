@@ -8,11 +8,10 @@ import { color } from 'framer-motion';
 
 
 export default function AphexChart() {
-	const API_URL = process.env.REACT_APP_API_URL;
 	// console.log("API_URL:", process.env.REACT_APP_API_URL);
 	// console.log("Final URL:", `${process.env.REACT_APP_API_URL}/api/cotizaciones/status/`);
 	const getStatus = async (str: string) => {
-		const response = await axios.post('http://www.revuagencyapp.com:8081/api/cotizaciones/status', {
+		const response = await axios.post('https://www.revuagencyapp.com/api/cotizaciones/status', {
 			status: str,
 		});
 
