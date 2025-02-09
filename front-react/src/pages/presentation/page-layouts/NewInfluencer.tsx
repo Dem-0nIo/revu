@@ -1509,10 +1509,10 @@ const NewInfluencer = () => {
 											title='Apellidos'
 											value={formik.values.lastName}
 										/>
-										<PreviewItem
+										{/* <PreviewItem
 											title='Fecha Nacimiento'
 											value={formik.values.birthdayDate}
-										/>
+										/> */}
 										<PreviewItem title='Edad' value={formik.values.year} />
 										<PreviewItem title='Genero'   value={genders.find(gender => gender.id === Number(formik.values.gender_id))?.description || 'No especificado'} />
 										{/* <PreviewItem title='Cedula' value={formik.values.idUser} /> */}
