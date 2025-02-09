@@ -18,6 +18,6 @@ ADD nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /front-react/build /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
