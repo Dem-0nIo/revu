@@ -54,6 +54,7 @@ services:
     build: ./front-react
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+      - $REACT_APP_PORT:$REACT_APP_PORT
     environment:
       - REACT_APP_URL_API=http://165.22.179.233:8081
     working_dir: /front-react
