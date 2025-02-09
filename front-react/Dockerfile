@@ -14,7 +14,7 @@ RUN mkdir -p /etc/nginx/ssl
 COPY certs/revuagencyapp_com_chain.crt /etc/nginx/ssl/revuagencyapp_com_chain.crt
 COPY certs/revuagencyapp.key /etc/nginx/ssl/revuagencyapp.key
 
-ADD nginx.conf /etc/nginx/conf.d/default.conf
+ADD nginx.conf /etc/nginx/conf.d/revuagencyapp_com-ssl.conf
 
 COPY --from=build /front-react/build /usr/share/nginx/html
 
