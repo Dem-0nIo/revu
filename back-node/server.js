@@ -16,7 +16,9 @@ const allowedOrigins = [
 	'http://localhost',
 	'http://165.22.179.233',
 	'http://revuagencyapp.com',
-	'http://www.revuagencyapp.com'
+	'http://www.revuagencyapp.com',
+	'https://revuagencyapp.com',
+	'https://www.revuagencyapp.com' 
 ];
 
 
