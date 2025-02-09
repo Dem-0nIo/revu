@@ -40,8 +40,12 @@ app.use(cors({
 	credentials: true
 	}));
 
-// Rutas
-//app.use('/api/auth', require('./app/routes/auth'));
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+});
 
 // parse requests of content-type - application/json
 app.use(express.json());
