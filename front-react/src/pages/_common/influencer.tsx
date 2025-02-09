@@ -3,7 +3,6 @@ interface Influencer {
 	firstName: string;
 	lastName: string;
 	idUser: number;
-	cityNac: string;
 	birthdayDate: string;
 	year: string;
 	gender: string;
