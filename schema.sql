@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `genders` (
 
 -- Insertar los valores de géneros/sexos
 INSERT INTO genders (description) VALUES
-('Masculino'),
-('Femenino'),
+('Hombre'),
+('Mujer'),
 ('Gay'),
 ('Lesbiana'),
 ('No binario');
@@ -70,7 +70,7 @@ INSERT INTO genders (description) VALUES
 CREATE TABLE `influencers` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
-  `idUser` INT AUTO_INCREMENT,
+  `idUser` INT NOT NULL AUTO_INCREMENT,
   `birthdayDate` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `gender_id` INT DEFAULT NULL,

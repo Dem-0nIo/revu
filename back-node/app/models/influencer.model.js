@@ -13,6 +13,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     idUser: {
       type: Sequelize.INTEGER,
+      autoIncrement:true,
       allowNull: false,
       primaryKey: true,
     },
