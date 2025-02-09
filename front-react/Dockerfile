@@ -11,8 +11,8 @@ FROM nginx:alpine3.19
 
 RUN mkdir -p /etc/nginx/ssl
 
-COPY front-react/certs/revuagencyapp_com_chain.crt /etc/nginx/ssl/revuagencyapp_com_chain.crt
-COPY front-react/certs/revuagencyapp.key /etc/nginx/ssl/revuagencyapp.key
+COPY certs/revuagencyapp_com_chain.crt /etc/nginx/ssl/revuagencyapp_com_chain.crt
+COPY certs/revuagencyapp.key /etc/nginx/ssl/revuagencyapp.key
 
 ADD nginx.conf /etc/nginx/conf.d/default.conf
 
