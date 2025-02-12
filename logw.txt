@@ -1,0 +1,2413 @@
+back_app  | 
+back_app  | > js-jwt-auth@1.0.0 start
+back_app  | > node server.js
+back_app  | 
+back_app  | /back-node/app/images
+back_app  | gender
+back_app  | Server is running on port 8081.
+back_app  | Executing (default): SELECT 1+1 AS result
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Database connected successfully.
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT `TagsCategory`.`id`, `TagsCategory`.`category_name`, `sub_category`.`id` AS `sub_category.id`, `sub_category`.`subcategory_name` AS `sub_category.subcategory_name`, `sub_category`.`tag_category_id` AS `sub_category.tag_category_id` FROM `TagsCategories` AS `TagsCategory` LEFT OUTER JOIN `SubCategories` AS `sub_category` ON `TagsCategory`.`id` = `sub_category`.`tag_category_id`;
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | [
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 16,
+back_app  |       category_name: 'Activismo y Causas sociales',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 16,
+back_app  |       category_name: 'Activismo y Causas sociales',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 14,
+back_app  |       category_name: 'Animales y Mascotas',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 14,
+back_app  |       category_name: 'Animales y Mascotas',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 13,
+back_app  |       category_name: 'Arte y Creatividad',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 13,
+back_app  |       category_name: 'Arte y Creatividad',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 12, category_name: 'Belleza', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 12, category_name: 'Belleza', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 8,
+back_app  |       category_name: 'Deportes y Fitness',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 8,
+back_app  |       category_name: 'Deportes y Fitness',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 6,
+back_app  |       category_name: 'Entretenimiento y Cultura',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 6,
+back_app  |       category_name: 'Entretenimiento y Cultura',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 2, category_name: 'Estilo de vida', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 2, category_name: 'Estilo de vida', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 11,
+back_app  |       category_name: 'Familia y Crianza',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 11,
+back_app  |       category_name: 'Familia y Crianza',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 15, category_name: 'Gaming', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 15, category_name: 'Gaming', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 7,
+back_app  |       category_name: 'Gastronomía y Comida',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 7,
+back_app  |       category_name: 'Gastronomía y Comida',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 4,
+back_app  |       category_name: 'Hogar y Decoración',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 4,
+back_app  |       category_name: 'Hogar y Decoración',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 1, category_name: 'Moda', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 1, category_name: 'Moda', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 10,
+back_app  |       category_name: 'Negocios y Educación',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 10,
+back_app  |       category_name: 'Negocios y Educación',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 3, category_name: 'Salud', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 3, category_name: 'Salud', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 9,
+back_app  |       category_name: 'Tecnología y Gadgets',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 9,
+back_app  |       category_name: 'Tecnología y Gadgets',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 5, category_name: 'Viajes y Turismo', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 5, category_name: 'Viajes y Turismo', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   }
+back_app  | ]
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Database synchronized successfully.
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Drop and Resync Database with { force: true }
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'admin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 1;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users`;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | Executing (default): SELECT `firstName`, `lastName`, `idUser`, `birthdayDate`, `year`, `gender_id`, `social_class_id`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `contact`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `celebrity`, `city_id`, `state_id`, `country_id`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUtube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt` FROM `influencers` AS `influencers`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'admin';
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'admin';
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'admin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 1;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'admin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 1;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | pending
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | 
+back_app  | > js-jwt-auth@1.0.0 start
+back_app  | > node server.js
+back_app  | 
+back_app  | /back-node/app/images
+back_app  | gender
+back_app  | Server is running on port 8081.
+back_app  | Executing (default): SELECT 1+1 AS result
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Database connected successfully.
+back_app  | Executing (default): SELECT `TagsCategory`.`id`, `TagsCategory`.`category_name`, `sub_category`.`id` AS `sub_category.id`, `sub_category`.`subcategory_name` AS `sub_category.subcategory_name`, `sub_category`.`tag_category_id` AS `sub_category.tag_category_id` FROM `TagsCategories` AS `TagsCategory` LEFT OUTER JOIN `SubCategories` AS `sub_category` ON `TagsCategory`.`id` = `sub_category`.`tag_category_id`;
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | [
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 16,
+back_app  |       category_name: 'Activismo y Causas sociales',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 16,
+back_app  |       category_name: 'Activismo y Causas sociales',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 14,
+back_app  |       category_name: 'Animales y Mascotas',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 14,
+back_app  |       category_name: 'Animales y Mascotas',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 13,
+back_app  |       category_name: 'Arte y Creatividad',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 13,
+back_app  |       category_name: 'Arte y Creatividad',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 12, category_name: 'Belleza', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 12, category_name: 'Belleza', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 8,
+back_app  |       category_name: 'Deportes y Fitness',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 8,
+back_app  |       category_name: 'Deportes y Fitness',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 6,
+back_app  |       category_name: 'Entretenimiento y Cultura',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 6,
+back_app  |       category_name: 'Entretenimiento y Cultura',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 2, category_name: 'Estilo de vida', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 2, category_name: 'Estilo de vida', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 11,
+back_app  |       category_name: 'Familia y Crianza',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 11,
+back_app  |       category_name: 'Familia y Crianza',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 15, category_name: 'Gaming', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 15, category_name: 'Gaming', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 7,
+back_app  |       category_name: 'Gastronomía y Comida',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 7,
+back_app  |       category_name: 'Gastronomía y Comida',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 4,
+back_app  |       category_name: 'Hogar y Decoración',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 4,
+back_app  |       category_name: 'Hogar y Decoración',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 1, category_name: 'Moda', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 1, category_name: 'Moda', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 10,
+back_app  |       category_name: 'Negocios y Educación',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 10,
+back_app  |       category_name: 'Negocios y Educación',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 3, category_name: 'Salud', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 3, category_name: 'Salud', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 9,
+back_app  |       category_name: 'Tecnología y Gadgets',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 9,
+back_app  |       category_name: 'Tecnología y Gadgets',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 5, category_name: 'Viajes y Turismo', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 5, category_name: 'Viajes y Turismo', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   }
+back_app  | ]
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Drop and Resync Database with { force: true }
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Database synchronized successfully.
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'Admin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 1;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users`;
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones`;
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Executing (default): SELECT `firstName`, `lastName`, `idUser`, `birthdayDate`, `year`, `gender_id`, `social_class_id`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `contact`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `celebrity`, `city_id`, `state_id`, `country_id`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUtube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt` FROM `influencers` AS `influencers`;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Received ID: 2
+back_app  | Executing (default): SELECT `id`, `subcategory_name` FROM `SubCategories` AS `SubCategory` WHERE `SubCategory`.`tag_category_id` = '2';
+back_app  | Received ID: 1
+back_app  | Executing (default): SELECT `id`, `subcategory_name` FROM `SubCategories` AS `SubCategory` WHERE `SubCategory`.`tag_category_id` = '1';
+back_app  | Received ID: 6
+back_app  | Executing (default): SELECT `id`, `subcategory_name` FROM `SubCategories` AS `SubCategory` WHERE `SubCategory`.`tag_category_id` = '6';
+back_app  | {"firstName":"Jordan","lastName":"Hurtado Gomez","birthdayDate":"10//2024","year":25,"gender_id":"1","hair_color_id":"1","hair_type_id":"4","skin_color_id":"4","contact":"Revu","passport":"","displayName":"Jordan Hurtado","emailAddress":"contactorevu@gmail.com","phoneNumber":"3186965513","addressLine":"","addressLine2":"","social_class_id":"2","celebrity":"","city_id":"68","state_id":"","country_id":"5","emailNotification":[""],"pushNotification":[""],"phoneNumberWhp":"","socialInstagram":"@JordanHurtado1","socialInstagramCla":"Macro","socialInstagramSeg":966000,"socialTik":"@JordanHurtado1_","socialTikCla":"Macro","socialTikSeg":306600,"socialFace":"@JordanHurtado1_","socialFaceCla":"Macro","socialFaceSeg":306600,"socialUTube":"@JordanHurtado1_","socialUTubeCla":"Macro","socialUTubeSeg":306600,"socialNetwork":[""],"image":"","costo_1":"1300000","costo_2":"1900000","costo_3":"3800000","costo_4":"4500000","costo_5":"3500000","costo_6":"4900000","costo_7":"3800000","costo_8":"1300000","costo_9":"1500000","costo_10":"1","costo_11":"650000","costo_12":"1600000","costo_13":"1","subcategories":[7,2,36]}
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes` WHERE `influencer_classes`.`min_followers` <= 966000 AND `influencer_classes`.`max_followers` >= 966000 LIMIT 1;
+back_app  | Executing (default): INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+back_app  | Error creating influencer: Error
+back_app  |     at Query.run (/back-node/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+back_app  |     at /back-node/node_modules/sequelize/lib/sequelize.js:315:28
+back_app  |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+back_app  |     at async MySQLQueryInterface.insert (/back-node/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+back_app  |     at async model.save (/back-node/node_modules/sequelize/lib/model.js:2490:35)
+back_app  |     at async influencers.create (/back-node/node_modules/sequelize/lib/model.js:1362:12)
+back_app  |     at async exports.registerinfluencer (/back-node/app/controllers/influencer.controller.js:81:27) {
+back_app  |   name: 'SequelizeDatabaseError',
+back_app  |   parent: Error: Incorrect integer value: '' for column 'celebrity' at row 1
+back_app  |       at Packet.asError (/back-node/node_modules/mysql2/lib/packets/packet.js:740:17)
+back_app  |       at Execute.execute (/back-node/node_modules/mysql2/lib/commands/command.js:29:26)
+back_app  |       at Connection.handlePacket (/back-node/node_modules/mysql2/lib/base/connection.js:475:34)
+back_app  |       at PacketParser.onPacket (/back-node/node_modules/mysql2/lib/base/connection.js:93:12)
+back_app  |       at PacketParser.executeStart (/back-node/node_modules/mysql2/lib/packet_parser.js:75:16)
+back_app  |       at Socket.<anonymous> (/back-node/node_modules/mysql2/lib/base/connection.js:100:25)
+back_app  |       at Socket.emit (node:events:513:28)
+back_app  |       at addChunk (node:internal/streams/readable:324:12)
+back_app  |       at readableAddChunk (node:internal/streams/readable:297:9)
+back_app  |       at Readable.push (node:internal/streams/readable:234:10) {
+back_app  |     code: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD',
+back_app  |     errno: 1366,
+back_app  |     sqlState: 'HY000',
+back_app  |     sqlMessage: "Incorrect integer value: '' for column 'celebrity' at row 1",
+back_app  |     sql: 'INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+back_app  |     parameters: [
+back_app  |       'Jordan',
+back_app  |       'Hurtado Gomez',
+back_app  |       '10//2024',
+back_app  |       25,
+back_app  |       '1',
+back_app  |       '2',
+back_app  |       '1',
+back_app  |       '4',
+back_app  |       '4',
+back_app  |       'Revu',
+back_app  |       '',
+back_app  |       'Jordan Hurtado',
+back_app  |       'contactorevu@gmail.com',
+back_app  |       '',
+back_app  |       '3186965513',
+back_app  |       '',
+back_app  |       '5',
+back_app  |       '[""]',
+back_app  |       '[""]',
+back_app  |       '',
+back_app  |       '@JordanHurtado1',
+back_app  |       'Macro',
+back_app  |       966000,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '[""]',
+back_app  |       '/',
+back_app  |       '1300000',
+back_app  |       '1900000',
+back_app  |       '3800000',
+back_app  |       '4500000',
+back_app  |       '3500000',
+back_app  |       '4900000',
+back_app  |       '3800000',
+back_app  |       '1300000',
+back_app  |       '1500000',
+back_app  |       '1',
+back_app  |       '650000',
+back_app  |       '1600000',
+back_app  |       '1',
+back_app  |       '2025-02-11 15:57:48',
+back_app  |       '2025-02-11 15:57:48'
+back_app  |     ]
+back_app  |   },
+back_app  |   original: Error: Incorrect integer value: '' for column 'celebrity' at row 1
+back_app  |       at Packet.asError (/back-node/node_modules/mysql2/lib/packets/packet.js:740:17)
+back_app  |       at Execute.execute (/back-node/node_modules/mysql2/lib/commands/command.js:29:26)
+back_app  |       at Connection.handlePacket (/back-node/node_modules/mysql2/lib/base/connection.js:475:34)
+back_app  |       at PacketParser.onPacket (/back-node/node_modules/mysql2/lib/base/connection.js:93:12)
+back_app  |       at PacketParser.executeStart (/back-node/node_modules/mysql2/lib/packet_parser.js:75:16)
+back_app  |       at Socket.<anonymous> (/back-node/node_modules/mysql2/lib/base/connection.js:100:25)
+back_app  |       at Socket.emit (node:events:513:28)
+back_app  |       at addChunk (node:internal/streams/readable:324:12)
+back_app  |       at readableAddChunk (node:internal/streams/readable:297:9)
+back_app  |       at Readable.push (node:internal/streams/readable:234:10) {
+back_app  |     code: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD',
+back_app  |     errno: 1366,
+back_app  |     sqlState: 'HY000',
+back_app  |     sqlMessage: "Incorrect integer value: '' for column 'celebrity' at row 1",
+back_app  |     sql: 'INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+back_app  |     parameters: [
+back_app  |       'Jordan',
+back_app  |       'Hurtado Gomez',
+back_app  |       '10//2024',
+back_app  |       25,
+back_app  |       '1',
+back_app  |       '2',
+back_app  |       '1',
+back_app  |       '4',
+back_app  |       '4',
+back_app  |       'Revu',
+back_app  |       '',
+back_app  |       'Jordan Hurtado',
+back_app  |       'contactorevu@gmail.com',
+back_app  |       '',
+back_app  |       '3186965513',
+back_app  |       '',
+back_app  |       '5',
+back_app  |       '[""]',
+back_app  |       '[""]',
+back_app  |       '',
+back_app  |       '@JordanHurtado1',
+back_app  |       'Macro',
+back_app  |       966000,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '[""]',
+back_app  |       '/',
+back_app  |       '1300000',
+back_app  |       '1900000',
+back_app  |       '3800000',
+back_app  |       '4500000',
+back_app  |       '3500000',
+back_app  |       '4900000',
+back_app  |       '3800000',
+back_app  |       '1300000',
+back_app  |       '1500000',
+back_app  |       '1',
+back_app  |       '650000',
+back_app  |       '1600000',
+back_app  |       '1',
+back_app  |       '2025-02-11 15:57:48',
+back_app  |       '2025-02-11 15:57:48'
+back_app  |     ]
+back_app  |   },
+back_app  |   sql: 'INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+back_app  |   parameters: [
+back_app  |     'Jordan',
+back_app  |     'Hurtado Gomez',
+back_app  |     '10//2024',
+back_app  |     25,
+back_app  |     '1',
+back_app  |     '2',
+back_app  |     '1',
+back_app  |     '4',
+back_app  |     '4',
+back_app  |     'Revu',
+back_app  |     '',
+back_app  |     'Jordan Hurtado',
+back_app  |     'contactorevu@gmail.com',
+back_app  |     '',
+back_app  |     '3186965513',
+back_app  |     '',
+back_app  |     '5',
+back_app  |     '[""]',
+back_app  |     '[""]',
+back_app  |     '',
+back_app  |     '@JordanHurtado1',
+back_app  |     'Macro',
+back_app  |     966000,
+back_app  |     '@JordanHurtado1_',
+back_app  |     'Macro',
+back_app  |     306600,
+back_app  |     '@JordanHurtado1_',
+back_app  |     'Macro',
+back_app  |     306600,
+back_app  |     'Macro',
+back_app  |     306600,
+back_app  |     '[""]',
+back_app  |     '/',
+back_app  |     '1300000',
+back_app  |     '1900000',
+back_app  |     '3800000',
+back_app  |     '4500000',
+back_app  |     '3500000',
+back_app  |     '4900000',
+back_app  |     '3800000',
+back_app  |     '1300000',
+back_app  |     '1500000',
+back_app  |     '1',
+back_app  |     '650000',
+back_app  |     '1600000',
+back_app  |     '1',
+back_app  |     '2025-02-11 15:57:48',
+back_app  |     '2025-02-11 15:57:48'
+back_app  |   ]
+back_app  | }
+back_app  | {"firstName":"Jordan","lastName":"Hurtado Gomez","birthdayDate":"10//2024","year":25,"gender_id":"1","hair_color_id":"1","hair_type_id":"4","skin_color_id":"4","contact":"Revu","passport":"","displayName":"Jordan Hurtado","emailAddress":"contactorevu@gmail.com","phoneNumber":"3186965513","addressLine":"","addressLine2":"","social_class_id":"2","celebrity":"","city_id":"68","state_id":"","country_id":"5","emailNotification":[""],"pushNotification":[""],"phoneNumberWhp":"","socialInstagram":"@JordanHurtado1","socialInstagramCla":"Macro","socialInstagramSeg":966000,"socialTik":"@JordanHurtado1_","socialTikCla":"Macro","socialTikSeg":306600,"socialFace":"@JordanHurtado1_","socialFaceCla":"Macro","socialFaceSeg":306600,"socialUTube":"@JordanHurtado1_","socialUTubeCla":"Macro","socialUTubeSeg":306600,"socialNetwork":[""],"image":"","costo_1":"1300000","costo_2":"1900000","costo_3":"3800000","costo_4":"4500000","costo_5":"3500000","costo_6":"4900000","costo_7":"3800000","costo_8":"1300000","costo_9":"1500000","costo_10":"1","costo_11":"650000","costo_12":"1600000","costo_13":"1","subcategories":[7,2,36]}
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes` WHERE `influencer_classes`.`min_followers` <= 966000 AND `influencer_classes`.`max_followers` >= 966000 LIMIT 1;
+back_app  | Executing (default): INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+back_app  | Error creating influencer: Error
+back_app  |     at Query.run (/back-node/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+back_app  |     at /back-node/node_modules/sequelize/lib/sequelize.js:315:28
+back_app  |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+back_app  |     at async MySQLQueryInterface.insert (/back-node/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+back_app  |     at async model.save (/back-node/node_modules/sequelize/lib/model.js:2490:35)
+back_app  |     at async influencers.create (/back-node/node_modules/sequelize/lib/model.js:1362:12)
+back_app  |     at async exports.registerinfluencer (/back-node/app/controllers/influencer.controller.js:81:27) {
+back_app  |   name: 'SequelizeDatabaseError',
+back_app  |   parent: Error: Incorrect integer value: '' for column 'celebrity' at row 1
+back_app  |       at Packet.asError (/back-node/node_modules/mysql2/lib/packets/packet.js:740:17)
+back_app  |       at Execute.execute (/back-node/node_modules/mysql2/lib/commands/command.js:29:26)
+back_app  |       at Connection.handlePacket (/back-node/node_modules/mysql2/lib/base/connection.js:475:34)
+back_app  |       at PacketParser.onPacket (/back-node/node_modules/mysql2/lib/base/connection.js:93:12)
+back_app  |       at PacketParser.executeStart (/back-node/node_modules/mysql2/lib/packet_parser.js:75:16)
+back_app  |       at Socket.<anonymous> (/back-node/node_modules/mysql2/lib/base/connection.js:100:25)
+back_app  |       at Socket.emit (node:events:513:28)
+back_app  |       at addChunk (node:internal/streams/readable:324:12)
+back_app  |       at readableAddChunk (node:internal/streams/readable:297:9)
+back_app  |       at Readable.push (node:internal/streams/readable:234:10) {
+back_app  |     code: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD',
+back_app  |     errno: 1366,
+back_app  |     sqlState: 'HY000',
+back_app  |     sqlMessage: "Incorrect integer value: '' for column 'celebrity' at row 1",
+back_app  |     sql: 'INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+back_app  |     parameters: [
+back_app  |       'Jordan',
+back_app  |       'Hurtado Gomez',
+back_app  |       '10//2024',
+back_app  |       25,
+back_app  |       '1',
+back_app  |       '2',
+back_app  |       '1',
+back_app  |       '4',
+back_app  |       '4',
+back_app  |       'Revu',
+back_app  |       '',
+back_app  |       'Jordan Hurtado',
+back_app  |       'contactorevu@gmail.com',
+back_app  |       '',
+back_app  |       '3186965513',
+back_app  |       '',
+back_app  |       '5',
+back_app  |       '[""]',
+back_app  |       '[""]',
+back_app  |       '',
+back_app  |       '@JordanHurtado1',
+back_app  |       'Macro',
+back_app  |       966000,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '[""]',
+back_app  |       '/',
+back_app  |       '1300000',
+back_app  |       '1900000',
+back_app  |       '3800000',
+back_app  |       '4500000',
+back_app  |       '3500000',
+back_app  |       '4900000',
+back_app  |       '3800000',
+back_app  |       '1300000',
+back_app  |       '1500000',
+back_app  |       '1',
+back_app  |       '650000',
+back_app  |       '1600000',
+back_app  |       '1',
+back_app  |       '2025-02-11 15:58:00',
+back_app  |       '2025-02-11 15:58:00'
+back_app  |     ]
+back_app  |   },
+back_app  |   original: Error: Incorrect integer value: '' for column 'celebrity' at row 1
+back_app  |       at Packet.asError (/back-node/node_modules/mysql2/lib/packets/packet.js:740:17)
+back_app  |       at Execute.execute (/back-node/node_modules/mysql2/lib/commands/command.js:29:26)
+back_app  |       at Connection.handlePacket (/back-node/node_modules/mysql2/lib/base/connection.js:475:34)
+back_app  |       at PacketParser.onPacket (/back-node/node_modules/mysql2/lib/base/connection.js:93:12)
+back_app  |       at PacketParser.executeStart (/back-node/node_modules/mysql2/lib/packet_parser.js:75:16)
+back_app  |       at Socket.<anonymous> (/back-node/node_modules/mysql2/lib/base/connection.js:100:25)
+back_app  |       at Socket.emit (node:events:513:28)
+back_app  |       at addChunk (node:internal/streams/readable:324:12)
+back_app  |       at readableAddChunk (node:internal/streams/readable:297:9)
+back_app  |       at Readable.push (node:internal/streams/readable:234:10) {
+back_app  |     code: 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD',
+back_app  |     errno: 1366,
+back_app  |     sqlState: 'HY000',
+back_app  |     sqlMessage: "Incorrect integer value: '' for column 'celebrity' at row 1",
+back_app  |     sql: 'INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+back_app  |     parameters: [
+back_app  |       'Jordan',
+back_app  |       'Hurtado Gomez',
+back_app  |       '10//2024',
+back_app  |       25,
+back_app  |       '1',
+back_app  |       '2',
+back_app  |       '1',
+back_app  |       '4',
+back_app  |       '4',
+back_app  |       'Revu',
+back_app  |       '',
+back_app  |       'Jordan Hurtado',
+back_app  |       'contactorevu@gmail.com',
+back_app  |       '',
+back_app  |       '3186965513',
+back_app  |       '',
+back_app  |       '5',
+back_app  |       '[""]',
+back_app  |       '[""]',
+back_app  |       '',
+back_app  |       '@JordanHurtado1',
+back_app  |       'Macro',
+back_app  |       966000,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '@JordanHurtado1_',
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       'Macro',
+back_app  |       306600,
+back_app  |       '[""]',
+back_app  |       '/',
+back_app  |       '1300000',
+back_app  |       '1900000',
+back_app  |       '3800000',
+back_app  |       '4500000',
+back_app  |       '3500000',
+back_app  |       '4900000',
+back_app  |       '3800000',
+back_app  |       '1300000',
+back_app  |       '1500000',
+back_app  |       '1',
+back_app  |       '650000',
+back_app  |       '1600000',
+back_app  |       '1',
+back_app  |       '2025-02-11 15:58:00',
+back_app  |       '2025-02-11 15:58:00'
+back_app  |     ]
+back_app  |   },
+back_app  |   sql: 'INSERT INTO `influencers` (`firstName`,`lastName`,`idUser`,`birthdayDate`,`year`,`gender_id`,`social_class_id`,`hair_color_id`,`hair_type_id`,`skin_color_id`,`contact`,`passport`,`displayName`,`emailAddress`,`addressLine`,`phoneNumber`,`celebrity`,`country_id`,`emailNotification`,`pushNotification`,`phoneNumberWhp`,`socialInstagram`,`socialInstagramCla`,`socialInstagramSeg`,`socialTik`,`socialTikCla`,`socialTikSeg`,`socialFace`,`socialFaceCla`,`socialFaceSeg`,`socialUTubeCla`,`socialUTubeSeg`,`socialNetwork`,`img`,`costo_1`,`costo_2`,`costo_3`,`costo_4`,`costo_5`,`costo_6`,`costo_7`,`costo_8`,`costo_9`,`costo_10`,`costo_11`,`costo_12`,`costo_13`,`createdAt`,`updatedAt`) VALUES (?,?,DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+back_app  |   parameters: [
+back_app  |     'Jordan',
+back_app  |     'Hurtado Gomez',
+back_app  |     '10//2024',
+back_app  |     25,
+back_app  |     '1',
+back_app  |     '2',
+back_app  |     '1',
+back_app  |     '4',
+back_app  |     '4',
+back_app  |     'Revu',
+back_app  |     '',
+back_app  |     'Jordan Hurtado',
+back_app  |     'contactorevu@gmail.com',
+back_app  |     '',
+back_app  |     '3186965513',
+back_app  |     '',
+back_app  |     '5',
+back_app  |     '[""]',
+back_app  |     '[""]',
+back_app  |     '',
+back_app  |     '@JordanHurtado1',
+back_app  |     'Macro',
+back_app  |     966000,
+back_app  |     '@JordanHurtado1_',
+back_app  |     'Macro',
+back_app  |     306600,
+back_app  |     '@JordanHurtado1_',
+back_app  |     'Macro',
+back_app  |     306600,
+back_app  |     'Macro',
+back_app  |     306600,
+back_app  |     '[""]',
+back_app  |     '/',
+back_app  |     '1300000',
+back_app  |     '1900000',
+back_app  |     '3800000',
+back_app  |     '4500000',
+back_app  |     '3500000',
+back_app  |     '4900000',
+back_app  |     '3800000',
+back_app  |     '1300000',
+back_app  |     '1500000',
+back_app  |     '1',
+back_app  |     '650000',
+back_app  |     '1600000',
+back_app  |     '1',
+back_app  |     '2025-02-11 15:58:00',
+back_app  |     '2025-02-11 15:58:00'
+back_app  |   ]
+back_app  | }
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'Linamarin';
+back_app  | Executing (default): INSERT INTO `users` (`id`,`username`,`email`,`password`,`firstname`,`lastname`,`phone`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?);
+back_app  | 3
+back_app  | respondiendo back { idUser: 3, rol: '3' }
+back_app  | Executing (default): INSERT INTO `user_roles` (`roleId`,`userId`,`createdAt`,`updatedAt`) VALUES (?,?,?,?);
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'linamarin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 3;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | Executing (default): SELECT `firstName`, `lastName`, `idUser`, `birthdayDate`, `year`, `gender_id`, `social_class_id`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `contact`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `celebrity`, `city_id`, `state_id`, `country_id`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUtube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt` FROM `influencers` AS `influencers`;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'Admin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 1;
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users`;
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'JuanjoSanchez';
+back_app  | Executing (default): INSERT INTO `users` (`id`,`username`,`email`,`password`,`firstname`,`lastname`,`phone`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?,?);
+back_app  | 4
+back_app  | respondiendo back { idUser: 4, rol: '2' }
+back_app  | Executing (default): INSERT INTO `user_roles` (`roleId`,`userId`,`createdAt`,`updatedAt`) VALUES (?,?,?,?);
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'Juanjosanchez';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 4;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `firstName`, `lastName`, `idUser`, `birthdayDate`, `year`, `gender_id`, `social_class_id`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `contact`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `celebrity`, `city_id`, `state_id`, `country_id`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUtube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt` FROM `influencers` AS `influencers`;
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones`;
+back_app  | []
+back_app  | Executing (default): SELECT `firstName`, `lastName`, `idUser`, `birthdayDate`, `year`, `gender_id`, `social_class_id`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `contact`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `celebrity`, `city_id`, `state_id`, `country_id`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUtube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt` FROM `influencers` AS `influencers`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `firstName`, `lastName`, `idUser`, `birthdayDate`, `year`, `gender_id`, `social_class_id`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `contact`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `celebrity`, `city_id`, `state_id`, `country_id`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUtube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt` FROM `influencers` AS `influencers`;
+back_app  | Executing (default): SELECT `id`, `hair_color_name` FROM `hair_colors` AS `hair_colors`;
+back_app  | Executing (default): SELECT `id`, `department_name` FROM `departments` AS `departments` ORDER BY `departments`.`department_name` ASC;
+back_app  | Executing (default): SELECT `id`, `city_name`, `department_id` FROM `cities` AS `city` ORDER BY `city`.`city_name` ASC;
+back_app  | Executing (default): SELECT `id`, `class_name`, `min_followers`, `max_followers` FROM `influencer_classes` AS `influencer_classes`;
+back_app  | Executing (default): SELECT `id`, `class_name` FROM `social_classes` AS `SocialClass`;
+back_app  | Executing (default): SELECT `id`, `description` FROM `genders` AS `gender` ORDER BY `gender`.`id` ASC;
+back_app  | Executing (default): SELECT `id`, `hair_type_name` FROM `hair_types` AS `hair_types`;
+back_app  | Executing (default): SELECT `id`, `skin_color_name` FROM `skin_colors` AS `skin_colors`;
+back_app  | Executing (default): SELECT `id`, `name`, `name_en`, `iso_code`, `iso_code_2`, `region`, `is_active`, `created_at`, `updated_at` FROM `countries` AS `Country`;
+back_app  | Executing (default): SELECT `id`, `category_name` FROM `TagsCategories` AS `TagsCategory`;
+back_app  | approved
+back_app  | pending
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
+back_app  | []
+back_app  | []
+back_app  | 
+back_app  | > js-jwt-auth@1.0.0 start
+back_app  | > node server.js
+back_app  | 
+back_app  | /back-node/app/images
+back_app  | gender
+back_app  | Server is running on port 8081.
+back_app  | Executing (default): SELECT 1+1 AS result
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Database connected successfully.
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencers' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT `TagsCategory`.`id`, `TagsCategory`.`category_name`, `sub_category`.`id` AS `sub_category.id`, `sub_category`.`subcategory_name` AS `sub_category.subcategory_name`, `sub_category`.`tag_category_id` AS `sub_category.tag_category_id` FROM `TagsCategories` AS `TagsCategory` LEFT OUTER JOIN `SubCategories` AS `sub_category` ON `TagsCategory`.`id` = `sub_category`.`tag_category_id`;
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SHOW INDEX FROM `influencers`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | Executing (default): SHOW INDEX FROM `users`
+back_app  | [
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 16,
+back_app  |       category_name: 'Activismo y Causas sociales',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 16,
+back_app  |       category_name: 'Activismo y Causas sociales',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 14,
+back_app  |       category_name: 'Animales y Mascotas',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 14,
+back_app  |       category_name: 'Animales y Mascotas',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 13,
+back_app  |       category_name: 'Arte y Creatividad',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 13,
+back_app  |       category_name: 'Arte y Creatividad',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 12, category_name: 'Belleza', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 12, category_name: 'Belleza', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 8,
+back_app  |       category_name: 'Deportes y Fitness',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 8,
+back_app  |       category_name: 'Deportes y Fitness',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 6,
+back_app  |       category_name: 'Entretenimiento y Cultura',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 6,
+back_app  |       category_name: 'Entretenimiento y Cultura',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 2, category_name: 'Estilo de vida', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 2, category_name: 'Estilo de vida', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 11,
+back_app  |       category_name: 'Familia y Crianza',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 11,
+back_app  |       category_name: 'Familia y Crianza',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 15, category_name: 'Gaming', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 15, category_name: 'Gaming', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 7,
+back_app  |       category_name: 'Gastronomía y Comida',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 7,
+back_app  |       category_name: 'Gastronomía y Comida',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 4,
+back_app  |       category_name: 'Hogar y Decoración',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 4,
+back_app  |       category_name: 'Hogar y Decoración',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [ [SubCategory], [SubCategory], [SubCategory] ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 1, category_name: 'Moda', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 1, category_name: 'Moda', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 10,
+back_app  |       category_name: 'Negocios y Educación',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 10,
+back_app  |       category_name: 'Negocios y Educación',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory], [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 3, category_name: 'Salud', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 3, category_name: 'Salud', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: {
+back_app  |       id: 9,
+back_app  |       category_name: 'Tecnología y Gadgets',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     _previousDataValues: {
+back_app  |       id: 9,
+back_app  |       category_name: 'Tecnología y Gadgets',
+back_app  |       sub_category: [Array]
+back_app  |     },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   },
+back_app  |   TagsCategory {
+back_app  |     dataValues: { id: 5, category_name: 'Viajes y Turismo', sub_category: [Array] },
+back_app  |     _previousDataValues: { id: 5, category_name: 'Viajes y Turismo', sub_category: [Array] },
+back_app  |     uniqno: 1,
+back_app  |     _changed: Set(0) {},
+back_app  |     _options: {
+back_app  |       isNewRecord: false,
+back_app  |       _schema: null,
+back_app  |       _schemaDelimiter: '',
+back_app  |       include: [Array],
+back_app  |       includeNames: [Array],
+back_app  |       includeMap: [Object],
+back_app  |       includeValidated: true,
+back_app  |       attributes: [Array],
+back_app  |       raw: true
+back_app  |     },
+back_app  |     isNewRecord: false,
+back_app  |     sub_category: [
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory],
+back_app  |       [SubCategory]
+back_app  |     ]
+back_app  |   }
+back_app  | ]
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SHOW INDEX FROM `roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cotizaciones' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SHOW INDEX FROM `cotizaciones`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'user_roles' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SHOW INDEX FROM `user_roles`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'genders' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `genders`
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'departments' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SHOW INDEX FROM `departments`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'cities' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SHOW INDEX FROM `cities`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'influencer_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SHOW INDEX FROM `influencer_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'ethnic_groups' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Drop and Resync Database with { force: true }
+back_app  | Database synchronized successfully.
+back_app  | Executing (default): SHOW INDEX FROM `ethnic_groups`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_types' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_types`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'hair_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `hair_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'skin_colors' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `skin_colors`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TagsCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `TagsCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SubCategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `SubCategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'countries' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `countries`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'InfluencerSubcategories' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `InfluencerSubcategories`
+back_app  | Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'social_classes' AND TABLE_SCHEMA = 'revu_db'
+back_app  | Executing (default): SHOW INDEX FROM `social_classes`
+back_app  | Executing (default): SELECT `id`, `username`, `email`, `password`, `firstname`, `lastname`, `phone`, `createdAt`, `updatedAt` FROM `users` AS `users` WHERE `users`.`username` = 'admin';
+back_app  | Executing (default): SELECT `roles`.`id`, `roles`.`name`, `roles`.`createdAt`, `roles`.`updatedAt`, `user_roles`.`roleId` AS `user_roles.roleId`, `user_roles`.`userId` AS `user_roles.userId`, `user_roles`.`createdAt` AS `user_roles.createdAt`, `user_roles`.`updatedAt` AS `user_roles.updatedAt` FROM `roles` AS `roles` INNER JOIN `user_roles` AS `user_roles` ON `roles`.`id` = `user_roles`.`roleId` AND `user_roles`.`userId` = 1;
+back_app  | pending
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'pending';
+back_app  | []
+back_app  | approved
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'approved';
+back_app  | []
+back_app  | canceled
+back_app  | Executing (default): SELECT `idCotizacion`, `influencerId`, `numCotizacion`, `numContacto`, `personaContacto`, `emailContacto`, `whatsappContacto`, `status`, `price`, `dateCreated`, `createdAt`, `updatedAt` FROM `cotizaciones` AS `cotizaciones` WHERE `cotizaciones`.`status` = 'canceled';
+back_app  | []
