@@ -106,7 +106,7 @@ CREATE TABLE `influencers` (
   `socialUTubeCla` varchar(255) DEFAULT NULL,
   `socialUTubeSeg` varchar(255) DEFAULT NULL,
   `socialNetwork` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`socialNetwork`)),
-  `celebrity` TINYINT(1) NOT NULL DEFAULT 1,
+  `celebrity` TINYINT(1) DEFAULT 1,
   `img` varchar(255) DEFAULT NULL,
   `costo_1` int(11) DEFAULT NULL,
   `costo_2` int(11) DEFAULT NULL,

@@ -28,10 +28,10 @@ const initialValues = {
     // idUser: '90998909',
     birthdayDate: '10//2024',
     year: '',
-    gender_id: '',
-    hair_color_id: '',
-    hair_type_id: '',
-    skin_color_id: '',
+    gender_id: 0,
+    hair_color_id: 0,
+    hair_type_id: 0,
+    skin_color_id: 0,
 	contact: '',
     passport: '',
     displayName: '',
@@ -39,11 +39,11 @@ const initialValues = {
     phoneNumber: '',
     addressLine: '',
     addressLine2: '',
-	social_class_id: '',
-	celebrity: '',
-    city_id: '',
-    state_id: '',
-    country_id: '',
+	social_class_id: 0,
+	celebrity: 0,
+    city_id: 0,
+    state_id: 0,
+    country_id: 0,
     emailNotification: [''],
     pushNotification: [''],
     phoneNumberWhp: '',
@@ -703,12 +703,14 @@ const NewInfluencer = () => {
 															ariaLabel='Country'
 															placeholder='Seleccione...'
 															list={countries.map((country) => ({
-																value: country.id,
+																value: String(country.id),
 																text: country.name,
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('country_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.country_id}
+															value={String(formik.values.country_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.country_id}
 															invalidFeedback={formik.errors.country_id}
@@ -725,12 +727,14 @@ const NewInfluencer = () => {
 															ariaLabel='Ciudad'
 															placeholder='Seleccione...'
 															list={cities.map((city) => ({
-																value: city.id, 
+																value: String(city.id), 
 																text: city.city_name, 
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('city_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.city_id}
+															value={String(formik.values.city_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.city_id}
 															invalidFeedback={formik.errors.city_id}
@@ -744,12 +748,14 @@ const NewInfluencer = () => {
 															ariaLabel='Clase Social'
 															placeholder='Seleccione...'
 															list={socialClasses.map((socialClass) => ({
-																value: socialClass.id, // Use the gender ID as the value
+																value: String(socialClass.id), // Use the gender ID as the value
 																text: socialClass.class_name, // Use the gender description as the text
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('social_class_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.social_class_id}
+															value={String(formik.values.social_class_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.social_class_id}
 															invalidFeedback={formik.errors.social_class_id}
@@ -779,12 +785,14 @@ const NewInfluencer = () => {
 															ariaLabel='Sexo'
 															placeholder='Seleccione...'
 															list={genders.map((gender) => ({
-																value: gender.id, // Use the gender ID as the value
+																value: String(gender.id), // Use the gender ID as the value
 																text: gender.description, // Use the gender description as the text
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('gender_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.gender_id}
+															value={String(formik.values.gender_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.gender_id}
 															invalidFeedback={formik.errors.gender_id}
@@ -802,12 +810,14 @@ const NewInfluencer = () => {
 															ariaLabel='Tipo de cabello'
 															placeholder='Seleccione...'
 															list={hairType.map((hairTypes) => ({
-																value: hairTypes.id, 
+																value: String(hairTypes.id), 
 																text: hairTypes.hair_type_name, 
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('hair_type_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.hair_type_id}
+															value={String(formik.values.country_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.hair_type_id}
 															invalidFeedback={formik.errors.hair_type_id}
@@ -825,12 +835,14 @@ const NewInfluencer = () => {
 															ariaLabel='Color de cabello'
 															placeholder='Seleccione...'
 															list={hairColor.map((hairColors) => ({
-																value: hairColors.id, 
+																value: String(hairColors.id), 
 																text: hairColors.hair_color_name, 
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('hair_color_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.hair_color_id}
+															value={String(formik.values.hair_color_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.hair_color_id}
 															invalidFeedback={formik.errors.hair_color_id}
@@ -848,12 +860,14 @@ const NewInfluencer = () => {
 															ariaLabel='color de piel'
 															placeholder='Seleccione...'
 															list={skinColor.map((skinColors) => ({
-																value: skinColors.id, 
+																value: String(skinColors.id), 
 																text: skinColors.skin_color_name, 
 															}))}
-															onChange={formik.handleChange}
+															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+																formik.setFieldValue('skin_color_id', Number(e.target.value))
+															}
 															onBlur={formik.handleBlur}
-															value={formik.values.skin_color_id}
+															value={String(formik.values.skin_color_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.skin_color_id}
 															invalidFeedback={formik.errors.skin_color_id}
@@ -1200,9 +1214,9 @@ const NewInfluencer = () => {
 													label='Celebrity?'
 													value='1' // Example value, you can modify it as needed
 													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-														formik.setFieldValue('celebrity', e.target.checked ? '1' : '0')
+														formik.setFieldValue('celebrity', e.target.checked ? 1 : 0)
 													}
-													checked={formik.values.celebrity === '1'}
+													checked={formik.values.celebrity === 1}
 												/>
 											</FormGroup>
 										</div>
