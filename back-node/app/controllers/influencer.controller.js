@@ -18,6 +18,7 @@ const fileUpload = multer({
 
 exports.registerinfluencer = async (req, res) => {
   try {
+    req.body.celebrity = 0;
     const {
       firstName,
       lastName,
