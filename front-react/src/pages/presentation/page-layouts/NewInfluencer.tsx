@@ -26,24 +26,23 @@ const initialValues = {
     firstName: '',
     lastName: '',
     // idUser: '90998909',
-    birthdayDate: '10//2024',
+    // birthdayDate: '10//2024',
     year: '',
-    gender_id: 0,
-    hair_color_id: 0,
-    hair_type_id: 0,
-    skin_color_id: 0,
+    gender_id: 1,
+    hair_color_id: 1,
+    hair_type_id: 1,
+    skin_color_id: 1,
 	contact: '',
     passport: '',
     displayName: '',
     emailAddress: '',
     phoneNumber: '',
     addressLine: '',
-    addressLine2: '',
-	social_class_id: 0,
-	celebrity: 0,
-    city_id: 0,
-    state_id: 0,
-    country_id: 0,
+	social_class_id: 1,
+	celebrity: 1,
+    city_id: 1,
+    state_id: 1,
+    country_id: 1,
     emailNotification: [''],
     pushNotification: [''],
     phoneNumberWhp: '',
@@ -386,7 +385,7 @@ const NewInfluencer = () => {
 				addressLine: values.addressLine,
 				addressLine2: values.addressLine2,
 				social_class_id: values.social_class_id,
-				celebrity: values.celebrity,
+				celebrity: parseInt(values.celebrit,10),
 				city_id: values.city_id,
 				state_id: values.state_id,
 				country_id: values.country_id,
@@ -1581,7 +1580,7 @@ const NewInfluencer = () => {
 											value={formik.values.socialTik}
 										/>
 										<PreviewItem
-											title='Calsificación'
+											title='Clasificación'
 											value={formik.values.socialTikCla}
 										/>
 										<PreviewItem
@@ -1594,7 +1593,7 @@ const NewInfluencer = () => {
 											value={formik.values.socialFace}
 										/>
 										<PreviewItem
-											title='Calsificación'
+											title='Clasificación'
 											value={formik.values.socialFaceCla}
 										/>
 										<PreviewItem
@@ -1606,7 +1605,7 @@ const NewInfluencer = () => {
 											value={formik.values.socialUTube}
 										/>
 										<PreviewItem
-											title='Calsificación'
+											title='Clasificación'
 											value={formik.values.socialUTubeCla}
 										/>
 										<PreviewItem

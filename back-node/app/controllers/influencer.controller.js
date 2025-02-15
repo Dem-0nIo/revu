@@ -18,6 +18,7 @@ const fileUpload = multer({
 
 exports.registerinfluencer = async (req, res) => {
   try {
+    req.body.celebrity = 0;
     const {
       firstName,
       lastName,
@@ -194,25 +195,26 @@ exports.registerinflu = async (req, res, fileUpload) => {
 
   console.log(__dirname, "../images/" + req.file.filename);
   // Save User to Database
+  console.log("Celebrity create :"+req.body.celebrity);
   const newInfluencer = await Influ.create({
     firstName: req.body.name,
     lastName: req.body.lastName,
     idUser: req.body.idUser,
     birthdayDate: req.body.birthdayDate,
     year: req.body.year,
-    gender_id: Number.isNaN(parseInt(req.body.gender_id, 10)) ? -1 : parseInt(req.body.gender_id, 10),
-    hair_color_id: Number.isNaN(parseInt(req.body.hair_color_id, 10)) ? -1 : parseInt(req.body.hair_color_id, 10),
-    hair_type_id: Number.isNaN(parseInt(req.body.hair_type_id, 10)) ? -1 : parseInt(req.body.hair_type_id, 10),
-    skin_color_id: Number.isNaN(parseInt(req.body.skin_color_id, 10)) ? -1 : parseInt(req.body.skin_color_id, 10),
+    gender_id: Number.isNaN(parseInt(req.body.gender_id, 10)) ? 1 : parseInt(req.body.gender_id, 10),
+    hair_color_id: Number.isNaN(parseInt(req.body.hair_color_id, 10)) ? 1 : parseInt(req.body.hair_color_id, 10),
+    hair_type_id: Number.isNaN(parseInt(req.body.hair_type_id, 10)) ? 1 : parseInt(req.body.hair_type_id, 10),
+    skin_color_id: Number.isNaN(parseInt(req.body.skin_color_id, 10)) ? 1 : parseInt(req.body.skin_color_id, 10),
 	  contact: req.body.contact,
     passport: req.body.passport,
     displayName: req.body.displayName,
     emailAddress: req.body.emailAddress,
     phoneNumber: req.body.phoneNumber,
     addressLine: req.body.addressLine,
-    social_class_id: Number.isNaN(parseInt(req.body.social_class_id, 10)) ? -1 : parseInt(req.body.social_class_id, 10),
-    celebrity: Number.isNaN(parseInt(req.body.celebrity, 10)) ? -1 : parseInt(req.body.celebrity, 10),
-    country_id: Number.isNaN(parseInt(req.body.country_id,10)) ? -1 : parseInt(req.body.country_id, 10),
+    social_class_id: Number.isNaN(parseInt(req.body.social_class_id, 10)) ? 1 : parseInt(req.body.social_class_id, 10),
+    celebrity: String(parseInt(req.body.celebrity, 10)) ? -1 : String(parseInt(req.body.celebrity, 10)),
+    country_id: Number.isNaN(parseInt(req.body.country_id,10)) ? 1 : parseInt(req.body.country_id, 10),
     emailNotification: req.body.emailNotification,
     pushNotification: req.body.pushNotification,
     phoneNumberWhp: req.body.phoneNumberWhp,
