@@ -14,20 +14,13 @@ console.log(publicDirectoryPath);
 
 const allowedOrigins = [
 	'http://localhost',
+  'https://localhost:8082',
 	'http://165.22.179.233',
 	'http://revuagencyapp.com',
 	'http://www.revuagencyapp.com',
 	'https://revuagencyapp.com',
 	'https://www.revuagencyapp.com' 
 ];
-
-
-
-//puerto de conexión con back
-var corsOptions = {
-  origin: "http://165.22.179.233",
-  credentials: true,
-};
 
 app.use(cors({ 
 	origin: function (origin, callback) {  
@@ -75,21 +68,21 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("./app/routes/auth.routes", cors(corsOptions))(app);
-require("./app/routes/user.routes", cors(corsOptions))(app);
-require("./app/routes/influ.routes", cors(corsOptions))(app);
-require("./app/routes/cotizaciones.routes", cors(corsOptions))(app);
-require("./app/routes/gender.routes", cors(corsOptions))(app);
-require("./app/routes/cities.routes", cors(corsOptions))(app);
-require("./app/routes/departments.routes", cors(corsOptions))(app);
-require("./app/routes/influ_classes.routes", cors(corsOptions))(app);
-require("./app/routes/ethnic.routes", cors(corsOptions))(app);
-require("./app/routes/hair_colors.routes", cors(corsOptions))(app);
-require("./app/routes/hair_types.routes", cors(corsOptions))(app);
-require("./app/routes/skin_colors.routes", cors(corsOptions))(app);
-require("./app/routes/tags.routes", cors(corsOptions))(app);
-require("./app/routes/countries.routes", cors(corsOptions))(app);
-require("./app/routes/socialClass.routes", cors(corsOptions))(app);
+require("./app/routes/auth.routes", cors(allowedOrigins))(app);
+require("./app/routes/user.routes", cors(allowedOrigins))(app);
+require("./app/routes/influ.routes", cors(allowedOrigins))(app);
+require("./app/routes/cotizaciones.routes", cors(allowedOrigins))(app);
+require("./app/routes/gender.routes", cors(allowedOrigins))(app);
+require("./app/routes/cities.routes", cors(allowedOrigins))(app);
+require("./app/routes/departments.routes", cors(allowedOrigins))(app);
+require("./app/routes/influ_classes.routes", cors(allowedOrigins))(app);
+require("./app/routes/ethnic.routes", cors(allowedOrigins))(app);
+require("./app/routes/hair_colors.routes", cors(allowedOrigins))(app);
+require("./app/routes/hair_types.routes", cors(allowedOrigins))(app);
+require("./app/routes/skin_colors.routes", cors(allowedOrigins))(app);
+require("./app/routes/tags.routes", cors(allowedOrigins))(app);
+require("./app/routes/countries.routes", cors(allowedOrigins))(app);
+require("./app/routes/socialClass.routes", cors(allowedOrigins))(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 8081;
