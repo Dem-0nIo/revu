@@ -43,4 +43,4 @@ fi
 EXPOSE 8082
 
 # Comando de inicio
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]git log --oneline --graph --decorate --all --branches
