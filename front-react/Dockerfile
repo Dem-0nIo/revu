@@ -29,6 +29,8 @@ fi
 COPY nginx.dev.conf /etc/nginx/nginx.dev.conf
 COPY nginx.prod.conf /etc/nginx/nginx.prod.conf
 
+RUN echo "NODE_ENV is set to $NODE_ENV"
+
 # Copiar la configuración de Nginx (diferente según entorno)
 RUN if [ "$NODE_ENV" = "production" ]; then \
     cp /etc/nginx/nginx.prod.conf /etc/nginx/conf.d/default.conf; \
