@@ -16,6 +16,8 @@ WORKDIR /etc/nginx
 ARG NODE_ENV=development
 ENV NODE_ENV=$NODE_ENV
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # Crear carpeta para certificados (solo en producción)
 RUN if [ "$NODE_ENV" = "production" ]; then mkdir -p /etc/nginx/ssl; fi
 
@@ -38,7 +40,6 @@ else \
     cp /etc/nginx/nginx.dev.conf /etc/nginx/conf.d/default.conf; \
 fi
 
-EXPOSE 80 443
 EXPOSE 8082
 
 # Comando de inicio
