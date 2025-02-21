@@ -32,7 +32,11 @@ services:
     links:
       - mysqldb
     build: ./back-node
-    # restart: unless-stopped
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1g
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
