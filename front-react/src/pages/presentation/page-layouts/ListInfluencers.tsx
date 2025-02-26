@@ -1,13 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable react/button-has-type */
-/* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState, useEffect, useContext } from 'react';
 import Page from '../../../layout/Page/Page';
 import SubHeader, {
@@ -61,10 +51,9 @@ const DefaultAsidePage = () => {
 					data={influencer}
 					isLoading={isLoading}
 					loadingTag={<h1>Loading...</h1>}
-					add={true}
-					flag={true}
+					add
+					flag
 				/>
-				{/* <InfluencerList influencer={influencer} /> */}
 			</Page>
 		</PageWrapper>
 	);

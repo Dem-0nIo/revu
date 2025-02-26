@@ -9,7 +9,14 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET GLOBAL time_zone = '-05:00';
+CREATE USER IF NOT EXISTS 'robot'@'%' IDENTIFIED BY '12345678';
+GRANT SELECT, REFERENCES ON revu_db.* TO 'robot'@'%';
+
+CREATE USER IF NOT EXISTS 'robot'@'localhost' IDENTIFIED BY '12345678';
+GRANT SELECT, REFERENCES ON revu_db.* TO 'robot'@'localhost';
+
+FLUSH PRIVILEGES;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -123,8 +130,17 @@ CREATE TABLE `influencers` (
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
 -- --------------------------------------------------------
+
+INSERT INTO `influencers` (`firstName`, `lastName`, `birthdayDate`, `year`, `gender_id`, `contact`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `social_class_id`, `city_id`, `state_id`, `country_id`, `zip`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUTube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `celebrity`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt`)
+VALUES
+('Juan', 'Pérez', '1995-06-12', '28', 1, 'juan.perez@example.com', 2, 1, 1, 'P123456', 'Juanito', 'juan@example.com', 'Calle Falsa 123', '+573001234567', 1, 1, 1, 1, '110111', '["yes"]', '["yes"]', '+573001234567', '@juanperez', 'Micro', '15000', '@juan_tik', 'Macro', '500000', '@juan_fb', 'Nano', '9000', '@juan_yt', 'Mega', '1500000', '["Instagram", "TikTok"]', 1, 'juan.jpg', 100, 200, 150, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, NOW(), NOW()),
+('María', 'Gómez', '1992-03-25', '31', 2, 'maria.gomez@example.com', 1, 2, 2, 'P654321', 'MariStar', 'maria@example.com', 'Avenida Central 456', '+573002345678', 2, 2, 2, 2, '220222', '["no"]', '["yes"]', '+573002345678', '@mariag', 'Mega', '1000000', '@maria_tik', 'Micro', '80000', '@maria_fb', 'Macro', '600000', '@maria_yt', 'Nano', '5000', '["Facebook", "YouTube"]', 0, 'maria.jpg', 120, 220, 180, 320, 420, 520, 620, 720, 820, 920, 1020, 1120, 1220, NOW(), NOW()),
+('Carlos', 'Rodríguez', '2000-09-18', '23', 1, 'carlos.rod@example.com', 3, 1, 3, 'P789456', 'CarlosTech', 'carlos@example.com', 'Calle Nueva 789', '+573003456789', 3, 3, 3, 3, '330333', '["yes"]', '["no"]', '+573003456789', '@carlost', 'Nano', '9000', '@carlos_tik', 'Micro', '45000', '@carlos_fb', 'Macro', '700000', '@carlos_yt', 'Mega', '2000000', '["TikTok", "Instagram", "YouTube"]', 1, 'carlos.jpg', 140, 240, 190, 340, 440, 540, 640, 740, 840, 940, 1040, 1140, 1240, NOW(), NOW()),
+('Ana', 'Martínez', '1998-12-30', '25', 2, 'ana.mart@example.com', 2, 3, 1, 'P321987', 'AnaBeauty', 'ana@example.com', 'Calle Linda 101', '+573004567890', 1, 4, 4, 4, '440444', '["yes"]', '["yes"]', '+573004567890', '@ana_mart', 'Macro', '400000', '@ana_tik', 'Mega', '1200000', '@ana_fb', 'Micro', '30000', '@ana_yt', 'Nano', '8000', '["Instagram", "TikTok", "Facebook"]', 0, 'ana.jpg', 160, 260, 210, 360, 460, 560, 660, 760, 860, 960, 1060, 1160, 1260, NOW(), NOW()),
+('Pedro', 'Ramírez', '1990-05-14', '33', 1, 'pedro.ram@example.com', 1, 2, 2, 'P852963', 'PedroFitness', 'pedro@example.com', 'Calle Musculosa 666', '+573005678901', 2, 5, 5, 5, '550555', '["yes"]', '["no"]', '+573005678901', '@pedror', 'Nano', '5000', '@pedro_tik', 'Micro', '50000', '@pedro_fb', 'Macro', '900000', '@pedro_yt', 'Mega', '2200000', '["TikTok", "Instagram", "YouTube"]', 1, 'pedro.jpg', 180, 280, 230, 380, 480, 580, 680, 780, 880, 980, 1080, 1180, 1280, NOW(), NOW()),
+('Laura', 'Hernández', '1988-07-22', '35', 2, 'laura.hern@example.com', 3, 1, 3, 'P963258', 'LauraVlogs', 'laura@example.com', 'Avenida Creativa 909', '+573006789012', 3, 6, 6, 6, '660666', '["no"]', '["yes"]', '+573006789012', '@laurah', 'Mega', '1100000', '@laura_tik', 'Micro', '70000', '@laura_fb', 'Macro', '550000', '@laura_yt', 'Nano', '6000', '["Facebook", "YouTube"]', 0, 'laura.jpg', 200, 300, 250, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, NOW(), NOW()),
+('David', 'Sánchez', '1996-02-11', '28', 1, 'david.san@example.com', 2, 2, 2, 'P753159', 'DavidMusic', 'david@example.com', 'Calle Melodía 222', '+573007890123', 1, 7, 7, 7, '770777', '["yes"]', '["yes"]', '+573007890123', '@davids', 'Nano', '12000', '@david_tik', 'Micro', '80000', '@david_fb', 'Macro', '720000', '@david_yt', 'Mega', '1800000', '["Instagram", "TikTok"]', 1, 'david.jpg', 220, 320, 270, 420, 520, 620, 720, 820, 920, 1020, 1120, 1220, 1320, NOW(), NOW());
 
 --
 -- Estructura de tabla para la tabla `roles`
@@ -658,6 +674,28 @@ CREATE TABLE IF NOT EXISTS InfluencerSubcategories (
     FOREIGN KEY (influencerId) REFERENCES influencers(idUser) ON DELETE CASCADE,
     FOREIGN KEY (subcategoryId) REFERENCES SubCategories(id) ON DELETE CASCADE
 );
+
+INSERT INTO InfluencerSubcategories (influencerId, subcategoryId) VALUES
+(1, 2), -- Juan Pérez -> Technology
+(1, 5), -- Juan Pérez -> Fashion
+(2, 1), -- María Gómez -> Beauty
+(2, 3), -- María Gómez -> Fitness
+(3, 4), -- Carlos Rodríguez -> Gaming
+(3, 6), -- Carlos Rodríguez -> Lifestyle
+(4, 1), -- Ana Martínez -> Beauty
+(4, 5), -- Ana Martínez -> Fashion
+(5, 3), -- Pedro Ramírez -> Fitness
+(5, 7), -- Pedro Ramírez -> Health
+(6, 2), -- Laura Hernández -> Technology
+(6, 8), -- Laura Hernández -> Travel
+(7, 9), -- David Sánchez -> Music
+(7, 10), -- David Sánchez -> Dance
+(1, 6), -- Juan Pérez -> Lifestyle
+(2, 8), -- María Gómez -> Travel
+(3, 10), -- Carlos Rodríguez -> Dance
+(4, 9), -- Ana Martínez -> Music
+(5, 4), -- Pedro Ramírez -> Gaming
+(6, 7); -- Laura Hernández -> Health
 
 
 -- Agregar columna a la tabla influencers para referenciar a social_classes

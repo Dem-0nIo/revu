@@ -10,10 +10,11 @@ services:
       - MYSQL_PASSWORD=$MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQL_DATABASE
+      - TZ=America/Bogota
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 60s
-      retries: 30
+      timeout: 20s
+      retries: 10
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     expose:
@@ -43,30 +44,26 @@ services:
       - DB_PASSWORD=$MYSQL_PASSWORD
       - DB_NAME=$MYSQL_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
-    #volumes:
-    #  - .:/back-node
-    command: sh -c "npm start"
-      #- .:/app
-    #command: sh -c "npm install && npm run start"
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run start"
 
   front_app:
     container_name: front_app
     build: ./front-react
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
-      - $REACT_APP_PORT:$REACT_APP_PORT
-    environment:
-      - REACT_APP_URL_API=http://165.22.179.233:8081
     working_dir: /front-react
+    environment:
+      - NODE_ENV=development
     depends_on:
       - back_app
     env_file: ./.env
     volumes:
       - .:/src
   nginx:
-    image: nginx:latest
-    container_name: nginx
+    build: ./front-react
     ports:
-      - 8080:8080
+      - 80:80
     depends_on:
       - front_app

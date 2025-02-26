@@ -7,7 +7,6 @@
 import { useState } from 'react';
 import '../../styles/card.css';
 import '../../styles/button.css';
-import Icon from '../icon/Icon';
 
 export const Card = ({
 	data,

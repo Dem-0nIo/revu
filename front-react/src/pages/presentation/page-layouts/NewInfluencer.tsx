@@ -871,65 +871,6 @@ const NewInfluencer = () => {
 														/>
 													</FormGroup>
 												</div>
-												{/* 
-												<div className='col-md-3'>
-													<FormGroup
-														id='idUser'
-														label='Cedula'
-														isFloating>
-														<Input
-															type='number'
-															placeholder='Cedula'
-															autoComplete='additional-name'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.idUser}
-															isValid={formik.isValid}
-															isTouched={formik.touched.idUser}
-															invalidFeedback={formik.errors.idUser}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div> */}
-												{/* <div className='col-md-3'>
-													<FormGroup
-														id='birthdayDate'
-														label='Fecha de nacimiento'
-														isFloating>
-														<Input
-															type='text'
-															autoComplete='cc-exp'
-															placeholder='MM/YY'
-															mask='99/99'
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.birthdayDate}
-															isValid={formik.isValid}
-															isTouched={formik.touched.firstName}
-															invalidFeedback={
-																formik.errors.birthdayDate
-															}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div> */}
-												{/* <div className='col-md-3'>
-													<FormGroup
-														id='addressLine'
-														label='Dirección'
-														isFloating>
-														<Input
-															onChange={formik.handleChange}
-															onBlur={formik.handleBlur}
-															value={formik.values.addressLine}
-															isValid={formik.isValid}
-															isTouched={formik.touched.addressLine}
-															invalidFeedback={formik.errors.addressLine}
-															validFeedback='Looks good!'
-														/>
-													</FormGroup>
-												</div> */}
-												
 											</div>
 										</CardBody>
 									</Card>
@@ -990,38 +931,7 @@ const NewInfluencer = () => {
 												validFeedback='Looks good!'
 											/>
 										</FormGroup>
-									</div>
-									{/* <div className='col-md-3'>
-										<FormGroup
-											id='state_id'
-											label='Departamento'
-											isFloating>
-											<Select
-												ariaLabel='State'
-												placeholder='Seleccione...'
-												list={departments.map((state) => ({
-													value: state.id,
-													text: state.department_name,
-												}))}
-												onChange={formik.handleChange}
-												onBlur={formik.handleBlur}
-												value={formik.values.state_id}
-												isValid={formik.isValid}
-												isTouched={formik.touched.state_id}
-												invalidFeedback={formik.errors.state_id}
-											/>
-										</FormGroup>
-									</div> */}
-
-									{/* <div className='col-md-4'>
-										<Button
-											color='info'
-											onClick={() => console.log('Subcategories Selected:', selectedSubcategories)}
-										>
-											Agregar Subcategoria
-										</Button>
-									</div> */}
-									
+									</div>							
 								</div>
 
 								</WizardItem>

@@ -85,7 +85,11 @@ const getSocialClasses = () => {
 	return axios.get(`${API_URL}social-classes`, { headers: authHeader() });
 };
 
-const UserService = {
+const searchInfluencers = (values) => {
+	return axios.get(`${INFLUENCER_URL}search`, values, { headers: authHeader() });
+};
+
+const InfluService = {
 	getAll,
 	addInfluencer,
 	deleteInfluencer,
@@ -102,7 +106,8 @@ const UserService = {
 	getCategoriesSubcategories,
 	getCategories,
 	getSubcategories,
-	getSocialClasses, // Export the new method
+	getSocialClasses,
+	searchInfluencers, // Export the new method
 };
 
-export default UserService;
+export default InfluService;

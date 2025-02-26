@@ -25,7 +25,7 @@ export const CarritoProvider = ({ children }) => {
 						return { ...item, cantidad: cant };
 					return item;
 				});
-				break;
+				
 			case '[CARRITO] Eliminar Compra':
 				return state.filter((compra) => compra.idUser !== action.payload);
 			default:

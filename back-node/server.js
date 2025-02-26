@@ -13,32 +13,17 @@ app.use(express.static(publicDirectoryPath));
 console.log(publicDirectoryPath);
 
 const allowedOrigins = [
-	'http://localhost',
-  'https://localhost:8082',
-	'http://165.22.179.233',
-	'http://revuagencyapp.com',
-	'http://www.revuagencyapp.com',
-	'https://revuagencyapp.com',
-	'https://www.revuagencyapp.com' 
+	'http://localhost:8088',
+  'https://localhost:3000'
 ];
 
-app.use(cors({ 
-	origin: function (origin, callback) {  
-		if (!origin || allowedOrigins.includes(origin)) {   
-			callback(null, true);  
-		} else {   
-			callback(new error('CORS not allowed'));  
-		}
-	}, 
-	credentials: true
-	}));
+//puerto de conexión con back
+var corsOptions = {
+  origin: "*",
+  credentials: true,
+};
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
-});
+app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -68,6 +53,7 @@ app.get("/", (req, res) => {
 });
 
 // routes
+// routes
 require("./app/routes/auth.routes", cors(allowedOrigins))(app);
 require("./app/routes/user.routes", cors(allowedOrigins))(app);
 require("./app/routes/influ.routes", cors(allowedOrigins))(app);
@@ -86,29 +72,25 @@ require("./app/routes/socialClass.routes", cors(allowedOrigins))(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 8081;
-app.listen(PORT,'0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-db.TagsCategory.findAll({ include: [{ model: db.SubCategory, as: 'sub_category'}], })
-    .then((categories) => console.log(categories))
-    .catch((error) => console.error("Error fetching categories:", error));
 
 /** Only for initial data, comment to first init */
 function initial() {
   Role.create({
     id: 1,
-    name: "admin",
+    name: "user",
   });
 
   Role.create({
     id: 2,
-    name: "cct",
+    name: "moderator",
   });
 
   Role.create({
     id: 3,
-    name: "reclutador",
+    name: "admin",
   });
   User.create({
     username: "admin",

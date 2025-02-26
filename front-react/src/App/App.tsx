@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { ThemeProvider } from 'react-jss';
 import { ReactNotifications } from 'react-notifications-component';
 import { useFullscreen } from 'react-use';
-import { TourProvider } from '@reactour/tour';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -13,12 +12,10 @@ import Portal from '../layout/Portal/Portal';
 import useDarkMode from '../hooks/useDarkMode';
 import COLORS from '../common/data/enumColors';
 import { getOS } from '../helpers/helpers';
-import steps, { styles } from '../steps';
 import AsideRoutes from '../layout/Aside/AsideRoutes';
 import { ToastCloseButton } from '../components/bootstrap/Toasts';
 import { CarritoProvider } from '../contexts/CarritoProvider';
 import { ProductosProvider } from '../contexts/ProductosProvider';
-import { NavBar } from '../components/NavBar';
 
 const App = () => {
 	getOS();

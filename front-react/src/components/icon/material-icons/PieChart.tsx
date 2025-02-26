@@ -1,4 +1,5 @@
 import React, { SVGProps } from 'react';
+import axios from "axios";
 
 const SvgPieChart = (props: SVGProps<SVGSVGElement>) => {
 	return (

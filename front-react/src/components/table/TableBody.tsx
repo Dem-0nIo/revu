@@ -6,8 +6,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-console */
 import React, { Fragment, useContext, useState } from 'react';
-import { Field, useFormik } from 'formik';
-import * as Yup from 'yup';
 import CarritoContext from '../../contexts/CarritoContext';
 import { Card } from './AddDel';
 import Button from '../bootstrap/Button';
@@ -40,6 +38,7 @@ export const TableBody = ({
 }) => {
 	const { agregarCompra, eliminarCompra } = useContext(CarritoContext);
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [added, setAdded] = useState(false);
 
 	const [upcomingEventsEditOffcanvas, setUpcomingEventsEditOffcanvas] = useState(false);

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Icon from '../../components/icon/Icon';
-import Logo from '../../components/Logo';
-import User1Img from '../../assets/img/wanna/logo_login.png';
+// import Logo from '../../components/Logo';
+// import User1Img from '../../assets/img/wanna/logo_login.png';
 
 interface IBrandProps {
 	asideStatus: boolean;
