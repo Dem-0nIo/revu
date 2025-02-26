@@ -337,10 +337,44 @@ exports.clasificacion = (req, res) => {
 
 exports.getFilteredInfluencers = async (req, res) => {
   try {
-    const { category_id } = req.query; // Get category ID from request
+    //const { category_id } = req.query; // Get category ID from request
     
+    const {
+      category_id,       // Categoría
+      socialNetwork,     // Red Social
+      influencerSize,    // Tamaño de Influencer
+      country,           // País
+      city,              // Ciudad
+      gender,            // Sexo
+      age,               // Edad
+      socialClass,       // Clase Social
+      hairType,          // Tipo de cabello
+      hairColor,         // Color de cabello
+      skinColor,         // Color de piel
+      isCelebrity,       // Celebrity
+      isUGC              // UGC (User Generated Content)
+    } = req.query;
+
+    let whereClause = {};
+
+    if (category_id) whereClause['$influencerSubcategories.subcategory.category.id$'] = category_id;
+    if (socialNetwork) whereClause['socialNetwork'] = socialNetwork;
+    if (influencerSize) whereClause['influencerSize'] = influencerSize;
+    if (country) whereClause['country_id'] = country;  // Cambio de country a country_id ✅
+    if (city) whereClause['city_id'] = city;  // Cambio de city a city_id ✅
+    if (gender) whereClause['gender_id'] = gender;  // Cambio de gender a gender_id ✅
+    if (age) whereClause['year'] = age;  // Si el año representa la edad
+    if (socialClass) whereClause['social_class_id'] = socialClass;  // Cambio de socialClass a social_class_id ✅
+    if (hairType) whereClause['hair_type_id'] = hairType;  // Cambio de hairType a hair_type_id ✅
+    if (hairColor) whereClause['hair_color_id'] = hairColor;  // Cambio de hairColor a hair_color_id ✅
+    if (skinColor) whereClause['skin_color_id'] = skinColor;  // Cambio de skinColor a skin_color_id ✅
+    if (isCelebrity !== undefined) whereClause['celebrity'] = isCelebrity === 'true';
+    if (isUGC !== undefined) whereClause['isUGC'] = isUGC === 'true';
+
+
     const influencers = await Influ.findAll({
-      attributes: ['idUser', 'displayName', 'socialInstagram', 'socialTik', 'socialFace', 'socialUTube'],
+      attributes: ['idUser', 'displayName', 'socialInstagram', 'socialInstagramCla', 'socialTik', 'socialTikCla', 'socialFace', 'socialFaceCla', 'socialUTube', 'socialUTubeCla'],
+      where: whereClause,
       include: [
         {
           model: InfluencerSubcategories,
@@ -352,8 +386,7 @@ exports.getFilteredInfluencers = async (req, res) => {
               include: [
                 {
                   model: TagsCategory,
-                  as: 'category',
-                  where: { id: category_id } // Ensure `category_id` comes from request
+                  as: 'category'
                 }
               ]
             }

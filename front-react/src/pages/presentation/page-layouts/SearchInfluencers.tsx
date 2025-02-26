@@ -1,11 +1,11 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card, { CardBody, CardHeader, CardLabel, CardTitle } from '../../../components/bootstrap/Card';
 import Button from '../../../components/bootstrap/Button';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
 import Input from '../../../components/bootstrap/forms/Input';
 import Select from '../../../components/bootstrap/forms/Select';
-import Checks, { ChecksGroup } from '../../../components/bootstrap/forms/Checks';
-import Label from '../../../components/bootstrap/forms/Label';
+import Checks from '../../../components/bootstrap/forms/Checks';
+// import Label from '../../../components/bootstrap/forms/Label';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import Page from '../../../layout/Page/Page';
 import showNotification from '../../../components/extras/showNotification';
@@ -65,6 +65,7 @@ interface Category {
     category_name: string;
 }
 
+
 const SearchPage = () => {
 
   // State to store filter values
@@ -89,11 +90,11 @@ const SearchPage = () => {
   const [cities, setCities] = useState<City[]>([]);
   const [genders, setGenders] = useState<Gender[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
+  const [, setInfluencerClasses] = useState<InfluencerClass[]>([]);
   const [hairColor, setHairColor] = useState<HairColor[]>([]);
   const [hairType, setHairType] = useState<HairType[]>([]);
   const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const [, setSelectedCategoryId] = useState<number | null>(null);
   const [socialClasses, setSocialClasses] = useState<SocialClass[]>([]);
 
   const [results, setResults] = useState<any[]>([]);
@@ -104,11 +105,30 @@ const SearchPage = () => {
 
   const fetchResults = async () => {
     try {
-      const response = await FiltersService.searchInfluencers(filters); // Asegúrate de crear este método en el servicio
-      setResults(response.data); // Guardamos los resultados en el estado
-      console.log("Resultados encontrados:", response.data);
+      const params = new URLSearchParams();
+
+      // Agregar solo los filtros que tienen valor
+      if (filters.socialNetwork) params.append("socialNetwork", filters.socialNetwork);
+      if (filters.influencerSize) params.append("influencerSize", filters.influencerSize);
+      if (filters.category) params.append("category_id", filters.category); // Cambio de `category` a `category_id`
+      if (filters.country) params.append("country_id", filters.country); // Cambio a `country_id`
+      if (filters.city) params.append("city_id", filters.city); // Cambio a `city_id`
+      if (filters.gender) params.append("gender_id", filters.gender); // Cambio a `gender_id`
+      if (filters.age) params.append("year", filters.age); // Cambio a `year`
+      if (filters.socialClass) params.append("social_class_id", filters.socialClass); // Cambio a `social_class_id`
+      if (filters.hairType) params.append("hair_type_id", filters.hairType); // Cambio a `hair_type_id`
+      if (filters.hairColor) params.append("hair_color_id", filters.hairColor); // Cambio a `hair_color_id`
+      if (filters.skinColor) params.append("skin_color_id", filters.skinColor); // Cambio a `skin_color_id`
+      if (filters.celebrity) params.append("celebrity", filters.celebrity);
+      if (filters.ugc) params.append("ugc", filters.ugc);
+
+      const response = await FiltersService.searchInfluencers(`?${params.toString()}`);
+      setResults(response.data);
+
+      if (process.env.NODE_ENV === "development") {
+        console.log("Resultados encontrados:", response.data);
+      }
     } catch (error) {
-      console.error("Error al buscar influencers:", error);
       showNotification("Error", "No se pudieron cargar los resultados", "danger");
     }
   };
@@ -136,7 +156,7 @@ const SearchPage = () => {
 				const response = await FiltersService.getGenders(); // Make sure to create this service method
 				setGenders(response.data);
 			} catch (error) {
-				console.error("Failed to fetch genders:", error);
+				// console.error("Failed to fetch genders:", error);
 			}
 		}
 		fetchGenders();
@@ -149,7 +169,7 @@ const SearchPage = () => {
 				const response = await FiltersService.getCities(); // Make sure to create this service method
 				setCities(response.data);
 			} catch (error) {
-				console.error("Failed to fetch Cities:", error);
+				// console.error("Failed to fetch Cities:", error);
 			}
 		}
 		fetchCities();
@@ -162,7 +182,7 @@ const SearchPage = () => {
 				const response = await FiltersService.getSocialClasses(); // Make sure to create this service method
 				setSocialClasses(response.data);
 			} catch (error) {
-				console.error("Failed to fetch social classes:", error);
+				// console.error("Failed to fetch social classes:", error);
 			}
 		}
 		fetchSocialClasses();
@@ -173,10 +193,10 @@ const SearchPage = () => {
 		async function fetchHairColor() {
 			try {
 				const response = await FiltersService.getHairColor(); // Asegúrate de tener este método en tu servicio
-				console.log("Color de cabello:", response.data); // Verifica el contenido
+				// console.log("Color de cabello:", response.data); // Verifica el contenido
 				setHairColor(response.data);
 			} catch (error) {
-				console.error("Failed to fetch hair color:", error);
+				// console.error("Failed to fetch hair color:", error);
 			}
 		}
 		fetchHairColor();
@@ -187,10 +207,10 @@ const SearchPage = () => {
 		async function fetchHairType() {
 			try {
 				const response = await FiltersService.getHairTypes(); // Asegúrate de tener este método en tu servicio
-				console.log("Tipo de cabello cargado:", response.data); // Verifica el contenido
+				// console.log("Tipo de cabello cargado:", response.data); // Verifica el contenido
 				setHairType(response.data);
 			} catch (error) {
-				console.error("Failed to fetch hair type:", error);
+				// console.error("Failed to fetch hair type:", error);
 			}
 		}
 		fetchHairType();
@@ -201,10 +221,10 @@ const SearchPage = () => {
 		async function fetchSkinColor() {
 			try {
 				const response = await FiltersService.getSkinColors(); // Asegúrate de tener este método en tu servicio
-				console.log("Color de piel cargado: ", response.data); // Verifica el contenido
+				// console.log("Color de piel cargado: ", response.data); // Verifica el contenido
 				setSkinColor(response.data);
 			} catch (error) {
-				console.error("Failed to fetch skin color: ", error);
+				// console.error("Failed to fetch skin color: ", error);
 			}
 		}
 		fetchSkinColor();
@@ -215,10 +235,10 @@ const SearchPage = () => {
 		async function fetchCountry() {
 			try {
 				const response = await FiltersService.getCountries(); // Asegúrate de tener este método en tu servicio
-				console.log("Paises cargados: ", response.data); // Verifica el contenido
+				// console.log("Paises cargados: ", response.data); // Verifica el contenido
 				setCountry(response.data);
 			} catch (error) {
-				console.error("Failed to fetch countries: ", error);
+				// console.error("Failed to fetch countries: ", error);
 			}
 		}
 		fetchCountry();
@@ -231,7 +251,7 @@ const SearchPage = () => {
 				const response = await FiltersService.getCategories(); // Create this service
 				setCategories(response.data);
 			} catch (error) {
-				console.error("Failed to fetch categories:", error);
+				// console.error("Failed to fetch categories:", error);
 			}
 		}
 		fetchCategories();
@@ -242,10 +262,10 @@ const SearchPage = () => {
 		async function fetchInfluencerClasses() {
 			try {
 				const response = await FiltersService.getInfluencerClasses(); // Asegúrate de tener este método en tu servicio
-				console.log("Clases cargadas:", response.data); // Verifica el contenido
+				// console.log("Clases cargadas:", response.data); // Verifica el contenido
 				setInfluencerClasses(response.data);
 			} catch (error) {
-				console.error("Failed to fetch influencer classes:", error);
+				// console.error("Failed to fetch influencer classes:", error);
 			}
 		}
 		fetchInfluencerClasses();
@@ -253,12 +273,10 @@ const SearchPage = () => {
   
   // Handle filter selection
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
-
-  // Simulated search function (connect to API later)
-  const searchInfluencers = () => {
-    console.log("Searching with filters:", filters);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [e.target.name]: e.target.value || "", // Evita valores `undefined`
+    }));
   };
 
   return (
@@ -500,20 +518,38 @@ const SearchPage = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {results.map((influencer, index) => (
-                          <tr key={influencer.idUser}>
-                            <td>{influencer.displayName || `${influencer.firstName} ${influencer.lastName}`}</td>
-                            <td>{influencer.socialNetwork}</td>
-                            <td>
-                              {influencer.socialInstagramCla || 
-                              influencer.socialTikCla || 
-                              influencer.socialFaceCla || 
-                              influencer.socialUTubeCla || "N/A"}
-                            </td>
-                            <td>{influencer.category_name || "N/A"}</td>
-                            <td>{influencer.subcategory_name || "N/A"}</td>
-                          </tr>
-                        ))}
+                        {results.map((influencer) => {
+                          // Obtener la primera red social disponible
+                          const firstSocialMedia = 
+                            influencer.socialInstagram || 
+                            influencer.socialTik || 
+                            influencer.socialFace || 
+                            influencer.socialUTube || "N/A";
+
+                          // Obtener la primera clasificación de red social disponible
+                          const firstSocialClass = 
+                            influencer.socialInstagramCla || 
+                            influencer.socialTikCla || 
+                            influencer.socialFaceCla || 
+                            influencer.socialUTubeCla || "N/A";
+
+                          // Obtener la primera subcategoría disponible (asegurando que tenga categoría)
+                          const firstSubcategory = influencer.influencerSubcategories?.[0]?.subcategory || null;
+                          
+                          // Obtener la categoría asociada a la subcategoría
+                          const categoryName = firstSubcategory?.category?.category_name || "N/A";
+                          const subcategoryName = firstSubcategory?.subcategory_name || "N/A";
+
+                          return (
+                            <tr key={influencer.idUser}>
+                              <td>{influencer.displayName || `${influencer.firstName} ${influencer.lastName}`}</td>
+                              <td>{firstSocialMedia}</td>
+                              <td>{firstSocialClass}</td>
+                              <td>{categoryName}</td>
+                              <td>{subcategoryName}</td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
