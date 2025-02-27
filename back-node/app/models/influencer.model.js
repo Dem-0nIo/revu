@@ -118,7 +118,7 @@ module.exports = (sequelize, Sequelize) => {
     socialFaceSeg: {
       type: Sequelize.STRING,
     },
-    socialUtube: {
+    socialUTube: {
       type: Sequelize.STRING,
     },
     socialUTubeCla: {

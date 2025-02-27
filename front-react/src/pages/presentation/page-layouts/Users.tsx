@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable spaced-comment */
-import React, { FC, useState } from 'react';
-import * as Yup from 'yup';
+import React, { useState } from 'react';
+// import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Card, {
 	CardBody,
@@ -20,12 +20,12 @@ import Page from '../../../layout/Page/Page';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
 import Input from '../../../components/bootstrap/forms/Input';
 import showNotification from '../../../components/extras/showNotification';
-import Icon from '../../../components/icon/Icon';
+// import Icon from '../../../components/icon/Icon';
 import Button from '../../../components/bootstrap/Button';
 import UserService from '../../../services/user.service';
-import UserData from '../../_common/user';
+// import UserData from '../../_common/user';
 
-const SignupSchema = Yup.object({
+/* const SignupSchema = Yup.object({
 	firstName: Yup.string().required('Es un campo obligatorio'),
 	lastName: Yup.string().required('Es un campo obligatorio'),
 	displayName: Yup.string().required('Es un campo obligatorio'),
@@ -34,12 +34,12 @@ const SignupSchema = Yup.object({
 		.email('Ingresar un correo valido')
 		.required('Es un campo obligatorio'),
 	addressLine: Yup.string().required('Es un campo obligatorio'),
-});
+}); */
 
 const Users = () => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [successful, setSuccessful] = useState(false);
-	const [message, setMessage] = useState('error por defecto');
+	// const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [, setSuccessful] = useState(false);
+	// const [message, setMessage] = useState('error por defecto');
 
 	async function addUser(values: any) {
 		try {

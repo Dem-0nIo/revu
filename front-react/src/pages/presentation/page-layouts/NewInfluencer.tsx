@@ -14,8 +14,8 @@ import Wizard, { WizardItem } from '../../../components/Wizard';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
 import Input from '../../../components/bootstrap/forms/Input';
 import Select from '../../../components/bootstrap/forms/Select';
-import Label from '../../../components/bootstrap/forms/Label';
-import Checks, { ChecksGroup } from '../../../components/bootstrap/forms/Checks';
+// import Label from '../../../components/bootstrap/forms/Label';
+import Checks from '../../../components/bootstrap/forms/Checks';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import Page from '../../../layout/Page/Page';
 import showNotification from '../../../components/extras/showNotification';
@@ -283,10 +283,10 @@ interface SkinColor {
 
 const NewInfluencer = () => {
 	
-	const [successful, setSuccessful] = useState(false);
+	// const [, setSuccessful] = useState(false);
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
-	const [departments, setDepartments] = useState<Department[]>([]);
+	const [, setDepartments] = useState<Department[]>([]);
 	const [countries, setCountry] = useState<Country[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
@@ -303,14 +303,14 @@ const NewInfluencer = () => {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
 		TEST: 'Test',
 	};
-	const [activeTab, setActiveTab] = useState(TABS.ACCOUNT_DETAIL);
+	const [activeTab, ] = useState(TABS.ACCOUNT_DETAIL);
 
-	const socialNetwork = [
+/* 	const socialNetwork = [
 		{ id: 1, name: 'Instagram' },
 		{ id: 2, name: 'TikTok' },
 		{ id: 3, name: 'Facebook' },
 		{ id: 4, name: 'YouTube' },
-	];
+	]; */
 
 	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setSelectedCategoryId(Number(e.target.value));
@@ -592,7 +592,7 @@ const NewInfluencer = () => {
 		fetchSubcategories();
 	}, [selectedCategoryId]);
 
-	async function addInflu(values: any) {
+	/* async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
 			if (resp) {
@@ -603,7 +603,7 @@ const NewInfluencer = () => {
 			setSuccessful(false);
 			showNotification('Error', String(error), 'danger');
 		}
-	}
+	} */
 
 	const formik = useFormik({
         initialValues,

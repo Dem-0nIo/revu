@@ -89,6 +89,10 @@ const searchInfluencers = (values) => {
 	return axios.get(`${INFLUENCER_URL}search`, values, { headers: authHeader() });
 };
 
+const getAllInfluencersWithCategories = () => {
+	return axios.get(`${INFLUENCER_URL}allWithCategories`, { headers: authHeader() });
+};
+
 const InfluService = {
 	getAll,
 	addInfluencer,
@@ -107,7 +111,8 @@ const InfluService = {
 	getCategories,
 	getSubcategories,
 	getSocialClasses,
-	searchInfluencers, // Export the new method
+	searchInfluencers,
+	getAllInfluencersWithCategories, // Export the new method
 };
 
 export default InfluService;

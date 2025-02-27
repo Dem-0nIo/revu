@@ -334,6 +334,67 @@ exports.clasificacion = (req, res) => {
     });
 };
 
+exports.getAllInfluencersWithCategories = async (req, res) => {
+  try {
+    const influencers = await Influ.findAll({
+      attributes: [
+        'idUser',
+        'displayName',
+        'socialInstagram',
+        'socialInstagramCla',
+        'socialTik',
+        'socialTikCla',
+        'socialFace',
+        'socialFaceCla',
+        'socialUTube',
+        'socialUTubeCla'
+      ],
+      include: [
+        {
+          model: InfluencerSubcategories,
+          as: 'influencerSubcategories',
+          include: [
+            {
+              model: SubCategory,
+              as: 'subcategory',
+              include: [
+                {
+                  model: TagsCategory,
+                  as: 'category'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+
+    const formattedInfluencers = influencers.map(influencer => {
+      return {
+        idUser: influencer.idUser,
+        displayName: influencer.displayName,
+        socialInstagram: influencer.socialInstagram,
+        socialInstagramCla: influencer.socialInstagramCla,
+        socialTik: influencer.socialTik,
+        socialTikCla: influencer.socialTikCla,
+        socialFace: influencer.socialFace,
+        socialFaceCla: influencer.socialFaceCla,
+        socialUTube: influencer.socialUTube,
+        socialUTubeCla: influencer.socialUTubeCla,
+        categories: influencer.influencerSubcategories.map(sub => ({
+          category: sub.subcategory?.category?.category_name || "N/A",
+          subcategory: sub.subcategory?.subcategory_name || "N/A"
+        }))
+      };
+    });
+
+    res.status(200).json(formattedInfluencers);
+  } catch (error) {
+    console.error("Error fetching influencers with categories:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 
 exports.getFilteredInfluencers = async (req, res) => {
   try {
@@ -395,7 +456,14 @@ exports.getFilteredInfluencers = async (req, res) => {
       ]
     });
 
-    res.status(200).json(influencers);
+    // Transform the response to include category & subcategory as separate fields
+    const formattedInfluencers = influencers.map(influencer => ({
+      ...influencer.toJSON(),
+      category: influencer.influencerSubcategories.map(sub => sub.subcategory?.category?.category_name).join(", "),
+      subcategory: influencer.influencerSubcategories.map(sub => sub.subcategory?.subcategory_name).join(", ")
+    }));
+
+    res.status(200).json(formattedInfluencers);
   } catch (error) {
     console.error("Error fetching influencers:", error);
     res.status(500).json({ error: "Internal server error" });

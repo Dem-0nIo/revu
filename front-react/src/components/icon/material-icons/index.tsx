@@ -1786,6 +1786,7 @@ export { default as WrapText } from './WrapText';
 export { default as WrongLocation } from './WrongLocation';
 export { default as Wysiwyg } from './Wysiwyg';
 export { default as Yard } from './Yard';
+export { default as Youtube } from './Youtube';
 export { default as YoutubeSearchedFor } from './YoutubeSearchedFor';
 export { default as ZoomIn } from './ZoomIn';
 export { default as ZoomOut } from './ZoomOut';

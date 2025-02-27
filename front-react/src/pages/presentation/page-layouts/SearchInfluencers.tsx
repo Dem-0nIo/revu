@@ -10,6 +10,7 @@ import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import Page from '../../../layout/Page/Page';
 import showNotification from '../../../components/extras/showNotification';
 import FiltersService from '../../../services/influ.service'; // Crear este servicio para obtener filtros de API
+import TableClientSideBlog from '../../../components/table/Table'; 
 
 
 // Define the City type
@@ -98,14 +99,28 @@ const SearchPage = () => {
   const [socialClasses, setSocialClasses] = useState<SocialClass[]>([]);
 
   const [results, setResults] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setSelectedCategoryId(Number(e.target.value));
     };
+  
+  // Handle filter selection
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [e.target.name]: e.target.value || "", // Evita valores `undefined`
+    }));
+  };
 
   const fetchResults = async () => {
     try {
+      setIsLoading(true);
       const params = new URLSearchParams();
+
+      /* Object.entries(filters).forEach(([key, value]) => {
+        if (value) params.append(key, value);
+      }); */
 
       // Agregar solo los filtros que tienen valor
       if (filters.socialNetwork) params.append("socialNetwork", filters.socialNetwork);
@@ -125,9 +140,9 @@ const SearchPage = () => {
       const response = await FiltersService.searchInfluencers(`?${params.toString()}`);
       setResults(response.data);
 
-      if (process.env.NODE_ENV === "development") {
+      // if (process.env.NODE_ENV === "development") {
         console.log("Resultados encontrados:", response.data);
-      }
+      // }
     } catch (error) {
       showNotification("Error", "No se pudieron cargar los resultados", "danger");
     }
@@ -137,11 +152,30 @@ const SearchPage = () => {
   useEffect(() => {
     async function fetchFilters() {
       try {
-        const countriesResponse = await FiltersService.getCountries();
+/*         const countriesResponse = await FiltersService.getCountries();
         setCountry(countriesResponse.data);
 
         const categoriesResponse = await FiltersService.getCategories();
-        setCategories(categoriesResponse.data);
+        setCategories(categoriesResponse.data); */
+        const [countriesRes, categoriesRes, gendersRes, citiesRes, socialClassesRes, hairColorsRes, hairTypesRes, skinColorsRes] = await Promise.all([
+          FiltersService.getCountries(),
+          FiltersService.getCategories(),
+          FiltersService.getGenders(),
+          FiltersService.getCities(),
+          FiltersService.getSocialClasses(),
+          FiltersService.getHairColor(),
+          FiltersService.getHairTypes(),
+          FiltersService.getSkinColors()
+        ]);
+
+        setCountry(countriesRes.data);
+        setCategories(categoriesRes.data);
+        setGenders(gendersRes.data);
+        setCities(citiesRes.data);
+        setSocialClasses(socialClassesRes.data);
+        setHairColor(hairColorsRes.data);
+        setHairType(hairTypesRes.data);
+        setSkinColor(skinColorsRes.data);
       } catch (error) {
         showNotification('Error', 'No se pudieron cargar los filtros', 'danger');
       }
@@ -270,236 +304,261 @@ const SearchPage = () => {
 		}
 		fetchInfluencerClasses();
 	}, []);
-  
-  // Handle filter selection
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [e.target.name]: e.target.value || "", // Evita valores `undefined`
-    }));
-  };
 
   return (
     <PageWrapper title="Búsqueda de Influencers">
       <Page>
-        <div className="row h-100 pb-3">
-          <div className="col-lg-12 col-md-8">
-            <Card>
-              <CardHeader>
-                <CardLabel icon="Search" iconColor="info">
-                  <CardTitle>Filtros de Influencers</CardTitle>
-                </CardLabel>
-              </CardHeader>
-              <CardBody>
-                <div className="row g-4">
-                  <div className="col-md-2">
-                    <FormGroup label="Red Social">
-                      <Select
-                        ariaLabel='Social Network'
-												placeholder='Seleccione...'
-                        name="socialNetwork" 
-                        onChange={handleFilterChange} list={[
-                          { value: 'Instagram', text: 'Instagram' },
-                          { value: 'TikTok', text: 'TikTok' },
-                          { value: 'Facebook', text: 'Facebook' },
-                          { value: 'Youtube', text: 'Youtube' },
-                        ]} 
-                      />
-                    </FormGroup>
-                  </div>
+        <Card>
+          <CardHeader>
+            <CardLabel icon="Search" iconColor="info">
+              <CardTitle>Filtros de Influencers</CardTitle>
+            </CardLabel>
+          </CardHeader>
+          <CardBody>
+            <div className="row g-4">
+              <div className="col-md-2">
+                <FormGroup label="Red Social">
+                  <Select
+                    ariaLabel='Social Network'
+                    placeholder='Seleccione...'
+                    name="socialNetwork" 
+                    onChange={handleFilterChange} list={[
+                      { value: 'Instagram', text: 'Instagram' },
+                      { value: 'TikTok', text: 'TikTok' },
+                      { value: 'Facebook', text: 'Facebook' },
+                      { value: 'Youtube', text: 'Youtube' },
+                    ]} 
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className="col-md-2">
-                    <FormGroup label="Tamaño de Influencer">
-                      <Select
-                        ariaLabel='Tamaño de influencer'
-												placeholder='Seleccione...'
-                        name="influencerSize" 
-                        onChange={handleFilterChange} list={[
-                          { value: 'Nano', text: 'Nano (1k-10k)' },
-                          { value: 'Micro', text: 'Micro (10k-100k)' },
-                          { value: 'Macro', text: 'Macro (100k-1M)' },
-                          { value: 'Mega', text: 'Mega (1M+)' },
-                        ]} 
-                      />
-                    </FormGroup>
-                  </div>
+              <div className="col-md-2">
+                <FormGroup label="Tamaño de Influencer">
+                  <Select
+                    ariaLabel='Tamaño de influencer'
+                    placeholder='Seleccione...'
+                    name="influencerSize" 
+                    onChange={handleFilterChange} list={[
+                      { value: 'Nano', text: 'Nano (1k-10k)' },
+                      { value: 'Micro', text: 'Micro (10k-100k)' },
+                      { value: 'Macro', text: 'Macro (100k-1M)' },
+                      { value: 'Mega', text: 'Mega (1M+)' },
+                    ]} 
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className="col-md-2">
-                    <FormGroup label="Categoría">
-                      <Select
-                        ariaLabel='Categoría'
-												placeholder='Seleccione...'
-                        name="category" 
-                        onChange={handleCategoryChange} 
-                        list={categories.map(cat => ({
-                          value: cat.id, 
-                          text: cat.category_name
-                        }))} 
-                        />
-                    </FormGroup>
-                  </div>
+              <div className="col-md-2">
+                <FormGroup label="Categoría">
+                  <Select
+                    ariaLabel='Categoría'
+                    placeholder='Seleccione...'
+                    name="category" 
+                    onChange={handleCategoryChange} 
+                    list={categories.map(cat => ({
+                      value: cat.id, 
+                      text: cat.category_name
+                    }))} 
+                    />
+                </FormGroup>
+              </div>
 
-                  <div className="col-md-2">
-                    <FormGroup label="País">
-                      <Select
-                        ariaLabel='Country'
-                        placeholder='Seleccione...'
-                        name="country" 
-                        onChange={handleFilterChange} 
-                        list={countries.map(country => ({
-                          value: country.id, 
-                          text: country.name
-                        }))} 
-                      />
-                    </FormGroup>
-                  </div>
+              <div className="col-md-2">
+                <FormGroup label="País">
+                  <Select
+                    ariaLabel='Country'
+                    placeholder='Seleccione...'
+                    name="country" 
+                    onChange={handleFilterChange} 
+                    list={countries.map(country => ({
+                      value: country.id, 
+                      text: country.name
+                    }))} 
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className="col-md-2">
-                    <FormGroup label="Ciudad">
-                      <Select 
-                        ariaLabel='Ciudad'
-                        placeholder='Seleccione...'
-                        name="city" 
-                        onChange={handleFilterChange} 
-                        list={cities.map(city => ({
-                          value: city.id, 
-                          text: city.city_name
-                        }))} 
-                      />
-                    </FormGroup>
-                  </div>
+              <div className="col-md-2">
+                <FormGroup label="Ciudad">
+                  <Select 
+                    ariaLabel='Ciudad'
+                    placeholder='Seleccione...'
+                    name="city" 
+                    onChange={handleFilterChange} 
+                    list={cities.map(city => ({
+                      value: city.id, 
+                      text: city.city_name
+                    }))} 
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className="col-md-2">
-                    <FormGroup id='gender_id' label='Sexo' >
-                      <Select
-                        name="gender_id"
-                        ariaLabel='Sexo'
-                        placeholder='Seleccione...'
-                        list={genders.map((gender) => ({
-                          value: String(gender.id), // Use the gender ID as the value
-                          text: gender.description, // Use the gender description as the text
-                        }))}
-                        onChange={handleFilterChange}
-                      />
-                    </FormGroup>
-                  </div>
+              <div className="col-md-2">
+                <FormGroup id='gender_id' label='Sexo' >
+                  <Select
+                    name="gender_id"
+                    ariaLabel='Sexo'
+                    placeholder='Seleccione...'
+                    list={genders.map((gender) => ({
+                      value: String(gender.id), // Use the gender ID as the value
+                      text: gender.description, // Use the gender description as the text
+                    }))}
+                    onChange={handleFilterChange}
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className='col-md-2'>
-                    <FormGroup id='year' label='Edad' >
-                      <Input
-                        type='number'
-                        placeholder='Edad'
-                        autoComplete='off'
-                        onChange={handleFilterChange}
-                        /* onBlur={formik.handleBlur}
-                        value={formik.values.year}
-                        isValid={formik.isValid}
-                        isTouched={formik.touched.year}
-                        invalidFeedback={formik.errors.year}
-                        validFeedback='Looks good!' */
-                      />
-                    </FormGroup>
-                  </div>
+              <div className='col-md-2'>
+                <FormGroup id='year' label='Edad' >
+                  <Input
+                    type='number'
+                    placeholder='Edad'
+                    autoComplete='off'
+                    onChange={handleFilterChange}
+                    /* onBlur={formik.handleBlur}
+                    value={formik.values.year}
+                    isValid={formik.isValid}
+                    isTouched={formik.touched.year}
+                    invalidFeedback={formik.errors.year}
+                    validFeedback='Looks good!' */
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className='col-2'>
-                    <FormGroup id='social_class_id' label='Clase social'>
-                      <Select
-                        name="social_class_id"
-                        ariaLabel='Clase Social'
-                        placeholder='Seleccione...'
-                        list={socialClasses.map((socialClass) => ({
-                          value: String(socialClass.id), // Use the gender ID as the value
-                          text: socialClass.class_name, // Use the gender description as the text
-                        }))}
-                        onChange={handleFilterChange}
-                      />
-                    </FormGroup>
-                  </div>
+              <div className='col-2'>
+                <FormGroup id='social_class_id' label='Clase social'>
+                  <Select
+                    name="social_class_id"
+                    ariaLabel='Clase Social'
+                    placeholder='Seleccione...'
+                    list={socialClasses.map((socialClass) => ({
+                      value: String(socialClass.id), // Use the gender ID as the value
+                      text: socialClass.class_name, // Use the gender description as the text
+                    }))}
+                    onChange={handleFilterChange}
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className='col-md-2'>
-                    <FormGroup
-                      id='hair_type'
-                      label='Tipo de cabello'>
-                      <Select
-                        name = 'hair_type_id'
-                        ariaLabel='Tipo de cabello'
-                        placeholder='Seleccione...'
-                        list={hairType.map((hairTypes) => ({
-                          value: String(hairTypes.id), 
-                          text: hairTypes.hair_type_name, 
-                        }))}
-                        onChange={handleFilterChange}
-                      />
-                    </FormGroup>
-                  </div>
+              <div className='col-md-2'>
+                <FormGroup
+                  id='hair_type'
+                  label='Tipo de cabello'>
+                  <Select
+                    name = 'hair_type_id'
+                    ariaLabel='Tipo de cabello'
+                    placeholder='Seleccione...'
+                    list={hairType.map((hairTypes) => ({
+                      value: String(hairTypes.id), 
+                      text: hairTypes.hair_type_name, 
+                    }))}
+                    onChange={handleFilterChange}
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className='col-md-2'>
-                    <FormGroup
-                      id='hair_color'
-                      label='Color de cabello'>
-                      <Select
-                        name = 'hair_color_id'
-                        ariaLabel='Color de cabello'
-                        placeholder='Seleccione...'
-                        list={hairColor.map((hairColors) => ({
-                          value: String(hairColors.id), 
-                          text: hairColors.hair_color_name, 
-                        }))}
-                        onChange={handleFilterChange}
-                      />
-                    </FormGroup>
-                  </div>
+              <div className='col-md-2'>
+                <FormGroup
+                  id='hair_color'
+                  label='Color de cabello'>
+                  <Select
+                    name = 'hair_color_id'
+                    ariaLabel='Color de cabello'
+                    placeholder='Seleccione...'
+                    list={hairColor.map((hairColors) => ({
+                      value: String(hairColors.id), 
+                      text: hairColors.hair_color_name, 
+                    }))}
+                    onChange={handleFilterChange}
+                  />
+                </FormGroup>
+              </div>
 
-                  <div className='col-md-2'>
-                    <FormGroup
-                      id='skin_color'
-                      label='Color de piel'>
-                      <Select
-                        name = 'skin_color_id'
-                        ariaLabel='color de piel'
-                        placeholder='Seleccione...'
-                        list={skinColor.map((skinColors) => ({
-                          value: String(skinColors.id), 
-                          text: skinColors.skin_color_name, 
-                        }))}
-                        onChange={handleFilterChange}
-                      />
-                    </FormGroup>
-                  </div>
-                  
-                  <div className="row">
-                    <div className="col-4 mt-4 d-flex align-items-center gap-5">
-                      <FormGroup>
-                        <Checks
-                          type='switch' // or 'checkbox', depending on your preference
-                          id='celebrity'
-                          name='celebrity'
-                          label='Celebrity?'
-                          value='1' // Example value, you can modify it as needed
-                          onChange={handleFilterChange}
-                        />
-                      </FormGroup>
-                  
-                      <FormGroup>
-                        <Checks
-                          type='switch' // or 'checkbox', depending on your preference
-                          id='UGC'
-                          name='UGC'
-                          label='UGC'
-                          value='1' // Example value, you can modify it as needed
-                          onChange={handleFilterChange}
-                        />
-                      </FormGroup>
-                    </div>
-                  </div>
+              <div className='col-md-2'>
+                <FormGroup
+                  id='skin_color'
+                  label='Color de piel'>
+                  <Select
+                    name = 'skin_color_id'
+                    ariaLabel='color de piel'
+                    placeholder='Seleccione...'
+                    list={skinColor.map((skinColors) => ({
+                      value: String(skinColors.id), 
+                      text: skinColors.skin_color_name, 
+                    }))}
+                    onChange={handleFilterChange}
+                  />
+                </FormGroup>
+              </div>
+              
+              <div className="row">
+                <div className="col-4 mt-4 d-flex align-items-center gap-5">
+                  <FormGroup>
+                    <Checks
+                      type='switch' // or 'checkbox', depending on your preference
+                      id='celebrity'
+                      name='celebrity'
+                      label='Celebrity?'
+                      value='1' // Example value, you can modify it as needed
+                      onChange={handleFilterChange}
+                    />
+                  </FormGroup>
+              
+                  <FormGroup>
+                    <Checks
+                      type='switch' // or 'checkbox', depending on your preference
+                      id='UGC'
+                      name='UGC'
+                      label='UGC'
+                      value='1' // Example value, you can modify it as needed
+                      onChange={handleFilterChange}
+                    />
+                  </FormGroup>
                 </div>
-                <Button color="info" className="mt-3" onClick={fetchResults}>
-                  Buscar
-                </Button>
-              </CardBody>
-            </Card>
-            {results.length > 0 && (
-              <Card className="mt-4">
+              </div>
+            </div>
+            <Button color="info" className="mt-3" onClick={fetchResults}>
+              Buscar
+            </Button>
+          </CardBody>
+        </Card>
+        {results.length > 0 && (
+          <TableClientSideBlog
+            headers={[
+              { column: 'displayName', label: 'Nombre Artistico', tag: 'i' },
+              { column: 'socialInstagram', label: 'Instagram', tag: 'i' },
+              { column: 'socialInstagramCla', label: 'Clase', tag: 'i' },
+              { column: 'socialTik', label: 'TikTok', tag: 'i' },
+              { column: 'socialTikCla', label: 'Clase', tag: 'i' },
+              { column: 'socialFace', label: 'Facebook', tag: 'i' },
+              { column: 'socialFaceCla', label: 'Clase', tag: 'i' },
+              { column: 'socialUTube', label: 'Youtube', tag: 'i' },
+              { column: 'socialUTubeCla', label: 'Clase', tag: 'i' },
+              { column: 'category', label: 'Categoría', tag: 'i' },      // ✅ New column
+              { column: 'subcategory', label: 'Subcategoría', tag: 'i' } // ✅ New column
+            ]}
+            data={results.map(influencer => ({
+              ...influencer,
+              category: influencer.influencerSubcategories
+                ? Array.from(new Set(influencer.influencerSubcategories.map((s: any) => s.subcategory?.category?.category_name)))
+                  .join(", ")
+                : "N/A",
+              subcategory: influencer.influencerSubcategories
+                ? influencer.influencerSubcategories.map((s: any) => s.subcategory?.subcategory_name)
+                  .join(", ")
+                : "N/A"
+            }))}
+            isLoading={false}
+            loadingTag={<h1>Loading...</h1>}
+            add
+            flag
+          />
+        )}
+        {/* <div className="row h-100 pb-3">
+          <div className="col-lg-12 col-md-8"> */}
+            
+            {/* {results.length > 0 && ( */}
+              {/* <Card className="mt-4">
                 <CardHeader>
                   <CardLabel icon="List" iconColor="info">
                     <CardTitle>Resultados</CardTitle>
@@ -554,10 +613,11 @@ const SearchPage = () => {
                     </table>
                   </div>
                 </CardBody>
-              </Card>
-            )}
-          </div>
-        </div>
+              </Card> */}
+              
+           {/*  )} */}
+         {/*  </div>
+        </div> */}
       </Page>
     </PageWrapper>
   );

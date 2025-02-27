@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import Page from '../../../layout/Page/Page';
-import SubHeader, {
-	SubHeaderLeft,
-	SubHeaderRight,
-	SubheaderSeparator,
-} from '../../../layout/SubHeader/SubHeader';
+// import SubHeader, { SubHeaderLeft, SubHeaderRight, SubheaderSeparator, } from '../../../layout/SubHeader/SubHeader';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import TableClientSideBlog from '../../../components/table/Table';
-import CarritoContext from '../../../contexts/CarritoContext';
-import { InfluencerList } from '../../../components/InfluencerList';
+// import CarritoContext from '../../../contexts/CarritoContext';
+// import { InfluencerList } from '../../../components/InfluencerList';
 import influService from '../../../services/influ.service';
 
 const DefaultAsidePage = () => {
@@ -20,7 +16,7 @@ const DefaultAsidePage = () => {
 	}, []);
 
 	async function getAll() {
-		influService.getAll().then(
+		influService.getAllInfluencersWithCategories().then(
 			(respon: { data: any[] }) => {
 				setIsLoading(true);
 				setInfluencer(respon.data);
@@ -38,17 +34,23 @@ const DefaultAsidePage = () => {
 			<Page>
 				<TableClientSideBlog
 					headers={[
-						{ column: 'idUser', label: 'ID', tag: 'i' },
-						{ column: 'phoneNumber', label: 'Número', tag: 'i' },
-						{ column: 'lastName', label: 'Nombre', tag: 'i' },
-						{ column: 'displayName', label: 'Contacto', tag: 'i' },
-						{ column: 'emailAddress', label: 'Email', tag: 'i' },
+						{ column: 'displayName', label: 'Nombre Artistico', tag: 'i' },
 						{ column: 'socialInstagram', label: 'Instagram', tag: 'i' },
-						{ column: 'socialInstagramCla', label: 'Instagram Cla', tag: 'i' },
+						{ column: 'socialInstagramCla', label: 'Clase', tag: 'i' },
 						{ column: 'socialTik', label: 'TikTok', tag: 'i' },
-						{ column: 'socialTikCla', label: 'TikTok Cla', tag: 'i' },
+						{ column: 'socialTikCla', label: 'Clase', tag: 'i' },
+						{ column: 'socialFace', label: 'Facebook', tag: 'i' },
+						{ column: 'socialFaceCla', label: 'Clase', tag: 'i' },
+						{ column: 'socialUTube', label: 'Youtube', tag: 'i' },
+						{ column: 'socialUTubeCla', label: 'Clase', tag: 'i' },
+						{ column: 'category', label: 'Categoría', tag: 'i' },
+   						{ column: 'subcategory', label: 'Subcategoría', tag: 'i' },
 					]}
-					data={influencer}
+					data={influencer.map(inf => ({
+						...inf,
+						category: inf.categories.map((c: { category: string }) => c.category).join(", "), // Convert array to string
+						subcategory: inf.categories.map((c: { subcategory: string }) => c.subcategory).join(", ")
+					}))}
 					isLoading={isLoading}
 					loadingTag={<h1>Loading...</h1>}
 					add

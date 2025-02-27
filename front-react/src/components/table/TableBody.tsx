@@ -79,14 +79,18 @@ export const TableBody = ({
 		city: string;
 		gender: string;
 		ethnic: string;
-		eps: string;
-		passport: string;
 		socialInstagram: string;
 		socialInstagramCla: string;
 		socialInstagramSeg: string;
 		socialTik: string;
 		socialTikCla: string;
 		socialTikSeg: string;
+		socialFace: string;
+		socialFaceCla: string;
+		socialFaceSeg: string;
+		socialUTube: string;
+		socialUTubeCla: string;
+		socialUTubeSeg: string;
 	}
 
 	const handleUpcomingEdit = (item: any) => {
@@ -135,7 +139,8 @@ export const TableBody = ({
 		const { name, value } = e.target;
 		setDataToEdit((prev) => (prev ? { ...prev, [name]: value } : null));
 	};
-
+	console.log("Headers:", headers);
+	
 	return (
 		<>
 			<tbody>
@@ -145,7 +150,7 @@ export const TableBody = ({
 							{headers.map((header, index) => (
 								<Fragment key={`${item.idUser}-${index}`}>
 									{header.column === 'socialInstagram' ? (
-										<td key={index}>
+										<td style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
 											{item[header.column] != null ? (
 												<a
 													href={`https://www.instagram.com/${item[header.column]}`}
@@ -161,7 +166,7 @@ export const TableBody = ({
 											) : null}
 										</td>
 									) : header.column === 'socialTik' ? (
-										<td key={index}>
+										<td style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
 											{item[header.column] != null ? (
 												<a
 													href={`https://www.tiktok.com/${item[header.column]}`}
@@ -176,6 +181,44 @@ export const TableBody = ({
 												</a>
 											) : null}
 										</td>
+									) : header.column === 'socialFace' ? (
+										<td style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
+											{item[header.column] != null ? (
+												<a
+													href={`https://www.facebook.com/${item[header.column]}`}
+													target='_blank'
+													rel='noopener noreferrer'>
+													<Icon
+														icon='Facebook'
+														color='primary'
+														size='2x'
+														forceFamily='material'
+													/>
+												</a>
+											) : null}
+										</td>
+									) : header.column === 'socialUTube' ? (
+										(() => {
+										// console.log("DEBUG: Entered condition for socialUTube", item[header.column]); // Debug log
+										return (
+											<td id ="youtube" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
+												{item[header.column] != null ? (
+													<a
+														href={`https://www.youtube.com/${item[header.column]}`}
+														target='_blank'
+														rel='noopener noreferrer'>
+														<Icon
+															icon='Youtube'
+															color='primary'
+															size='2x'
+															forceFamily='material'
+														/>
+													</a>
+												) : // (// console.log("DEBUG: Item for YouTube is NULL", item), null)
+													null }
+										</td>
+										);
+									})()
 									) : header.column === 'status' ? (
 										<td key={index}>
 											{item[header.column] === 'APPROVED' ? (
@@ -341,27 +384,7 @@ export const TableBody = ({
 								/>
 							</FormGroup>
 						</div>
-						<div className='col-6'>
-							<FormGroup id='eps' label='Eps'>
-								<Input
-									id='eps'
-									name='eps'
-									value={dataToEdit?.eps}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-						</div>
-						<div className='col-6'>
-							<FormGroup id='passport' label='Pasaporte'>
-								<Input
-									id='passport'
-									name='passport'
-									value={dataToEdit?.passport}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-						</div>
-
+						
 						<div className='col-4'>
 							<FormGroup id='inst' label='Instagram'>
 								<Input
@@ -419,6 +442,66 @@ export const TableBody = ({
 									id='socialTikSeg'
 									name='socialTikSeg'
 									value={dataToEdit?.socialTikSeg}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+						<div className='col-4'>
+							<FormGroup id='tik' label='Facebook'>
+								<Input
+									id='socialFace'
+									name='socialFace'
+									value={dataToEdit?.socialFace}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+						<div className='col-4'>
+							<FormGroup id='faceclas' label='Clasificación'>
+								<Input
+									id='socialFaceCla'
+									name='socialFaceCla'
+									value={dataToEdit?.socialFaceCla}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+						<div className='col-4'>
+							<FormGroup id='faceseg' label='#Seguidores'>
+								<Input
+									id='socialFaceSeg'
+									name='socialFaceSeg'
+									value={dataToEdit?.socialFaceSeg}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+						<div className='col-4'>
+							<FormGroup id='UTube' label='Youtube'>
+								<Input
+									id='socialUTube'
+									name='socialUTube'
+									value={dataToEdit?.socialUTube}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+						<div className='col-4'>
+							<FormGroup id='Utubeclas' label='Clasificación'>
+								<Input
+									id='socialUTubeCla'
+									name='socialUTubeCla'
+									value={dataToEdit?.socialUTubeCla}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+						<div className='col-4'>
+							<FormGroup id='UTubeseg' label='#Seguidores'>
+								<Input
+									id='socialUTubeSeg'
+									name='socialUTubeSeg'
+									value={dataToEdit?.socialUTubeSeg}
 									onChange={handleChange}
 								/>
 							</FormGroup>
