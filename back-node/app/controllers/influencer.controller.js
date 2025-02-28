@@ -398,43 +398,56 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
 
 exports.getFilteredInfluencers = async (req, res) => {
   try {
-    //const { category_id } = req.query; // Get category ID from request
-    
+    console.log("📌 Recibidos parámetros de consulta:", req.query); // Debugging
+
     const {
-      category_id,       // Categoría
-      socialNetwork,     // Red Social
-      influencerSize,    // Tamaño de Influencer
-      country,           // País
-      city,              // Ciudad
-      gender,            // Sexo
-      age,               // Edad
-      socialClass,       // Clase Social
-      hairType,          // Tipo de cabello
-      hairColor,         // Color de cabello
-      skinColor,         // Color de piel
-      isCelebrity,       // Celebrity
-      isUGC              // UGC (User Generated Content)
+      category_id,
+      socialNetwork,
+      influencerSize,
+      // country_id,
+      state_id,  // Estado (departamento)
+      city_id,   // Ciudad
+      gender_id, // Género
+      year,      // Año (posible filtro de edad)
+      social_class_id,
+      hair_type_id,
+      hair_color_id,
+      skin_color_id,
+      celebrity,
+      isUGC
     } = req.query;
 
-    let whereClause = {};
+    let whereClause = { [Op.and]: [] };
 
-    if (category_id) whereClause['$influencerSubcategories.subcategory.category.id$'] = category_id;
-    if (socialNetwork) whereClause['socialNetwork'] = socialNetwork;
-    if (influencerSize) whereClause['influencerSize'] = influencerSize;
-    if (country) whereClause['country_id'] = country;  // Cambio de country a country_id ✅
-    if (city) whereClause['city_id'] = city;  // Cambio de city a city_id ✅
-    if (gender) whereClause['gender_id'] = gender;  // Cambio de gender a gender_id ✅
-    if (age) whereClause['year'] = age;  // Si el año representa la edad
-    if (socialClass) whereClause['social_class_id'] = socialClass;  // Cambio de socialClass a social_class_id ✅
-    if (hairType) whereClause['hair_type_id'] = hairType;  // Cambio de hairType a hair_type_id ✅
-    if (hairColor) whereClause['hair_color_id'] = hairColor;  // Cambio de hairColor a hair_color_id ✅
-    if (skinColor) whereClause['skin_color_id'] = skinColor;  // Cambio de skinColor a skin_color_id ✅
-    if (isCelebrity !== undefined) whereClause['celebrity'] = isCelebrity === 'true';
-    if (isUGC !== undefined) whereClause['isUGC'] = isUGC === 'true';
+    // Agregar filtros con los nombres de columna correctos
+    if (category_id) whereClause[Op.and].push({ '$influencerSubcategories.subcategory.category.id$': category_id });
+    if (socialNetwork) whereClause[Op.and].push({ socialNetwork });
+    if (influencerSize) whereClause[Op.and].push({ influencerSize });
+    // if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
+    if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
+    if (city_id) whereClause[Op.and].push({ city_id: parseInt(city_id, 10) });
+    if (gender_id) whereClause[Op.and].push({ gender_id: parseInt(gender_id, 10) });
+    if (year) whereClause[Op.and].push({ year });
+    if (social_class_id) whereClause[Op.and].push({ social_class_id: parseInt(social_class_id, 10) });
+    if (hair_type_id) whereClause[Op.and].push({ hair_type_id: parseInt(hair_type_id, 10) });
+    if (hair_color_id) whereClause[Op.and].push({ hair_color_id: parseInt(hair_color_id, 10) });
+    if (skin_color_id) whereClause[Op.and].push({ skin_color_id: parseInt(skin_color_id, 10) });
+    if (celebrity !== undefined) whereClause[Op.and].push({ celebrity: celebrity === 'true' });
+    if (isUGC !== undefined) whereClause[Op.and].push({ isUGC: isUGC === 'true' });
 
+    console.log("🧐 Filtros aplicados:", JSON.stringify(whereClause, null, 2));
+
+    if (whereClause[Op.and].length === 0) {
+      return res.status(400).json({ message: "Debe proporcionar al menos un filtro" });
+    }
 
     const influencers = await Influ.findAll({
-      attributes: ['idUser', 'displayName', 'socialInstagram', 'socialInstagramCla', 'socialTik', 'socialTikCla', 'socialFace', 'socialFaceCla', 'socialUTube', 'socialUTubeCla'],
+      attributes: [
+        'idUser', 'displayName', 'socialInstagram', 'socialInstagramCla',
+        'socialTik', 'socialTikCla', 'socialFace', 'socialFaceCla',
+        'socialUTube', 'socialUTubeCla', 'state_id', 'city_id', 'country_id',
+        'gender_id', 'social_class_id', 'hair_type_id', 'hair_color_id', 'skin_color_id'
+      ],
       where: whereClause,
       include: [
         {
@@ -456,16 +469,38 @@ exports.getFilteredInfluencers = async (req, res) => {
       ]
     });
 
-    // Transform the response to include category & subcategory as separate fields
-    const formattedInfluencers = influencers.map(influencer => ({
-      ...influencer.toJSON(),
-      category: influencer.influencerSubcategories.map(sub => sub.subcategory?.category?.category_name).join(", "),
-      subcategory: influencer.influencerSubcategories.map(sub => sub.subcategory?.subcategory_name).join(", ")
-    }));
+    // Formatear la respuesta para incluir categorías y subcategorías correctamente
+    const formattedInfluencers = influencers.map(influencer => {
+      return {
+        idUser: influencer.idUser,
+        displayName: influencer.displayName,
+        socialInstagram: influencer.socialInstagram,
+        socialInstagramCla: influencer.socialInstagramCla,
+        socialTik: influencer.socialTik,
+        socialTikCla: influencer.socialTikCla,
+        socialFace: influencer.socialFace,
+        socialFaceCla: influencer.socialFaceCla,
+        socialUTube: influencer.socialUTube,
+        socialUTubeCla: influencer.socialUTubeCla,
+        // country_id: influencer.country_id,
+        state_id: influencer.state_id,
+        city_id: influencer.city_id,
+        gender_id: influencer.gender_id,
+        social_class_id: influencer.social_class_id,
+        hair_type_id: influencer.hair_type_id,
+        hair_color_id: influencer.hair_color_id,
+        skin_color_id: influencer.skin_color_id,
+        categories: influencer.influencerSubcategories.map(sub => ({
+          category: sub.subcategory?.category?.category_name || "N/A",
+          subcategory: sub.subcategory?.subcategory_name || "N/A"
+        }))
+      };
+    });
 
+    //res.status(200).json(influencers);
     res.status(200).json(formattedInfluencers);
   } catch (error) {
-    console.error("Error fetching influencers:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("❌ Back - Error al obtener influencers:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 };
