@@ -128,7 +128,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     socialNetwork: {
-      type: Sequelize.JSON,
+      type: Sequelize.STRING,
     },
     img: {
       type: Sequelize.STRING,

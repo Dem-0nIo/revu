@@ -1,6 +1,6 @@
-import React, { ReactNode, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 // import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import Brand from '../../../layout/Brand/Brand';
 import Navigation, { NavigationLine } from '../../../layout/Navigation/Navigation';
 import User from '../../../layout/User/User';

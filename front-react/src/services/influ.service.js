@@ -86,6 +86,9 @@ const getSocialClasses = () => {
 };
 
 const searchInfluencers = (values) => {
+	// eslint-disable-next-line no-template-curly-in-string
+	console.log("URL a ejecutar ", `${INFLUENCER_URL}search`, values);
+
 	return axios.get(`${INFLUENCER_URL}search`, values, { headers: authHeader() });
 };
 

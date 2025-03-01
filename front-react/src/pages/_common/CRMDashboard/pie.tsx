@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
-import { get } from 'http';
-import { color } from 'framer-motion';
+// import { get } from 'http';
+// import { color } from 'framer-motion';
 
 
 export default function AphexChart() {
@@ -52,7 +52,7 @@ export default function AphexChart() {
 
 	const names: string[] = [];
 	const quantities: number[] = [];
-	data.forEach(function (n) {
+	data.forEach(function quantity(n) {
 		names.push(n.name);
 		quantities.push(n.quantity);
 	});

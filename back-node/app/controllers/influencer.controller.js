@@ -41,7 +41,7 @@ exports.registerinfluencer = async (req, res) => {
       addressLine,
       social_class_id,
       celebrity,
-      country_id,
+      state_id,
       emailNotification,
       pushNotification,
       phoneNumberWhp,
@@ -82,6 +82,13 @@ exports.registerinfluencer = async (req, res) => {
 
     const classification = matchedClass ? matchedClass.class_name : "Unknown";
 
+    const socialNetworks = [];
+
+    if (socialInstagram) socialNetworks.push("socialInstagram");
+    if (socialTik) socialNetworks.push("socialTiktok");
+    if (socialFace) socialNetworks.push("socialFacebook");
+    if (socialUTube) socialNetworks.push("socialYoutube");
+
     // Save influencer to the database
     const newInfluencer = await Influ.create({
       firstName,
@@ -101,7 +108,7 @@ exports.registerinfluencer = async (req, res) => {
       addressLine,
       social_class_id,
       celebrity,
-      country_id,
+      state_id,
       emailNotification,
       pushNotification,
       phoneNumberWhp,
@@ -109,15 +116,15 @@ exports.registerinfluencer = async (req, res) => {
       socialInstagramCla: classification,
       socialInstagramSeg,
       socialTik,
-      socialTikCla: classification, // Add logic for TikTok classification if necessary
+      socialTikCla: classification, 
       socialTikSeg,
       socialFace,
-      socialFaceCla: classification, // Add logic for TikTok classification if necessary
+      socialFaceCla: classification, 
       socialFaceSeg,
       socialUTube,
-      socialUTubeCla: classification, // Add logic for TikTok classification if necessary
+      socialUTubeCla: classification, 
       socialUTubeSeg,
-      socialNetwork,
+      socialNetwork: JSON.stringify(socialNetworks),
       img: "/", // Default image or logic to handle uploaded image
       costo_1,
       costo_2,
@@ -217,7 +224,7 @@ exports.registerinflu = async (req, res, fileUpload) => {
     addressLine: req.body.addressLine,
     social_class_id: Number.isNaN(parseInt(req.body.social_class_id, 10)) ? -1 : parseInt(req.body.social_class_id, 10),
     celebrity: String(parseInt(req.body.celebrity, 10)) ? "-1" : String(parseInt(req.body.celebrity, 10)),
-    country_id: Number.isNaN(parseInt(req.body.country_id,10)) ? -1 : parseInt(req.body.country_id, 10),
+    state_id: Number.isNaN(parseInt(req.body.state_id,10)) ? -1 : parseInt(req.body.state_id, 10),
     emailNotification: req.body.emailNotification,
     pushNotification: req.body.pushNotification,
     phoneNumberWhp: req.body.phoneNumberWhp,
@@ -403,8 +410,10 @@ exports.getFilteredInfluencers = async (req, res) => {
     const {
       category_id,
       socialNetwork,
-      influencerSize,
-      // country_id,
+      socialInstagramCla,
+      socialFaceCla,
+      socialTikCla,
+      socialUTubeCla,
       state_id,  // Estado (departamento)
       city_id,   // Ciudad
       gender_id, // Género
@@ -417,27 +426,33 @@ exports.getFilteredInfluencers = async (req, res) => {
       isUGC
     } = req.query;
 
-    let whereClause = { [Op.and]: [] };
+    let whereClause = {[Op.and]: [] };
 
     // Agregar filtros con los nombres de columna correctos
     if (category_id) whereClause[Op.and].push({ '$influencerSubcategories.subcategory.category.id$': category_id });
-    if (socialNetwork) whereClause[Op.and].push({ socialNetwork });
-    if (influencerSize) whereClause[Op.and].push({ influencerSize });
-    // if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
+    if (socialNetwork) {
+      whereClause.socialNetwork = { [Op.like]: `%${socialNetwork}%` }; // Correcto
+    }
+    // if (influencerSize) whereClause[Op.and].push({ influencerSize });
     if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
+    if (socialInstagramCla) whereClause[Op.and].push({ socialInstagramCla});
     if (city_id) whereClause[Op.and].push({ city_id: parseInt(city_id, 10) });
     if (gender_id) whereClause[Op.and].push({ gender_id: parseInt(gender_id, 10) });
-    if (year) whereClause[Op.and].push({ year });
+    if (year) whereClause[Op.and].push({year});
     if (social_class_id) whereClause[Op.and].push({ social_class_id: parseInt(social_class_id, 10) });
     if (hair_type_id) whereClause[Op.and].push({ hair_type_id: parseInt(hair_type_id, 10) });
     if (hair_color_id) whereClause[Op.and].push({ hair_color_id: parseInt(hair_color_id, 10) });
     if (skin_color_id) whereClause[Op.and].push({ skin_color_id: parseInt(skin_color_id, 10) });
-    if (celebrity !== undefined) whereClause[Op.and].push({ celebrity: celebrity === 'true' });
-    if (isUGC !== undefined) whereClause[Op.and].push({ isUGC: isUGC === 'true' });
+    if (celebrity !== undefined) whereClause[Op.and].push({ celebrity: parseInt(celebrity, 10) });
+    if (isUGC !== undefined) whereClause[Op.and].push({ isUGC: parseInt(isUGC, 10) });
 
-    console.log("🧐 Filtros aplicados:", JSON.stringify(whereClause, null, 2));
+    console.log("Clausula SocialNetwork");
+    console.dir(whereClause.socialNetwork, { depth: null }); // Mejor que JSON.stringify
+    console.log("Clausula");
+    console.dir(whereClause, { depth: null }); // Mejor que JSON.stringify
+    console.log("🧐 Filtros aplicados antes de consulta:", JSON.stringify(whereClause, null, 2));
 
-    if (whereClause[Op.and].length === 0) {
+    if (whereClause.length === 0 ) {
       return res.status(400).json({ message: "Debe proporcionar al menos un filtro" });
     }
 

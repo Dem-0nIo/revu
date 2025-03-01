@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Card, { CardBody, CardHeader, CardLabel, CardTitle } from '../../../components/bootstrap/Card';
 import Button from '../../../components/bootstrap/Button';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
@@ -73,21 +73,21 @@ const SearchPage = () => {
   const [filters, setFilters] = useState({
     socialNetwork: "",
     influencerSize: "",
-    category: "",
-    country: "",
-    city: "",
-    gender: "",
-    age: "",
-    socialClass: "",
+    category_id: "", // Cambio de category a category_id
+    state_id: "",    // Agregado state_id
+    city_id: "",     // Cambio a city_id
+    gender_id: "",   // Cambio a gender_id
+    year: "",        // Cambio de age a year
+    social_class_id: "", // Cambio a social_class_id
     celebrity: "",
-    ugc: "",
-    hairType: "",
-    hairColor: "",
-    skinColor: "",
+    isUGC: "",       // Cambio de ugc a isUGC
+    hair_type_id: "", // Cambio a hair_type_id
+    hair_color_id: "", // Cambio a hair_color_id
+    skin_color_id: "", // Cambio a skin_color_id
   });
 
   // Listados obtenidos de API
-  const [countries, setCountry] = useState<Country[]>([]);
+  const [state, setState] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
   const [genders, setGenders] = useState<Gender[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -95,7 +95,7 @@ const SearchPage = () => {
   const [hairColor, setHairColor] = useState<HairColor[]>([]);
   const [hairType, setHairType] = useState<HairType[]>([]);
   const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
-  const [, setSelectedCategoryId] = useState<number | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
   const [socialClasses, setSocialClasses] = useState<SocialClass[]>([]);
 
   const [results, setResults] = useState<any[]>([]);
@@ -107,46 +107,54 @@ const SearchPage = () => {
   
   // Handle filter selection
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [e.target.name]: e.target.value || "", // Evita valores `undefined`
-    }));
+    const { name, type, value } = e.target;
+
+    let updatedValue: string;
+
+    if (type === "checkbox" && e.target instanceof HTMLInputElement) {
+      updatedValue = e.target.checked ? "1" : "0"; // ✅ Ensures correct type checking
+    } else {
+      updatedValue = value;
+    }
+
+    setFilters(prevFilters => {
+      const updatedFilters = { ...prevFilters, [name]: updatedValue };
+      console.log("🎯 Nuevo filtro aplicado:", updatedFilters); // Debug
+      return updatedFilters;
+    });
   };
 
-  const fetchResults = async () => {
+  const fetchResults = useCallback(async () => {
     try {
       setIsLoading(true);
       const params = new URLSearchParams();
-
-      /* Object.entries(filters).forEach(([key, value]) => {
-        if (value) params.append(key, value);
-      }); */
-
-      // Agregar solo los filtros que tienen valor
-      if (filters.socialNetwork) params.append("socialNetwork", filters.socialNetwork);
-      if (filters.influencerSize) params.append("influencerSize", filters.influencerSize);
-      if (filters.category) params.append("category_id", filters.category); // Cambio de `category` a `category_id`
-      if (filters.country) params.append("country_id", filters.country); // Cambio a `country_id`
-      if (filters.city) params.append("city_id", filters.city); // Cambio a `city_id`
-      if (filters.gender) params.append("gender_id", filters.gender); // Cambio a `gender_id`
-      if (filters.age) params.append("year", filters.age); // Cambio a `year`
-      if (filters.socialClass) params.append("social_class_id", filters.socialClass); // Cambio a `social_class_id`
-      if (filters.hairType) params.append("hair_type_id", filters.hairType); // Cambio a `hair_type_id`
-      if (filters.hairColor) params.append("hair_color_id", filters.hairColor); // Cambio a `hair_color_id`
-      if (filters.skinColor) params.append("skin_color_id", filters.skinColor); // Cambio a `skin_color_id`
-      if (filters.celebrity) params.append("celebrity", filters.celebrity);
-      if (filters.ugc) params.append("ugc", filters.ugc);
-
-      const response = await FiltersService.searchInfluencers(`?${params.toString()}`);
+  
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value && value !== "0") {  // ✅ Evitamos agregar valores vacíos o "0"
+          params.append(key, String(value));
+        }
+      });
+  
+      console.log("📌 Parámetros enviados: ", params.toString());
+  
+      if ([...params].length === 0) {
+        console.warn("⚠️ No hay filtros aplicados, evitando llamada inválida.");
+        setIsLoading(false);
+        return;
+      }
+      console.log("🔍 URL Final: ", `?${params.toString()}`);
+      const response = await FiltersService.searchInfluencers({ params });
       setResults(response.data);
-
-      // if (process.env.NODE_ENV === "development") {
-        console.log("Resultados encontrados:", response.data);
-      // }
+  
+      console.log("✅ Resultados encontrados:", response.data);
     } catch (error) {
       showNotification("Error", "No se pudieron cargar los resultados", "danger");
+      console.error("❌ FRONT - Error al obtener influencers:", error);
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, [filters]); // ✅ Ahora `fetchResults` solo cambia si cambian los filtros
+
   
   // Obtener filtros de API
   useEffect(() => {
@@ -168,7 +176,7 @@ const SearchPage = () => {
           FiltersService.getSkinColors()
         ]);
 
-        setCountry(countriesRes.data);
+        setState(countriesRes.data);
         setCategories(categoriesRes.data);
         setGenders(gendersRes.data);
         setCities(citiesRes.data);
@@ -270,7 +278,7 @@ const SearchPage = () => {
 			try {
 				const response = await FiltersService.getCountries(); // Asegúrate de tener este método en tu servicio
 				// console.log("Paises cargados: ", response.data); // Verifica el contenido
-				setCountry(response.data);
+				setState(response.data);
 			} catch (error) {
 				// console.error("Failed to fetch countries: ", error);
 			}
@@ -323,10 +331,10 @@ const SearchPage = () => {
                     placeholder='Seleccione...'
                     name="socialNetwork" 
                     onChange={handleFilterChange} list={[
-                      { value: 'Instagram', text: 'Instagram' },
-                      { value: 'TikTok', text: 'TikTok' },
-                      { value: 'Facebook', text: 'Facebook' },
-                      { value: 'Youtube', text: 'Youtube' },
+                      { value: 'socialInstagram', text: 'Instagram' },
+                      { value: 'socialTikTok', text: 'TikTok' },
+                      { value: 'socialFacebook', text: 'Facebook' },
+                      { value: 'socialYoutube', text: 'Youtube' },
                     ]} 
                   />
                 </FormGroup>
@@ -353,8 +361,8 @@ const SearchPage = () => {
                   <Select
                     ariaLabel='Categoría'
                     placeholder='Seleccione...'
-                    name="category" 
-                    onChange={handleCategoryChange} 
+                    name="category_id" 
+                    onChange={handleFilterChange} 
                     list={categories.map(cat => ({
                       value: cat.id, 
                       text: cat.category_name
@@ -368,11 +376,11 @@ const SearchPage = () => {
                   <Select
                     ariaLabel='Country'
                     placeholder='Seleccione...'
-                    name="country" 
+                    name="state_id" 
                     onChange={handleFilterChange} 
-                    list={countries.map(country => ({
-                      value: country.id, 
-                      text: country.name
+                    list={state.map(stateOp => ({
+                      value: stateOp.id, 
+                      text: stateOp.name
                     }))} 
                   />
                 </FormGroup>
@@ -383,7 +391,7 @@ const SearchPage = () => {
                   <Select 
                     ariaLabel='Ciudad'
                     placeholder='Seleccione...'
-                    name="city" 
+                    name="city_id" 
                     onChange={handleFilterChange} 
                     list={cities.map(city => ({
                       value: city.id, 
@@ -415,12 +423,6 @@ const SearchPage = () => {
                     placeholder='Edad'
                     autoComplete='off'
                     onChange={handleFilterChange}
-                    /* onBlur={formik.handleBlur}
-                    value={formik.values.year}
-                    isValid={formik.isValid}
-                    isTouched={formik.touched.year}
-                    invalidFeedback={formik.errors.year}
-                    validFeedback='Looks good!' */
                   />
                 </FormGroup>
               </div>
@@ -499,7 +501,7 @@ const SearchPage = () => {
                       id='celebrity'
                       name='celebrity'
                       label='Celebrity?'
-                      value='1' // Example value, you can modify it as needed
+                      checked={filters.celebrity === "1"} // ✅ Ensures it reflects the state
                       onChange={handleFilterChange}
                     />
                   </FormGroup>
@@ -507,10 +509,10 @@ const SearchPage = () => {
                   <FormGroup>
                     <Checks
                       type='switch' // or 'checkbox', depending on your preference
-                      id='UGC'
-                      name='UGC'
+                      id='isUGC'
+                      name='isUGC'
                       label='UGC'
-                      value='1' // Example value, you can modify it as needed
+                      checked={filters.isUGC === "1"} // ✅ Ensures it reflects the state
                       onChange={handleFilterChange}
                     />
                   </FormGroup>
@@ -539,12 +541,12 @@ const SearchPage = () => {
             ]}
             data={results.map(influencer => ({
               ...influencer,
-              category: influencer.influencerSubcategories
-                ? Array.from(new Set(influencer.influencerSubcategories.map((s: any) => s.subcategory?.category?.category_name)))
+              category: influencer.categories
+                ? Array.from(new Set(influencer.categories.map((s: any) => s.category)))
                   .join(", ")
                 : "N/A",
-              subcategory: influencer.influencerSubcategories
-                ? influencer.influencerSubcategories.map((s: any) => s.subcategory?.subcategory_name)
+              subcategory: influencer.categories
+                ? influencer.categories.map((s: any) => s.subcategory)
                   .join(", ")
                 : "N/A"
             }))}
@@ -554,70 +556,6 @@ const SearchPage = () => {
             flag
           />
         )}
-        {/* <div className="row h-100 pb-3">
-          <div className="col-lg-12 col-md-8"> */}
-            
-            {/* {results.length > 0 && ( */}
-              {/* <Card className="mt-4">
-                <CardHeader>
-                  <CardLabel icon="List" iconColor="info">
-                    <CardTitle>Resultados</CardTitle>
-                  </CardLabel>
-                </CardHeader>
-                <CardBody>
-                  <div className="table-responsive">
-                    <table className="table table-bordered">
-                      <thead className="table-light">
-                        <tr>
-                          <th>Nombre Artístico</th>
-                          <th>Red Social</th>
-                          <th>Clasificación</th>
-                          <th>Categoría</th>
-                          <th>Subcategoría</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {results.map((influencer) => {
-                          // Obtener la primera red social disponible
-                          const firstSocialMedia = 
-                            influencer.socialInstagram || 
-                            influencer.socialTik || 
-                            influencer.socialFace || 
-                            influencer.socialUTube || "N/A";
-
-                          // Obtener la primera clasificación de red social disponible
-                          const firstSocialClass = 
-                            influencer.socialInstagramCla || 
-                            influencer.socialTikCla || 
-                            influencer.socialFaceCla || 
-                            influencer.socialUTubeCla || "N/A";
-
-                          // Obtener la primera subcategoría disponible (asegurando que tenga categoría)
-                          const firstSubcategory = influencer.influencerSubcategories?.[0]?.subcategory || null;
-                          
-                          // Obtener la categoría asociada a la subcategoría
-                          const categoryName = firstSubcategory?.category?.category_name || "N/A";
-                          const subcategoryName = firstSubcategory?.subcategory_name || "N/A";
-
-                          return (
-                            <tr key={influencer.idUser}>
-                              <td>{influencer.displayName || `${influencer.firstName} ${influencer.lastName}`}</td>
-                              <td>{firstSocialMedia}</td>
-                              <td>{firstSocialClass}</td>
-                              <td>{categoryName}</td>
-                              <td>{subcategoryName}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </CardBody>
-              </Card> */}
-              
-           {/*  )} */}
-         {/*  </div>
-        </div> */}
       </Page>
     </PageWrapper>
   );
