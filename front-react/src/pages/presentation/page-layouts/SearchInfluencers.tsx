@@ -74,7 +74,7 @@ const SearchPage = () => {
     socialNetwork: "",
     influencerSize: "",
     category_id: "", // Cambio de category a category_id
-    state_id: "",    // Agregado state_id
+    country_id: "",    // Agregado country_id
     city_id: "",     // Cambio a city_id
     gender_id: "",   // Cambio a gender_id
     year: "",        // Cambio de age a year
@@ -84,10 +84,14 @@ const SearchPage = () => {
     hair_type_id: "", // Cambio a hair_type_id
     hair_color_id: "", // Cambio a hair_color_id
     skin_color_id: "", // Cambio a skin_color_id
+    socialInstagramCla: "",
+    socialTikCla: "",
+    socialFaceCla: "",
+    socialUTubeCla: "",
   });
 
   // Listados obtenidos de API
-  const [state, setState] = useState<Country[]>([]);
+  const [country, setCountry] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
   const [genders, setGenders] = useState<Gender[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -100,28 +104,62 @@ const SearchPage = () => {
 
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelectedCategoryId(Number(e.target.value));
-    };
+  const [yearError, setYearError] = useState<string | null>(null);
   
   // Handle filter selection
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, type, value } = e.target;
-
-    let updatedValue: string;
-
+    
+    let updatedValue = value;
+  
     if (type === "checkbox" && e.target instanceof HTMLInputElement) {
-      updatedValue = e.target.checked ? "1" : "0"; // ✅ Ensures correct type checking
-    } else {
-      updatedValue = value;
+      updatedValue = e.target.checked ? "1" : "0";
     }
-
-    setFilters(prevFilters => {
-      const updatedFilters = { ...prevFilters, [name]: updatedValue };
-      console.log("🎯 Nuevo filtro aplicado:", updatedFilters); // Debug
+  
+    setFilters((prevFilters) => {
+      const updatedFilters: any = { ...prevFilters, [name]: updatedValue }; // ✅ Convertimos temporalmente a `any`
+  
+      // 🔹 Si se cambia la red social, resetear el tamaño de influencer y su clasificación
+      if (name === "socialNetwork") {
+        updatedFilters.influencerSize = "";
+        updatedFilters.socialInstagramCla = "";
+        updatedFilters.socialTikCla = "";
+        updatedFilters.socialFaceCla = "";
+        updatedFilters.socialUTubeCla = "";
+      }
+  
+      // 🔹 Si se cambia el tamaño de influencer, actualizar la clasificación correcta según la red social
+      if (name === "influencerSize") {
+        const socialColumnMap: Record<string, string> = {
+          socialInstagram: "socialInstagramCla",
+          socialTikTok: "socialTikCla",
+          socialFace: "socialFaceCla",
+          socialUTube: "socialUTubeCla",
+        };
+  
+        const socialColumn = socialColumnMap[prevFilters.socialNetwork];
+  
+        // ✅ Asegurar que se borren las demás clasificaciones
+        Object.values(socialColumnMap).forEach((column) => {
+          updatedFilters[column] = "";
+        });
+  
+        if (socialColumn) {
+          updatedFilters[socialColumn] = updatedValue;
+        }
+      }
+  
+      console.log("🎯 Nuevo filtro aplicado:", updatedFilters);
       return updatedFilters;
     });
+  };
+
+
+  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/\D/g, ""); // ✅ Solo números
+    const limitedValue = numericValue.slice(0, 3); // ✅ Máximo 3 dígitos
+    setFilters(prev => ({ ...prev, year: limitedValue }));
+    setYearError(null); // ✅ Limpia el error si el usuario corrige
   };
 
   const fetchResults = useCallback(async () => {
@@ -142,6 +180,13 @@ const SearchPage = () => {
         setIsLoading(false);
         return;
       }
+
+      // **Validación antes de ejecutar la búsqueda**
+      if (filters.year && !/^\d{1,3}$/.test(filters.year)) { // ✅ Solo números, 1 a 3 dígitos
+        setYearError("⚠️ Ingrese una edad válida (solo números, máximo 3 dígitos).");
+        return; // ❌ No ejecuta la búsqueda si hay error
+      }
+
       console.log("🔍 URL Final: ", `?${params.toString()}`);
       const response = await FiltersService.searchInfluencers({ params });
       setResults(response.data);
@@ -155,7 +200,55 @@ const SearchPage = () => {
     }
   }, [filters]); // ✅ Ahora `fetchResults` solo cambia si cambian los filtros
 
+  const resetFilters = () => {
+    setFilters({
+      socialNetwork: "",
+      influencerSize: "",
+      category_id: "", // Restablecer a valor por defecto
+      country_id: "",
+      city_id: "",
+      gender_id: "",
+      year: "",
+      social_class_id: "",
+      celebrity: "0",
+      isUGC: "0",
+      hair_type_id: "",
+      hair_color_id: "",
+      skin_color_id: "",
+      socialInstagramCla: "",
+      socialTikCla: "",
+      socialFaceCla: "",
+      socialUTubeCla: "",
+    });
   
+    // Si usas estados para `selectedCategoryId`, también lo reinicias
+    setSelectedCategoryId(null);
+  };
+
+  useEffect(() => {
+    async function fetchInitialResults() {
+      try {
+        setIsLoading(true);
+        const params = new URLSearchParams();
+        params.append("limit", "50"); // ✅ Obtener los primeros 50 registros por defecto
+  
+        console.log("📌 Carga inicial: ", `?${params.toString()}`);
+  
+        const response = await FiltersService.searchInfluencers({ params });
+        setResults(response.data);
+  
+        console.log("✅ Resultados iniciales:", response.data);
+      } catch (error) {
+        showNotification("Error", "No se pudieron cargar los resultados iniciales", "danger");
+        console.error("❌ FRONT - Error al obtener influencers iniciales:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  
+    fetchInitialResults(); // ✅ Llamar a la función solo una vez al cargar la página
+  }, []);
+
   // Obtener filtros de API
   useEffect(() => {
     async function fetchFilters() {
@@ -176,7 +269,7 @@ const SearchPage = () => {
           FiltersService.getSkinColors()
         ]);
 
-        setState(countriesRes.data);
+        setCountry(countriesRes.data);
         setCategories(categoriesRes.data);
         setGenders(gendersRes.data);
         setCities(citiesRes.data);
@@ -242,7 +335,7 @@ const SearchPage = () => {
 			}
 		}
 		fetchHairColor();
-	}, []);
+	}, [])
 
 	// Fetch Hair type group
 	useEffect(() => {
@@ -278,7 +371,7 @@ const SearchPage = () => {
 			try {
 				const response = await FiltersService.getCountries(); // Asegúrate de tener este método en tu servicio
 				// console.log("Paises cargados: ", response.data); // Verifica el contenido
-				setState(response.data);
+				setCountry(response.data);
 			} catch (error) {
 				// console.error("Failed to fetch countries: ", error);
 			}
@@ -330,22 +423,23 @@ const SearchPage = () => {
                     ariaLabel='Social Network'
                     placeholder='Seleccione...'
                     name="socialNetwork" 
+                    value={filters.socialNetwork} // Asegura que tome el valor de filtros
                     onChange={handleFilterChange} list={[
                       { value: 'socialInstagram', text: 'Instagram' },
                       { value: 'socialTikTok', text: 'TikTok' },
-                      { value: 'socialFacebook', text: 'Facebook' },
-                      { value: 'socialYoutube', text: 'Youtube' },
+                      { value: 'socialFace', text: 'Facebook' },
+                      { value: 'socialUTube', text: 'Youtube' },
                     ]} 
                   />
                 </FormGroup>
               </div>
-
               <div className="col-md-2">
                 <FormGroup label="Tamaño de Influencer">
                   <Select
                     ariaLabel='Tamaño de influencer'
                     placeholder='Seleccione...'
                     name="influencerSize" 
+                    value={filters.influencerSize} // Asegura que tome el valor de filtros
                     onChange={handleFilterChange} list={[
                       { value: 'Nano', text: 'Nano (1k-10k)' },
                       { value: 'Micro', text: 'Micro (10k-100k)' },
@@ -362,6 +456,7 @@ const SearchPage = () => {
                     ariaLabel='Categoría'
                     placeholder='Seleccione...'
                     name="category_id" 
+                    value={filters.category_id} // Asegura que tome el valor de filtros
                     onChange={handleFilterChange} 
                     list={categories.map(cat => ({
                       value: cat.id, 
@@ -376,9 +471,10 @@ const SearchPage = () => {
                   <Select
                     ariaLabel='Country'
                     placeholder='Seleccione...'
-                    name="state_id" 
+                    name="country_id" 
+                    value={filters.country_id} // Asegura que tome el valor de filtros
                     onChange={handleFilterChange} 
-                    list={state.map(stateOp => ({
+                    list={country.map(stateOp => ({
                       value: stateOp.id, 
                       text: stateOp.name
                     }))} 
@@ -391,7 +487,8 @@ const SearchPage = () => {
                   <Select 
                     ariaLabel='Ciudad'
                     placeholder='Seleccione...'
-                    name="city_id" 
+                    name="city_id"
+                    value={filters.city_id} // Asegura que tome el valor de filtros
                     onChange={handleFilterChange} 
                     list={cities.map(city => ({
                       value: city.id, 
@@ -406,6 +503,7 @@ const SearchPage = () => {
                   <Select
                     name="gender_id"
                     ariaLabel='Sexo'
+                    value={filters.gender_id} // Asegura que tome el valor de filtros
                     placeholder='Seleccione...'
                     list={genders.map((gender) => ({
                       value: String(gender.id), // Use the gender ID as the value
@@ -419,12 +517,14 @@ const SearchPage = () => {
               <div className='col-md-2'>
                 <FormGroup id='year' label='Edad' >
                   <Input
-                    type='number'
+                    type='text'
                     placeholder='Edad'
+                    value={filters.year || ""} // ✅ Asegura que cuando no haya valor, sea un string vacío
                     autoComplete='off'
-                    onChange={handleFilterChange}
+                    onChange={handleYearChange}
                   />
                 </FormGroup>
+                {yearError && <small className="text-danger">{yearError}</small>}
               </div>
 
               <div className='col-2'>
@@ -432,6 +532,7 @@ const SearchPage = () => {
                   <Select
                     name="social_class_id"
                     ariaLabel='Clase Social'
+                    value={filters.social_class_id} // Asegura que tome el valor de filtros
                     placeholder='Seleccione...'
                     list={socialClasses.map((socialClass) => ({
                       value: String(socialClass.id), // Use the gender ID as the value
@@ -450,6 +551,7 @@ const SearchPage = () => {
                     name = 'hair_type_id'
                     ariaLabel='Tipo de cabello'
                     placeholder='Seleccione...'
+                    value={filters.hair_type_id} // Asegura que tome el valor de filtros
                     list={hairType.map((hairTypes) => ({
                       value: String(hairTypes.id), 
                       text: hairTypes.hair_type_name, 
@@ -466,6 +568,7 @@ const SearchPage = () => {
                   <Select
                     name = 'hair_color_id'
                     ariaLabel='Color de cabello'
+                    value={filters.hair_color_id} // Asegura que tome el valor de filtros
                     placeholder='Seleccione...'
                     list={hairColor.map((hairColors) => ({
                       value: String(hairColors.id), 
@@ -483,6 +586,7 @@ const SearchPage = () => {
                   <Select
                     name = 'skin_color_id'
                     ariaLabel='color de piel'
+                    value={filters.skin_color_id} // Asegura que tome el valor de filtros
                     placeholder='Seleccione...'
                     list={skinColor.map((skinColors) => ({
                       value: String(skinColors.id), 
@@ -501,7 +605,7 @@ const SearchPage = () => {
                       id='celebrity'
                       name='celebrity'
                       label='Celebrity?'
-                      checked={filters.celebrity === "1"} // ✅ Ensures it reflects the state
+                      checked={filters.celebrity === "1"} 
                       onChange={handleFilterChange}
                     />
                   </FormGroup>
@@ -512,16 +616,21 @@ const SearchPage = () => {
                       id='isUGC'
                       name='isUGC'
                       label='UGC'
-                      checked={filters.isUGC === "1"} // ✅ Ensures it reflects the state
+                      checked={filters.isUGC === "1"} 
                       onChange={handleFilterChange}
                     />
                   </FormGroup>
                 </div>
               </div>
             </div>
-            <Button color="info" className="mt-3" onClick={fetchResults}>
-              Buscar
-            </Button>
+            <div className="d-flex gap-3 mt-3"> 
+              <Button color="info" className="mt-3" onClick={fetchResults}>
+                Buscar
+              </Button>
+              <Button color="danger" className="mt-3" onClick={resetFilters}>
+                Limpiar
+              </Button>
+            </div>
           </CardBody>
         </Card>
         {results.length > 0 && (

@@ -292,7 +292,6 @@ const NewInfluencer = () => {
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
 	const [hairType, setHairType] = useState<HairType[]>([]);
 	const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
-
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
 	const [selectedSubcategories, setSelectedSubcategories] = useState<any[]>([]);
