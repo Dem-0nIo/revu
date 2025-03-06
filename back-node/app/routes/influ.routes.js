@@ -28,6 +28,8 @@ module.exports = function (app) {
 
   app.get("/api/influencer/all", controller.allAccess);
 
+  app.get("/api/influencer/search", controller.getFilteredInfluencers);
+
   app.get("/api/influencer/clasificacion", controller.clasificacion);
 
   app.post("/api/influencer/update", controller.editInfluencer);

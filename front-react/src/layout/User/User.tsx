@@ -11,7 +11,7 @@ import Icon from '../../components/icon/Icon';
 import useNavigationItemHandle from '../../hooks/useNavigationItemHandle';
 import AuthContext from '../../contexts/authContext';
 import ThemeContext from '../../contexts/themeContext';
-import Popovers from '../../components/bootstrap/Popovers';
+// import Popovers from '../../components/bootstrap/Popovers';
 
 const User = () => {
 	const { width } = useWindowSize();

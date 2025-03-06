@@ -15,6 +15,8 @@ const PAGE_LAYOUTS = {
 	LISTUSER: lazy(() => import('../pages/presentation/page-layouts/ListUser')),
 	SHOP: lazy(() => import('../pages/presentation/page-layouts/CarritoPage')),
 	COTIZACIONES: lazy(() => import('../pages/presentation/page-layouts/ListCotizciones')),
+	SEARCH_INFLUENCERS: lazy(() => import('../pages/presentation/page-layouts/SearchInfluencers')), // ✅ ADD THIS LINE
+
 };
 
 const presentation = [
@@ -55,6 +57,10 @@ const presentation = [
 	{
 		path: dashboardPagesMenu.listadoCotizaciones.path,
 		element: <PAGE_LAYOUTS.COTIZACIONES />,
+	},
+	{
+		path: dashboardPagesMenu.searchInfluencer.path,  
+		element: <PAGE_LAYOUTS.SEARCH_INFLUENCERS />,  
 	},
 	{
 		path: adminPagesMenu.nuevouser.path,

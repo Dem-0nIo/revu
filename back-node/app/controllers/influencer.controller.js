@@ -1,6 +1,10 @@
 const db = require("../models");
 const Influ = db.influ;
 const InfluencerSubcategories = db.InfluencerSubcategories;
+const SubCategory = db.SubCategory;
+const TagsCategory = db.TagsCategory;
+const SocialClass = db.SocialClass;
+const { Op } = require("sequelize");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -328,4 +332,39 @@ exports.clasificacion = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials.",
       });
     });
+};
+
+
+exports.getFilteredInfluencers = async (req, res) => {
+  try {
+    const { category_id } = req.query; // Get category ID from request
+    
+    const influencers = await Influ.findAll({
+      attributes: ['idUser', 'displayName', 'socialInstagram', 'socialTik', 'socialFace', 'socialUTube'],
+      include: [
+        {
+          model: InfluencerSubcategories,
+          as: 'influencerSubcategories',
+          include: [
+            {
+              model: SubCategory,
+              as: 'subcategory',
+              include: [
+                {
+                  model: TagsCategory,
+                  as: 'category',
+                  where: { id: category_id } // Ensure `category_id` comes from request
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+
+    res.status(200).json(influencers);
+  } catch (error) {
+    console.error("Error fetching influencers:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };

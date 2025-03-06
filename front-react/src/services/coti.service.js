@@ -19,11 +19,17 @@ const updateCotizacion = (values) => {
 	return axios.post(`${API_URL}update`, { values }, { headers: authHeader() });
 };
 
+const getCotizacionStatus = (values) => {
+	return axios.post(`${API_URL}status`, { values }, { headers: authHeader() });
+};
+
+
 const UserService = {
 	getAll,
 	addCotizacion,
 	deleteCotizacion,
 	updateCotizacion,
+	getCotizacionStatus,
 };
 
 export default UserService;

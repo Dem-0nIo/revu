@@ -7,6 +7,7 @@ import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeContextProvider } from './contexts/themeContext';
 import { AuthContextProvider } from './contexts/authContext';
+import api from "./utils/api"; 
 import './i18n';
 
 const children = (
