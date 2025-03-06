@@ -22,7 +22,8 @@ const fileUpload = multer({
 
 exports.registerinfluencer = async (req, res) => {
   try {
-    req.body.celebrity = 0;
+    // req.body.celebrity = 0;
+    // req.body.isUGC = 0;
     const {
       firstName,
       lastName,
@@ -41,17 +42,24 @@ exports.registerinfluencer = async (req, res) => {
       addressLine,
       social_class_id,
       celebrity,
-      state_id,
+      isUGC,
+      country_id,
+      city_id,
+    //  state_id,
       emailNotification,
       pushNotification,
       phoneNumberWhp,
       socialInstagram,
+      socialInstagramCla,
       socialInstagramSeg,
       socialTik,
+      socialTikCla,
       socialTikSeg,
       socialFace,
+      socialFaceCla,
       socialFaceSeg,
       socialUTube,
+      socialUTubeCla,
       socialUTubeSeg,
       socialNetwork,
       costo_1,
@@ -71,16 +79,6 @@ exports.registerinfluencer = async (req, res) => {
     } = req.body;
 
     console.log(JSON.stringify(req.body));
-
-    // Determine classification based on socialInstagramSeg
-    const matchedClass = await db.influencer_classes.findOne({
-      where: {
-        min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
-        max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
-      },
-    });
-
-    const classification = matchedClass ? matchedClass.class_name : "Unknown";
 
     const socialNetworks = [];
 
@@ -108,21 +106,24 @@ exports.registerinfluencer = async (req, res) => {
       addressLine,
       social_class_id,
       celebrity,
-      state_id,
+      isUGC,
+      country_id,
+      city_id,
+      // state_id,
       emailNotification,
       pushNotification,
       phoneNumberWhp,
       socialInstagram,
-      socialInstagramCla: classification,
+      socialInstagramCla,
       socialInstagramSeg,
       socialTik,
-      socialTikCla: classification, 
+      socialTikCla, 
       socialTikSeg,
       socialFace,
-      socialFaceCla: classification, 
+      socialFaceCla, 
       socialFaceSeg,
       socialUTube,
-      socialUTubeCla: classification, 
+      socialUTubeCla, 
       socialUTubeSeg,
       socialNetwork: JSON.stringify(socialNetworks),
       img: "/", // Default image or logic to handle uploaded image
@@ -188,17 +189,6 @@ exports.registerinflu = async (req, res, fileUpload) => {
   );
   const { socialInstagramSeg } = req.body;
 
-  // Validate and find the influencer class based on the number of followers
-  const matchedClass = await db.influencer_classes.findOne({
-    where: {
-        min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
-        max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
-    },
-  });
-
-  // Add logic to handle the matched class (optional)
-  const classification = matchedClass ? matchedClass.class_name : "Unknown";
-
   // Manejo de la imagen subida
   const filePath = req.file
     ? "/" + req.file.filename
@@ -224,21 +214,23 @@ exports.registerinflu = async (req, res, fileUpload) => {
     addressLine: req.body.addressLine,
     social_class_id: Number.isNaN(parseInt(req.body.social_class_id, 10)) ? -1 : parseInt(req.body.social_class_id, 10),
     celebrity: String(parseInt(req.body.celebrity, 10)) ? "-1" : String(parseInt(req.body.celebrity, 10)),
-    state_id: Number.isNaN(parseInt(req.body.state_id,10)) ? -1 : parseInt(req.body.state_id, 10),
+    isUGC: String(parseInt(req.body.isUGC, 10)) ? "-1" : String(parseInt(req.body.isUGC, 10)),
+    country_id: Number.isNaN(parseInt(req.body.country_id,10)) ? -1 : parseInt(req.body.country_id, 10),
+    city_id: Number.isNaN(parseInt(req.body.city_id,10)) ? -1 : parseInt(req.body.city_id, 10),
     emailNotification: req.body.emailNotification,
     pushNotification: req.body.pushNotification,
     phoneNumberWhp: req.body.phoneNumberWhp,
     socialInstagram: req.body.socialInstagram,
-    socialInstagramCla: classification,
+    socialInstagramCla: req.body.socialInstagramCla,
     socialInstagramSeg: req.body.socialInstagramSeg,
     socialTik: req.body.socialTik,
-    socialTikCla: classification,
+    socialTikCla: req.body.socialTikCla,
     socialTikSeg: req.body.socialTikSeg,
     socialFace: req.body.socialTik,
-    socialFaceCla: classification,
+    socialFaceCla: req.body.socialFaceCla,
     socialFaceSeg: req.body.socialTikSeg,
     socialUTube: req.body.socialTik,
-    socialUTubeCla: classification,
+    socialUTubeCla: req.body.socialUTubeCla,
     socialUTubeSeg: req.body.socialTikSeg,
     socialNetwork: req.body.socialNetwork,
     img: "/" + req.file.filename,
@@ -414,7 +406,7 @@ exports.getFilteredInfluencers = async (req, res) => {
       socialFaceCla,
       socialTikCla,
       socialUTubeCla,
-      state_id,  // Estado (departamento)
+      country_id,  // Estado (departamento)
       city_id,   // Ciudad
       gender_id, // Género
       year,      // Año (posible filtro de edad)
@@ -434,7 +426,8 @@ exports.getFilteredInfluencers = async (req, res) => {
       whereClause.socialNetwork = { [Op.like]: `%${socialNetwork}%` }; // Correcto
     }
     // if (influencerSize) whereClause[Op.and].push({ influencerSize });
-    if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
+  //  if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
+    if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
     if (socialInstagramCla) whereClause[Op.and].push({ socialInstagramCla});
     if (city_id) whereClause[Op.and].push({ city_id: parseInt(city_id, 10) });
     if (gender_id) whereClause[Op.and].push({ gender_id: parseInt(gender_id, 10) });
@@ -497,8 +490,8 @@ exports.getFilteredInfluencers = async (req, res) => {
         socialFaceCla: influencer.socialFaceCla,
         socialUTube: influencer.socialUTube,
         socialUTubeCla: influencer.socialUTubeCla,
-        // country_id: influencer.country_id,
-        state_id: influencer.state_id,
+        country_id: influencer.country_id,
+        // state_id: influencer.state_id,
         city_id: influencer.city_id,
         gender_id: influencer.gender_id,
         social_class_id: influencer.social_class_id,

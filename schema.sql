@@ -441,7 +441,7 @@ CREATE TABLE IF NOT EXISTS influencer_classes (
 
 INSERT INTO influencer_classes (class_name, min_followers, max_followers)
 VALUES
-    ('Nano', 1000, 9999),
+    ('Nano', 1, 9999),
     ('Micro', 10000, 99999),
     ('Macro', 100000, 999999),
     ('Mega', 1000000, NULL);
@@ -700,6 +700,9 @@ INSERT INTO InfluencerSubcategories (influencerId, subcategoryId) VALUES
 
 ALTER TABLE `influencers` 
 ADD COLUMN `isUGC` TINYINT(1) NULL DEFAULT '1' AFTER `celebrity`;
+
+ALTER TABLE `influencers` 
+MODIFY COLUMN `isUGC` TINYINT(1) NOT NULL DEFAULT '1';
 
 -- Agregar columna a la tabla influencers para referenciar a social_classes
 ALTER TABLE influencers

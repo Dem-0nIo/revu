@@ -73,6 +73,9 @@ module.exports = (sequelize, Sequelize) => {
     celebrity: {
       type: Sequelize.INTEGER,
     },
+    isUGC: {
+      type: Sequelize.INTEGER,
+    },
     city_id: {
       type: Sequelize.INTEGER,
     },

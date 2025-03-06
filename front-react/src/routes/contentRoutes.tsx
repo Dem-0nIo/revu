@@ -49,10 +49,6 @@ const presentation = [
 		path: dashboardPagesMenu.newInfluencer.path,
 		element: <PAGE_LAYOUTS.NEWINFLUENCER />,
 	},
-	{
-		path: dashboardPagesMenu.defaultAside.path,
-		element: <PAGE_LAYOUTS.ASIDE />,
-	},
 
 	{
 		path: dashboardPagesMenu.listadoCotizaciones.path,
