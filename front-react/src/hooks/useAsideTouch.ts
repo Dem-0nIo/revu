@@ -37,7 +37,7 @@ const useAsideTouch = () => {
 		}
 
 		// @ts-ignore
-		const unsubscribeX = x.onChange(updateX);
+		const unsubscribeX = x.on("change",updateX);
 
 		return () => {
 			unsubscribeX();

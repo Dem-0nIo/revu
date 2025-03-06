@@ -11,15 +11,15 @@ import Card, { CardBody } from '../../../components/bootstrap/Card';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
 import Input from '../../../components/bootstrap/forms/Input';
 import Button from '../../../components/bootstrap/Button';
-import Logo from '../../../components/Logo';
+// import Logo from '../../../components/Logo';
 import User1Img from '../../../assets/img/wanna/logo_login.png';
 import useDarkMode from '../../../hooks/useDarkMode';
 import AuthContext from '../../../contexts/authContext';
-import USERS from '../../../common/data/userData';
+// import USERS from '../../../common/data/userData';
 import Spinner from '../../../components/bootstrap/Spinner';
-import Alert from '../../../components/bootstrap/Alert';
+// import Alert from '../../../components/bootstrap/Alert';
 import AuthService from '../../../services/auth.service';
-import UserService from '../../../services/user.service';
+// import UserService from '../../../services/user.service';
 
 interface ILoginHeaderProps {
 	isNewUser?: boolean;
@@ -53,7 +53,7 @@ const Login: FC<ILoginProps> = ({ isSignUp }) => {
 	const { darkModeStatus } = useDarkMode();
 
 	const [signInPassword, setSignInPassword] = useState<boolean>(false);
-	const [singUpStatus, setSingUpStatus] = useState<boolean>(!!isSignUp);
+	const [singUpStatus, ] = useState<boolean>(!!isSignUp);
 
 	const navigate = useNavigate();
 	const handleOnClick = useCallback(() => navigate('/'), [navigate]);

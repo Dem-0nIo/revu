@@ -1,13 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import Page from '../../../layout/Page/Page';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 
-import SubHeader, {
-	SubHeaderLeft,
-	SubHeaderRight,
-	SubheaderSeparator,
-} from '../../../layout/SubHeader/SubHeader';
+// import SubHeader, { SubHeaderLeft, SubHeaderRight, SubheaderSeparator } from '../../../layout/SubHeader/SubHeader';
 import Button from '../../../components/bootstrap/Button'; /* 
 import tableData from '../../../common/data/dummyProductData'; */
 import OffCanvas, {
@@ -23,7 +19,7 @@ import Card, {
 } from '../../../components/bootstrap/Card';
 import Badge from '../../../components/bootstrap/Badge';
 import Input from '../../../components/bootstrap/forms/Input';
-import PlaceholderImage from '../../../components/extras/PlaceholderImage';
+// import PlaceholderImage from '../../../components/extras/PlaceholderImage';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
 import UserService from '../../../services/user.service';
 import UserData from '../../_common/user';
@@ -35,7 +31,7 @@ const DefaultAsidePage = () => {
 		getUsers();
 	}, []);
 
-	const [successful, setSuccessful] = useState(false);
+	const [, setSuccessful] = useState(false);
 
 	const [editPanel, setEditPanel] = useState<boolean>(false);
 
@@ -57,7 +53,7 @@ const DefaultAsidePage = () => {
 	}
 
 	async function editUser(values: any) {
-		console.log(values);
+		// console.log(values);
 
 		const resp = await UserService.updateUser(values);
 		if (resp.status === 500) {

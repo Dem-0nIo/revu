@@ -49,11 +49,11 @@ export const dashboardPagesMenu = {
 		path: 'revu/add-influencer',
 		icon: 'AddReaction',
 	},
-	defaultAside: {
-		id: 'defaultAside',
-		text: 'Listado Influencers',
-		path: 'revu/listado-influencers',
-		icon: 'List',
+	searchInfluencer: {
+		id: 'searchInfluencer',
+		text: 'Busqueda de Influencers',
+		path: 'revu/busqueda-influencers',
+		icon: 'Search',
 	},
 	searchInfluencer: {
 		id: 'searchInfluencer',
@@ -99,11 +99,12 @@ export const adminPagesMenu = {
 		path: 'revu/add-influencer',
 		icon: 'AddReaction',
 	},
-	defaultAside: {
-		id: 'defaultAside',
-		text: 'Listado Influencers',
-		path: 'revu/listado-influencers',
-		icon: 'List',
+
+	searchInfluencer: {
+		id: 'searchInfluencer',
+		text: 'Busqueda de Influencers',
+		path: 'revu/busqueda-influencers',
+		icon: 'Search',
 	},
 	searchInfluencer: {
 		id: 'searchInfluencer',

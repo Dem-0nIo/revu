@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
-import { get } from 'http';
-import { color } from 'framer-motion';
+// import { get } from 'http';
+// import { color } from 'framer-motion';
 
 
 export default function AphexChart() {
 	// console.log("API_URL:", process.env.REACT_APP_API_URL);
 	// console.log("Final URL:", `${process.env.REACT_APP_API_URL}/api/cotizaciones/status/`);
 	const getStatus = async (str: string) => {
-		const response = await axios.post('https://www.revuagencyapp.com/api/cotizaciones/status', {
+		const response = await axios.post('http://localhost:8081/api/cotizaciones/status', {
 			status: str,
 		});
 
@@ -52,7 +52,7 @@ export default function AphexChart() {
 
 	const names: string[] = [];
 	const quantities: number[] = [];
-	data.forEach(function (n) {
+	data.forEach(function quantity(n) {
 		names.push(n.name);
 		quantities.push(n.quantity);
 	});

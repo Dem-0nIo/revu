@@ -13,7 +13,7 @@ import { Pagination } from './Pagination'
 
 const Table = ({ headers, data, isLoading, loadingTag, add, flag }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchValue, setSearchValue] = useState(""); // Added state for search
+  const [searchValue, ] = useState(""); // Added state for search
   const [itemsPerPage, setItemsPerPage] = useState(5); // Added state for itemsPerPage
   const [sortColumn, setSortColumn] = useState(headers[0].column); // Default sorting column
   const [sortDirection, setSortDirection] = useState("asc"); // Default sorting direction
@@ -45,10 +45,10 @@ const Table = ({ headers, data, isLoading, loadingTag, add, flag }) => {
     }
   };
 
-  const handleSearchChange = (e) => {
+  /* const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
     setCurrentPage(1); // Reset to the first page when searching
-  };
+  }; */
 
   return (
     <>
@@ -79,7 +79,7 @@ const Table = ({ headers, data, isLoading, loadingTag, add, flag }) => {
             </span>
           </div>
         </div>
-        <div className="col-md-3 col-sm-12 text-end">
+        {/* <div className="col-md-3 col-sm-12 text-end">
           <div className="input-group">
             <input
               className="form-control"
@@ -89,7 +89,7 @@ const Table = ({ headers, data, isLoading, loadingTag, add, flag }) => {
               placeholder="Buscar en todas las columnas"
             />
           </div>
-        </div>
+        </div> */}
       </div>
       <br />
 

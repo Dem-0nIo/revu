@@ -6,16 +6,16 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-restricted-globals */
 
-import React, { useEffect, useState, useContext } from 'react';
-import { ErrorMessage, useFormik } from 'formik';
+import React, { useState, useContext } from 'react';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Page from '../../../layout/Page/Page';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import { CarritoContext } from '../../../contexts/CarritoContext';
-import Avatar from '../../../components/Avatar';
+// import Avatar from '../../../components/Avatar';
 import { PdfGenerator } from '../aside-types/PdfGenerator';
 import showNotification from '../../../components/extras/showNotification';
-import Search from '../../../components/Search';
+// import Search from '../../../components/Search';
 import Input from '../../../components/bootstrap/forms/Input';
 import SubHeader, {
 	SubHeaderLeft,
@@ -24,8 +24,10 @@ import SubHeader, {
 } from '../../../layout/SubHeader/SubHeader';
 
 const CarritoPage = () => {
-	const [message, setMessage] = useState('');
-	const { listaCompras, aumentarCantidad, disminuirCantidad, eliminarCompra } =
+	const [, setMessage] = useState('');
+	// const { listaCompras, aumentarCantidad, disminuirCantidad, eliminarCompra } =
+	const { listaCompras, eliminarCompra } =
+
 		useContext(CarritoContext);
 
 	const calcularTotal = () => {

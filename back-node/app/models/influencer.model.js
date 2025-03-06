@@ -73,6 +73,9 @@ module.exports = (sequelize, Sequelize) => {
     celebrity: {
       type: Sequelize.INTEGER,
     },
+    isUGC: {
+      type: Sequelize.INTEGER,
+    },
     city_id: {
       type: Sequelize.INTEGER,
     },
@@ -118,7 +121,7 @@ module.exports = (sequelize, Sequelize) => {
     socialFaceSeg: {
       type: Sequelize.STRING,
     },
-    socialUtube: {
+    socialUTube: {
       type: Sequelize.STRING,
     },
     socialUTubeCla: {
@@ -128,7 +131,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     socialNetwork: {
-      type: Sequelize.JSON,
+      type: Sequelize.STRING,
     },
     img: {
       type: Sequelize.STRING,

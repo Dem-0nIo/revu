@@ -5,6 +5,10 @@ const SubCategory = db.SubCategory;
 const TagsCategory = db.TagsCategory;
 const SocialClass = db.SocialClass;
 const { Op } = require("sequelize");
+const SubCategory = db.SubCategory;
+const TagsCategory = db.TagsCategory;
+const SocialClass = db.SocialClass;
+const { Op } = require("sequelize");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -22,7 +26,8 @@ const fileUpload = multer({
 
 exports.registerinfluencer = async (req, res) => {
   try {
-    req.body.celebrity = 0;
+    // req.body.celebrity = 0;
+    // req.body.isUGC = 0;
     const {
       firstName,
       lastName,
@@ -41,17 +46,24 @@ exports.registerinfluencer = async (req, res) => {
       addressLine,
       social_class_id,
       celebrity,
+      isUGC,
       country_id,
+      city_id,
+    //  state_id,
       emailNotification,
       pushNotification,
       phoneNumberWhp,
       socialInstagram,
+      socialInstagramCla,
       socialInstagramSeg,
       socialTik,
+      socialTikCla,
       socialTikSeg,
       socialFace,
+      socialFaceCla,
       socialFaceSeg,
       socialUTube,
+      socialUTubeCla,
       socialUTubeSeg,
       socialNetwork,
       costo_1,
@@ -72,15 +84,12 @@ exports.registerinfluencer = async (req, res) => {
 
     console.log(JSON.stringify(req.body));
 
-    // Determine classification based on socialInstagramSeg
-    const matchedClass = await db.influencer_classes.findOne({
-      where: {
-        min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
-        max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
-      },
-    });
+    const socialNetworks = [];
 
-    const classification = matchedClass ? matchedClass.class_name : "Unknown";
+    if (socialInstagram) socialNetworks.push("socialInstagram");
+    if (socialTik) socialNetworks.push("socialTiktok");
+    if (socialFace) socialNetworks.push("socialFacebook");
+    if (socialUTube) socialNetworks.push("socialYoutube");
 
     // Save influencer to the database
     const newInfluencer = await Influ.create({
@@ -101,23 +110,26 @@ exports.registerinfluencer = async (req, res) => {
       addressLine,
       social_class_id,
       celebrity,
+      isUGC,
       country_id,
+      city_id,
+      // state_id,
       emailNotification,
       pushNotification,
       phoneNumberWhp,
       socialInstagram,
-      socialInstagramCla: classification,
+      socialInstagramCla,
       socialInstagramSeg,
       socialTik,
-      socialTikCla: classification, // Add logic for TikTok classification if necessary
+      socialTikCla, 
       socialTikSeg,
       socialFace,
-      socialFaceCla: classification, // Add logic for TikTok classification if necessary
+      socialFaceCla, 
       socialFaceSeg,
       socialUTube,
-      socialUTubeCla: classification, // Add logic for TikTok classification if necessary
+      socialUTubeCla, 
       socialUTubeSeg,
-      socialNetwork,
+      socialNetwork: JSON.stringify(socialNetworks),
       img: "/", // Default image or logic to handle uploaded image
       costo_1,
       costo_2,
@@ -181,17 +193,6 @@ exports.registerinflu = async (req, res, fileUpload) => {
   );
   const { socialInstagramSeg } = req.body;
 
-  // Validate and find the influencer class based on the number of followers
-  const matchedClass = await db.influencer_classes.findOne({
-    where: {
-        min_followers: { [db.Sequelize.Op.lte]: socialInstagramSeg },
-        max_followers: { [db.Sequelize.Op.gte]: socialInstagramSeg },
-    },
-  });
-
-  // Add logic to handle the matched class (optional)
-  const classification = matchedClass ? matchedClass.class_name : "Unknown";
-
   // Manejo de la imagen subida
   const filePath = req.file
     ? "/" + req.file.filename
@@ -217,21 +218,23 @@ exports.registerinflu = async (req, res, fileUpload) => {
     addressLine: req.body.addressLine,
     social_class_id: Number.isNaN(parseInt(req.body.social_class_id, 10)) ? -1 : parseInt(req.body.social_class_id, 10),
     celebrity: String(parseInt(req.body.celebrity, 10)) ? "-1" : String(parseInt(req.body.celebrity, 10)),
+    isUGC: String(parseInt(req.body.isUGC, 10)) ? "-1" : String(parseInt(req.body.isUGC, 10)),
     country_id: Number.isNaN(parseInt(req.body.country_id,10)) ? -1 : parseInt(req.body.country_id, 10),
+    city_id: Number.isNaN(parseInt(req.body.city_id,10)) ? -1 : parseInt(req.body.city_id, 10),
     emailNotification: req.body.emailNotification,
     pushNotification: req.body.pushNotification,
     phoneNumberWhp: req.body.phoneNumberWhp,
     socialInstagram: req.body.socialInstagram,
-    socialInstagramCla: classification,
+    socialInstagramCla: req.body.socialInstagramCla,
     socialInstagramSeg: req.body.socialInstagramSeg,
     socialTik: req.body.socialTik,
-    socialTikCla: classification,
+    socialTikCla: req.body.socialTikCla,
     socialTikSeg: req.body.socialTikSeg,
     socialFace: req.body.socialTik,
-    socialFaceCla: classification,
+    socialFaceCla: req.body.socialFaceCla,
     socialFaceSeg: req.body.socialTikSeg,
     socialUTube: req.body.socialTik,
-    socialUTubeCla: classification,
+    socialUTubeCla: req.body.socialUTubeCla,
     socialUTubeSeg: req.body.socialTikSeg,
     socialNetwork: req.body.socialNetwork,
     img: "/" + req.file.filename,
@@ -334,13 +337,21 @@ exports.clasificacion = (req, res) => {
     });
 };
 
-
-exports.getFilteredInfluencers = async (req, res) => {
+exports.getAllInfluencersWithCategories = async (req, res) => {
   try {
-    const { category_id } = req.query; // Get category ID from request
-    
     const influencers = await Influ.findAll({
-      attributes: ['idUser', 'displayName', 'socialInstagram', 'socialTik', 'socialFace', 'socialUTube'],
+      attributes: [
+        'idUser',
+        'displayName',
+        'socialInstagram',
+        'socialInstagramCla',
+        'socialTik',
+        'socialTikCla',
+        'socialFace',
+        'socialFaceCla',
+        'socialUTube',
+        'socialUTubeCla'
+      ],
       include: [
         {
           model: InfluencerSubcategories,
@@ -352,8 +363,7 @@ exports.getFilteredInfluencers = async (req, res) => {
               include: [
                 {
                   model: TagsCategory,
-                  as: 'category',
-                  where: { id: category_id } // Ensure `category_id` comes from request
+                  as: 'category'
                 }
               ]
             }
@@ -362,9 +372,147 @@ exports.getFilteredInfluencers = async (req, res) => {
       ]
     });
 
-    res.status(200).json(influencers);
+    const formattedInfluencers = influencers.map(influencer => {
+      return {
+        idUser: influencer.idUser,
+        displayName: influencer.displayName,
+        socialInstagram: influencer.socialInstagram,
+        socialInstagramCla: influencer.socialInstagramCla,
+        socialTik: influencer.socialTik,
+        socialTikCla: influencer.socialTikCla,
+        socialFace: influencer.socialFace,
+        socialFaceCla: influencer.socialFaceCla,
+        socialUTube: influencer.socialUTube,
+        socialUTubeCla: influencer.socialUTubeCla,
+        categories: influencer.influencerSubcategories.map(sub => ({
+          category: sub.subcategory?.category?.category_name || "N/A",
+          subcategory: sub.subcategory?.subcategory_name || "N/A"
+        }))
+      };
+    });
+
+    res.status(200).json(formattedInfluencers);
   } catch (error) {
-    console.error("Error fetching influencers:", error);
+    console.error("Error fetching influencers with categories:", error);
     res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+exports.getFilteredInfluencers = async (req, res) => {
+  try {
+    console.log("📌 Recibidos parámetros de consulta:", req.query); // Debugging
+
+    const {
+      category_id,
+      socialNetwork,
+      socialInstagramCla,
+      socialFaceCla,
+      socialTikCla,
+      socialUTubeCla,
+      country_id,  // Estado (departamento)
+      city_id,   // Ciudad
+      gender_id, // Género
+      year,      // Año (posible filtro de edad)
+      social_class_id,
+      hair_type_id,
+      hair_color_id,
+      skin_color_id,
+      celebrity,
+      isUGC
+    } = req.query;
+
+    let whereClause = {[Op.and]: [] };
+
+    // Agregar filtros con los nombres de columna correctos
+    if (category_id) whereClause[Op.and].push({ '$influencerSubcategories.subcategory.category.id$': category_id });
+    if (socialNetwork) {
+      whereClause.socialNetwork = { [Op.like]: `%${socialNetwork}%` }; // Correcto
+    }
+    // if (influencerSize) whereClause[Op.and].push({ influencerSize });
+  //  if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
+    if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
+    if (socialInstagramCla) whereClause[Op.and].push({ socialInstagramCla});
+    if (city_id) whereClause[Op.and].push({ city_id: parseInt(city_id, 10) });
+    if (gender_id) whereClause[Op.and].push({ gender_id: parseInt(gender_id, 10) });
+    if (year) whereClause[Op.and].push({year});
+    if (social_class_id) whereClause[Op.and].push({ social_class_id: parseInt(social_class_id, 10) });
+    if (hair_type_id) whereClause[Op.and].push({ hair_type_id: parseInt(hair_type_id, 10) });
+    if (hair_color_id) whereClause[Op.and].push({ hair_color_id: parseInt(hair_color_id, 10) });
+    if (skin_color_id) whereClause[Op.and].push({ skin_color_id: parseInt(skin_color_id, 10) });
+    if (celebrity !== undefined) whereClause[Op.and].push({ celebrity: parseInt(celebrity, 10) });
+    if (isUGC !== undefined) whereClause[Op.and].push({ isUGC: parseInt(isUGC, 10) });
+
+    console.log("Clausula SocialNetwork");
+    console.dir(whereClause.socialNetwork, { depth: null }); // Mejor que JSON.stringify
+    console.log("Clausula");
+    console.dir(whereClause, { depth: null }); // Mejor que JSON.stringify
+    console.log("🧐 Filtros aplicados antes de consulta:", JSON.stringify(whereClause, null, 2));
+
+    if (whereClause.length === 0 ) {
+      return res.status(400).json({ message: "Debe proporcionar al menos un filtro" });
+    }
+
+    const influencers = await Influ.findAll({
+      attributes: [
+        'idUser', 'displayName', 'socialInstagram', 'socialInstagramCla',
+        'socialTik', 'socialTikCla', 'socialFace', 'socialFaceCla',
+        'socialUTube', 'socialUTubeCla', 'state_id', 'city_id', 'country_id',
+        'gender_id', 'social_class_id', 'hair_type_id', 'hair_color_id', 'skin_color_id'
+      ],
+      where: whereClause,
+      include: [
+        {
+          model: InfluencerSubcategories,
+          as: 'influencerSubcategories',
+          include: [
+            {
+              model: SubCategory,
+              as: 'subcategory',
+              include: [
+                {
+                  model: TagsCategory,
+                  as: 'category'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+
+    // Formatear la respuesta para incluir categorías y subcategorías correctamente
+    const formattedInfluencers = influencers.map(influencer => {
+      return {
+        idUser: influencer.idUser,
+        displayName: influencer.displayName,
+        socialInstagram: influencer.socialInstagram,
+        socialInstagramCla: influencer.socialInstagramCla,
+        socialTik: influencer.socialTik,
+        socialTikCla: influencer.socialTikCla,
+        socialFace: influencer.socialFace,
+        socialFaceCla: influencer.socialFaceCla,
+        socialUTube: influencer.socialUTube,
+        socialUTubeCla: influencer.socialUTubeCla,
+        country_id: influencer.country_id,
+        // state_id: influencer.state_id,
+        city_id: influencer.city_id,
+        gender_id: influencer.gender_id,
+        social_class_id: influencer.social_class_id,
+        hair_type_id: influencer.hair_type_id,
+        hair_color_id: influencer.hair_color_id,
+        skin_color_id: influencer.skin_color_id,
+        categories: influencer.influencerSubcategories.map(sub => ({
+          category: sub.subcategory?.category?.category_name || "N/A",
+          subcategory: sub.subcategory?.subcategory_name || "N/A"
+        }))
+      };
+    });
+
+    //res.status(200).json(influencers);
+    res.status(200).json(formattedInfluencers);
+  } catch (error) {
+    console.error("❌ Back - Error al obtener influencers:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 };

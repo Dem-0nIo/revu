@@ -4,15 +4,15 @@ import Header, { HeaderLeft, HeaderRight } from '../../../layout/Header/Header';
 import Popovers from '../../../components/bootstrap/Popovers';
 import Button, { IButtonProps } from '../../../components/bootstrap/Button';
 import useDarkMode from '../../../hooks/useDarkMode';
-import LANG, { getLangWithKey, ILang } from '../../../lang';
-import Dropdown, {
+// import LANG, { getLangWithKey, ILang } from '../../../lang';
+/* import Dropdown, {
 	DropdownItem,
 	DropdownMenu,
 	DropdownToggle,
-} from '../../../components/bootstrap/Dropdown';
-import showNotification from '../../../components/extras/showNotification';
+} from '../../../components/bootstrap/Dropdown'; */
+// import showNotification from '../../../components/extras/showNotification';
 import Icon from '../../../components/icon/Icon';
-import Spinner from '../../../components/bootstrap/Spinner';
+// import Spinner from '../../../components/bootstrap/Spinner';
 import { NavBar } from '../../../components/NavBar';
 
 const DashboardHeader = () => {

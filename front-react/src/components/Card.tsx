@@ -5,6 +5,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/card.css';
 import Icon from '../components/icon/Icon';
 
@@ -45,14 +46,14 @@ export const Card = ({
 				<h3 className='tarjeta-titulo'>{titulo}</h3>
 				<p className='tarjeta-descripcion'>{descripcion}</p>
 				<p className='tarjeta-precio'>@{precio}</p>
-				<a href={`https://www.instagram.com/${precio}`} target="_blank" rel="noopener noreferrer">
+				<Link to={`https://www.instagram.com/${precio}`} target="_blank" rel="noopener noreferrer">
 					<Icon
 						icon='Insta'
 						color='primary' // null || 'primary' || 'secondary' || 'success' || 'info' || 'warning' || 'danger' || 'light' || 'dark'
 						size='4x' // null || 'sm' || 'md' || 'lg' || '2x' || '3x' || '4x' || '5x' || '6x' || '7x' || '8x' || '9x' || '10x'
 						forceFamily='material' // null || 'custom' || 'material'
 						/>
-				</a>
+				</Link>
 
 				{added ? (
 					<button type='button' className='boton-quitar' onClick={clickQuitar}>

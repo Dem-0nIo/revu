@@ -3,6 +3,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import {useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Card, {
 	CardBody,
 	CardHeader,
@@ -14,12 +16,13 @@ import Wizard, { WizardItem } from '../../../components/Wizard';
 import FormGroup from '../../../components/bootstrap/forms/FormGroup';
 import Input from '../../../components/bootstrap/forms/Input';
 import Select from '../../../components/bootstrap/forms/Select';
-import Label from '../../../components/bootstrap/forms/Label';
-import Checks, { ChecksGroup } from '../../../components/bootstrap/forms/Checks';
+// import Label from '../../../components/bootstrap/forms/Label';
+import Checks from '../../../components/bootstrap/forms/Checks';
 import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import Page from '../../../layout/Page/Page';
 import showNotification from '../../../components/extras/showNotification';
 import InfluService from '../../../services/influ.service';
+
 
 // Extract initialValues
 const initialValues = {
@@ -40,6 +43,7 @@ const initialValues = {
     addressLine: '',
     social_class_id: 0,
     celebrity: 0,
+	isUGC: 0,
     city_id: 0,
     state_id: 0,
     country_id: 0,
@@ -60,19 +64,19 @@ const initialValues = {
     socialUTubeSeg: '',
     socialNetwork: [''],
     image: '',
-    costo_1: '',
-    costo_2: '',
-    costo_3: '',
-	costo_4: '',
-    costo_5: '',
-    costo_6: '',
-	costo_7: '',
-    costo_8: '',
-    costo_9: '',
-	costo_10: '',
-    costo_11: '',
-    costo_12: '',
-	costo_13: '',
+    costo_1: '$0',
+    costo_2: '$0',
+    costo_3: '$0',
+	costo_4: '$0',
+    costo_5: '$0',
+    costo_6: '$0',
+	costo_7: '$0',
+    costo_8: '$0',
+    costo_9: '$0',
+	costo_10: '$0',
+    costo_11: '$0',
+    costo_12: '$0',
+	costo_13: '$0',
 };
 
 // Extract validationSchema
@@ -94,6 +98,10 @@ const validationSchema = Yup.object({
             (val) => (val ? val.toString().length === 2 : false) // Retorna `false` si `val` es undefined
         ),
     displayName: Yup.string() ,
+	social_class_id: Yup.number()
+					.moreThan(0, 'Debe ser mayor que 0'),
+	hair_color_id: Yup.number()
+					.moreThan(0, 'Debe ser mayor que 0'),
     phoneNumber: Yup.string()
         .matches(
             /^(\+)?\d+$/,
@@ -103,34 +111,38 @@ const validationSchema = Yup.object({
             'len',
             'Debe tener no más de 12 dígitos',
             (val) => (val ? val.toString().length <= 13 : false)
-        ),
+        )
+		.required("El número de teléfono es requerido"),
     emailAddress: Yup.string()
         .email('Ingresar un correo valido'),
-    addressLine: Yup.string(),
     socialInstagram: Yup.string(),
     socialInstagramCla: Yup.string(),
     socialInstagramSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero'),
+        .integer('Debe ser un número entero')
+		.moreThan(0, 'Debe ser mayor que 0'),
 	socialTik: Yup.string(),
     socialTikSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero'),
+        .integer('Debe ser un número entero')
+		.moreThan(0, 'Debe ser mayor que 0'),
     socialTikCla: Yup.string(),
 	socialFace: Yup.string(),
     socialFaceCla: Yup.string(),
     socialFaceSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero'),
+        .integer('Debe ser un número entero')
+		.moreThan(0, 'Debe ser mayor que 0'),
 	socialUTube: Yup.string(),
     socialUTubeCla: Yup.string(),
     socialUTubeSeg: Yup.number()
         .typeError('Debe ser un número')
         .positive('Debe ser un número positivo')
-        .integer('Debe ser un número entero'),
+        .integer('Debe ser un número entero')
+		.moreThan(0, 'Debe ser mayor que 0'),
 	costo_1: Yup.string()
         .test('is-currency', 'Debe comenzar con $ y contener solo números después', (value) => {
             if (!value) return false;
@@ -196,8 +208,11 @@ const validationSchema = Yup.object({
 		if (!value) return false;
 		return /^\$\d+$/.test(value); // Check if it starts with $ and is followed by digits
 	}),
-    gender_id: Yup.string(),
+    gender_id: Yup.number()
+				.moreThan(0, 'Debe ser mayor que 0')
+				.required("Debes escoger un sexo"),
 	celebrity: Yup.number(),
+	isUGC: Yup.number(),
     country_id: Yup.number(),
 });
 
@@ -215,6 +230,8 @@ const PreviewItem: FC<IPreviewItemProps> = ({ title, value }) => {
 		</>
 	);
 };
+
+
 
 interface SocialClass {
 	id: number;
@@ -283,16 +300,15 @@ interface SkinColor {
 
 const NewInfluencer = () => {
 	
-	const [successful, setSuccessful] = useState(false);
+	// const [, setSuccessful] = useState(false);
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
-	const [departments, setDepartments] = useState<Department[]>([]);
+	const [, setDepartments] = useState<Department[]>([]);
 	const [countries, setCountry] = useState<Country[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
 	const [hairType, setHairType] = useState<HairType[]>([]);
 	const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
-
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
 	const [selectedSubcategories, setSelectedSubcategories] = useState<any[]>([]);
@@ -303,14 +319,23 @@ const NewInfluencer = () => {
 		ACCOUNT_DETAIL: 'Detalles Influencer',
 		TEST: 'Test',
 	};
-	const [activeTab, setActiveTab] = useState(TABS.ACCOUNT_DETAIL);
+	const [activeTab, ] = useState(TABS.ACCOUNT_DETAIL);
 
-	const socialNetwork = [
+	const [showErrorToast, setShowErrorToast] = useState(false);
+
+	useEffect(() => {
+	if (showErrorToast) {
+		toast.error("⚠️ This is an error toast!", { autoClose: 8000 });
+		setShowErrorToast(false); // Reset after displaying
+	}
+	}, [showErrorToast]);
+
+/* 	const socialNetwork = [
 		{ id: 1, name: 'Instagram' },
 		{ id: 2, name: 'TikTok' },
 		{ id: 3, name: 'Facebook' },
 		{ id: 4, name: 'YouTube' },
-	];
+	]; */
 
 	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setSelectedCategoryId(Number(e.target.value));
@@ -340,7 +365,7 @@ const NewInfluencer = () => {
 		formik.setFieldValue("socialTikCla", matchedClass?.class_name || "");
 	};
 
-	// Handle TikTok classification update
+	// Handle Facebook classification update
 	const handleFaceFollowersChange = (followers: number) => {
 		formik.setFieldValue("socialFaceSeg", followers); // Actualiza el número de seguidores
 		const matchedClass = influencerClasses.find(
@@ -352,7 +377,7 @@ const NewInfluencer = () => {
 		formik.setFieldValue("socialFaceCla", matchedClass?.class_name || "");
 	};
 
-	// Handle TikTok classification update
+	// Handle Youtube classification update
 	const handleUTubeFollowersChange = (followers: number) => {
 		formik.setFieldValue("socialUTubeSeg", followers); // Actualiza el número de seguidores
 		const matchedClass = influencerClasses.find(
@@ -366,6 +391,16 @@ const NewInfluencer = () => {
 
 	const handleSubmit = async (values: any) => {
 		try {
+
+			const selectedNetworks = [];
+
+			if (values.socialInstagram) selectedNetworks.push("socialInstagram");
+			if (values.socialTik) selectedNetworks.push("socialTik");
+			if (values.socialFace) selectedNetworks.push("socialFace");
+			if (values.socialUTube) selectedNetworks.push("socialUTube");
+
+			// ✅ Convertimos la lista a JSON, pero guardamos el string (IMPORTANTE)
+			const socialNetworkString = JSON.stringify(selectedNetworks);
 			// Prepare the payload for submission, including all form values and subcategories
 			const payload = {
 				firstName: values.firstName,
@@ -373,8 +408,8 @@ const NewInfluencer = () => {
 				// idUser: values.idUser,
 				year: values.year,
 				gender_id: values.gender_id,
-				hair_color_id: values.hair_color_id,
 				hair_type_id: values.hair_type_id,
+				hair_color_id: values.hair_color_id,
 				skin_color_id: values.skin_color_id,
 				contact: values.contact,
 				passport: values.passport,
@@ -384,6 +419,7 @@ const NewInfluencer = () => {
 				addressLine: values.addressLine,
 				social_class_id: values.social_class_id,
 				celebrity: Number.isNaN(parseInt(values.celebrity, 10)) ? -1 : parseInt(values.celebrity, 10),
+				isUGC: Number.isNaN(parseInt(values.isUGC, 10)) ? -1 : parseInt(values.isUGC, 10),
 				city_id: values.city_id,
 				state_id: values.state_id,
 				country_id: values.country_id,
@@ -402,7 +438,7 @@ const NewInfluencer = () => {
 				socialUTube: values.socialTik,
 				socialUTubeCla: values.socialTikCla,
 				socialUTubeSeg: values.socialTikSeg,
-				socialNetwork: values.socialNetwork,
+				socialNetwork: socialNetworkString,
 				image: values.image,
 				costo_1: values.costo_1.replace('$', ''),
 				costo_2: values.costo_2.replace('$', ''),
@@ -419,7 +455,7 @@ const NewInfluencer = () => {
 				costo_13: values.costo_13.replace('$', ''),
 				subcategories: selectedSubcategories.map((subcat) => subcat.id), // Add selected subcategories IDs
 			};
-	
+		
 			// Debugging: Log the payload before sending
 			console.log("Payload to be sent:", payload);
 	
@@ -592,7 +628,7 @@ const NewInfluencer = () => {
 		fetchSubcategories();
 	}, [selectedCategoryId]);
 
-	async function addInflu(values: any) {
+	/* async function addInflu(values: any) {
 		try {
 			const resp = await InfluService.addInfluencer(values);
 			if (resp) {
@@ -603,13 +639,18 @@ const NewInfluencer = () => {
 			setSuccessful(false);
 			showNotification('Error', String(error), 'danger');
 		}
-	}
+	} */
 
 	const formik = useFormik({
         initialValues,
-        validationSchema,
-        onSubmit: handleSubmit,
+        validationSchema: Yup.object().shape(validationSchema.fields),
+		validateOnBlur: false,
+		validateOnChange: false, // Solo validará al hacer Submit
+		onSubmit: handleSubmit,
     });
+
+	
+
 
 	return (
 		<PageWrapper title='Nuevo Ingreso'>
@@ -617,6 +658,7 @@ const NewInfluencer = () => {
 				<div className='row h-100 pb-3'>
 					<div className='col-lg-12 col-md-8'>
 						{TABS.ACCOUNT_DETAIL === activeTab && (
+							
 							<Wizard
 								isHeader
 								stretch
@@ -624,6 +666,7 @@ const NewInfluencer = () => {
 								noValidate
 								onSubmit={formik.handleSubmit}
 								className='shadow-3d-info'>
+								
 								<WizardItem id='step1' title='Formulario de ingreso'>
 									<Card>
 										<CardHeader>
@@ -814,7 +857,7 @@ const NewInfluencer = () => {
 																formik.setFieldValue('hair_type_id', Number(e.target.value))
 															}
 															onBlur={formik.handleBlur}
-															value={String(formik.values.country_id)}
+															value={String(formik.values.hair_type_id)}
 															isValid={formik.isValid}
 															isTouched={formik.touched.hair_type_id}
 															invalidFeedback={formik.errors.hair_type_id}
@@ -962,6 +1005,8 @@ const NewInfluencer = () => {
 													placeholder="Clasificación"
 													value={formik.values.socialInstagramCla}
 													readOnly // Campo deshabilitado
+													isTouched={formik.touched.socialInstagramCla}
+													invalidFeedback={formik.errors.socialInstagramCla}
 												/>
 											</FormGroup>
 										</div>
@@ -978,6 +1023,9 @@ const NewInfluencer = () => {
 													}													
 													onBlur={formik.handleBlur}
 													value={formik.values.socialInstagramSeg}
+													isValid={formik.isValid}
+													isTouched={formik.touched.socialInstagramSeg}
+													invalidFeedback={formik.errors.socialInstagramSeg}
 												/>
 											</FormGroup>
 										</div>
@@ -1004,6 +1052,8 @@ const NewInfluencer = () => {
 													placeholder="Clasificación TikTok"
 													value={formik.values.socialTikCla}
 													readOnly // Campo deshabilitado
+													isTouched={formik.touched.socialTikCla}
+													invalidFeedback={formik.errors.socialTikCla}
 												/>
 											</FormGroup>
 										</div>
@@ -1020,6 +1070,9 @@ const NewInfluencer = () => {
 													}
 													onBlur={formik.handleBlur}
 													value={formik.values.socialTikSeg}
+													isValid={formik.isValid}
+													isTouched={formik.touched.socialTikSeg}
+													invalidFeedback={formik.errors.socialTikSeg}
 												/>
 											</FormGroup>
 										</div>
@@ -1049,6 +1102,8 @@ const NewInfluencer = () => {
 													placeholder="Clasificación"
 													value={formik.values.socialFaceCla}
 													readOnly // Campo deshabilitado
+													isTouched={formik.touched.socialFaceCla}
+													invalidFeedback={formik.errors.socialFaceCla}
 												/>
 											</FormGroup>
 										</div>
@@ -1065,6 +1120,9 @@ const NewInfluencer = () => {
 													}													
 													onBlur={formik.handleBlur}
 													value={formik.values.socialFaceSeg}
+													isValid={formik.isValid}
+													isTouched={formik.touched.socialFaceSeg}
+													invalidFeedback={formik.errors.socialFaceSeg}
 												/>
 											</FormGroup>
 										</div>
@@ -1093,6 +1151,8 @@ const NewInfluencer = () => {
 													placeholder="Clasificación"
 													value={formik.values.socialUTubeCla}
 													readOnly // Campo deshabilitado
+													isTouched={formik.touched.socialUTubeCla}
+													invalidFeedback={formik.errors.socialUTubeCla}
 												/>
 											</FormGroup>
 										</div>
@@ -1109,6 +1169,9 @@ const NewInfluencer = () => {
 													}													
 													onBlur={formik.handleBlur}
 													value={formik.values.socialUTubeSeg}
+													isValid={formik.isValid}
+													isTouched={formik.touched.socialUTubeSeg}
+													invalidFeedback={formik.errors.socialUTubeSeg}
 												/>
 											</FormGroup>
 										</div>
@@ -1124,6 +1187,7 @@ const NewInfluencer = () => {
 														formik.setFieldValue('celebrity', e.target.checked ? 1 : 0)
 													}
 													checked={formik.values.celebrity === 1}
+													
 												/>
 											</FormGroup>
 										</div>
@@ -1139,6 +1203,7 @@ const NewInfluencer = () => {
 													}))}
 													onChange={handleCategoryChange}
 													value={selectedCategoryId ? String(selectedCategoryId) : ''}
+													
 												/>
 											</FormGroup>
 										</div>
@@ -1374,45 +1439,20 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-3'>
-											<FormGroup id='costo_13' label='UGC' isFloating>
-												<Input
-													onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-														const value = e.target.value.startsWith('$') ? e.target.value : `$${e.target.value}`;
-														formik.setFieldValue('costo_13', value);
-													}}
-													onBlur={formik.handleBlur}
-													value={formik.values.costo_13}
-													isValid={formik.isValid}
-													isTouched={formik.touched.costo_13}
-													invalidFeedback={formik.errors.costo_13}
+											<FormGroup id='costo_13' >
+												<Checks
+													type='switch' // or 'checkbox', depending on your preference
+													id='isUGC'
+													name='isUGC'
+													label='UGC?'
+													value='1' // Example value, you can modify it as needed
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														formik.setFieldValue('isUGC', e.target.checked ? 1 : 0)
+													}
+													checked={formik.values.isUGC === 1}
 												/>
 											</FormGroup>
 										</div>
-
-										{/* <div className='col-6'>
-											<FormGroup>
-												<Label htmlFor='emailNotification'>
-													Redes Sociales
-												</Label>
-												<ChecksGroup>
-													{socialNetwork.map((cat) => (
-														<Checks
-															type='switch'
-															key={cat.id}
-															id={`emailNotification-${cat.id.toString()}`}
-															name='socialNetwork'
-															label={cat.name}
-															value={cat.id}
-															onChange={formik.handleChange}
-															checked={formik.values.socialNetwork.includes(
-																cat.id.toString(),
-															)}
-														/>
-													))}
-												</ChecksGroup>
-											</FormGroup>
-										</div> */}
-										
 									</div>
 								</WizardItem>
 								<WizardItem id='step4' title='Resumen'>
@@ -1446,6 +1486,10 @@ const NewInfluencer = () => {
 											<h4 className='mt-4'>Información de Contacto</h4>
 										</div>
 										<PreviewItem
+											title='Persona de contacto'
+											value={formik.values.contact}
+										/>
+										<PreviewItem
 											title='Número celular'
 											value={formik.values.phoneNumber}
 										/>
@@ -1453,24 +1497,13 @@ const NewInfluencer = () => {
 											title='Email'
 											value={formik.values.emailAddress}
 										/>
-										<PreviewItem
-											title='Dirección'
-											value={formik.values.addressLine}
-										/>
+
 										
 										<div className='col-9 offset-3'>
 											<h3 className='mt-4'>Informacion Redes Sociales</h3>
 										</div>
 
-										{/* <PreviewItem
-											title='Redes Activadas'
-											value={socialNetwork.map(
-												(cat) =>
-													formik.values.socialNetwork.includes(
-														cat.id.toString(),
-													) && `${cat.name}, `,
-											)}
-										/> */}
+										
 										<PreviewItem
 											title='Instagram'
 											value={formik.values.socialInstagram}
