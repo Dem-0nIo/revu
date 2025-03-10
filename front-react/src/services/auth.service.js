@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081';
 
-// console.log("API_URL resolved: " , API_URL);
+console.log("API_URL resolved: " , API_URL);
 
 const register = (username, email, password) => {
 	return axios.post(`${API_URL}/api/auth/signup`, {

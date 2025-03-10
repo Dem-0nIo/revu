@@ -55,12 +55,6 @@ export const dashboardPagesMenu = {
 		path: 'revu/busqueda-influencers',
 		icon: 'Search',
 	},
-	searchInfluencer: {
-		id: 'searchInfluencer',
-		text: 'Busqueda de Influencers',
-		path: 'revu/busqueda-influencers',
-		icon: 'Search',
-	},
 	cotizaciones: {
 		id: 'ccoti',
 		text: 'Admin Cotizaciones',
@@ -100,12 +94,6 @@ export const adminPagesMenu = {
 		icon: 'AddReaction',
 	},
 
-	searchInfluencer: {
-		id: 'searchInfluencer',
-		text: 'Busqueda de Influencers',
-		path: 'revu/busqueda-influencers',
-		icon: 'Search',
-	},
 	searchInfluencer: {
 		id: 'searchInfluencer',
 		text: 'Busqueda de Influencers',

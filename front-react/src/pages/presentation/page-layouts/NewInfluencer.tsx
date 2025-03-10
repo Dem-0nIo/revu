@@ -76,7 +76,6 @@ const initialValues = {
 	costo_10: '$0',
     costo_11: '$0',
     costo_12: '$0',
-	costo_13: '$0',
 };
 
 // Extract validationSchema
@@ -230,8 +229,6 @@ const PreviewItem: FC<IPreviewItemProps> = ({ title, value }) => {
 		</>
 	);
 };
-
-
 
 interface SocialClass {
 	id: number;
@@ -452,7 +449,6 @@ const NewInfluencer = () => {
 				costo_10: values.costo_10.replace('$', ''),
 				costo_11: values.costo_11.replace('$', ''),
 				costo_12: values.costo_12.replace('$', ''),
-				costo_13: values.costo_13.replace('$', ''),
 				subcategories: selectedSubcategories.map((subcat) => subcat.id), // Add selected subcategories IDs
 			};
 		
@@ -533,8 +529,8 @@ const NewInfluencer = () => {
 	useEffect(() => {
 		async function fetchInfluencerClasses() {
 			try {
-				const response = await InfluService.getInfluencerClasses(); // Asegúrate de tener este método en tu servicio
-				console.log("Clases cargadas:", response.data); // Verifica el contenido
+				const response = await InfluService.getInfluencerClasses(); 
+				console.log("Clases cargadas:", response.data); 
 				setInfluencerClasses(response.data);
 			} catch (error) {
 				console.error("Failed to fetch influencer classes:", error);
@@ -628,19 +624,6 @@ const NewInfluencer = () => {
 		fetchSubcategories();
 	}, [selectedCategoryId]);
 
-	/* async function addInflu(values: any) {
-		try {
-			const resp = await InfluService.addInfluencer(values);
-			if (resp) {
-				setSuccessful(true);
-				showNotification('Ingreso de usuario', 'Ingreso exitoso', 'info');
-			}
-		} catch (error) {
-			setSuccessful(false);
-			showNotification('Error', String(error), 'danger');
-		}
-	} */
-
 	const formik = useFormik({
         initialValues,
         validationSchema: Yup.object().shape(validationSchema.fields),
@@ -648,9 +631,6 @@ const NewInfluencer = () => {
 		validateOnChange: false, // Solo validará al hacer Submit
 		onSubmit: handleSubmit,
     });
-
-	
-
 
 	return (
 		<PageWrapper title='Nuevo Ingreso'>
@@ -788,8 +768,8 @@ const NewInfluencer = () => {
 															ariaLabel='Clase Social'
 															placeholder='Seleccione...'
 															list={socialClasses.map((socialClass) => ({
-																value: String(socialClass.id), // Use the gender ID as the value
-																text: socialClass.class_name, // Use the gender description as the text
+																value: String(socialClass.id),
+																text: socialClass.class_name, 
 															}))}
 															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
 																formik.setFieldValue('social_class_id', Number(e.target.value))
@@ -1029,7 +1009,6 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-
 										<div className='col-4'>
 											<FormGroup id='socialTik' label='TikTok' isFloating>
 												<Input
@@ -1076,7 +1055,6 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
-
 										<div className='col-4'>
 											<FormGroup
 												id='socialFace'
@@ -1439,7 +1417,7 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-3'>
-											<FormGroup id='costo_13' >
+											<FormGroup id='isUGC' >
 												<Checks
 													type='switch' // or 'checkbox', depending on your preference
 													id='isUGC'

@@ -1,23 +1,25 @@
-FROM node:19-alpine AS build
+FROM node:19-alpine as build
 
 WORKDIR /front-react
-COPY . .
-RUN npm install
+
+# Copy only package files and the locally downloaded node_modules folder
+COPY package*.json ./
+COPY node_modules/ ./node_modules/
+
+# Copy the rest of the application code
 COPY . .
 
+# Build the application
 RUN npm run build
 
 FROM nginx:alpine3.19
 
-RUN mkdir -p /etc/nginx/ssl
+# Add the nginx configuration
+ADD nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY certs/revuagencyapp_com_chain.crt /etc/nginx/ssl/revuagencyapp_com_chain.crt
-COPY certs/revuagencyapp.key /etc/nginx/ssl/revuagencyapp.key
-
-ADD nginx.conf /etc/nginx/conf.d/revuagencyapp_com-ssl.conf
-
+# Copy the built app from the build stage
 COPY --from=build /front-react/build /usr/share/nginx/html
 
-EXPOSE 80 443
+EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
