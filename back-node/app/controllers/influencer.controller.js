@@ -5,10 +5,6 @@ const SubCategory = db.SubCategory;
 const TagsCategory = db.TagsCategory;
 const SocialClass = db.SocialClass;
 const { Op } = require("sequelize");
-const SubCategory = db.SubCategory;
-const TagsCategory = db.TagsCategory;
-const SocialClass = db.SocialClass;
-const { Op } = require("sequelize");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -39,7 +35,6 @@ exports.registerinfluencer = async (req, res) => {
       hair_type_id,
       skin_color_id,
       contact,
-      passport,
       displayName,
       emailAddress,
       phoneNumber,
@@ -50,9 +45,6 @@ exports.registerinfluencer = async (req, res) => {
       country_id,
       city_id,
     //  state_id,
-      emailNotification,
-      pushNotification,
-      phoneNumberWhp,
       socialInstagram,
       socialInstagramCla,
       socialInstagramSeg,
@@ -343,6 +335,7 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
       attributes: [
         'idUser',
         'displayName',
+        'firstName',
         'socialInstagram',
         'socialInstagramCla',
         'socialTik',
@@ -375,7 +368,10 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
     const formattedInfluencers = influencers.map(influencer => {
       return {
         idUser: influencer.idUser,
+        firstName: influencer.firstName,
+        lastName: influencer.lastName,
         displayName: influencer.displayName,
+        year: influencer.year,
         socialInstagram: influencer.socialInstagram,
         socialInstagramCla: influencer.socialInstagramCla,
         socialTik: influencer.socialTik,
@@ -455,10 +451,12 @@ exports.getFilteredInfluencers = async (req, res) => {
 
     const influencers = await Influ.findAll({
       attributes: [
-        'idUser', 'displayName', 'socialInstagram', 'socialInstagramCla',
-        'socialTik', 'socialTikCla', 'socialFace', 'socialFaceCla',
-        'socialUTube', 'socialUTubeCla', 'state_id', 'city_id', 'country_id',
-        'gender_id', 'social_class_id', 'hair_type_id', 'hair_color_id', 'skin_color_id'
+        'idUser', 'firstName','lastName','displayName', 'year', 'hair_color_id', 'hair_type_id',
+        'gender_id', 'skin_color_id', 'contact', 'emailAddress', 'phoneNumber', 'celebrity', 'isUGC', 'city_id', 
+        'country_id', 'socialInstagram', 'socialInstagramCla', 'socialInstagramSeg','socialTik', 'socialTikCla', 
+        'socialTikSeg','socialFace', 'socialFaceCla', 'socialFaceSeg', 'socialUTube', 'socialUTubeCla', 
+        'socialUTubeSeg', 'social_class_id', 'costo_1', 'costo_2', 'costo_3', 'costo_4', 'costo_5', 'costo_6', 
+        'costo_7', 'costo_8', 'costo_9', 'costo_10', 'costo_11', 'costo_12'
       ],
       where: whereClause,
       include: [
@@ -486,25 +484,49 @@ exports.getFilteredInfluencers = async (req, res) => {
       return {
         idUser: influencer.idUser,
         displayName: influencer.displayName,
-        socialInstagram: influencer.socialInstagram,
-        socialInstagramCla: influencer.socialInstagramCla,
-        socialTik: influencer.socialTik,
-        socialTikCla: influencer.socialTikCla,
-        socialFace: influencer.socialFace,
-        socialFaceCla: influencer.socialFaceCla,
-        socialUTube: influencer.socialUTube,
-        socialUTubeCla: influencer.socialUTubeCla,
-        country_id: influencer.country_id,
-        // state_id: influencer.state_id,
+        firstName: influencer.firstName,
+        lastName: influencer.lastName,
+        year: influencer.year,
+        emailAddress: influencer.emailAddress,
+        phoneNumber: influencer.phoneNumber,
+        hair_color_id : influencer.hair_color_id,
+        hair_type_id: influencer.hair_type_id,
+        skin_color_id : influencer.skin_color_id,
+        contact: influencer.contact,
+        celebrity: influencer.celebrity,
+        isUGC: influencer.isUGC,
         city_id: influencer.city_id,
         gender_id: influencer.gender_id,
         social_class_id: influencer.social_class_id,
-        hair_type_id: influencer.hair_type_id,
-        hair_color_id: influencer.hair_color_id,
-        skin_color_id: influencer.skin_color_id,
+        socialInstagram: influencer.socialInstagram,
+        socialInstagramCla: influencer.socialInstagramCla,
+        socialInstagramSeg: influencer.socialInstagramSeg,
+        socialTik: influencer.socialTik,
+        socialTikCla: influencer.socialTikCla,
+        socialTikSeg: influencer.socialTikSeg,
+        socialFace: influencer.socialFace,
+        socialFaceCla: influencer.socialFaceCla,
+        socialFaceSeg: influencer.socialFaceSeg,
+        socialUTube: influencer.socialUTube,
+        socialUTubeCla: influencer.socialUTubeCla,
+        socialUTubeSeg: influencer.socialUTubeSeg,
+        country_id: influencer.country_id,
+        costo_1: influencer.costo_1,
+        costo_2: influencer.costo_2,
+        costo_3: influencer.costo_3,
+        costo_4: influencer.costo_4,
+        costo_5: influencer.costo_5,
+        costo_6: influencer.costo_6,
+        costo_7: influencer.costo_7,
+        costo_8: influencer.costo_8,
+        costo_9: influencer.costo_9,
+        costo_10: influencer.costo_10,
+        costo_11: influencer.costo_11,
+        costo_12: influencer.costo_12,
         categories: influencer.influencerSubcategories.map(sub => ({
           category: sub.subcategory?.category?.category_name || "N/A",
-          subcategory: sub.subcategory?.subcategory_name || "N/A"
+          subcategory: sub.subcategory?.subcategory_name || "N/A",
+          subcategory_id: sub.subcategory?.id || "N/A"
         }))
       };
     });

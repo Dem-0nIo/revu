@@ -28,7 +28,7 @@ exports.getAllUsers = (req, res) => {
 
 exports.assignUserRole = (req, res) => {
   const body = req.body;
-  console.log("respondiendo back", req.body);
+  // console.log("respondiendo back", req.body);
   // Save User to Database
   userRoles
     .create({
