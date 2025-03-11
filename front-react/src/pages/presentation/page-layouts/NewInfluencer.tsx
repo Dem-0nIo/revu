@@ -294,6 +294,7 @@ const NewInfluencer = () => {
 	// const [, setSuccessful] = useState(false);
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
+	const [citiesCopy, setCitiesCopy] = useState<City[]>([]);
 	const [countries, setCountry] = useState<Country[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
@@ -375,22 +376,23 @@ const NewInfluencer = () => {
 				followers >= cls.min_followers &&
 				(cls.max_followers === null || followers <= cls.max_followers)
 		);
-		console.log("Clase UTube coincidente:", matchedClass); // Verifica si encuentra una clase
+		console.log("Clase UTube coincidente: ", matchedClass); // Verifica si encuentra una clase
 		formik.setFieldValue("socialUTubeCla", matchedClass?.class_name || "");
 	};
 
 	const handleChangeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const selectedCountryId = Number(e.target.value);
-	
+		console.log("Selected country id ", selectedCountryId);
 		// Update the selected country in Formik
 		formik.setFieldValue('country_id', selectedCountryId);
-	
+		console.log("City copies: ", citiesCopy);
+		const allCities = citiesCopy;
+		console.log("Cities to display after copy",allCities);
 		// Filter cities based on selected country
-		const filtered = cities.filter(city => city.country_id === selectedCountryId);
+		const filtered = allCities.filter(city => city.country_id === selectedCountryId);
+		console.log("Cities to display ",filtered);
 		setCities(filtered);
-	
-		// Reset city selection
-		formik.setFieldValue('city_id', '');
+
 	};
 
 	const handleSubmit = async (values: any) => {
@@ -509,8 +511,10 @@ const NewInfluencer = () => {
 	useEffect(() => {
 		async function fetchCities() {
 			try {
-				const response = await InfluService.getCities(); // Make sure to create this service method
+				const response = await InfluService.getCities();
+				console.log("Ciudades cargadas: ", response.data); 
 				setCities(response.data);
+				setCitiesCopy(response.data);
 			} catch (error) {
 				console.error("Failed to fetch Cities:", error);
 			}
@@ -637,9 +641,6 @@ const NewInfluencer = () => {
 		validateOnChange: false, // Solo validará al hacer Submit
 		onSubmit: handleSubmit,
     });
-
-	
-
 
 	return (
 		<PageWrapper title='Nuevo Ingreso'>
