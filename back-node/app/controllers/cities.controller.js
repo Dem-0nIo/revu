@@ -3,7 +3,7 @@ const db = require("../models");
 const City = db.cities;
 
 exports.getAllCities = async (req, res) => {
-    // Find all genders
+    // Find all cities
     try {
         const { sortBy = "city_name", order = "ASC" } = req.query; // Get sort parameters from query string
         const cities = await City.findAll({

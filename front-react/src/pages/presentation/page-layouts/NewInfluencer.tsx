@@ -76,6 +76,7 @@ const initialValues = {
 	costo_10: '$0',
     costo_11: '$0',
     costo_12: '$0',
+	costo_13: '$0',
 };
 
 // Extract validationSchema
@@ -105,11 +106,6 @@ const validationSchema = Yup.object({
         .matches(
             /^(\+)?\d+$/,
             "El número de teléfono solo puede contener dígitos y un '+' opcional al inicio"
-        )
-        .test(
-            'len',
-            'Debe tener no más de 12 dígitos',
-            (val) => (val ? val.toString().length <= 13 : false)
         )
 		.required("El número de teléfono es requerido"),
     emailAddress: Yup.string()
@@ -265,13 +261,11 @@ interface Country {
 interface City {
 	id: number;
 	city_name: string;
+	country_id: number;
 }
 
 // Define the Department type
-interface Department {
-	id: number;
-	department_name: string;
-}
+
 
 interface InfluencerClass {
 	min_followers: number;
@@ -300,7 +294,6 @@ const NewInfluencer = () => {
 	// const [, setSuccessful] = useState(false);
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
-	const [, setDepartments] = useState<Department[]>([]);
 	const [countries, setCountry] = useState<Country[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
@@ -386,6 +379,20 @@ const NewInfluencer = () => {
 		formik.setFieldValue("socialUTubeCla", matchedClass?.class_name || "");
 	};
 
+	const handleChangeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const selectedCountryId = Number(e.target.value);
+	
+		// Update the selected country in Formik
+		formik.setFieldValue('country_id', selectedCountryId);
+	
+		// Filter cities based on selected country
+		const filtered = cities.filter(city => city.country_id === selectedCountryId);
+		setCities(filtered);
+	
+		// Reset city selection
+		formik.setFieldValue('city_id', '');
+	};
+
 	const handleSubmit = async (values: any) => {
 		try {
 
@@ -409,7 +416,6 @@ const NewInfluencer = () => {
 				hair_color_id: values.hair_color_id,
 				skin_color_id: values.skin_color_id,
 				contact: values.contact,
-				passport: values.passport,
 				displayName: values.displayName,
 				emailAddress: values.emailAddress,
 				phoneNumber: values.phoneNumber,
@@ -512,25 +518,12 @@ const NewInfluencer = () => {
 		fetchCities();
 	}, []);
 
-	// Fetch departments from the API
-	useEffect(() => {
-		async function fetchDepartments() {
-			try {
-				const response = await InfluService.getDepartments(); // Make sure to create this service method
-				setDepartments(response.data);
-			} catch (error) {
-				console.error("Failed to fetch Departments Front", error);
-			}
-		}
-		fetchDepartments();
-	}, []);
-
 	// Fetch influencer classes
 	useEffect(() => {
 		async function fetchInfluencerClasses() {
 			try {
-				const response = await InfluService.getInfluencerClasses(); 
-				console.log("Clases cargadas:", response.data); 
+				const response = await InfluService.getInfluencerClasses(); // Asegúrate de tener este método en tu servicio
+				console.log("Clases cargadas:", response.data); // Verifica el contenido
 				setInfluencerClasses(response.data);
 			} catch (error) {
 				console.error("Failed to fetch influencer classes:", error);
@@ -624,6 +617,19 @@ const NewInfluencer = () => {
 		fetchSubcategories();
 	}, [selectedCategoryId]);
 
+	/* async function addInflu(values: any) {
+		try {
+			const resp = await InfluService.addInfluencer(values);
+			if (resp) {
+				setSuccessful(true);
+				showNotification('Ingreso de usuario', 'Ingreso exitoso', 'info');
+			}
+		} catch (error) {
+			setSuccessful(false);
+			showNotification('Error', String(error), 'danger');
+		}
+	} */
+
 	const formik = useFormik({
         initialValues,
         validationSchema: Yup.object().shape(validationSchema.fields),
@@ -631,6 +637,9 @@ const NewInfluencer = () => {
 		validateOnChange: false, // Solo validará al hacer Submit
 		onSubmit: handleSubmit,
     });
+
+	
+
 
 	return (
 		<PageWrapper title='Nuevo Ingreso'>
@@ -726,9 +735,7 @@ const NewInfluencer = () => {
 																value: String(country.id),
 																text: country.name,
 															}))}
-															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-																formik.setFieldValue('country_id', Number(e.target.value))
-															}
+															onChange={handleChangeCountry}
 															onBlur={formik.handleBlur}
 															value={String(formik.values.country_id)}
 															isValid={formik.isValid}
@@ -768,8 +775,8 @@ const NewInfluencer = () => {
 															ariaLabel='Clase Social'
 															placeholder='Seleccione...'
 															list={socialClasses.map((socialClass) => ({
-																value: String(socialClass.id),
-																text: socialClass.class_name, 
+																value: String(socialClass.id), // Use the gender ID as the value
+																text: socialClass.class_name, // Use the gender description as the text
 															}))}
 															onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
 																formik.setFieldValue('social_class_id', Number(e.target.value))
@@ -1009,6 +1016,7 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
+
 										<div className='col-4'>
 											<FormGroup id='socialTik' label='TikTok' isFloating>
 												<Input
@@ -1055,6 +1063,7 @@ const NewInfluencer = () => {
 												/>
 											</FormGroup>
 										</div>
+
 										<div className='col-4'>
 											<FormGroup
 												id='socialFace'
@@ -1417,7 +1426,7 @@ const NewInfluencer = () => {
 										</div>
 
 										<div className='col-3'>
-											<FormGroup id='isUGC' >
+											<FormGroup id='costo_13' >
 												<Checks
 													type='switch' // or 'checkbox', depending on your preference
 													id='isUGC'

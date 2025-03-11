@@ -45,6 +45,9 @@ exports.registerinfluencer = async (req, res) => {
       country_id,
       city_id,
     //  state_id,
+      emailNotification,
+      pushNotification,
+      phoneNumberWhp,
       socialInstagram,
       socialInstagramCla,
       socialInstagramSeg,
@@ -70,7 +73,6 @@ exports.registerinfluencer = async (req, res) => {
       costo_10,
       costo_11,
       costo_12,
-      costo_13,
       subcategories,// Subcategories array from request
     } = req.body;
 
@@ -95,7 +97,6 @@ exports.registerinfluencer = async (req, res) => {
       hair_type_id,
       skin_color_id,
       contact,
-      passport,
       displayName,
       emailAddress,
       phoneNumber,
@@ -135,7 +136,6 @@ exports.registerinfluencer = async (req, res) => {
       costo_10,
       costo_11,
       costo_12,
-      costo_13,
     });
 
     console.log("Subcategories received:", subcategories);
@@ -203,7 +203,6 @@ exports.registerinflu = async (req, res, fileUpload) => {
     hair_type_id: Number.isNaN(parseInt(req.body.hair_type_id, 10)) ? -1 : parseInt(req.body.hair_type_id, 10),
     skin_color_id: Number.isNaN(parseInt(req.body.skin_color_id, 10)) ? -1 : parseInt(req.body.skin_color_id, 10),
     contact: req.body.contact,
-    passport: req.body.passport,
     displayName: req.body.displayName,
     emailAddress: req.body.emailAddress,
     phoneNumber: req.body.phoneNumber,
@@ -242,7 +241,6 @@ exports.registerinflu = async (req, res, fileUpload) => {
     costo_10: req.body.costo_10,
     costo_11: req.body.costo_11,
     costo_12: req.body.costo_12,
-    costo_13: req.body.costo_13,
   })
     .then(() => {
       console.log("se ingreso con exito");
@@ -335,7 +333,6 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
       attributes: [
         'idUser',
         'displayName',
-        'firstName',
         'socialInstagram',
         'socialInstagramCla',
         'socialTik',
@@ -368,10 +365,7 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
     const formattedInfluencers = influencers.map(influencer => {
       return {
         idUser: influencer.idUser,
-        firstName: influencer.firstName,
-        lastName: influencer.lastName,
         displayName: influencer.displayName,
-        year: influencer.year,
         socialInstagram: influencer.socialInstagram,
         socialInstagramCla: influencer.socialInstagramCla,
         socialTik: influencer.socialTik,
@@ -382,7 +376,8 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
         socialUTubeCla: influencer.socialUTubeCla,
         categories: influencer.influencerSubcategories.map(sub => ({
           category: sub.subcategory?.category?.category_name || "N/A",
-          subcategory: sub.subcategory?.subcategory_name || "N/A"
+          subcategory: sub.subcategory?.subcategory_name || "N/A",
+          subcategory_id: sub.subcategory?.id || "N/A"
         }))
       };
     });
@@ -450,13 +445,13 @@ exports.getFilteredInfluencers = async (req, res) => {
     }
 
     const influencers = await Influ.findAll({
+
       attributes: [
-        'idUser', 'firstName','lastName','displayName', 'year', 'hair_color_id', 'hair_type_id',
-        'gender_id', 'skin_color_id', 'contact', 'emailAddress', 'phoneNumber', 'celebrity', 'isUGC', 'city_id', 
-        'country_id', 'socialInstagram', 'socialInstagramCla', 'socialInstagramSeg','socialTik', 'socialTikCla', 
-        'socialTikSeg','socialFace', 'socialFaceCla', 'socialFaceSeg', 'socialUTube', 'socialUTubeCla', 
-        'socialUTubeSeg', 'social_class_id', 'costo_1', 'costo_2', 'costo_3', 'costo_4', 'costo_5', 'costo_6', 
-        'costo_7', 'costo_8', 'costo_9', 'costo_10', 'costo_11', 'costo_12'
+        'idUser', 'displayName', 'firstName','lastName','year','contact','emailAddress','phoneNumber','celebrity','isUGC',
+        'socialInstagram', 'socialInstagramCla', 'socialInstagramSeg', 'socialTik', 'socialTikCla', 'socialTikSeg','socialFace', 
+        'socialFaceCla', 'socialFaceSeg','socialUTube', 'socialUTubeCla', 'socialUTubeSeg', 'state_id', 'city_id', 'country_id',
+        'gender_id', 'social_class_id', 'hair_type_id', 'hair_color_id', 'skin_color_id','costo_1', 'costo_2', 'costo_3', 'costo_4',
+        'costo_5','costo_6','costo_7','costo_8','costo_9','costo_10','costo_11', 'costo_12'
       ],
       where: whereClause,
       include: [
@@ -482,22 +477,17 @@ exports.getFilteredInfluencers = async (req, res) => {
     // Formatear la respuesta para incluir categorías y subcategorías correctamente
     const formattedInfluencers = influencers.map(influencer => {
       return {
+
         idUser: influencer.idUser,
         displayName: influencer.displayName,
         firstName: influencer.firstName,
         lastName: influencer.lastName,
         year: influencer.year,
+        contact: influencer.contact,
         emailAddress: influencer.emailAddress,
         phoneNumber: influencer.phoneNumber,
-        hair_color_id : influencer.hair_color_id,
-        hair_type_id: influencer.hair_type_id,
-        skin_color_id : influencer.skin_color_id,
-        contact: influencer.contact,
         celebrity: influencer.celebrity,
         isUGC: influencer.isUGC,
-        city_id: influencer.city_id,
-        gender_id: influencer.gender_id,
-        social_class_id: influencer.social_class_id,
         socialInstagram: influencer.socialInstagram,
         socialInstagramCla: influencer.socialInstagramCla,
         socialInstagramSeg: influencer.socialInstagramSeg,
@@ -511,6 +501,12 @@ exports.getFilteredInfluencers = async (req, res) => {
         socialUTubeCla: influencer.socialUTubeCla,
         socialUTubeSeg: influencer.socialUTubeSeg,
         country_id: influencer.country_id,
+        city_id: influencer.city_id,
+        gender_id: influencer.gender_id,
+        social_class_id: influencer.social_class_id,
+        hair_type_id: influencer.hair_type_id,
+        hair_color_id: influencer.hair_color_id,
+        skin_color_id: influencer.skin_color_id,
         costo_1: influencer.costo_1,
         costo_2: influencer.costo_2,
         costo_3: influencer.costo_3,
@@ -522,7 +518,6 @@ exports.getFilteredInfluencers = async (req, res) => {
         costo_9: influencer.costo_9,
         costo_10: influencer.costo_10,
         costo_11: influencer.costo_11,
-        costo_12: influencer.costo_12,
         categories: influencer.influencerSubcategories.map(sub => ({
           category: sub.subcategory?.category?.category_name || "N/A",
           subcategory: sub.subcategory?.subcategory_name || "N/A",

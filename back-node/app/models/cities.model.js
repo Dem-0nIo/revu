@@ -5,26 +5,35 @@ module.exports = (sequelize, Sequelize) => {
         id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
         city_name: {
-          type: Sequelize.STRING(100), // Coincide con VARCHAR(100)
-          allowNull: false,
+            type: Sequelize.STRING,
+            allowNull: false
         },
-        department_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: "departments", // Nombre de la tabla referenciada
-            key: "id", // Clave foránea
-          },
-          onDelete: "CASCADE", // Acción al eliminar
-          onUpdate: "CASCADE", // Acción al actualizar
+        country_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'countries',
+                key: 'id'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         },
       },
       {
+        tableName: 'cities',
         timestamps: false, // Desactivar `createdAt` y `updatedAt`
       }
     );
+
+    City.associate = (models) => {
+      City.belongsTo(models.Country, {
+          foreignKey: 'country_id',
+          as: 'country'
+      });
+    };
+
     return City;
   };

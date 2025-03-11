@@ -251,153 +251,8 @@ INSERT INTO departments (department_name) VALUES
 ('Vaupés'),
 ('Vichada');
 
--- Crear la tabla de ciudades
-CREATE TABLE IF NOT EXISTS cities (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    city_name VARCHAR(100) NOT NULL,
-    department_id INT NOT NULL,
-    FOREIGN KEY (department_id) REFERENCES departments(id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
 
--- Insertar ciudades con su respectivo departamento
-INSERT INTO cities (city_name, department_id) VALUES
--- Amazonas
-('Leticia', (SELECT id FROM departments WHERE department_name = 'Amazonas')),
-('Puerto Nariño', (SELECT id FROM departments WHERE department_name = 'Amazonas')),
 
--- Antioquia
-('Medellín', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
-('Bello', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
-('Itagüí', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
-('Envigado', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
-('Rionegro', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
-('Turbo', (SELECT id FROM departments WHERE department_name = 'Antioquia')),
-
--- Arauca
-('Arauca', (SELECT id FROM departments WHERE department_name = 'Arauca')),
-('Arauquita', (SELECT id FROM departments WHERE department_name = 'Arauca')),
-('Saravena', (SELECT id FROM departments WHERE department_name = 'Arauca')),
-
--- Atlántico
-('Barranquilla', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
-('Soledad', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
-('Malambo', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
-('Sabanalarga', (SELECT id FROM departments WHERE department_name = 'Atlántico')),
-
--- Bolívar
-('Cartagena', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
-('Magangué', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
-('Turbaco', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
-('Arjona', (SELECT id FROM departments WHERE department_name = 'Bolívar')),
-
--- Boyacá
-('Tunja', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
-('Duitama', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
-('Sogamoso', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
-('Chiquinquirá', (SELECT id FROM departments WHERE department_name = 'Boyacá')),
-
--- Caldas
-('Manizales', (SELECT id FROM departments WHERE department_name = 'Caldas')),
-('Chinchiná', (SELECT id FROM departments WHERE department_name = 'Caldas')),
-('Villamaría', (SELECT id FROM departments WHERE department_name = 'Caldas')),
-
--- Caquetá
-('Florencia', (SELECT id FROM departments WHERE department_name = 'Caquetá')),
-('Morelia', (SELECT id FROM departments WHERE department_name = 'Caquetá')),
-
--- Casanare
-('Yopal', (SELECT id FROM departments WHERE department_name = 'Casanare')),
-('Aguazul', (SELECT id FROM departments WHERE department_name = 'Casanare')),
-
--- Cauca
-('Popayán', (SELECT id FROM departments WHERE department_name = 'Cauca')),
-('Santander de Quilichao', (SELECT id FROM departments WHERE department_name = 'Cauca')),
-
--- Cesar
-('Valledupar', (SELECT id FROM departments WHERE department_name = 'Cesar')),
-('Aguachica', (SELECT id FROM departments WHERE department_name = 'Cesar')),
-
--- Chocó
-('Quibdó', (SELECT id FROM departments WHERE department_name = 'Chocó')),
-('Istmina', (SELECT id FROM departments WHERE department_name = 'Chocó')),
-
--- Córdoba
-('Montería', (SELECT id FROM departments WHERE department_name = 'Córdoba')),
-('Lorica', (SELECT id FROM departments WHERE department_name = 'Córdoba')),
-
--- Cundinamarca
-('Bogotá', (SELECT id FROM departments WHERE department_name = 'Cundinamarca')),
-('Zipaquirá', (SELECT id FROM departments WHERE department_name = 'Cundinamarca')),
-('Girardot', (SELECT id FROM departments WHERE department_name = 'Cundinamarca')),
-
--- Guainía
-('Inírida', (SELECT id FROM departments WHERE department_name = 'Guainía')),
-
--- Guaviare
-('San José del Guaviare', (SELECT id FROM departments WHERE department_name = 'Guaviare')),
-
--- Huila
-('Neiva', (SELECT id FROM departments WHERE department_name = 'Huila')),
-('Pitalito', (SELECT id FROM departments WHERE department_name = 'Huila')),
-
--- La Guajira
-('Riohacha', (SELECT id FROM departments WHERE department_name = 'La Guajira')),
-('Maicao', (SELECT id FROM departments WHERE department_name = 'La Guajira')),
-
--- Magdalena
-('Santa Marta', (SELECT id FROM departments WHERE department_name = 'Magdalena')),
-('Ciénaga', (SELECT id FROM departments WHERE department_name = 'Magdalena')),
-
--- Meta
-('Villavicencio', (SELECT id FROM departments WHERE department_name = 'Meta')),
-('Acacías', (SELECT id FROM departments WHERE department_name = 'Meta')),
-
--- Nariño
-('Pasto', (SELECT id FROM departments WHERE department_name = 'Nariño')),
-('Tumaco', (SELECT id FROM departments WHERE department_name = 'Nariño')),
-
--- Norte de Santander
-('Cúcuta', (SELECT id FROM departments WHERE department_name = 'Norte de Santander')),
-('Ocaña', (SELECT id FROM departments WHERE department_name = 'Norte de Santander')),
-
--- Putumayo
-('Mocoa', (SELECT id FROM departments WHERE department_name = 'Putumayo')),
-
--- Quindío
-('Armenia', (SELECT id FROM departments WHERE department_name = 'Quindío')),
-('Montenegro', (SELECT id FROM departments WHERE department_name = 'Quindío')),
-
--- Risaralda
-('Pereira', (SELECT id FROM departments WHERE department_name = 'Risaralda')),
-('Dosquebradas', (SELECT id FROM departments WHERE department_name = 'Risaralda')),
-
--- San Andrés y Providencia
-('San Andrés', (SELECT id FROM departments WHERE department_name = 'San Andrés y Providencia')),
-
--- Santander
-('Bucaramanga', (SELECT id FROM departments WHERE department_name = 'Santander')),
-('Floridablanca', (SELECT id FROM departments WHERE department_name = 'Santander')),
-
--- Sucre
-('Sincelejo', (SELECT id FROM departments WHERE department_name = 'Sucre')),
-('Corozal', (SELECT id FROM departments WHERE department_name = 'Sucre')),
-
--- Tolima
-('Ibagué', (SELECT id FROM departments WHERE department_name = 'Tolima')),
-('Espinal', (SELECT id FROM departments WHERE department_name = 'Tolima')),
-
--- Valle del Cauca
-('Cali', (SELECT id FROM departments WHERE department_name = 'Valle del Cauca')),
-('Palmira', (SELECT id FROM departments WHERE department_name = 'Valle del Cauca')),
-('Buenaventura', (SELECT id FROM departments WHERE department_name = 'Valle del Cauca')),
-
--- Vaupés
-('Mitú', (SELECT id FROM departments WHERE department_name = 'Vaupés')),
-
--- Vichada
-('Puerto Carreño', (SELECT id FROM departments WHERE department_name = 'Vichada'));
 
 CREATE TABLE IF NOT EXISTS countries (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -432,6 +287,243 @@ INSERT INTO countries (name, name_en, iso_code, iso_code_2, region, is_active) V
 ('Uruguay', 'Uruguay', 'URY', 'UY', 'América Latina', 1),
 ('Venezuela', 'Venezuela', 'VEN', 'VE', 'América Latina', 1);
 
+-- Drop the cities table if it already exists
+DROP TABLE IF EXISTS cities;
+
+-- Create the cities table with a relation to the countries table
+CREATE TABLE IF NOT EXISTS cities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    city_name VARCHAR(100) NOT NULL,
+    country_id INT NOT NULL,
+    FOREIGN KEY (country_id) REFERENCES countries(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert major cities for each country
+INSERT INTO cities (city_name, country_id) VALUES
+
+-- Colombia
+
+
+('Leticia',(SELECT id FROM countries WHERE iso_code = 'COL')),
+('Puerto Nariño', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Antioquia
+('Medellín', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Bello', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Itagüí', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Envigado', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Rionegro', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Turbo', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Arauca
+('Arauca',(SELECT id FROM countries WHERE iso_code = 'COL')),
+('Arauquita', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Saravena', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Atlántico
+('Barranquilla', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Soledad', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Malambo', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Sabanalarga', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Bolívar
+('Cartagena', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Magangué', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Turbaco', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Arjona', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Boyacá
+('Tunja', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Duitama', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Sogamoso', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Chiquinquirá', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Caldas
+('Manizales', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Chinchiná', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Villamaría', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Caquetá
+('Florencia', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Morelia', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Casanare
+('Yopal', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Aguazul', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Cauca
+('Popayán', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Santander de Quilichao', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Cesar
+('Valledupar', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Aguachica', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Chocó
+('Quibdó', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Istmina', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Córdoba
+('Montería', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Lorica', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Cundinamarca
+('Bogotá', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Zipaquirá', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Girardot', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Guainía
+('Inírida', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Guaviare
+('San José del Guaviare', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Huila
+('Neiva', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Pitalito', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- La Guajira
+('Riohacha', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Maicao', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Magdalena
+('Santa Marta', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Ciénaga', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Meta
+('Villavicencio', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Acacías', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Nariño
+('Pasto', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Tumaco', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Norte de Santander
+('Cúcuta', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Ocaña', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Putumayo
+('Mocoa', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Quindío
+('Armenia', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Montenegro', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Risaralda
+('Pereira', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Dosquebradas', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- San Andrés y Providencia
+('San Andrés', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Santander
+('Bucaramanga', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Floridablanca', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Sucre
+('Sincelejo', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Corozal', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Tolima
+('Ibagué', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Espinal', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Valle del Cauca
+('Cali', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Palmira', (SELECT id FROM countries WHERE iso_code = 'COL')),
+('Buenaventura', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Vaupés
+('Mitú', (SELECT id FROM countries WHERE iso_code = 'COL')),
+
+-- Vichada
+('Puerto Carreño', (SELECT id FROM countries WHERE iso_code = 'COL'));
+-- Argentina
+('Buenos Aires', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('Córdoba', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('Rosario', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('Mendoza', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('San Miguel de Tucumán', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('La Plata', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('Mar del Plata', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('Salta', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('Santa Fe', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+('San Juan', (SELECT id FROM countries WHERE iso_code = 'ARG')),
+
+-- Bolivia
+('La Paz', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Santa Cruz de la Sierra', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Cochabamba', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Sucre', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Oruro', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Potosí', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Tarija', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Trinidad', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('Cobija', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+('El Alto', (SELECT id FROM countries WHERE iso_code = 'BOL')),
+
+-- Brazil
+('São Paulo', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Rio de Janeiro', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Brasilia', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Salvador', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Fortaleza', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Belo Horizonte', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Manaus', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Curitiba', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Recife', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+('Porto Alegre', (SELECT id FROM countries WHERE iso_code = 'BRA')),
+
+-- Chile
+('Santiago', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Valparaíso', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Concepción', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('La Serena', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Antofagasta', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Temuco', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Rancagua', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Arica', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Puerto Montt', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+('Iquique', (SELECT id FROM countries WHERE iso_code = 'CHL')),
+
+-- Ecuador
+('Quito', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Guayaquil', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Cuenca', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Ambato', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Machala', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Portoviejo', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Loja', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Ibarra', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Manta', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+('Esmeraldas', (SELECT id FROM countries WHERE iso_code = 'ECU')),
+
+-- Peru
+('Lima', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Arequipa', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Cusco', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Trujillo', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Chiclayo', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Piura', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Iquitos', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Tacna', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Pucallpa', (SELECT id FROM countries WHERE iso_code = 'PER')),
+('Juliaca', (SELECT id FROM countries WHERE iso_code = 'PER')),
+
+-- Mexico
+('Mexico City', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Guadalajara', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Monterrey', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Puebla', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Tijuana', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Mérida', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Cancún', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('San Luis Potosí', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('León', (SELECT id FROM countries WHERE iso_code = 'MEX')),
+('Querétaro', (SELECT id FROM countries WHERE iso_code = 'MEX'));
+
 CREATE TABLE IF NOT EXISTS influencer_classes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     class_name VARCHAR(50) NOT NULL UNIQUE,
@@ -444,7 +536,7 @@ VALUES
     ('Nano', 1, 9999),
     ('Micro', 10000, 99999),
     ('Macro', 100000, 999999),
-    ('Mega', 1000000, NULL);
+    ('Mega', 1000000, 9999999999);
 
 -- Crear la tabla de etnias si no existe
 CREATE TABLE IF NOT EXISTS ethnic_groups (
