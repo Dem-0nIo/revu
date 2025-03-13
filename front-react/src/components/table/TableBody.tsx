@@ -146,6 +146,7 @@ export const TableBody = ({
 	};
 
 	async function editInfluencer(values: any) {
+		
 		console.log("Data sent to updateInfluencer:", values); // 🔍 Debug here
 		const resp = await InfluService.updateInfluencer(values);
 		if (resp.status === 500) {
@@ -219,9 +220,24 @@ export const TableBody = ({
 		setUpcomingEventsEditOffcanvas(!upcomingEventsEditOffcanvas);
 	};
 
-	const handleSave = (eventData: any) => {
+	/* const handleSave = (eventData: any) => {
 		console.log('Saving changes', eventData);
 		editInfluencer(eventData);
+		setUpcomingEventsEditOffcanvas(false);
+	}; */
+
+	const handleSave = () => {
+		if (!dataToEdit) return;
+	
+		// Extract only the IDs from selectedSubcategories
+		const updatedData = {
+			...dataToEdit,
+			subcategories: selectedSubcategories.map(subcat => subcat.id), // ✅ Include only the IDs
+		};
+		console.log("Selected Subcategories IDs: ", selectedSubcategories.map(subcat => subcat.id));
+	
+		console.log("📝 Saving influencer with data:", updatedData); // Debug log
+		editInfluencer(updatedData);
 		setUpcomingEventsEditOffcanvas(false);
 	};
 
@@ -393,6 +409,21 @@ export const TableBody = ({
 			setCities(filteredCities); // Actualizamos las ciudades disponibles en el select de ciudad
 		}
 	}, [dataToEdit, citiesCopy]);
+
+	useEffect(() => {
+		if (!selectedCategoryId) return;
+		console.log("Category selected:", selectedCategoryId);
+
+		async function fetchSubcategories() {
+			try {
+				const response = await InfluService.getSubcategories(selectedCategoryId); // Create this service
+				setSubcategories(response.data as SubCategory[]);
+			} catch (error) {
+				console.error("Failed to fetch subcategories:", error);
+			}
+		}
+		fetchSubcategories();
+	}, [selectedCategoryId]);
 	
 	return (
 		<>
@@ -872,6 +903,7 @@ export const TableBody = ({
 									onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
 										const subcategoryId = parseInt(e.target.value, 10); // Convert value to a number
 										const subcategoryName = subcategories.find((subcat) => subcat.id === subcategoryId)?.subcategory_name;
+										if (!subcategoryName) return; // Safety check
 										setSelectedSubcategories([...selectedSubcategories, { id: subcategoryId, name: subcategoryName }]);
 									}}
 								/>
@@ -1038,7 +1070,8 @@ export const TableBody = ({
 						<Button
 							color='info'
 							className='w-100'
-							onClick={() => handleSave(dataToEdit)}>
+							/* onClick={() => handleSave(dataToEdit)}> */
+							onClick={() => handleSave()}>
 							Save
 						</Button>
 					</div>

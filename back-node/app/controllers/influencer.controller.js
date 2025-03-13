@@ -252,31 +252,76 @@ exports.registerinflu = async (req, res, fileUpload) => {
     });
 };
 
-exports.editInfluencer = (req, res) => {
+exports.editInfluencer = async (req, res) => {
   console.log("values received by backend ",req.body.values);
   const updatedData = req.body.values;
   const idUser = updatedData.idUser;
+  const newSubcategories = updatedData.subcategories;
 
-  Influ.update(updatedData, {
+  if (!idUser) {
+    return res.status(400).json({ message: "Error: idUser is required" });
+  }
+
+  try {
+    // Step 1: Update influencer's main details
+    const [numUpdated] = await Influ.update(updatedData, { // ✅ Now this works!
+      where: { idUser },
+    });
+
+    if (numUpdated !== 1) {
+      return res.status(404).json({ message: "Influencer not found or no changes made" });
+    }
+
+    console.log("✅ Influencer updated successfully.");
+
+    // Step 2: Update influencer's subcategories
+    if (Array.isArray(newSubcategories)) {
+      console.log("🔄 Updating subcategories...");
+
+      // Delete existing subcategories for this influencer
+      await InfluencerSubcategories.destroy({
+        where: { influencerId: idUser },
+      });
+
+      console.log("🗑️ Deleted old subcategories.");
+
+      // Insert new subcategories
+      const subcategoryData = newSubcategories.map((subcategoryId) => ({
+        influencerId: idUser,
+        subcategoryId,
+      }));
+
+      await InfluencerSubcategories.bulkCreate(subcategoryData);
+      console.log("✅ New subcategories inserted:", subcategoryData);
+    }
+
+    res.json({ message: "Influencer updated successfully" });
+
+  } catch (error) {
+    console.error("❌ Error updating influencer:", error);
+    res.status(500).json({ message: "Error updating influencer", error: error.message });
+  }
+
+  /* Influ.update(updatedData, {
     where: { idUser: idUser },
   })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "Influencer was updated successfully.",
-        });
-      } else {
-        res.send({
-          message: `Cannot update Influencer with id=${id}. Maybe Influencer was not found or req.body is empty!`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating Influencer with id=" + id,
+  .then((num) => {
+    if (num == 1) {
+      res.send({
+        message: "Influencer was updated successfully.",
       });
-      console.error(err);
+    } else {
+      res.send({
+        message: `Cannot update Influencer with id=${id}. Maybe Influencer was not found or req.body is empty!`,
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message: "Error updating Influencer with id=" + idUser,
     });
+    console.error(err);
+  }); */
 };
 
 exports.deleteInfluencer = (req, res) => {
@@ -411,7 +456,8 @@ exports.getFilteredInfluencers = async (req, res) => {
       hair_color_id,
       skin_color_id,
       celebrity,
-      isUGC
+      isUGC,
+      search
     } = req.query;
 
     let whereClause = {[Op.and]: [] };
@@ -437,6 +483,13 @@ exports.getFilteredInfluencers = async (req, res) => {
     if (skin_color_id) whereClause[Op.and].push({ skin_color_id: parseInt(skin_color_id, 10) });
     if (celebrity !== undefined) whereClause[Op.and].push({ celebrity: parseInt(celebrity, 10) });
     if (isUGC !== undefined) whereClause[Op.and].push({ isUGC: parseInt(isUGC, 10) });
+    if (search) {
+      whereClause[Op.or] = [
+          { firstName: { [Op.like]: `%${search}%` } },  
+          { lastName: { [Op.like]: `%${search}%` } },
+          { displayName: { [Op.like]: `%${search}%` } }
+      ];
+    }
 
     console.log("Clausula SocialNetwork");
     console.dir(whereClause.socialNetwork, { depth: null }); // Mejor que JSON.stringify

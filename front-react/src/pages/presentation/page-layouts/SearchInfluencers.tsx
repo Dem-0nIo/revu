@@ -102,11 +102,15 @@ const SearchPage = () => {
   const [skinColor, setSkinColor] = useState<SkinColor[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
   const [socialClasses, setSocialClasses] = useState<SocialClass[]>([]);
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [yearError, setYearError] = useState<string | null>(null);
   
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
   // Handle filter selection
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, type, value } = e.target;
@@ -182,6 +186,10 @@ const SearchPage = () => {
           params.append(key, String(value));
         }
       });
+
+      if (searchQuery.trim() !== "") {
+        params.append("search", searchQuery); // 🔍 Add search query to API request
+      }
   
       console.log("📌 Parámetros enviados: ", params.toString());
   
@@ -208,7 +216,27 @@ const SearchPage = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [filters]); // ✅ Ahora `fetchResults` solo cambia si cambian los filtros
+  }, [filters, searchQuery]); // ✅ Ahora `fetchResults` solo cambia si cambian los filtros
+
+  const fetchInitialResults = async () => {
+    try {
+        setIsLoading(true);
+        const params = new URLSearchParams();
+        params.append("limit", "50"); // ✅ Default limit of 50 influencers
+
+        console.log("📌 Loading initial results: ", `?${params.toString()}`);
+
+        const response = await FiltersService.searchInfluencers({ params });
+        setResults(response.data);
+
+        console.log("✅ Initial influencers loaded:", response.data);
+    } catch (error) {
+        showNotification("Error", "Failed to load initial results", "danger");
+        console.error("❌ FRONT - Error loading initial influencers:", error);
+    } finally {
+        setIsLoading(false);
+    }
+};
 
   const resetFilters = () => {
     setFilters({
@@ -233,14 +261,16 @@ const SearchPage = () => {
   
     // Si usas estados para `selectedCategoryId`, también lo reinicias
     setSelectedCategoryId(null);
+    setSearchQuery("");
+    fetchInitialResults();
   };
 
   useEffect(() => {
-    async function fetchInitialResults() {
+    /* async function fetchInitialResults() {
       try {
         setIsLoading(true);
         const params = new URLSearchParams();
-        params.append("limit", "50"); // ✅ Obtener los primeros 50 registros por defecto
+        params.append("limit", "300"); // ✅ Obtener los primeros 50 registros por defecto
   
         console.log("📌 Carga inicial: ", `?${params.toString()}`);
   
@@ -254,7 +284,7 @@ const SearchPage = () => {
       } finally {
         setIsLoading(false);
       }
-    }
+    } */
   
     fetchInitialResults(); // ✅ Llamar a la función solo una vez al cargar la página
   }, []);
@@ -607,6 +637,17 @@ const SearchPage = () => {
                   />
                 </FormGroup>
               </div>
+
+             {/*  <div className="col-md-2">
+                <FormGroup id='search' label="Nombre/Nombre Artistico">
+                  <Input
+                    type="text"
+                    placeholder="Escriba nombre o apellido..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                </FormGroup>
+              </div> */}
               
               <div className="row">
                 <div className="col-4 mt-4 d-flex align-items-center gap-5">
