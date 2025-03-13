@@ -50,20 +50,12 @@ interface Gender {
 	description: string;
 }
 
-// Define the City type
-interface Country {
-	id: number;
-	name: string;
-	name_en: string;
-	iso_code: string;
-	iso_code_2: string;
-	region: string;
-}
 
 // Define the City type
 interface City {
 	id: number;
 	city_name: string;
+	country_id: number;
 }
 
 interface InfluencerClass {
@@ -111,8 +103,10 @@ export const TableBody = ({
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [added, setAdded] = useState(false);
 	const [countries, setCountry] = useState<Country[]>([]);
+	const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null);
 	const [genders, setGenders] = useState<Gender[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
+	const [citiesCopy, setCitiesCopy] = useState<City[]>([]);
 	const [influencerClasses, setInfluencerClasses] = useState<InfluencerClass[]>([]);
 	const [hairColor, setHairColor] = useState<HairColor[]>([]);
 	const [hairType, setHairType] = useState<HairType[]>([]);
@@ -131,7 +125,28 @@ export const TableBody = ({
 			setSelectedCategoryId(Number(e.target.value));
 		};
 
+	const handleCountryChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const countryId = Number(e.target.value);
+		console.log("Nuevo país seleccionado:", countryId);
+		setSelectedCountryId(countryId);
+		const allCities = citiesCopy;
+		const filtered = allCities.filter(city => city.country_id === countryId);
+		console.log("Cities to display ",filtered);
+		setCities(filtered);
+
+		// Actualizar el estado de edición con el nuevo país y resetear la ciudad
+ 		/* setDataToEdit((prev) => ({
+			...prev!,
+			country_id: countryId,
+			city_id: "", // Resetear la ciudad
+		})); */
+
+    	
+
+	};
+
 	async function editInfluencer(values: any) {
+		console.log("Data sent to updateInfluencer:", values); // 🔍 Debug here
 		const resp = await InfluService.updateInfluencer(values);
 		if (resp.status === 500) {
 			showNotification('Error', 'Error actualizando el usuario.', 'danger');
@@ -245,14 +260,15 @@ export const TableBody = ({
 		setDataToEdit((prev) => (prev ? { ...prev, [name]: value } : null));
 	}; */
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, type, checked, value } = e.target;
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement > ) => {
+		const { name, type, value } = e.target;
 	
 		setDataToEdit((prev) => {
 			if (!prev) return null;
 	
 			// Si el input es checkbox (switch), guardamos 1 o 0 en lugar de true o false
-			const newValue = type === "checkbox" ? (checked ? 1 : 0) : value;
+			const newValue = type === "checkbox" && "checked" in e.target ? (e.target as HTMLInputElement).checked ? 1 : 0 : value;
+			console.log(`Updating ${name}:`, newValue); // 🛠 Debug log
 	
 			return { ...prev, [name]: newValue };
 		});
@@ -260,6 +276,7 @@ export const TableBody = ({
 	console.log("Headers:", headers);
 
 	useEffect(() => {
+		console.log("🔄 dataToEdit changed:", dataToEdit);
         if (dataToEdit?.categories) {
             const formattedSubcategories = dataToEdit.categories.map(subcat => ({
                 id: subcat.subcategory_id,  // Asegurar que `id` coincida con el key en la lista
@@ -305,6 +322,7 @@ export const TableBody = ({
 			try {
 				const response = await InfluService.getCities(); // Make sure to create this service method
 				setCities(response.data);
+				setCitiesCopy(response.data);
 			} catch (error) {
 				console.error("Failed to fetch Cities:", error);
 			}
@@ -365,6 +383,16 @@ export const TableBody = ({
 		}
 		fetchCategories();
 	}, []);
+
+	useEffect(() => {
+		if (dataToEdit?.country_id) {
+			setSelectedCountryId(dataToEdit.country_id); // Establecemos el país seleccionado
+			
+			// Filtrar ciudades para el país seleccionado
+			const filteredCities = citiesCopy.filter(city => city.country_id === dataToEdit.country_id);
+			setCities(filteredCities); // Actualizamos las ciudades disponibles en el select de ciudad
+		}
+	}, [dataToEdit, citiesCopy]);
 	
 	return (
 		<>
@@ -375,7 +403,7 @@ export const TableBody = ({
 							{headers.map((header, index) => (
 								<Fragment key={`${item.idUser}-${index}`}>
 									{header.column === 'socialInstagram' ? (
-										<td style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
+										<td style={{ alignContent: "center", position: "relative", padding: "0 0 0 35px" }} key={index}>
 											{item[header.column] != null ? (
 												<a
 													href={`https://www.instagram.com/${item[header.column]}`}
@@ -391,7 +419,7 @@ export const TableBody = ({
 											) : null}
 										</td>
 									) : header.column === 'socialTik' ? (
-										<td style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
+										<td style={{ alignContent: "center", position: "relative", padding: "0 0 0 35px" }} key={index}>
 											{item[header.column] != null ? (
 												<a
 													href={`https://www.tiktok.com/${item[header.column]}`}
@@ -407,7 +435,7 @@ export const TableBody = ({
 											) : null}
 										</td>
 									) : header.column === 'socialFace' ? (
-										<td style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
+										<td style={{ alignContent: "center", position: "relative", padding: "0 0 0 35px" }} key={index}>
 											{item[header.column] != null ? (
 												<a
 													href={`https://www.facebook.com/${item[header.column]}`}
@@ -426,7 +454,7 @@ export const TableBody = ({
 										(() => {
 										// console.log("DEBUG: Entered condition for socialUTube", item[header.column]); // Debug log
 										return (
-											<td id ="youtube" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "73px" }} key={index}>
+											<td id ="youtube" style={{ alignContent: "center", position: "relative", padding: "0 0 0 35px" }} key={index}>
 												{item[header.column] != null ? (
 													<a
 														href={`https://www.youtube.com/${item[header.column]}`}
@@ -465,7 +493,7 @@ export const TableBody = ({
 									)}
 								</Fragment>
 							))}
-							{AuthService.isAdmin() && (
+							{/* {AuthService.isAdmin() && ( */}
 								<>
 									<td>
 										<div className='bo' key={ind}>
@@ -491,7 +519,7 @@ export const TableBody = ({
 										</div>
 									</td>
 								</>
-							)}
+							{/* )} */}
 						</tr>
 					))}
 			</tbody>
@@ -543,12 +571,13 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Country'
 									placeholder='Seleccione...'
+									name="country_id" 
 									list={countries.map((country) => ({
 										value: String(country.id),
 										text: country.name,
 									}))}
-									onChange={handleChange}
-									value={String(dataToEdit?.country_id)}
+									onChange={handleCountryChange}
+									value={selectedCountryId ? String(selectedCountryId) : ''}
 								/>
 							</FormGroup>	
 						</div>
@@ -557,12 +586,14 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Ciudad'
 									placeholder='Seleccione...'
+									name="city_id"
 									list={cities.map((city) => ({
 										value: String(city.id), 
 										text: city.city_name, 
 									}))}
 									onChange={handleChange}
-									value={String(dataToEdit?.city_id)}
+									value={dataToEdit?.city_id ? String(dataToEdit.city_id) : ''}
+									disabled={!selectedCountryId}
 								/>
 							</FormGroup>	
 						</div>
@@ -571,12 +602,13 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Clase Social'
 									placeholder='Seleccione...'
+									name="social_class_id"
 									list={socialClasses.map((socialClass) => ({
 										value: String(socialClass.id), 
 										text: socialClass.class_name, 
 									}))}
 									onChange={handleChange}
-									value={String(dataToEdit?.social_class_id)}
+									value={dataToEdit?.social_class_id ? String(dataToEdit.social_class_id) : ''}
 								/>
 							</FormGroup>	
 						</div>
@@ -595,6 +627,7 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Sexo'
 									placeholder='Seleccione...'
+									name="gender_id"
 									list={genders.map((gender) => ({
 										value: String(gender.id), 
 										text: gender.description,
@@ -609,6 +642,7 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Tipo de cabello'
 									placeholder='Seleccione...'
+									name = 'hair_type_id'
 									list={hairType.map((hairTypes) => ({
 										value: String(hairTypes.id), 
 										text: hairTypes.hair_type_name, 
@@ -623,6 +657,7 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Color de cabello'
 									placeholder='Seleccione...'
+									name = 'hair_color_id'
 									list={hairColor.map((hairColors) => ({
 										value: String(hairColors.id), 
 										text: hairColors.hair_color_name, 
@@ -637,6 +672,7 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Color de piel'
 									placeholder='Seleccione...'
+									name = 'skin_color_id'
 									list={skinColor.map((skinColors) => ({
 										value: String(skinColors.id), 
 										text: skinColors.skin_color_name, 
@@ -813,6 +849,7 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Categoria'
 									placeholder='Seleccione...'
+									name="category_id"
 									list={categories.map((cat) => ({
 										value: cat.id,
 										text: cat.category_name,
@@ -827,6 +864,7 @@ export const TableBody = ({
 								<Select
 									ariaLabel='Subcategory'
 									placeholder='Seleccione...'
+									name="subcategory_id"
 									list={subcategories.map((subcat) => ({
 										value: subcat.id,
 										text: subcat.subcategory_name,

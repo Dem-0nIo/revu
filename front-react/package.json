@@ -71,7 +71,7 @@
 		"react": "^18.2.0",
 		"react-apexcharts": "^1.4.1",
 		"react-big-calendar": "^1.8.5",
-		"react-bootstrap-table-next": "^1.1.0",
+		"react-bootstrap-table-next": "^4.0.3",
 		"react-bootstrap-table2-paginator": "^2.1.2",
 		"react-credit-cards-2": "0.10.0",
 		"react-date-range": "^1.4.0",

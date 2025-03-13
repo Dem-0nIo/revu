@@ -76,7 +76,7 @@ exports.registerinfluencer = async (req, res) => {
       subcategories,// Subcategories array from request
     } = req.body;
 
-    console.log(JSON.stringify(req.body));
+    console.log("Body a guardar ",JSON.stringify(req.body));
 
     const socialNetworks = [];
 
@@ -253,6 +253,7 @@ exports.registerinflu = async (req, res, fileUpload) => {
 };
 
 exports.editInfluencer = (req, res) => {
+  console.log("values received by backend ",req.body.values);
   const updatedData = req.body.values;
   const idUser = updatedData.idUser;
 
@@ -424,6 +425,9 @@ exports.getFilteredInfluencers = async (req, res) => {
   //  if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
     if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
     if (socialInstagramCla) whereClause[Op.and].push({ socialInstagramCla});
+    if (socialFaceCla) whereClause[Op.and].push({ socialFaceCla});
+    if (socialTikCla) whereClause[Op.and].push({ socialTikCla});
+    if (socialUTubeCla) whereClause[Op.and].push({ socialUTubeCla});
     if (city_id) whereClause[Op.and].push({ city_id: parseInt(city_id, 10) });
     if (gender_id) whereClause[Op.and].push({ gender_id: parseInt(gender_id, 10) });
     if (year) whereClause[Op.and].push({year});

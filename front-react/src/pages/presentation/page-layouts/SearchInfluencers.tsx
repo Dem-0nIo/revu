@@ -27,6 +27,7 @@ interface Country {
 interface City {
 	id: number;
 	city_name: string;
+  country_id: number;
 }
 
 interface InfluencerClass {
@@ -92,6 +93,7 @@ const SearchPage = () => {
   // Listados obtenidos de API
   const [country, setCountry] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
+  const [citiesCopy, setCitiesCopy] = useState<City[]>([]);
   const [genders, setGenders] = useState<Gender[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [, setInfluencerClasses] = useState<InfluencerClass[]>([]);
@@ -116,8 +118,16 @@ const SearchPage = () => {
     }
   
     setFilters((prevFilters) => {
-      const updatedFilters: any = { ...prevFilters, [name]: updatedValue }; // ✅ Convertimos temporalmente a `any`
-  
+      const updatedFilters: any = { ...prevFilters, [name]: updatedValue }; 
+
+      // If country is changed, reset the city selection and update city list
+      if (name === "country_id") {
+        const selectedCountryId = Number(value);
+        updatedFilters.city_id = ""; // Reset selected city
+        const filteredCities = citiesCopy.filter(city => city.country_id === selectedCountryId);
+        setCities(filteredCities);
+    }
+
       // 🔹 Si se cambia la red social, resetear el tamaño de influencer y su clasificación
       if (name === "socialNetwork") {
         updatedFilters.influencerSize = "";
@@ -160,6 +170,7 @@ const SearchPage = () => {
     setFilters(prev => ({ ...prev, year: limitedValue }));
     setYearError(null); // ✅ Limpia el error si el usuario corrige
   };
+
 
   const fetchResults = useCallback(async () => {
     try {
@@ -272,6 +283,7 @@ const SearchPage = () => {
         setCategories(categoriesRes.data);
         setGenders(gendersRes.data);
         setCities(citiesRes.data);
+        setCitiesCopy(citiesRes.data);
         setSocialClasses(socialClassesRes.data);
         setHairColor(hairColorsRes.data);
         setHairType(hairTypesRes.data);
@@ -488,7 +500,7 @@ const SearchPage = () => {
                     placeholder='Seleccione...'
                     name="city_id"
                     value={filters.city_id} // Asegura que tome el valor de filtros
-                    onChange={handleFilterChange} 
+                    onChange={handleFilterChange}
                     list={cities.map(city => ({
                       value: city.id, 
                       text: city.city_name
@@ -644,8 +656,8 @@ const SearchPage = () => {
               { column: 'socialFaceCla', label: 'Clase', tag: 'i' },
               { column: 'socialUTube', label: 'Youtube', tag: 'i' },
               { column: 'socialUTubeCla', label: 'Clase', tag: 'i' },
-              { column: 'category', label: 'Categoría', tag: 'i' },      // ✅ New column
-              { column: 'subcategory', label: 'Subcategoría', tag: 'i' } // ✅ New column
+              { column: 'category', label: 'Categoría', tag: 'i' },      
+              { column: 'subcategory', label: 'Subcategoría', tag: 'i' } 
             ]}
             data={results.map(influencer => ({
               ...influencer,
