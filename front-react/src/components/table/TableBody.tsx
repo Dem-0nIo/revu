@@ -135,13 +135,11 @@ export const TableBody = ({
 		setCities(filtered);
 
 		// Actualizar el estado de edición con el nuevo país y resetear la ciudad
- 		/* setDataToEdit((prev) => ({
+ 		setDataToEdit((prev) => ({
 			...prev!,
 			country_id: countryId,
-			city_id: "", // Resetear la ciudad
-		})); */
-
-    	
+			city_id: 0, // Resetear la ciudad
+		}));
 
 	};
 
@@ -220,12 +218,6 @@ export const TableBody = ({
 		setUpcomingEventsEditOffcanvas(!upcomingEventsEditOffcanvas);
 	};
 
-	/* const handleSave = (eventData: any) => {
-		console.log('Saving changes', eventData);
-		editInfluencer(eventData);
-		setUpcomingEventsEditOffcanvas(false);
-	}; */
-
 	const handleSave = () => {
 		if (!dataToEdit) return;
 	
@@ -271,11 +263,6 @@ export const TableBody = ({
 	// const paginatedData = data.slice(startIdx, endIdx);
 	const paginatedData = sortedData.slice(startIdx, endIdx);
 
-	/* const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setDataToEdit((prev) => (prev ? { ...prev, [name]: value } : null));
-	}; */
-
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement > ) => {
 		const { name, type, value } = e.target;
 	
@@ -289,11 +276,18 @@ export const TableBody = ({
 			return { ...prev, [name]: newValue };
 		});
 	};
-	console.log("Headers:", headers);
 
 	useEffect(() => {
 		console.log("🔄 dataToEdit changed:", dataToEdit);
         if (dataToEdit?.categories) {
+            const formattedSubcategories = dataToEdit.categories.map(subcat => ({
+                id: subcat.subcategory_id,  // Asegurar que `id` coincida con el key en la lista
+                name: subcat.subcategory    // Asegurar que `name` coincida con lo esperado en el render
+            }));
+            setSelectedSubcategories(formattedSubcategories);
+        }
+		if (dataToEdit?.country_id) {
+			const countryid = dataToEdit.country_id;
             const formattedSubcategories = dataToEdit.categories.map(subcat => ({
                 id: subcat.subcategory_id,  // Asegurar que `id` coincida con el key en la lista
                 name: subcat.subcategory    // Asegurar que `name` coincida con lo esperado en el render
@@ -623,12 +617,12 @@ export const TableBody = ({
 										text: city.city_name, 
 									}))}
 									onChange={handleChange}
+									
 									value={dataToEdit?.city_id ? String(dataToEdit.city_id) : ''}
-									disabled={!selectedCountryId}
 								/>
 							</FormGroup>	
 						</div>
-						<div className='col-12'>
+						<div className='col-12'> {/* Clase social */}
 							<FormGroup id='social_class_id' label='Clase social'>
 								<Select
 									ariaLabel='Clase Social'
@@ -643,7 +637,7 @@ export const TableBody = ({
 								/>
 							</FormGroup>	
 						</div>
-						<div className='col-12'>
+						<div className='col-12'> {/* Edad */}
 							<FormGroup id='year' label='Edad'>
 								<Input
 									id='year'
@@ -698,7 +692,7 @@ export const TableBody = ({
 								/>
 							</FormGroup>	
 						</div>
-						<div className='col-12'>
+						<div className='col-12'> {/* Skin color */} 
 							<FormGroup id='skin_color' label='Color de piel'>
 								<Select
 									ariaLabel='Color de piel'
@@ -930,8 +924,8 @@ export const TableBody = ({
 								))}
 							</ul>
 						</div>
-						<div className='col-4'>
-							<FormGroup id='costo_11' label='IG Historia 15 seg 1'>
+						<div className='col-4'> {/* costo_1 */}
+							<FormGroup id='costo_1' label='IG Historia 15 seg 1'>
 								<Input
 									id='costo_1'
 									name='costo_1'
@@ -1040,7 +1034,7 @@ export const TableBody = ({
 								/>
 							</FormGroup>
 						</div>
-						<div className='col-4'>
+						<div className='col-4'> {/* costo_12 */}
 							<FormGroup id='costo_12' label='Imagen pauta digital (1 mes)'>
 								<Input
 									id='costo_12'
@@ -1050,7 +1044,7 @@ export const TableBody = ({
 								/>
 							</FormGroup>
 						</div>
-						<div className='col-4'>
+						<div className='col-4'> {/* isUGC */}
 							<FormGroup id='isUGC' label='isUGC'>
 								<Checks
 									type='switch' // or 'checkbox', depending on your preference
