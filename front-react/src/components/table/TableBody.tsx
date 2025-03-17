@@ -277,6 +277,89 @@ export const TableBody = ({
 		});
 	};
 
+	// Handle classification update
+	const handleFollowersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const followers = e.target.value; // Keep as string since EventData expects a string
+
+		setDataToEdit((prev) => {
+			if (!prev) return null;
+	
+			const matchedClass = influencerClasses.find(
+				(cls) =>
+					Number(followers) >= cls.min_followers &&
+					(cls.max_followers === null || Number(followers) <= cls.max_followers)
+			);
+	
+			return {
+				...prev,
+				socialInstagramSeg: followers, // ✅ Now remains a string
+				socialInstagramCla: matchedClass?.class_name || "", // ✅ Remains a string
+			};
+		});
+	};
+
+	const handleTikTokFollowersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const followers = e.target.value; // Keep as string since EventData expects a string
+
+		setDataToEdit((prev) => {
+			if (!prev) return null;
+	
+			const matchedClass = influencerClasses.find(
+				(cls) =>
+					Number(followers) >= cls.min_followers &&
+					(cls.max_followers === null || Number(followers) <= cls.max_followers)
+			);
+	
+			return {
+				...prev,
+				socialTikSeg: followers, // ✅ Now remains a string
+				socialTikCla: matchedClass?.class_name || "", // ✅ Remains a string
+			};
+		});
+	};
+
+	// Handle Facebook classification update
+	const handleFaceFollowersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const followers = e.target.value; // Keep as string since EventData expects a string
+
+		setDataToEdit((prev) => {
+			if (!prev) return null;
+	
+			const matchedClass = influencerClasses.find(
+				(cls) =>
+					Number(followers) >= cls.min_followers &&
+					(cls.max_followers === null || Number(followers) <= cls.max_followers)
+			);
+	
+			return {
+				...prev,
+				socialFaceSeg: followers, // ✅ Now remains a string
+				socialFaceCla: matchedClass?.class_name || "", // ✅ Remains a string
+			};
+		});
+	};
+
+	// Handle Youtube classification update
+	const handleUTubeFollowersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const followers = e.target.value; // Keep as string since EventData expects a string
+
+		setDataToEdit((prev) => {
+			if (!prev) return null;
+	
+			const matchedClass = influencerClasses.find(
+				(cls) =>
+					Number(followers) >= cls.min_followers &&
+					(cls.max_followers === null || Number(followers) <= cls.max_followers)
+			);
+	
+			return {
+				...prev,
+				socialUTubeSeg: followers, // ✅ Now remains a string
+				socialUTubeCla: matchedClass?.class_name || "", // ✅ Remains a string
+			};
+		});
+	};
+
 	useEffect(() => {
 		console.log("🔄 dataToEdit changed:", dataToEdit);
         if (dataToEdit?.categories) {
@@ -752,7 +835,8 @@ export const TableBody = ({
 								<Input
 									id='socialInstagramCla'
 									name='socialInstagramCla'
-									value={dataToEdit?.socialInstagramCla}
+									value={dataToEdit?.socialInstagramCla || ""}
+									readOnly // Campo deshabilitado
 									onChange={handleChange}
 								/>
 							</FormGroup>
@@ -763,7 +847,7 @@ export const TableBody = ({
 									id='socialInstagramSeg'
 									name='socialInstagramSeg'
 									value={dataToEdit?.socialInstagramSeg}
-									onChange={handleChange}
+									onChange={handleFollowersChange}
 								/>
 							</FormGroup>
 						</div>
@@ -783,7 +867,8 @@ export const TableBody = ({
 									id='socialTikCla'
 									name='socialTikCla'
 									value={dataToEdit?.socialTikCla}
-									onChange={handleChange}
+									readOnly // Campo deshabilitado
+
 								/>
 							</FormGroup>
 						</div>
@@ -793,7 +878,7 @@ export const TableBody = ({
 									id='socialTikSeg'
 									name='socialTikSeg'
 									value={dataToEdit?.socialTikSeg}
-									onChange={handleChange}
+									onChange={handleTikTokFollowersChange}
 								/>
 							</FormGroup>
 						</div>
@@ -813,7 +898,8 @@ export const TableBody = ({
 									id='socialFaceCla'
 									name='socialFaceCla'
 									value={dataToEdit?.socialFaceCla}
-									onChange={handleChange}
+									readOnly // Campo deshabilitado
+									
 								/>
 							</FormGroup>
 						</div>
@@ -823,7 +909,7 @@ export const TableBody = ({
 									id='socialFaceSeg'
 									name='socialFaceSeg'
 									value={dataToEdit?.socialFaceSeg}
-									onChange={handleChange}
+									onChange={handleFaceFollowersChange}
 								/>
 							</FormGroup>
 						</div>
@@ -843,7 +929,8 @@ export const TableBody = ({
 									id='socialUTubeCla'
 									name='socialUTubeCla'
 									value={dataToEdit?.socialUTubeCla}
-									onChange={handleChange}
+									readOnly // Campo deshabilitado
+									
 								/>
 							</FormGroup>
 						</div>
@@ -853,7 +940,7 @@ export const TableBody = ({
 									id='socialUTubeSeg'
 									name='socialUTubeSeg'
 									value={dataToEdit?.socialUTubeSeg}
-									onChange={handleChange}
+									onChange={handleUTubeFollowersChange}
 								/>
 							</FormGroup>
 						</div>
@@ -869,7 +956,7 @@ export const TableBody = ({
 								/>
 							</FormGroup>
 						</div>
-						<div className='col-12'>
+						<div className='col-12'> {/* Inst category */}
 							<FormGroup id='category_id' label='Categoria'>
 								<Select
 									ariaLabel='Categoria'
@@ -885,9 +972,9 @@ export const TableBody = ({
 							</FormGroup>	
 						</div>
 						<div className='col-12'>
-							<FormGroup id='subcategory_id' label='Subcategory'>
+							<FormGroup id='subcategory_id' label='Subcategoria'>
 								<Select
-									ariaLabel='Subcategory'
+									ariaLabel='Subcategoria'
 									placeholder='Seleccione...'
 									name="subcategory_id"
 									list={subcategories.map((subcat) => ({

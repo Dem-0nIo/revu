@@ -621,19 +621,6 @@ const NewInfluencer = () => {
 		fetchSubcategories();
 	}, [selectedCategoryId]);
 
-	/* async function addInflu(values: any) {
-		try {
-			const resp = await InfluService.addInfluencer(values);
-			if (resp) {
-				setSuccessful(true);
-				showNotification('Ingreso de usuario', 'Ingreso exitoso', 'info');
-			}
-		} catch (error) {
-			setSuccessful(false);
-			showNotification('Error', String(error), 'danger');
-		}
-	} */
-
 	const formik = useFormik({
         initialValues,
         validationSchema: Yup.object().shape(validationSchema.fields),

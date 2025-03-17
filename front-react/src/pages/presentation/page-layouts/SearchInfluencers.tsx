@@ -555,6 +555,17 @@ const SearchPage = () => {
                 </FormGroup>
               </div>
 
+              <div className="col-md-2"> {/* Busqueda por nombre */}
+                <FormGroup id='search' label="Nombre/Nombre Artistico">
+                  <Input
+                    type="text"
+                    placeholder="Escriba nombre o apellido..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                </FormGroup>
+              </div>
+
               <div className='col-md-2'>
                 <FormGroup id='year' label='Edad' >
                   <Input
@@ -638,16 +649,7 @@ const SearchPage = () => {
                 </FormGroup>
               </div>
 
-             {/*  <div className="col-md-2">
-                <FormGroup id='search' label="Nombre/Nombre Artistico">
-                  <Input
-                    type="text"
-                    placeholder="Escriba nombre o apellido..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                  />
-                </FormGroup>
-              </div> */}
+             
               
               <div className="row">
                 <div className="col-4 mt-4 d-flex align-items-center gap-5">
