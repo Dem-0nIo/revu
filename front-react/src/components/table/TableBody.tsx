@@ -1106,7 +1106,7 @@ export const TableBody = ({
 								<Input
 									id='costo_10'
 									name='costo_10'
-									value={dataToEdit?.costo_1}
+									value={dataToEdit?.costo_10}
 									onChange={handleChange}
 								/>
 							</FormGroup>
