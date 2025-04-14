@@ -464,9 +464,9 @@ exports.getFilteredInfluencers = async (req, res) => {
 
     // Agregar filtros con los nombres de columna correctos
     if (category_id) whereClause[Op.and].push({ '$influencerSubcategories.subcategory.category.id$': category_id });
-    if (socialNetwork) {
+    /*if (socialNetwork) {
       whereClause.socialNetwork = { [Op.like]: `%${socialNetwork}%` }; // Correcto
-    }
+    } */
     // if (influencerSize) whereClause[Op.and].push({ influencerSize });
   //  if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
     if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
