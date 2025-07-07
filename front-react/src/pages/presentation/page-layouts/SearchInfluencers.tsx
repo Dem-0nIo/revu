@@ -128,9 +128,26 @@ const SearchPage = () => {
       if (name === "country_id") {
         const selectedCountryId = Number(value);
         updatedFilters.city_id = ""; // Reset selected city
-        const filteredCities = citiesCopy.filter(city => city.country_id === selectedCountryId);
-        setCities(filteredCities);
-    }
+        // Nueva lógica para ciudades Colombia
+        if (selectedCountryId === 5) { // Cambia 5 si el ID es diferente
+          FiltersService.getCitiesWithDepartmentsForColombia().then(response => {
+            const formattedCities = response.data.map((city: any) => ({
+              id: city.id,
+              city_name: city.name, // El backend retorna {id, name}
+              country_id: selectedCountryId,
+            }));
+            setCities(formattedCities);
+            setCitiesCopy(formattedCities);
+          }).catch(() => {
+            setCities([]);
+            setCitiesCopy([]);
+          });
+        } else {
+          // Resto de países: filtra del array local
+          const filteredCities = citiesCopy.filter(city => city.country_id === selectedCountryId);
+          setCities(filteredCities);
+        }
+      }
 
       // 🔹 Si se cambia la red social, resetear el tamaño de influencer y su clasificación
       if (name === "socialNetwork") {

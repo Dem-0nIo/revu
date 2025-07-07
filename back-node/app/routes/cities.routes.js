@@ -12,4 +12,5 @@ module.exports = function (app) {
         next();
       });
     app.get("/api/cities", citiesController.getAllCities);
-  };
+    app.get("/api/cities/colombia", citiesController.getCitiesWithDepartmentsForColombia);  
+};

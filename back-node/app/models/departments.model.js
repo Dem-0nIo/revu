@@ -18,5 +18,12 @@ module.exports = (sequelize, Sequelize) => {
     }
   );
 
+  Department.associate = (models) => {
+    Department.hasMany(models.cities, {
+      foreignKey: 'department_id',
+      as: 'cities'
+    });
+  };
+
   return Department;
 };

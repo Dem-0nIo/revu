@@ -287,6 +287,11 @@ interface SkinColor {
 	id: number;
 	skin_color_name: string;
 } 
+
+interface CityWithDepartment {
+	id: number;
+	name: string; // así lo retorna el backend: "Ciudad - Departamento"
+}
   
 
 const NewInfluencer = () => {
@@ -320,13 +325,6 @@ const NewInfluencer = () => {
 		setShowErrorToast(false); // Reset after displaying
 	}
 	}, [showErrorToast]);
-
-/* 	const socialNetwork = [
-		{ id: 1, name: 'Instagram' },
-		{ id: 2, name: 'TikTok' },
-		{ id: 3, name: 'Facebook' },
-		{ id: 4, name: 'YouTube' },
-	]; */
 
 	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setSelectedCategoryId(Number(e.target.value));
@@ -380,19 +378,40 @@ const NewInfluencer = () => {
 		formik.setFieldValue("socialUTubeCla", matchedClass?.class_name || "");
 	};
 
-	const handleChangeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleChangeCountry = async (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const selectedCountryId = Number(e.target.value);
-		console.log("Selected country id ", selectedCountryId);
-		// Update the selected country in Formik
+		console.log("Id de pais seleccionado ", selectedCountryId);
 		formik.setFieldValue('country_id', selectedCountryId);
-		console.log("City copies: ", citiesCopy);
-		const allCities = citiesCopy;
-		console.log("Cities to display after copy",allCities);
-		// Filter cities based on selected country
-		const filtered = allCities.filter(city => city.country_id === selectedCountryId);
-		console.log("Cities to display ",filtered);
-		setCities(filtered);
 
+		// Nueva lógica para cargar ciudades según país seleccionado
+		try {
+			let response;
+			if (selectedCountryId === 5) { // Asumiendo que 5 es el ID de Colombia, cambia si es otro
+				console.log("Cargando ciudades Colombia");
+				response = await InfluService.getCitiesWithDepartmentsForColombia();
+				// El backend retorna {id, name} así que mapeamos a city_name para compatibilidad
+				const formattedCities = (response.data as CityWithDepartment[]).map(city => ({
+					id: city.id,
+					city_name: city.name, // city.name ya viene con el formato "Ciudad - Departamento"
+					country_id: selectedCountryId
+				}));
+				console.log("Ciudades Colombia:", formattedCities); 
+				setCities(formattedCities);
+				setCitiesCopy(formattedCities);
+			} else {
+				response = await InfluService.getCities();
+				// Opcional: filtra aquí solo las del país si no lo hace el backend
+
+				const filtered = response.data.filter((city: City) => city.country_id === selectedCountryId);
+				console.log("Ciudades filtradas:", filtered); 
+				setCities(filtered);
+				setCitiesCopy(filtered);
+			}
+		} catch (error) {
+			console.error("Failed to fetch cities for country: ", error);
+			setCities([]);
+			setCitiesCopy([]);
+		}
 	};
 
 	const handleSubmit = async (values: any) => {
@@ -508,7 +527,7 @@ const NewInfluencer = () => {
 	}, []);
 
 	// Fetch cities from the API
-	useEffect(() => {
+	/* useEffect(() => {
 		async function fetchCities() {
 			try {
 				const response = await InfluService.getCities();
@@ -520,7 +539,7 @@ const NewInfluencer = () => {
 			}
 		}
 		fetchCities();
-	}, []);
+	}, []); */
 
 	// Fetch influencer classes
 	useEffect(() => {

@@ -33,6 +33,10 @@ module.exports = (sequelize, Sequelize) => {
           foreignKey: 'country_id',
           as: 'country'
       });
+      City.belongsTo(models.departments, {
+        foreignKey: 'department_id',
+        as: 'department'
+      });
     };
 
     return City;

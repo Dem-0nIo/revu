@@ -464,11 +464,6 @@ exports.getFilteredInfluencers = async (req, res) => {
 
     // Agregar filtros con los nombres de columna correctos
     if (category_id) whereClause[Op.and].push({ '$influencerSubcategories.subcategory.category.id$': category_id });
-    /*if (socialNetwork) {
-      whereClause.socialNetwork = { [Op.like]: `%${socialNetwork}%` }; // Correcto
-    } */
-    // if (influencerSize) whereClause[Op.and].push({ influencerSize });
-  //  if (state_id) whereClause[Op.and].push({ state_id: parseInt(state_id, 10) });
     if (country_id) whereClause[Op.and].push({ country_id: parseInt(country_id, 10) });
     if (socialInstagramCla) whereClause[Op.and].push({ socialInstagramCla});
     if (socialFaceCla) whereClause[Op.and].push({ socialFaceCla});
@@ -495,8 +490,7 @@ exports.getFilteredInfluencers = async (req, res) => {
     console.dir(whereClause.socialNetwork, { depth: null }); // Mejor que JSON.stringify
     console.log("Clausula");
     console.dir(whereClause, { depth: null }); // Mejor que JSON.stringify
-    console.log("🧐 Filtros aplicados antes de consulta:", JSON.stringify(whereClause, null, 2));
-
+    console.log("🧐 Filtros aplicados antes de ");
     if (whereClause.length === 0 ) {
       return res.status(400).json({ message: "Debe proporcionar al menos un filtro" });
     }

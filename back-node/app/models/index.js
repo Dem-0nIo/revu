@@ -45,6 +45,7 @@ db.Country = require("../models/country.model.js")(sequelize, Sequelize);
 db.InfluencerSubcategories = require("../models/influencerSubcategories.model.js")(sequelize, Sequelize);
 db.SocialClass = require("../models/socialClass.model.js")(sequelize, Sequelize);
 
+
 // ✅ Check if models are correctly imported
 console.log("Loaded models:", Object.keys(db));
 
@@ -72,6 +73,9 @@ db.InfluencerSubcategories.belongsTo(db.SubCategory, {
   foreignKey: "subcategoryId",
   as: "subcategory",
 });
+
+if (db.cities.associate) db.cities.associate(db);
+if (db.departments.associate) db.departments.associate(db);
 
 
 db.ROLES = ["admin", "cct", "reclutador"];

@@ -6,6 +6,7 @@ const API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api
 const INFLUENCER_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/influencer/`;
 const GENDER_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/genders`; // Add Gender API endpoint
 const CITIES_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/cities`; // Add Cities API endpoint
+const COLCITIES_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/cities/colombia`; // Add Cities API endpoint
 const DEPARTMENTS_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/departments`; // Add States API endpoint
 const INFLU_CLASSES_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/classes`; // Add Categories API endpoint
 const EHTNIC_API_URL = `${process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081'}/api/ethnic`; // Add Ethnics API endpoint
@@ -96,6 +97,10 @@ const getAllInfluencersWithCategories = () => {
 	return axios.get(`${INFLUENCER_URL}allWithCategories`, { headers: authHeader() });
 };
 
+const getCitiesWithDepartmentsForColombia = () => {
+	return axios.get(`${COLCITIES_API_URL}`, { headers: authHeader() });
+}
+
 const InfluService = {
 	getAll,
 	addInfluencer,
@@ -115,7 +120,8 @@ const InfluService = {
 	getSubcategories,
 	getSocialClasses,
 	searchInfluencers,
-	getAllInfluencersWithCategories, // Export the new method
+	getAllInfluencersWithCategories,
+	getCitiesWithDepartmentsForColombia, // Export the new method
 };
 
 export default InfluService;
