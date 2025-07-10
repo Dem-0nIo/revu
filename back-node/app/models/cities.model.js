@@ -21,6 +21,16 @@ module.exports = (sequelize, Sequelize) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
+        department_id: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'departments',
+            key: 'id'
+          },
+          onDelete: 'SET NULL',
+          onUpdate: 'CASCADE'
+        },
       },
       {
         tableName: 'cities',
@@ -35,8 +45,13 @@ module.exports = (sequelize, Sequelize) => {
       });
       City.belongsTo(models.departments, {
         foreignKey: 'department_id',
-        as: 'department'
+        as: 'department',
+        constraints: false
       });
+    };
+
+    City.sync = async () => {
+      return Promise.resolve(); // Evita sync real
     };
 
     return City;

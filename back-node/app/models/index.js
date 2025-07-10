@@ -22,16 +22,11 @@ db.sequelize
     console.error("Database connection error:", error);
   });
 
-db.sequelize.sync({ force: false }).then(() => {
-  console.log("Database synchronized successfully.");
-});
-
 db.influ = require("../models/influencer.model.js")(sequelize, Sequelize);
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.cotizaciones = require("../models/cotizaciones.model.js")(sequelize, Sequelize);
-db.roles = require("../models/user_roles.model.js")(sequelize, Sequelize);
-db.gender = require("../models/gender.model.js")(sequelize, Sequelize);
+db.user_roles = require("../models/user_roles.model.js")(sequelize, Sequelize);db.gender = require("../models/gender.model.js")(sequelize, Sequelize);
 db.cities = require("../models/cities.model.js")(sequelize, Sequelize);
 db.departments = require("../models/departments.model.js")(sequelize, Sequelize);
 db.influencer_classes = require("../models/influencer_classes.model.js")(sequelize, Sequelize);
@@ -46,24 +41,31 @@ db.InfluencerSubcategories = require("../models/influencerSubcategories.model.js
 db.SocialClass = require("../models/socialClass.model.js")(sequelize, Sequelize);
 
 
+if (db.role.associate) db.role.associate(db);
+if (db.TagsCategory.associate) db.TagsCategory.associate(db);
+
 // ✅ Check if models are correctly imported
 console.log("Loaded models:", Object.keys(db));
 
 // Call associations after model initialization
-db.SubCategory.belongsTo(db.TagsCategory, {
-  foreignKey: 'tag_category_id',
-  as: 'category', // Ensure alias matches model definition
-});
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
+  foreignKey: "roleId",
+  otherKey: "userId"
 });
 db.user.belongsToMany(db.role, {
   through: "user_roles",
+  foreignKey: "userId",
+  otherKey: "roleId"
 });
 db.influ.belongsTo(db.SocialClass, { 
-    foreignKey: 'social_class_id', 
-    as: 'socialClass' 
+    foreignKey: {
+      name: 'social_class_id',
+      allowNull: true
+    },
+    as: 'socialClass',
+    constraints: false // esto evita que intente eliminarla
 });
 db.influ.hasMany(db.InfluencerSubcategories, {
   foreignKey: "influencerId",
@@ -71,7 +73,7 @@ db.influ.hasMany(db.InfluencerSubcategories, {
 });
 db.InfluencerSubcategories.belongsTo(db.SubCategory, {
   foreignKey: "subcategoryId",
-  as: "subcategory",
+  as: "subcategories",
 });
 
 if (db.cities.associate) db.cities.associate(db);
@@ -79,5 +81,13 @@ if (db.departments.associate) db.departments.associate(db);
 
 
 db.ROLES = ["admin", "cct", "reclutador"];
+
+
+
+db.sequelize.sync({ force: false, alter: false, logging: console.log }).then(() => {
+  console.log("✅ Database synchronized successfully.");
+}).catch(err => {
+  console.error("❌ Sync error:", err);
+});
 
 module.exports = db;

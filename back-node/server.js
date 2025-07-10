@@ -98,7 +98,7 @@ app.listen(PORT,'0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-db.TagsCategory.findAll({ include: [{ model: db.SubCategory, as: 'sub_category'}], })
+db.TagsCategory.findAll({ include: [{ model: db.SubCategory, as: 'subcategories'}], })
     .then((categories) => console.log(categories))
     .catch((error) => console.error("Error fetching categories:", error));
 

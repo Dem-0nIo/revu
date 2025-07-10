@@ -12,18 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       tag_category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: 'TagsCategory',
-          key: 'id',
-        },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
     },
     {
       timestamps: false, // Opcional: Si no necesitas createdAt y updatedAt
-    },
-    {
       tableName: "SubCategories", // Match the database table name
     });
   

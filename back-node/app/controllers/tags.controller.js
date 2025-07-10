@@ -9,7 +9,7 @@ exports.getCategoriesWithSubcategories = async (req, res) => {
       include: [
             {
                 model: SubCategory,
-                as: 'sub_category',
+                as: 'subcategories',
                 attributes: ['id', 'subcategory_name'],
             },
         ],  

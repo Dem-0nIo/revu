@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Cotizaciones = sequelize.define("cotizaciones", {
+  const Cotizaciones = sequelize.define("Cotizacion", {
     idCotizacion: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -49,6 +49,11 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+  }, {
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    tableName: "cotizaciones"
   });
 
   return Cotizaciones;

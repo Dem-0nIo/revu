@@ -51,18 +51,20 @@ services:
 
   front_app:
     container_name: front_app
-    build: ./front-react
+    build:
+      context: ./front-react
+      dockerfile: Dockerfile.dev
     ports:
-      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
-      - $REACT_APP_PORT:$REACT_APP_PORT
+      - "3000:3000"
     environment:
-      - REACT_APP_URL_API=http://165.22.179.233:8081
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_URL_API=http://localhost:8081
     working_dir: /front-react
     depends_on:
       - back_app
-    env_file: ./.env
     volumes:
-      - .:/src
+      - ./front-react:/front-react
+    command: sh -c "npm start"
   nginx:
     image: nginx:latest
     container_name: nginx

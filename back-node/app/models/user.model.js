@@ -22,7 +22,11 @@ module.exports = (sequelize, Sequelize) => {
     phone: {
       type: Sequelize.STRING,
     },
-  });
+  }, {
+  timestamps: true,
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+});
 
   return User;
 };

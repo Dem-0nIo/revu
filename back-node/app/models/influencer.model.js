@@ -1,4 +1,3 @@
-const SocialClass = require('./socialClass.model'); // Adjust the path as needed
 const Gender = require('./gender.model');
 
 module.exports = (sequelize, Sequelize) => {
@@ -25,36 +24,27 @@ module.exports = (sequelize, Sequelize) => {
     },
     gender_id: {
       type: Sequelize.INTEGER,
-      references: {
-        model: Gender,
-        key: 'id',
-      },
-      allowNull: false,
+      allowNull: true,
     },
     social_class_id: {
       type: Sequelize.INTEGER,
-      references: {
-          model: SocialClass,
-          key: 'id',
-      },
       allowNull: true,
     },
     hair_color_id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     hair_type_id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     skin_color_id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
 	  contact: {
       type: Sequelize.STRING,
     },
-
     passport: {
       type: Sequelize.STRING,
     },
@@ -84,6 +74,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     country_id: {
       type: Sequelize.INTEGER,
+    },
+    zip: {
+      type: Sequelize.STRING,
+      allowNull: true
     },
     emailNotification: {
       type: Sequelize.JSON,
@@ -178,6 +172,9 @@ module.exports = (sequelize, Sequelize) => {
     },
   }, {
     tableName: 'influencers',
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   });
 
   Influencer.associate = (models) => {
@@ -190,7 +187,20 @@ module.exports = (sequelize, Sequelize) => {
       foreignKey: "influencerId",
     });
     Influencer.belongsTo(models.SocialClass, { 
-      foreignKey: 'social_class_id', as: 'socialClass' 
+      foreignKey: {
+        name: 'social_class_id',
+        allowNull: true
+      },
+      as: 'socialClass',
+      constraints: false 
+    });
+    Influencer.belongsTo(models.Gender, {
+      foreignKey: {
+        name: 'gender_id',
+        allowNull: true
+      },
+      as: 'gender',
+      constraints: false
     });
 
   };

@@ -395,7 +395,7 @@ exports.getAllInfluencersWithCategories = async (req, res) => {
           include: [
             {
               model: SubCategory,
-              as: 'subcategory',
+              as: 'subcategories',
               include: [
                 {
                   model: TagsCategory,
@@ -512,7 +512,7 @@ exports.getFilteredInfluencers = async (req, res) => {
           include: [
             {
               model: SubCategory,
-              as: 'subcategory',
+              as: 'subcategories',
               include: [
                 {
                   model: TagsCategory,
