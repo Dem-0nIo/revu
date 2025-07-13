@@ -6,7 +6,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-console */
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import {useFormik } from 'formik';
 import CarritoContext from '../../contexts/CarritoContext';
 import { Card } from './AddDel';
 import Button from '../bootstrap/Button';
@@ -16,7 +15,6 @@ import Input from '../bootstrap/forms/Input';
 import Select from '../bootstrap/forms/Select';
 import Checks from '../bootstrap/forms/Checks';
 import Icon from '../icon/Icon';
-import AuthService from '../../services/auth.service';
 import InfluService from '../../services/influ.service';
 import showNotification from '../extras/showNotification';
 
@@ -370,7 +368,6 @@ export const TableBody = ({
             setSelectedSubcategories(formattedSubcategories);
         }
 		if (dataToEdit?.country_id) {
-			const countryid = dataToEdit.country_id;
             const formattedSubcategories = dataToEdit.categories.map(subcat => ({
                 id: subcat.subcategory_id,  // Asegurar que `id` coincida con el key en la lista
                 name: subcat.subcategory    // Asegurar que `name` coincida con lo esperado en el render

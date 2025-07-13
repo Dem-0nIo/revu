@@ -18,11 +18,17 @@ module.exports = (sequelize, DataTypes) => {
 
 
   TagsCategory.associate = (models) => {
-  TagsCategory.hasMany(models.SubCategory, {
-    foreignKey: 'tag_category_id',
-    as: 'subcategories',
-  });
-};
+    TagsCategory.hasMany(models.SubCategory, {
+      foreignKey: 'tag_category_id',
+      as: 'subcategories',
+    });
+
+    // Relación inversa necesaria para evitar errores en eager loading
+    models.SubCategory.belongsTo(TagsCategory, {
+      foreignKey: 'tag_category_id',
+      as: 'category',
+    });
+  };
 
   return TagsCategory;
 };

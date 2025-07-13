@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"start": "PORT=8088 react-scripts start",
+		"start": "PORT=3000 react-scripts start",
 		"build": "react-scripts build",
 		"serve": "serve -s build",
 		"test": "react-scripts test",

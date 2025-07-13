@@ -283,25 +283,7 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    /* async function fetchInitialResults() {
-      try {
-        setIsLoading(true);
-        const params = new URLSearchParams();
-        params.append("limit", "300"); // ✅ Obtener los primeros 50 registros por defecto
-  
-        console.log("📌 Carga inicial: ", `?${params.toString()}`);
-  
-        const response = await FiltersService.searchInfluencers({ params });
-        setResults(response.data);
-  
-        console.log("✅ Resultados iniciales:", response.data);
-      } catch (error) {
-        showNotification("Error", "No se pudieron cargar los resultados iniciales", "danger");
-        console.error("❌ FRONT - Error al obtener influencers iniciales:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    } */
+   
   
     fetchInitialResults(); // ✅ Llamar a la función solo una vez al cargar la página
   }, []);

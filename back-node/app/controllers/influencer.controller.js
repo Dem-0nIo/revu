@@ -138,6 +138,20 @@ exports.registerinfluencer = async (req, res) => {
       costo_12,
     });
 
+    // Registrar la creación en la tabla de auditoría
+    try {
+      await db.sequelize.query(
+        'INSERT INTO influencer_creations (influencer_id, user_id) VALUES (?, ?)',
+        {
+          replacements: [newInfluencer.idUser, idUser],
+          type: db.Sequelize.QueryTypes.INSERT
+        }
+      );
+      console.log("✅ Influencer creation registrada en auditoría.");
+    } catch (auditErr) {
+      console.error("❌ Error registrando auditoría de creación:", auditErr);
+    }
+
     console.log("Subcategories received:", subcategories);
 
     // Handle subcategories if provided
@@ -582,5 +596,52 @@ exports.getFilteredInfluencers = async (req, res) => {
   } catch (error) {
     console.error("❌ Back - Error al obtener influencers:", error);
     res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+// Get total count of influencers
+exports.getInfluencerCount = async (req, res) => {
+  try {
+    const count = await db.influ.count();
+    res.status(200).json({ total: count });
+  } catch (error) {
+    console.error("Error fetching influencer count:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Get influencer creations by recruiter and date range
+exports.getInfluencersByRecruiterAndDate = async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({ message: "startDate and endDate are required" });
+    }
+
+    console.log("📅 Fecha recibida en backend:", { startDate, endDate });
+
+    const results = await db.sequelize.query(
+      `SELECT u.id, u.username, COUNT(ic.id) as total
+       FROM influencer_creations ic
+       JOIN users u ON ic.user_id = u.id
+       WHERE DATE(ic.created_at) BETWEEN ? AND ?
+       GROUP BY u.id, u.username
+       ORDER BY total DESC`,
+      {
+        replacements: [startDate, endDate],
+        type: db.Sequelize.QueryTypes.SELECT
+      }
+    );
+
+    console.log("📊 Resultados obtenidos:", results);
+
+    if (!results || results.length === 0) {
+      console.warn("⚠️ Consulta por reclutador devolvió vacío o inesperado:", results);
+    }
+
+    res.status(200).json(results);
+  } catch (error) {
+    console.error("❌ Error fetching influencer counts by recruiter:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

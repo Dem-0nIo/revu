@@ -65,3 +65,13 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
+
+.dashboard-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  background-color: white;
+  padding: 1rem;
+  height: 100%;
+  margin-bottom: 1rem;
+}

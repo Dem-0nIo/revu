@@ -34,6 +34,10 @@ module.exports = function (app) {
 
   app.get("/api/influencer/clasificacion", controller.clasificacion);
 
+  app.get("/api/influencer/count", controller.getInfluencerCount);
+  
+  app.get("/api/influencer/by-recruiter", controller.getInfluencersByRecruiterAndDate);
+
   app.post("/api/influencer/update", controller.editInfluencer);
 
   app.post("/api/influencer/delete", controller.deleteInfluencer);

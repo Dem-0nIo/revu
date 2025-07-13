@@ -4,8 +4,10 @@ import PageWrapper from '../../../layout/PageWrapper/PageWrapper';
 import Page from '../../../layout/Page/Page';
 import SubHeader, { SubHeaderLeft, SubHeaderRight } from '../../../layout/SubHeader/SubHeader';
 import Icon from '../../../components/icon/Icon';
-import CommonSalePerformance from '../../_common/CRMDashboard/CommonSalePerformance';
-import CommonTopSales from '../../_common/CRMDashboard/CommonTopSales';
+import DailyRecruiterWidget from '../../_common/CRMDashboard/DailyRecruiterWidget';
+import TotalInfluencersWidget from '../../_common/CRMDashboard/TotalInfluencersWidget';
+import SearchByCityCountryWidget from '../../_common/CRMDashboard/SearchByCityCountryWidget';
+
 
 const DashboardPage = () => {
 	return (
@@ -20,12 +22,21 @@ const DashboardPage = () => {
 				</SubHeaderRight>
 			</SubHeader>
 			<Page>
-				<div className='row'>
-					<div className='col-lg-8'>
-						<CommonSalePerformance />
+				<div className='row align-items-stretch'>
+					<div className='col-lg-4'>
+						<div className='dashboard-card'>
+							<DailyRecruiterWidget />
+						</div>
 					</div>
 					<div className='col-lg-4'>
-						<CommonTopSales />
+						<div className='dashboard-card'>
+							<TotalInfluencersWidget />
+						</div>
+					</div>
+					<div className='col-lg-4'>
+						<div className='dashboard-card'>
+							<SearchByCityCountryWidget />
+						</div>
 					</div>
 				</div>
 			</Page>

@@ -43,6 +43,9 @@ exports.getAll = (req, res) => {
 
 exports.getStatus = (req, res) => {
   // Find all cotizaciones
+  if (!req.body.status) {
+    return res.status(400).json({ error: 'Missing status in request body' });
+  }
   console.log(req.body.status);
   Coti.findAll({
     where: {
@@ -50,7 +53,7 @@ exports.getStatus = (req, res) => {
     },
   })
     .then((data) => {
-      res.send(data);
+      res.status(200).json(data || []);
       console.log(data);
     })
     .catch((err) => {

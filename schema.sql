@@ -28,7 +28,7 @@ SET time_zone = '-05:00';
 --
 
 CREATE TABLE IF NOT EXISTS `cotizaciones` (
-  `idCotizacion` int(11) NOT NULL,
+  `idCotizacion` int(11) AUTO_INCREMENT PRIMARY KEY,
   `influencerId` varchar(255) DEFAULT NULL,
   `numCotizacion` varchar(255) NOT NULL,
   `numContacto` varchar(255) NOT NULL,
@@ -123,6 +123,15 @@ CREATE TABLE IF NOT EXISTS `influencers` (
   `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+-- Tabla para registrar quién crea cada influencer (auditoría)
+CREATE TABLE IF NOT EXISTS influencer_creations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  influencer_id INT NOT NULL,
+  user_id INT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (influencer_id) REFERENCES influencers(idUser) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 -- --------------------------------------------------------
 
 INSERT INTO `influencers` (`firstName`, `lastName`, `birthdayDate`, `year`, `gender_id`, `contact`, `hair_color_id`, `hair_type_id`, `skin_color_id`, `passport`, `displayName`, `emailAddress`, `addressLine`, `phoneNumber`, `social_class_id`, `city_id`, `state_id`, `country_id`, `zip`, `emailNotification`, `pushNotification`, `phoneNumberWhp`, `socialInstagram`, `socialInstagramCla`, `socialInstagramSeg`, `socialTik`, `socialTikCla`, `socialTikSeg`, `socialFace`, `socialFaceCla`, `socialFaceSeg`, `socialUTube`, `socialUTubeCla`, `socialUTubeSeg`, `socialNetwork`, `celebrity`, `img`, `costo_1`, `costo_2`, `costo_3`, `costo_4`, `costo_5`, `costo_6`, `costo_7`, `costo_8`, `costo_9`, `costo_10`, `costo_11`, `costo_12`, `costo_13`, `createdAt`, `updatedAt`)
@@ -140,7 +149,7 @@ VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) DEFAULT NULL,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -660,16 +669,6 @@ ALTER TABLE `influencers`
 ALTER TABLE influencers ENGINE=InnoDB;
 ALTER TABLE SubCategories ENGINE=InnoDB;  
 --
-
--- Indices de la tabla `cotizaciones`
---
-ALTER TABLE `cotizaciones`
-  ADD PRIMARY KEY (`idCotizacion`);
-
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `users`

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_URL_API || 'http//:127.0.0.1:8081';
+const API_URL = process.env.REACT_APP_URL_API || 'http://127.0.0.1:8081';
 
 console.log("API_URL resolved: " , API_URL);
 
@@ -17,20 +17,22 @@ const isAdmin = () => {
 	return user && user.roles && user.roles.includes('ROLE_ADMIN');
 };
 
-const login = (username, password) => {
-	return axios
-		.post(`${API_URL}/api/auth/signin`, {
+const login = async (username, password) => {
+	try {
+		const response = await axios.post(`${API_URL}/api/auth/signin`, {
 			username,
 			password,
-		})
-		.then((response) => {
-			if (response.data.accessToken) {
-				localStorage.setItem('user', JSON.stringify(response.data));
-				localStorage.setItem('token', JSON.stringify(response.data.accessToken));
-			}
-
-			return response.data;
 		});
+
+		if (response.data.accessToken) {
+			localStorage.setItem('user', JSON.stringify(response.data));
+			localStorage.setItem('token', JSON.stringify(response.data.accessToken));
+		}
+		return response.data;
+	} catch (error) {
+		console.error("Login error:", error.response?.data || error.message);
+		throw error;
+	}
 };
 
 const logout = () => {
